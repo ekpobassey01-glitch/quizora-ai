@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quizora AI — Admin + Student</title>
+<title>Quizora AI — Admin + Student Same Frontpage</title>
 <style>
 *{box-sizing:border-box;font-family:Inter,system-ui,Arial}body{margin:0;background:#0A0F24;color:#fff}
 .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0A0F24;border-bottom:1px solid #FFD70055}
 .logo{width:38px;height:38px;border-radius:50%;background:#FFD700;color:#000;display:grid;place-items:center;font-weight:900;font-size:22px}
 h1{font-size:19px;margin:0}h1 span{color:#FFD700}.sub{font-size:11px;opacity:.7}
-.btn{background:#FFD700;color:#000;border:0;padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer}
-.btn2{background:#1A2547;color:#fff;border:1px solid #FFD70066;padding:10px 14px;border-radius:999px;cursor:pointer}
+.btn{background:#FFD700;color:#000;border:0;padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer;width:100%}
+.btn2{background:#1A2547;color:#fff;border:1px solid #FFD70066;padding:10px 14px;border-radius:999px;cursor:pointer;width:100%}
 .avatar{width:38px;height:38px;border-radius:50%;background:#FFD700;color:#000;display:grid;place-items:center;font-weight:900;border:2px solid #FFD700;margin-left:auto}
 .wrap{max-width:1100px;margin:0 auto;padding:14px}
 .card{background:#111A33;border:1px solid #FFD70033;border-radius:16px;padding:14px;margin-bottom:12px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.grid4 .card{text-align:center}.grid4 b{font-size:22px;color:#FFD700}.grid4 div{font-size:12px;opacity:.8}
 input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #2A3766;background:#0A0F24;color:#fff;margin:6px 0}
 textarea{min-height:90px}label{font-size:12px;opacity:.8}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:140px}
-.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:6px}.tabs button{white-space:nowrap}
+.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:6px}.tabs button{white-space:nowrap;width:auto}
 .tbl{width:100%;border-collapse:collapse;font-size:13px}.tbl th,.tbl td{padding:9px;border-bottom:1px solid #222C55;text-align:left}
 .badge{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800}.free{background:#1DB954;color:#000}.locked{background:#FF3B30;color:#fff}.gold{background:#FFD700;color:#000}
 .essay{background:#0D1430;border:1px solid #FFD70044;border-radius:14px;padding:14px;line-height:1.7}
@@ -27,46 +27,40 @@ textarea{min-height:90px}label{font-size:12px;opacity:.8}.row{display:flex;gap:8
 .subject{margin-left:10px}.topic{margin-left:22px;font-size:13px;padding:8px;background:#0A0F24;border:1px solid #222C55;border-radius:10px;margin:4px 0;cursor:pointer}
 .toolbar{display:flex;gap:6px;flex-wrap:wrap}.toolbar button{background:#1A2547;color:#fff;border:1px solid #FFD70066;padding:8px 11px;border-radius:999px;cursor:pointer}
 .log{font-size:12px;line-height:1.6;max-height:180px;overflow:auto}
-.lockScreen{position:fixed;inset:0;z-index:100;background:#0A0F24;display:grid;place-items:center;padding:20px}.lockBox{width:100%;max-width:400px;background:#111A33;border:1px solid #FFD70055;border-radius:18px;padding:20px;text-align:center}
+/* FIXED LOCK SCREEN - no cut off */
+.lockScreen{position:fixed;inset:0;z-index:100;background:#0A0F24;display:grid;place-items:center;padding:16px;overflow:auto}
+.lockBox{width:100%;max-width:420px;background:#111A33;border:1px solid #FFD70055;border-radius:18px;padding:20px 18px;text-align:center}
+.lockBox input{padding:13px 14px}
+.divider{display:flex;align-items:center;gap:10px;font-size:12px;opacity:.6;margin:12px 0}.divider:before,.divider:after{content:"";flex:1;height:1px;background:#2A3766}
 @media(max-width:700px){.grid4{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 
-<!-- ===== FIRST TIME PASSWORD / LOGIN SCREEN ===== -->
+<!-- ===== SAME FRONTPAGE FOR ADMIN + STUDENT - NO SECRET QUESTION ===== -->
 <div class="lockScreen" id="lockScreen">
 <div class="lockBox">
 <div class="logo" style="margin:0 auto">Q</div>
 <h2 style="margin:10px 0 4px">Quizora <span style="color:#FFD700">AI</span></h2>
-<p style="font-size:12px;opacity:.7" id="lockTitle">Create Your Admin Password — First Time Only</p>
+<p style="font-size:12px;opacity:.7" id="lockTitle">Welcome — Login</p>
 
-<!-- CREATE PASSWORD - SHOWS FIRST TIME ONLY -->
+<!-- CREATE PASSWORD - FIRST TIME ONLY, NO SECRET QUESTION -->
 <div id="createBox">
 <input type="password" id="newPass1" placeholder="Create Admin Password (6+ chars)">
 <input type="password" id="newPass2" placeholder="Confirm Admin Password">
-<input id="secretAns" placeholder="Secret Question: What is your Opay name? (for Forgot Password)">
 <button class="btn" onclick="createPassword()">Create Password & Enter Admin</button>
-<p style="font-size:11px;opacity:.6">Saved on YOUR phone only. Students never see this. Do not share.</p>
+<p style="font-size:11px;opacity:.6">Saved on YOUR phone only. Keep it safe. If you forget it, clear site data to create a new one — students cannot reset it.</p>
 </div>
 
-<!-- ADMIN LOGIN -->
+<!-- LOGIN - SAME FRONTPAGE -->
 <div id="loginBox" class="hidden">
-<input type="password" id="loginPass" placeholder="Enter Admin Password">
+<!-- ADMIN LOGIN -->
+<input type="password" id="loginPass" placeholder="Admin Password">
 <button class="btn" onclick="adminLogin()">Enter As Admin — All Features</button>
-<button class="btn2" onclick="showForgot()">Forgot Password?</button>
-<div id="forgotBox" class="hidden">
-<input id="forgotAns" placeholder="What is your Opay name?">
-<button class="btn2" onclick="resetWithSecret()">Reset Password</button>
-</div>
-<p style="font-size:12px;opacity:.7;margin:14px 0">OR</p>
-<button class="btn2" onclick="showStudentLogin()">Login as Student — Learning Only</button>
-</div>
-
+<div class="divider">OR</div>
 <!-- STUDENT LOGIN -->
-<div id="studentBox" class="hidden">
-<input id="studentPin" placeholder="Enter Your PIN e.g. QZ-12345">
-<button class="btn" onclick="studentLogin()">Enter As Student</button>
-<button class="btn2" onclick="backToAdminLogin()">Back To Admin Login</button>
+<input id="studentPin" placeholder="Student PIN e.g. QZ-12345">
+<button class="btn2" onclick="studentLogin()">Enter As Student — Learning Only</button>
 <p style="font-size:11px;opacity:.6">Student sees only Library / Ask AI / History / Subscribe. No Admin features. PIN is device-locked.</p>
 </div>
 <div id="lockMsg" style="color:#FF3B30;font-size:13px;margin-top:8px"></div>
@@ -75,23 +69,21 @@ textarea{min-height:90px}label{font-size:12px;opacity:.8}.row{display:flex;gap:8
 
 <!-- TOP BAR -->
 <div class="top">
-<button class="btn2" onclick="toggleMenu()">☰ Menu</button>
+<button class="btn2" style="width:auto" onclick="toggleMenu()">☰ Menu</button>
 <div class="logo">Q</div>
 <div><h1>Quizora <span>AI</span></h1><div class="sub" id="viewLabel">ADMIN VIEW • All Features</div></div>
-<button class="btn2" id="viewBtn" onclick="switchRole()">View as Student</button>
-<button class="btn2" onclick="changePassword()">Change Password</button>
-<button class="btn2" onclick="logout()">Logout</button>
+<button class="btn2" style="width:auto" id="viewBtn" onclick="switchRole()">View as Student</button>
+<button class="btn2" style="width:auto" onclick="changePassword()">Change Password</button>
+<button class="btn2" style="width:auto" onclick="logout()">Logout</button>
 <div class="avatar" id="avatarLetter">A</div>
 </div>
 
-<!-- MENU DRAWER - ONLY PLACE WITH CLASSES -->
 <div class="drawer" id="drawer"><div class="backdrop" onclick="toggleMenu()"></div><div class="panel">
 <h3 style="color:#FFD700;margin:4px 0">☰ Menu</h3><p style="font-size:12px;opacity:.7">CLASSES — Tap to Open</p><div id="menuList"></div>
-<button class="btn2" style="width:100%;margin-top:10px" onclick="toggleMenu()">Close Menu ✕</button></div></div>
+<button class="btn2" onclick="toggleMenu()">Close Menu ✕</button></div></div>
 
 <div class="wrap">
-<div class="card" id="announceCard">📢 <b id="announceText">Welcome to Quizora AI.</b></div>
-
+<div class="card">📢 <b id="announceText">Welcome to Quizora AI.</b></div>
 <div class="tabs" id="tabsBar">
 <button class="btn" id="tabBtn-dash" onclick="showTab('dash')">Dashboard</button>
 <button class="btn2" onclick="showTab('library')">Library</button>
@@ -101,47 +93,28 @@ textarea{min-height:90px}label{font-size:12px;opacity:.8}.row{display:flex;gap:8
 <button class="btn2" id="tabBtn-pins" onclick="showTab('pins')">PINs</button>
 </div>
 
-<!-- ===== ADMIN ONLY - DASHBOARD ===== -->
 <div id="tab-dash" class="adminOnly">
-<div class="grid4">
-<div class="card"><b id="statPins">0</b><div>Active PINs</div></div>
-<div class="card"><b id="statStudents">0</b><div>Total Students</div></div>
-<div class="card"><b id="statRev">₦0</b><div>Revenue (Month)</div></div>
-<div class="card"><b>4</b><div>Locked Classes</div></div>
-</div>
+<div class="grid4"><div class="card"><b id="statPins">0</b><div>Active PINs</div></div><div class="card"><b id="statStudents">0</b><div>Total Students</div></div><div class="card"><b id="statRev">₦0</b><div>Revenue (Month)</div></div><div class="card"><b>4</b><div>Locked Classes</div></div></div>
 <div class="card"><b>Revenue</b> • Today <span id="revToday">₦0</span> • Week <span id="revWeek">₦0</span> • Month <span id="revMonth">₦0</span><div style="margin-top:8px">⚠️ <b id="expiringText">No PIN expiring</b></div>
 <div class="row" style="margin-top:8px"><button class="btn2" onclick="backup()">⬇ Backup</button><button class="btn2" onclick="backupReminder()">🔔 Auto Backup Reminder</button><button class="btn2" onclick="searchFocus()">🔍 Search Student / PIN</button></div></div>
-
-<div class="card"><h3 style="margin:0;color:#FFD700">Generate PIN — Anytime • No Limit • Admin Only</h3>
+<div class="card"><h3 style="margin:0;color:#FFD700">Generate PIN — Anytime • Admin Only</h3>
 <div class="row"><div><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka O."></div><div><label>Class</label><select id="pinClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option><option>Nursery</option><option>Primary</option></select></div><div><label>Days</label><select id="pinDays"><option value="7">7 Days</option><option value="30" selected>30 Days</option></select></div></div>
-<button class="btn" onclick="generatePIN()">+ Generate PIN Anytime</button><div id="newPinResult" style="margin-top:8px;color:#FFD700;font-weight:800"></div><p style="font-size:12px;opacity:.7">PIN locks to first device that uses it. Cannot transfer.</p></div>
-
+<button class="btn" onclick="generatePIN()">+ Generate PIN Anytime</button><div id="newPinResult" style="margin-top:8px;color:#FFD700;font-weight:800"></div></div>
 <div class="card"><h3>Student List • Device Locked • Admin Only</h3><input id="searchInput" placeholder="Search by name or PIN..." oninput="renderStudents()"><div style="overflow:auto"><table class="tbl"><thead><tr><th>Name</th><th>Class</th><th>PIN</th><th>Device ID</th><th>Expiry</th><th>Status</th><th>Action</th></tr></thead><tbody id="studentRows"></tbody></table></div></div>
-
 <div class="card"><h3 style="color:#FFD700">Content Manager — Admin Only • No Code</h3>
-<p style="font-size:12px;opacity:.8">Paste phrase → Smart Paste auto-fixes to right line. Never cuts phrase.</p>
+<p style="font-size:12px;opacity:.8">Paste phrase → Smart Paste auto-fixes to right line.</p>
 <div class="row"><div><label>Class</label><select id="editClass" onchange="loadEdit()"><option>JSS1</option><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Subject</label><input id="editSubject" value="Basic Science"></div><div><label>Topic</label><input id="editTopic" value="Cells in Biology"></div></div>
-<div class="toolbar"><button onclick="editEssay()">✏️ Edit</button><button onclick="copyEssay()">📋 Copy</button><button onclick="pasteEssay()">📥 Paste</button><button onclick="selectAllEssay()">Select All</button><button onclick="deleteEssay()">🗑️ Delete</button><button class="btn" onclick="saveEssay()">💾 Save</button><button onclick="smartPaste()">✨ Smart Paste Phrase</button></div>
+<div class="toolbar"><button onclick="editEssay()">✏️ Edit</button><button onclick="copyEssay()">📋 Copy</button><button onclick="pasteEssay()">📥 Paste</button><button onclick="selectAllEssay()">Select All</button><button onclick="deleteEssay()">🗑️ Delete</button><button class="btn" style="width:auto" onclick="saveEssay()">💾 Save</button><button onclick="smartPaste()">✨ Smart Paste Phrase</button></div>
 <label>Paste Phrase Here (no code)</label><textarea id="pastePhrase" placeholder="Paste any phrase here..."></textarea>
-<label>Essay Lines — Edit Directly</label><textarea id="essayEditor" rows="8"></textarea><div id="saveMsg" style="color:#1DB954;font-weight:800"></div></div>
-
-<div class="card"><h3>Announcement To All Students — Admin Only</h3><input id="annInput" placeholder="Type announcement..."><button class="btn" onclick="saveAnnounce()">Send Announcement</button></div>
+<label>Essay Lines</label><textarea id="essayEditor" rows="8"></textarea><div id="saveMsg" style="color:#1DB954;font-weight:800"></div></div>
+<div class="card"><h3>Announcement — Admin Only</h3><input id="annInput" placeholder="Type announcement..."><button class="btn" onclick="saveAnnounce()">Send Announcement</button></div>
 <div class="card"><h3>PIN Activity Log — Admin Only</h3><div class="log" id="activityLog"></div></div>
 </div>
 
-<!-- LIBRARY - BOTH ADMIN + STUDENT -->
-<div id="tab-library" class="hidden"><div class="card"><h3>Library — Tap ☰ Menu</h3><p id="libraryNote">Admin sees all. Student sees only FREE + unlocked class.</p><div id="currentEssay" class="essay">Tap ☰ Menu → JSS1 → Basic Science → Cells in Biology</div></div></div>
-
-<!-- ASK AI - BOTH -->
-<div id="tab-ask" class="hidden"><div class="card"><h3>Ask AI — No “Essay or not?” Question</h3><input id="askInput" placeholder="Ask anything..."><button class="btn" onclick="askAI()">Ask</button><div id="askResult" class="essay" style="margin-top:10px">Your answer will appear here, saved to History.</div></div></div>
-
-<!-- HISTORY - BOTH -->
+<div id="tab-library" class="hidden"><div class="card"><h3>Library — Tap ☰ Menu</h3><p id="libraryNote">Admin sees all.</p><div id="currentEssay" class="essay">Tap ☰ Menu → JSS1 → Basic Science → Cells in Biology</div></div></div>
+<div id="tab-ask" class="hidden"><div class="card"><h3>Ask AI</h3><input id="askInput" placeholder="Ask anything..."><button class="btn" onclick="askAI()">Ask</button><div id="askResult" class="essay" style="margin-top:10px">Your answer will appear here.</div></div></div>
 <div id="tab-history" class="hidden"><div class="card"><h3>History</h3><div id="historyList"></div><button class="btn2" onclick="clearHistory()">Clear History</button></div></div>
-
-<!-- SUBSCRIBE - BOTH -->
-<div id="tab-subscribe" class="hidden"><div class="card"><h3>Unlock Class — ₦2,000 / month per class only</h3><div class="row"><div><label>Class</label><select id="subClass"><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Your PIN</label><input id="subPin" placeholder="Enter PIN"></div></div><p><b>Pay Opay 8147699555 (Ekpo Bassey) — Proof to WhatsApp 08147699555 — Enter PIN</b></p><button class="btn" onclick="unlockWithPin()">Unlock With PIN</button><button class="btn2" onclick="openWhatsAppProof()">Send Proof on WhatsApp</button><div id="subMsg"></div></div></div>
-
-<!-- PINS - ADMIN ONLY -->
+<div id="tab-subscribe" class="hidden"><div class="card"><h3>Unlock Class — ₦2,000 / month</h3><div class="row"><div><label>Class</label><select id="subClass"><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Your PIN</label><input id="subPin" placeholder="Enter PIN"></div></div><p><b>Pay Opay 8147699555 (Ekpo Bassey) — Proof to WhatsApp 08147699555</b></p><button class="btn" onclick="unlockWithPin()">Unlock With PIN</button><button class="btn2" onclick="openWhatsAppProof()">Send Proof on WhatsApp</button><div id="subMsg"></div></div></div>
 <div id="tab-pins" class="hidden adminOnly"><div class="card"><h3>PINs — Admin Only</h3><button class="btn" onclick="showTab('dash')">Go To Generate PIN</button></div></div>
 </div>
 
@@ -153,32 +126,22 @@ let history=JSON.parse(localStorage.getItem('q_history')||'[]');
 let logs=JSON.parse(localStorage.getItem('q_logs')||'[]');
 let role='admin'; let currentStudent=null;
 
-// --- PASSWORD: FIRST TIME CREATE ---
+// --- PASSWORD: NO SECRET QUESTION ---
 function initLock(){
 let hasPass=localStorage.getItem('q_admin_pass');
 if(!hasPass){document.getElementById('createBox').classList.remove('hidden');document.getElementById('loginBox').classList.add('hidden');document.getElementById('lockTitle').textContent='Create Your Admin Password — First Time Only';}
-else{document.getElementById('createBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');document.getElementById('lockTitle').textContent='Welcome Back — Enter Admin Password or Login as Student';}
+else{document.getElementById('createBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');document.getElementById('lockTitle').textContent='Welcome — Login as Admin or Student';}
 }
 function createPassword(){
-let p1=document.getElementById('newPass1').value, p2=document.getElementById('newPass2').value, sec=document.getElementById('secretAns').value.trim();
+let p1=document.getElementById('newPass1').value, p2=document.getElementById('newPass2').value;
 if(p1.length<6){document.getElementById('lockMsg').textContent='Password must be 6+ characters';return;}
 if(p1!==p2){document.getElementById('lockMsg').textContent='Passwords do not match';return;}
-if(!sec){document.getElementById('lockMsg').textContent='Enter secret answer for Forgot Password';return;}
-localStorage.setItem('q_admin_pass',p1); localStorage.setItem('q_secret',sec.toLowerCase());
-enterApp('admin');
+localStorage.setItem('q_admin_pass',p1); enterApp('admin');
 }
 function adminLogin(){
 if(document.getElementById('loginPass').value===localStorage.getItem('q_admin_pass')){enterApp('admin');}
 else{document.getElementById('lockMsg').textContent='❌ Wrong Admin Password';}
 }
-function showForgot(){document.getElementById('forgotBox').classList.remove('hidden');}
-function resetWithSecret(){
-if(document.getElementById('forgotAns').value.trim().toLowerCase()===localStorage.getItem('q_secret')){
-let np=prompt('Enter new Admin Password (6+ chars)'); if(np&&np.length>=6){localStorage.setItem('q_admin_pass',np);alert('Password reset! Login with new password');}
-}else{alert('Wrong secret answer');}
-}
-function showStudentLogin(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('studentBox').classList.remove('hidden');}
-function backToAdminLogin(){document.getElementById('studentBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');}
 function studentLogin(){
 let pin=document.getElementById('studentPin').value.trim(); let s=students.find(x=>x.pin===pin);
 if(!s){document.getElementById('lockMsg').textContent='❌ Invalid PIN';return;}
@@ -200,23 +163,18 @@ document.getElementById('viewBtn').textContent=isAdmin?'View as Student':'Back T
 document.getElementById('libraryNote').textContent=isAdmin?'Admin sees all classes.':'Student sees only FREE + your unlocked class: '+(currentStudent?currentStudent.class:'');
 }
 function switchRole(){
-if(role==='admin'){ // preview as student without logout - admin still has access
-role='student'; currentStudent=null; applyRole(); showTab('library'); alert('Preview as Student — You are still Admin, tap Back To Admin to return to all features');}
-else{ // back to admin needs password
-let p=prompt('Enter Admin Password to return to Admin:'); if(p===localStorage.getItem('q_admin_pass')){role='admin'; applyRole(); showTab('dash');} else alert('Wrong password — staying as Student');}
+if(role==='admin'){role='student'; currentStudent=null; applyRole(); showTab('library'); alert('Preview as Student — Tap Back To Admin to return');}
+else{let p=prompt('Enter Admin Password to return to Admin:'); if(p===localStorage.getItem('q_admin_pass')){role='admin'; applyRole(); showTab('dash');} else alert('Wrong password — staying as Student');}
 }
 function changePassword(){
 let oldP=prompt('Enter current Admin Password:'); if(oldP!==localStorage.getItem('q_admin_pass')){alert('Wrong password');return;}
-let np=prompt('Enter NEW Admin Password (6+ chars):'); if(np&&np.length>=6){localStorage.setItem('q_admin_pass',np); alert('Password changed!');} 
+let np=prompt('Enter NEW Admin Password (6+ chars):'); if(np&&np.length>=6){localStorage.setItem('q_admin_pass',np); alert('Password changed!');}
 }
 function logout(){document.getElementById('lockScreen').style.display='grid'; initLock(); document.getElementById('lockMsg').textContent='';}
-
-// --- REST OF APP ---
 function toggleMenu(){document.getElementById('drawer').classList.toggle('open');}
 function showTab(id){['dash','library','ask','history','subscribe','pins'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==id)); if(role!=='admin'&&(id==='dash'||id==='pins')){showTab('library');return;}}
 function renderMenu(){
 let html=''; Object.keys(DATA).forEach(cls=>{let d=DATA[cls]; let badge=d.free?'<span class="badge free">FREE</span>':'<span class="badge locked">🔒 ₦2,000/mo</span>';
-// STUDENT: show only FREE + their class, hide other locked classes content
 if(role==='student' && !d.free && (!currentStudent||currentStudent.class!==cls) && localStorage.getItem('unlock_'+cls)!=='1'){ html+=`<button class="classBtn" onclick="openTopic('${cls}','${Object.keys(d.subjects)[0]}','${d.subjects[Object.keys(d.subjects)[0]][0]}')"><span>${cls} 🔒</span>${badge}</button>`; return;}
 html+=`<button class="classBtn" onclick="toggleSub('${cls}')"><span>${cls}</span>${badge}</button><div id="sub-${cls}" class="hidden">`;
 Object.keys(d.subjects).forEach(subj=>{html+=`<button class="classBtn subject" onclick="toggleTopic('${cls}','${subj}')"><span>${subj}</span><span>▾</span></button><div id="top-${cls}-${subj}" class="hidden">`; d.subjects[subj].forEach(top=>{html+=`<div class="topic" onclick="openTopic('${cls}','${subj}','${top}')">• ${top}</div>`;}); html+='</div>';}); html+='</div>';});
@@ -227,40 +185,18 @@ function toggleTopic(cls,subj){document.getElementById('top-'+cls+'-'+subj).clas
 function defaultEssay(cls,subj,topic){return [`${topic} — ${subj} (${cls})`,`This is the full essay for ${topic}. It is written in simple, clear lines for students.`,`Also, this topic connects to real life examples and exam-style explanation.`].join('\n\n');}
 function getEssay(cls,subj,topic){return essays[cls+'|'+subj+'|'+topic]||defaultEssay(cls,subj,topic);}
 function openTopic(cls,subj,topic){
-let d=DATA[cls];
-let allowed = d.free || role==='admin' || (currentStudent&&currentStudent.class===cls) || localStorage.getItem('unlock_'+cls)==='1';
+let d=DATA[cls]; let allowed = d.free || role==='admin' || (currentStudent&&currentStudent.class===cls) || localStorage.getItem('unlock_'+cls)==='1';
 if(!allowed){showTab('subscribe');document.getElementById('subClass').value=cls;toggleMenu();document.getElementById('subMsg').innerHTML='🔒 '+cls+' is locked. Pay ₦2,000 to unlock this class only.';return;}
-let txt=getEssay(cls,subj,topic);
-document.getElementById('currentEssay').innerHTML='<h3>'+topic+' — '+subj+' ('+cls+')</h3><p>'+txt.replace(/\n\n/g,'</p><p>')+'</p>';
+let txt=getEssay(cls,subj,topic); document.getElementById('currentEssay').innerHTML='<h3>'+topic+' — '+subj+' ('+cls+')</h3><p>'+txt.replace(/\n\n/g,'</p><p>')+'</p>';
 if(role==='admin'){document.getElementById('editClass').value=cls;document.getElementById('editSubject').value=subj;document.getElementById('editTopic').value=topic;document.getElementById('essayEditor').value=txt;}
 toggleMenu();showTab('library');addHistory(topic+' — '+subj+' ('+cls+')');
 }
-function unlockWithPin(){
-let pin=document.getElementById('subPin').value.trim();let cls=document.getElementById('subClass').value;let s=students.find(x=>x.pin===pin);
-if(!s){document.getElementById('subMsg').innerHTML='❌ Invalid PIN';return;}
-let dev=localStorage.getItem('my_device')||('DEV-'+Math.random().toString(36).slice(2,7).toUpperCase());localStorage.setItem('my_device',dev);
-if(s.device && s.device!==dev){addLog('Blocked PIN '+pin+' different device');document.getElementById('subMsg').innerHTML='⛔ PIN bound to another device. Cannot transfer.';return;}
-if(!s.device){s.device=dev;localStorage.setItem('q_students',JSON.stringify(students));}
-if(s.class!==cls){document.getElementById('subMsg').innerHTML='❌ This PIN is for '+s.class+', not '+cls;return;}
-localStorage.setItem('unlock_'+cls,'1');document.getElementById('subMsg').innerHTML='✅ '+cls+' Unlocked! Go to Menu → '+cls;addLog('PIN '+pin+' unlocked '+cls+' on '+dev); renderMenu();
-}
-function openWhatsAppProof(){window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello, I paid ₦2,000 for Quizora. Class: '+document.getElementById('subClass').value+' — Proof attached.'),'_blank');}
-function generatePIN(){
-let name=document.getElementById('pinName').value.trim()||'Student';let cls=document.getElementById('pinClass').value;let days=+document.getElementById('pinDays').value;
-let pin='QZ-'+Math.floor(10000+Math.random()*89999);let exp=new Date(Date.now()+days*86400000).toISOString().slice(0,10);
-students.unshift({name,class:cls,pin,device:'',expiry:exp,status:'Active',blocked:false,price:2000});localStorage.setItem('q_students',JSON.stringify(students));
-document.getElementById('newPinResult').innerHTML='✅ PIN for '+name+' ('+cls+'): <b>'+pin+'</b> • Expires '+exp+' • Device-Locked on first use';
-addLog('Generated PIN '+pin+' for '+name+' ('+cls+')');renderStudents();updateStats();
-}
-function renderStudents(){
-let q=(document.getElementById('searchInput')?.value||'').toLowerCase();
-let rows=students.filter(s=>(s.name+' '+s.pin).toLowerCase().includes(q)).map(s=>{let idx=students.indexOf(s);return `<tr><td>${s.name}</td><td>${s.class}</td><td><b>${s.pin}</b></td><td>${s.device||'— Not used yet —'}</td><td>${s.expiry}</td><td>${s.blocked?'⛔ Blocked':s.status} ${s.device?'<span class="badge gold">🔒 Device Locked</span>':''}</td><td><button onclick="toggleBlock(${idx})">${s.blocked?'Unblock':'Block'}</button> <button onclick="whatsappRenew(${idx})">WhatsApp</button></td></tr>`;}).join('');
-if(document.getElementById('studentRows'))document.getElementById('studentRows').innerHTML=rows||'<tr><td colspan="7">No students yet.</td></tr>';
-let soon=students.filter(s=>{let d=(new Date(s.expiry)-new Date())/86400000;return d>=0&&d<=3;});
-if(document.getElementById('expiringText'))document.getElementById('expiringText').textContent=soon.length?('⚠️ '+soon.length+' PIN(s) expiring in 3 days'):'No PIN expiring in 3 days';
-}
+function unlockWithPin(){let pin=document.getElementById('subPin').value.trim();let cls=document.getElementById('subClass').value;let s=students.find(x=>x.pin===pin); if(!s){document.getElementById('subMsg').innerHTML='❌ Invalid PIN';return;} let dev=localStorage.getItem('my_device')||('DEV-'+Math.random().toString(36).slice(2,7).toUpperCase());localStorage.setItem('my_device',dev); if(s.device && s.device!==dev){addLog('Blocked PIN '+pin+' different device');document.getElementById('subMsg').innerHTML='⛔ PIN bound to another device. Cannot transfer.';return;} if(!s.device){s.device=dev;localStorage.setItem('q_students',JSON.stringify(students));} if(s.class!==cls){document.getElementById('subMsg').innerHTML='❌ This PIN is for '+s.class+', not '+cls;return;} localStorage.setItem('unlock_'+cls,'1');document.getElementById('subMsg').innerHTML='✅ '+cls+' Unlocked!';addLog('PIN '+pin+' unlocked '+cls); renderMenu();}
+function openWhatsAppProof(){window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello, I paid ₦2,000 for Quizora. Class: '+document.getElementById('subClass').value),'_blank');}
+function generatePIN(){let name=document.getElementById('pinName').value.trim()||'Student';let cls=document.getElementById('pinClass').value;let days=+document.getElementById('pinDays').value;let pin='QZ-'+Math.floor(10000+Math.random()*89999);let exp=new Date(Date.now()+days*86400000).toISOString().slice(0,10);students.unshift({name,class:cls,pin,device:'',expiry:exp,status:'Active',blocked:false});localStorage.setItem('q_students',JSON.stringify(students));document.getElementById('newPinResult').innerHTML='✅ PIN for '+name+' ('+cls+'): <b>'+pin+'</b> • Expires '+exp;addLog('Generated PIN '+pin+' for '+name);renderStudents();updateStats();}
+function renderStudents(){let q=(document.getElementById('searchInput')?.value||'').toLowerCase();let rows=students.filter(s=>(s.name+' '+s.pin).toLowerCase().includes(q)).map(s=>{let idx=students.indexOf(s);return `<tr><td>${s.name}</td><td>${s.class}</td><td><b>${s.pin}</b></td><td>${s.device||'— Not used yet —'}</td><td>${s.expiry}</td><td>${s.blocked?'⛔ Blocked':s.status} ${s.device?'<span class="badge gold">🔒 Device Locked</span>':''}</td><td><button onclick="toggleBlock(${idx})">${s.blocked?'Unblock':'Block'}</button> <button onclick="whatsappRenew(${idx})">WhatsApp</button></td></tr>`;}).join('');if(document.getElementById('studentRows'))document.getElementById('studentRows').innerHTML=rows||'<tr><td colspan="7">No students yet.</td></tr>';let soon=students.filter(s=>{let d=(new Date(s.expiry)-new Date())/86400000;return d>=0&&d<=3;});if(document.getElementById('expiringText'))document.getElementById('expiringText').textContent=soon.length?('⚠️ '+soon.length+' PIN(s) expiring in 3 days'):'No PIN expiring in 3 days';}
 function toggleBlock(i){students[i].blocked=!students[i].blocked;localStorage.setItem('q_students',JSON.stringify(students));addLog((students[i].blocked?'Blocked ':'Unblocked ')+'PIN '+students[i].pin);renderStudents();}
-function whatsappRenew(i){let s=students[i];window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello '+s.name+', your '+s.class+' PIN '+s.pin+' expires in 2 days. Renew ₦2,000 to Opay 8147699555 (Ekpo Bassey). Send proof here.'),'_blank');}
+function whatsappRenew(i){let s=students[i];window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello '+s.name+', your '+s.class+' PIN '+s.pin+' expires in 2 days. Renew ₦2,000 to Opay 8147699555 (Ekpo Bassey).'),' _blank');}
 function updateStats(){if(document.getElementById('statPins')){document.getElementById('statPins').textContent=students.filter(s=>!s.blocked).length;document.getElementById('statStudents').textContent=students.length;let rev=students.length*2000;document.getElementById('statRev').textContent='₦'+rev.toLocaleString();document.getElementById('revToday').textContent='₦'+(students.length?2000:0).toLocaleString();document.getElementById('revWeek').textContent='₦'+rev.toLocaleString();document.getElementById('revMonth').textContent='₦'+rev.toLocaleString();}}
 function loadEdit(){let c=document.getElementById('editClass').value;let s=document.getElementById('editSubject').value;let t=document.getElementById('editTopic').value;document.getElementById('essayEditor').value=getEssay(c,s,t);}
 function editEssay(){document.getElementById('essayEditor').focus();}
@@ -269,14 +205,8 @@ async function pasteEssay(){try{let t=await navigator.clipboard.readText();docum
 function selectAllEssay(){let e=document.getElementById('essayEditor');e.focus();e.select();}
 function deleteEssay(){if(confirm('Delete this essay?')){document.getElementById('essayEditor').value='';}}
 function saveEssay(){let k=document.getElementById('editClass').value+'|'+document.getElementById('editSubject').value+'|'+document.getElementById('editTopic').value;essays[k]=document.getElementById('essayEditor').value;localStorage.setItem('q_essays',JSON.stringify(essays));document.getElementById('saveMsg').textContent='✅ Saved!';addLog('Saved essay '+k);}
-function smartPaste(){
-let phrase=document.getElementById('pastePhrase').value.trim();if(!phrase){alert('Paste phrase first');return;}
-let ed=document.getElementById('essayEditor');let lines=ed.value.split('\n\n').filter(Boolean);let found=false;let keys=phrase.toLowerCase().split(' ').filter(w=>w.length>4);
-for(let i=0;i<lines.length;i++){let low=lines[i].toLowerCase();if(keys.some(k=>low.includes(k))){lines[i]=lines[i].trim()+' '+phrase;found=true;break;}}
-if(!found){lines.push('Also, '+phrase);}
-ed.value=lines.join('\n\n');saveEssay();document.getElementById('saveMsg').textContent='✅ Smart Pasted — auto-fixed to right line. Saved.';
-}
-function askAI(){let q=document.getElementById('askInput').value.trim();if(!q)return;let ans=q+'\n\nThis is a clear, simple explanation for students. It uses real-life examples and exam-ready lines. Also, it connects to what you already know.';document.getElementById('askResult').innerHTML='<p>'+ans.replace(/\n\n/g,'</p><p>')+'</p>';addHistory('Asked: '+q);}
+function smartPaste(){let phrase=document.getElementById('pastePhrase').value.trim();if(!phrase){alert('Paste phrase first');return;}let ed=document.getElementById('essayEditor');let lines=ed.value.split('\n\n').filter(Boolean);let found=false;let keys=phrase.toLowerCase().split(' ').filter(w=>w.length>4);for(let i=0;i<lines.length;i++){let low=lines[i].toLowerCase();if(keys.some(k=>low.includes(k))){lines[i]=lines[i].trim()+' '+phrase;found=true;break;}}if(!found){lines.push('Also, '+phrase);}ed.value=lines.join('\n\n');saveEssay();document.getElementById('saveMsg').textContent='✅ Smart Pasted — auto-fixed to right line. Saved.';}
+function askAI(){let q=document.getElementById('askInput').value.trim();if(!q)return;let ans=q+'\n\nThis is a clear, simple explanation for students.';document.getElementById('askResult').innerHTML='<p>'+ans.replace(/\n\n/g,'</p><p>')+'</p>';addHistory('Asked: '+q);}
 function addHistory(t){history.unshift(t+' • '+new Date().toLocaleString());localStorage.setItem('q_history',JSON.stringify(history));renderHistory();}
 function renderHistory(){if(document.getElementById('historyList'))document.getElementById('historyList').innerHTML=history.map(h=>'<div style="padding:8px;border-bottom:1px solid #222C55">'+h+'</div>').join('')||'No history yet.';}
 function clearHistory(){history=[];localStorage.setItem('q_history','[]');renderHistory();}
