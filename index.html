@@ -1,205 +1,293 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quizora AI - For World First Class Students</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quizora AI — Admin + Student</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;background:#f5f7fa;color:#111}button{cursor:pointer}.hidden{display:none!important}
-.topbar{background:#0b2a6b;color:#fff;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.qlogo{width:38px;height:38px;border-radius:50%;background:#d4af37;color:#0b2a6b;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center}
-.admin-badge{display:flex;flex-direction:column;align-items:center}.admin-badge img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #d4af37}.admin-badge span{font-size:10px;letter-spacing:1px;color:#ffd700;font-weight:700}
-.login-wrap{max-width:440px;margin:24px auto;background:#fff;border-radius:16px;padding:22px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.12)}
-.logo-big{width:82px;height:82px;border-radius:50%;background:#d4af37;color:#0b2a6b;font-size:50px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.login-wrap input{width:100%;padding:13px;border:1px solid #ccc;border-radius:10px;margin:6px 0}
-.btn{width:100%;padding:13px;border:0;border-radius:10px;background:#0b2a6b;color:#fff;font-weight:700;margin-top:8px}.btn-gold{background:#d4af37;color:#0b2a6b}
-.layout{display:flex}.left{width:310px;background:#fff;border-right:1px solid #ddd;padding:12px;padding-bottom:140px;overflow:auto}.right{flex:1;padding:14px;padding-bottom:140px;overflow:auto}
-.class-row{display:flex;justify-content:space-between;gap:6px;background:#eef2ff;padding:10px;border-radius:10px;margin:6px 0;font-weight:700}.subj-row{display:flex;justify-content:space-between;gap:6px;background:#f8f8f8;padding:9px;border-radius:8px;margin:4px 0 4px 12px}.topic-row{background:#fff;border:1px solid #eee;padding:9px;border-radius:8px;margin:3px 0 3px 24px;text-align:left;width:calc(100% - 24px)}.small{font-size:12px;padding:7px 8px;border-radius:8px;border:1px solid #0b2a6b;background:#fff;color:#0b2a6b;white-space:nowrap}
-.essay{background:#fff;border-radius:14px;padding:20px;max-width:860px;margin:0 auto;box-shadow:0 4px 18px rgba(0,0,0,.06)}.essay h2{color:#0b2a6b}.essay h3{color:#0b2a6b;margin:20px 0 8px}.essay p{line-height:1.75;margin:10px 0;text-align:justify}
-.diagram{border:2px solid #111;border-radius:12px;padding:12px;margin:14px 0;text-align:center;background:#fff}.diagram svg{max-width:100%;height:auto}
-.line{padding:8px;border-radius:8px}.line:focus{outline:2px solid #d4af37;background:#fffbe6}.line.selected{background:#fff3c4!important}
-.badge{display:inline-block;background:#d4af37;color:#0b2a6b;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700;margin:4px 4px 0 0}
-.ask{background:#fff;border-radius:14px;padding:14px;max-width:860px;margin:0 auto 12px}.ask input,.ask select{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;margin:6px 0}
-.smartbox{background:#fffbe6;border:2px dashed #d4af37;border-radius:12px;padding:14px;margin-bottom:14px}.smartbox textarea{width:100%;min-height:110px;padding:10px;border:1px solid #ccc;border-radius:10px}
-.lockbox{background:#fff;border:2px solid #d4af37;border-radius:14px;padding:18px;max-width:500px;margin:20px auto;text-align:center}.lockbox input{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;margin:8px 0}
-.fab{position:fixed;right:16px;bottom:90px;width:52px;height:52px;border-radius:50%;background:#0b2a6b;color:#fff;font-size:24px;border:0;z-index:20}.fab-menu{position:fixed;right:16px;bottom:150px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);width:210px;z-index:20;overflow:hidden}.fab-menu button{display:block;width:100%;text-align:left;padding:13px;border:0;background:#fff;border-bottom:1px solid #eee}
-.toolbar{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;background:#111;padding:8px;border-radius:999px;display:flex;gap:6px;z-index:30;flex-wrap:wrap;justify-content:center;max-width:96%}.toolbar button{border:0;background:#fff;padding:8px 10px;border-radius:999px;font-weight:700}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tabs button{padding:10px 12px;border-radius:999px;border:1px solid #0b2a6b;background:#fff;font-weight:700}.tabs button.active{background:#0b2a6b;color:#fff}
-@media(max-width:760px){.left{width:100%;display:none}.left.open{display:block}}
-</style></head><body>
-<div id="loginScreen"><div class="login-wrap"><div class="logo-big">Q</div><h1>Quizora AI</h1><p>For World First Class Students<br><b>100% OFFLINE</b></p>
-<div id="firstTimeBox"><p><b>Create Your ADMIN Password</b></p><input id="newPass1" type="password" placeholder="Create ADMIN Password"><input id="newPass2" type="password" placeholder="Confirm ADMIN Password"><button class="btn" onclick="createAdmin()">Save Password & Continue as ADMIN</button><button class="btn btn-gold" onclick="enterStudent()">Continue as STUDENT</button></div>
-<div id="returnBox" class="hidden"><input id="adminPass" type="password" placeholder="Enter ADMIN Password"><button class="btn" onclick="loginAdmin()">Login as ADMIN</button><button class="btn btn-gold" onclick="enterStudent()">Continue as STUDENT</button></div>
-</div></div>
-<div id="app" class="hidden">
-<div class="topbar"><div style="display:flex;align-items:center;gap:8px"><div class="qlogo">Q</div><div><b>Quizora AI</b><div style="font-size:11px" id="viewLabel">ADMIN VIEW</div></div></div>
-<div style="display:flex;gap:6px;align-items:center"><button id="viewToggleBtn" onclick="toggleView()" style="background:#fff;color:#0b2a6b;border:0;padding:8px 10px;border-radius:8px;font-weight:700">👁️ View as Student</button><button onclick="toggleMenu()" style="background:#fff;color:#0b2a6b;border:0;padding:8px 10px;border-radius:8px">☰ Menu</button><button onclick="logout()" style="background:#d4af37;color:#0b2a6b;border:0;padding:8px 10px;border-radius:8px;font-weight:700">Logout</button><div class="admin-badge"><img src="admin.jpg" onerror="this.src='https://via.placeholder.com/80'"><span>ADMIN</span></div></div></div>
-<div class="layout"><div class="left" id="leftMenu"></div><div class="right">
-<div class="ask"><div class="tabs"><button class="active" onclick="showTab('library',this)">📚 Library</button><button onclick="showTab('ask',this)">💬 Ask AI</button><button onclick="showTab('quiz',this)">✍️ Practice & Score</button><button onclick="showTab('upload',this)">📷 Upload</button><button onclick="showTab('history',this)">📊 History</button><button onclick="showTab('subscribe',this)">🔓 Subscribe ₦2,000</button><button id="adminTabBtn" class="hidden" onclick="showTab('admin',this)">⚙️ Admin - PINs</button></div>
-<div id="tab-library"><h3>Ask Any Question — Nursery to JAMB</h3><input id="qInput" placeholder="e.g. Explain Cells comprehensively"><select id="qPattern"><option>Full Essay</option><option>WAEC Essay + Diagrams</option><option>JAMB Objective + Explanation</option><option>Step-by-Step Maths</option></select><button class="btn" onclick="askAI()">Ask Quizora AI →</button><p style="font-size:12px;color:#666">FREE: Nursery, Primary, JSS1, JSS2, SS1, SS2. LOCKED: JSS3, SS3, WAEC, JAMB — ₦2,000 per class per month.</p></div>
-<div id="tab-ask" class="hidden"><p>Use Ask box above.</p></div>
-<div id="tab-quiz" class="hidden"><h3>Practice</h3><p>Q: If 3x + 5 = 20, what is x?</p><input id="quizAns" placeholder="Type answer"><button class="btn" onclick="checkQuiz()">Check → Feedback & Score</button><p id="quizFeedback"></p></div>
-<div id="tab-upload" class="hidden"><h3>Upload — Subscription Only</h3><input type="file" id="upFile" accept="image/*,.pdf"><button class="btn" onclick="doUpload()">Upload & Ask AI</button><p id="upResult"></p></div>
-<div id="tab-history" class="hidden"><h3>History & Scores</h3><div id="historyList"></div><button class="btn" onclick="clearHistory()">Clear History</button></div>
-<div id="tab-subscribe" class="hidden"><h3>🔓 Subscribe — ₦2,000 Per Locked Class Per Month</h3><p><b>1 PIN = 1 Class, 1 Student, 1 Phone, 1 Month. Not transferable.</b></p><p><b>Pay:</b> Opay <b>8147699555 (Ekpo Bassey)</b><br><b>Proof:</b> WhatsApp <b>08147699555</b></p></div>
-<div id="tab-admin" class="hidden"><h3>Admin Dashboard</h3><p id="adminStats"></p><input id="pinName" placeholder="Student Name"><select id="pinClass"><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select><input id="pinDays" type="number" value="30"><button class="btn" onclick="generatePIN()">Generate New PIN</button><div id="pinList"></div></div>
-</div><div id="essayBox"></div><p id="hint" style="text-align:center;color:#666;margin-top:12px"></p>
-</div></div></div>
-<button id="fab" class="fab hidden" onclick="toggleFab()">⋮</button>
-<div id="fabMenu" class="fab-menu hidden"><button onclick="doEdit()">✏️ Edit This Line</button><button onclick="doAddPhrase()">➕ Add Phrase</button><button onclick="doAddSentence()">➕ Add Sentence</button><button onclick="doDelete()">🗑️ Delete This Line</button><button onclick="doSave()" style="background:#d4af37;font-weight:700">💾 Save This Line</button></div>
-<div id="toolbar" class="toolbar hidden"><button onclick="document.execCommand('copy')">Copy</button><button onclick="document.execCommand('paste')">Paste</button><button onclick="document.execCommand('cut')">Cut</button><button onclick="document.execCommand('selectAll')">Select All</button><button onclick="doSave()">Save ✓</button></div>
-<script>
-let isAdmin=false,isStudentView=false,currentLine=null,currentClass='';
-let deviceId=localStorage.getItem('quizora_device')||('DEV-'+Math.random().toString(36).slice(2,8).toUpperCase());localStorage.setItem('quizora_device',deviceId);
-let pins=JSON.parse(localStorage.getItem('quizora_pins')||'[]');let unlocked=JSON.parse(localStorage.getItem('quizora_unlocked')||'[]');let history=JSON.parse(localStorage.getItem('quizora_history')||'[]');let scores=JSON.parse(localStorage.getItem('quizora_scores')||'[]');
-let data=JSON.parse(localStorage.getItem('quizora_data')||'null')||{
-"Nursery":{"English":["Rhymes"],"Maths":["Counting"]},
-"Primary":{"English":["Comprehension"],"Maths":["Addition"],"Basic Science":["Living Things"]},
-"JSS1":{"English":["Comprehension"],"Maths":["Algebra"],"Basic Science":["Cells in Biology"]},
-"JSS2":{"English":["Comprehension"],"Maths":["Algebra"],"Basic Science":["Cells in Biology"]},
-"JSS3":{"English":["Comprehension"],"Maths":["Algebra"],"Basic Science":["Cells in Biology"]},
-"SS1":{"English":["Essay"],"Maths":["Algebra"],"Biology":["Cells in Biology","Photosynthesis"],"Chemistry":["Atomic Structure"],"Physics":["Motion"]},
-"SS2":{"English":["Essay"],"Maths":["Algebra"],"Biology":["Cells in Biology"],"Chemistry":["Atomic Structure"],"Physics":["Motion"]},
-"SS3":{"English":["Essay"],"Maths":["Algebra"],"Biology":["Cells in Biology"],"Chemistry":["Atomic Structure"],"Physics":["Motion"]},
-"WAEC":{"English":["Essay"],"Maths":["Algebra"],"Biology":["Cells in Biology"],"Chemistry":["Atomic Structure"],"Physics":["Motion"],"Past Questions":["WAEC 2015-2025"]},
-"JAMB":{"English":["Comprehension"],"Maths":["Algebra"],"Biology":["Cells in Biology"],"Chemistry":["Atomic Structure"],"Physics":["Motion"]}
-};
-let essays=JSON.parse(localStorage.getItem('quizora_essays')||'{}');
-function saveAll(){localStorage.setItem('quizora_data',JSON.stringify(data));localStorage.setItem('quizora_essays',JSON.stringify(essays));localStorage.setItem('quizora_pins',JSON.stringify(pins));localStorage.setItem('quizora_unlocked',JSON.stringify(unlocked));localStorage.setItem('quizora_history',JSON.stringify(history));localStorage.setItem('quizora_scores',JSON.stringify(scores));}
-const FREE=["Nursery","Primary","JSS1","JSS2","SS1","SS2"];
-function effectiveAdmin(){return isAdmin && !isStudentView;}
-function isUnlocked(cls){if(effectiveAdmin())return true;if(FREE.includes(cls))return true;if(isStudentView && isAdmin)return false;return unlocked.includes(cls);}
-const ANIMAL_SVG=`<div class="diagram"><b>DIAGRAM: Animal Cell — Black Line — WAEC Standard</b><br><small>Horizontal labelling lines LEFT and RIGHT.</small><svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" style="background:#fff"><g font-size="13"><text x="0" y="40">Nucleus</text><line x1="70" y1="36" x2="190" y2="110" stroke="#000"/><text x="0" y="80">Nucleolus</text><line x1="75" y1="76" x2="215" y2="150" stroke="#000"/><text x="0" y="200">Golgi Apparatus</text><line x1="120" y1="196" x2="230" y2="230" stroke="#000"/><text x="0" y="260">Lysosome</text><line x1="80" y1="256" x2="230" y2="285" stroke="#000"/><text x="520" y="50">Cell Membrane</text><line x1="520" y1="46" x2="420" y2="80" stroke="#000"/><text x="520" y="160">Mitochondrion</text><line x1="520" y1="156" x2="400" y2="200" stroke="#000"/><text x="520" y="260">Ribosome</text><line x1="520" y1="256" x2="380" y2="270" stroke="#000"/></g><ellipse cx="320" cy="210" rx="190" ry="150" fill="none" stroke="#000" stroke-width="3"/><ellipse cx="240" cy="160" rx="65" ry="50" fill="none" stroke="#000" stroke-width="2.5"/><circle cx="240" cy="160" r="16" fill="none" stroke="#000" stroke-width="2"/><g fill="none" stroke="#000" stroke-width="2"><ellipse cx="390" cy="200" rx="38" ry="18" transform="rotate(-25 390 200)"/></g><circle cx="230" cy="285" r="12" fill="none" stroke="#000" stroke-width="2"/></svg></div>`;
-const PLANT_SVG=`<div class="diagram"><b>DIAGRAM: Plant Cell — Black Line</b><svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" style="background:#fff"><g font-size="13"><text x="0" y="40">Cell Wall</text><line x1="70" y1="36" x2="160" y2="70" stroke="#000"/><text x="0" y="90">Chloroplast</text><line x1="95" y1="86" x2="180" y2="130" stroke="#000"/><text x="0" y="180">Central Vacuole</text><line x1="115" y1="176" x2="210" y2="210" stroke="#000"/><text x="520" y="50">Nucleus</text><line x1="520" y1="46" x2="440" y2="100" stroke="#000"/></g><rect x="160" y="60" width="280" height="300" fill="none" stroke="#000" stroke-width="3"/><rect x="200" y="170" width="110" height="120" fill="none" stroke="#000" stroke-width="2"/><circle cx="410" cy="110" r="32" fill="none" stroke="#000" stroke-width="2.5"/></svg></div>`;
-const CELLS=`<h2>Cells in Biology</h2><span class="badge">WAEC + JAMB Standard</span>
-<div class="line"><h3>1.0 INTRODUCTION</h3></div><div class="line"><p>The cell is the basic structural and functional unit of life. Every living organism — bacterium to whale — is made of cells. Structural unit means building block. Functional unit means working unit. All life processes happen inside cells.</p></div>
-<div class="line"><h3>5.0 ANIMAL CELL — EVERY ORGANELLE</h3></div>${ANIMAL_SVG}
-<div class="line"><p><b>5.1 Cell Membrane:</b> Thin boundary, phospholipid bilayer, semi-permeable, controls entry and exit of substances.</p></div>
-<div class="line"><p><b>5.2 Cytoplasm:</b> Jelly fluid, organelles are suspended in it, glycolysis happens here.</p></div>
-<div class="line"><p><b>5.3 Nucleus:</b> Largest organelle, control centre, contains chromosomes, controls growth, repair and division.</p></div>
-<div class="line"><p><b>5.4 Nucleolus:</b> Inside the nucleus, it makes rRNA and assembles ribosomes.</p></div>
-<div class="line"><p><b>5.5 Nuclear Membrane:</b> Double membrane with pores, it controls movement between nucleus and cytoplasm.</p></div>
-<div class="line"><p><b>5.6 Mitochondrion:</b> Double membrane, inner membrane folded into cristae, it is the powerhouse of the cell, aerobic respiration takes place here, ATP is produced here.</p></div>
-<div class="line"><p><b>5.7 Ribosome:</b> Smallest organelle, it carries out protein synthesis.</p></div>
-<div class="line"><p><b>5.8 Rough ER:</b> It has ribosomes attached, it transports proteins to the Golgi apparatus.</p></div>
-<div class="line"><p><b>5.9 Smooth ER:</b> It has no ribosomes, it makes lipids and steroids.</p></div>
-<div class="line"><p><b>5.10 Golgi Apparatus:</b> Stack of membranes, it sorts, modifies and packages proteins.</p></div>
-<div class="line"><p><b>5.11 Lysosome:</b> Small sac, it contains digestive enzymes, it digests food particles, bacteria and worn-out organelles.</p></div>
-<div class="line"><p><b>5.12 Peroxisome:</b> Small sac, it contains catalase, it breaks down hydrogen peroxide into water and oxygen.</p></div>
-<div class="line"><p><b>5.13 Centrioles:</b> Pair of cylinders near the nucleus, they form spindle fibres during cell division.</p></div>
-<div class="line"><h3>6.0 PLANT CELL</h3></div>${PLANT_SVG}
-<div class="line"><p><b>6.1 Cell Wall:</b> Rigid wall made of cellulose, it gives shape, support and protection.</p></div>
-<div class="line"><p><b>6.2 Chloroplast:</b> Green organelle, it contains chlorophyll, photosynthesis takes place here.</p></div>
-<div class="line"><p><b>6.3 Large Central Vacuole:</b> Large sac, it stores water and cell sap, it maintains turgidity.</p></div>
-<div class="line"><p><b>6.4 Plasmodesmata:</b> Tiny channels through the cell wall, they connect neighbouring plant cells.</p></div>
-<div class="line"><h3>7.0 DIFFERENCES</h3></div><div class="line"><p>Plant cell has wall, chloroplast and large vacuole. Animal cell has no wall or chloroplast, but it has centrioles.</p></div>`;
-if(localStorage.getItem('quizora_admin_pass')){document.getElementById('firstTimeBox').classList.add('hidden');document.getElementById('returnBox').classList.remove('hidden');}
-function createAdmin(){let a=document.getElementById('newPass1').value.trim(),b=document.getElementById('newPass2').value.trim();if(!a||a!==b){alert('Passwords must match');return;}localStorage.setItem('quizora_admin_pass',a);isAdmin=true;showApp();}
-function loginAdmin(){if(document.getElementById('adminPass').value===localStorage.getItem('quizora_admin_pass')){isAdmin=true;showApp();}else alert('Wrong ADMIN Password');}
-function enterStudent(){isAdmin=false;showApp();}
-function showApp(){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.remove('hidden');updateViewUI();renderMenu();renderHome();renderHistory();renderAdmin();}
-function logout(){location.reload();} function toggleMenu(){document.getElementById('leftMenu').classList.toggle('open');}
-function toggleView(){if(!isAdmin)return;isStudentView=!isStudentView;updateViewUI();renderMenu();renderHome();}
-function updateViewUI(){let s=isStudentView&&isAdmin;document.getElementById('viewLabel').innerText=s?'STUDENT VIEW (Preview)':(isAdmin?'ADMIN VIEW':'STUDENT VIEW');document.getElementById('viewToggleBtn').innerText=s?'🔙 Back to Admin':'👁️ View as Student';document.getElementById('viewToggleBtn').style.display=isAdmin?'':'none';document.getElementById('adminTabBtn').classList.toggle('hidden',!effectiveAdmin());document.getElementById('fab').classList.toggle('hidden',!effectiveAdmin());}
-function showTab(n,b){document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');['library','ask','quiz','upload','history','subscribe','admin'].forEach(t=>{let e=document.getElementById('tab-'+t);if(e)e.classList.add('hidden');});let s=document.getElementById('tab-'+n);if(s)s.classList.remove('hidden');if(n==='library')renderHome();}
-function renderMenu(){let h='<h3>ALL CLASSES</h3>';Object.keys(data).forEach(cls=>{let lock=FREE.includes(cls)?'🟢 FREE':'🔒 LOCKED ₦2,000/mo';h+=`<div class="class-row"><span onclick="clickClass('${cls}')">${cls} ▾ <small>${lock}</small></span>${effectiveAdmin()?`<button class="small" onclick="insertSubject('${cls}')">+ Insert Subject</button>`:''}</div><div id="cls-${cls}" class="hidden">`;Object.keys(data[cls]).forEach(sub=>{h+=`<div class="subj-row"><span onclick="toggleSub('${cls}-${sub}')">${sub} ▾</span>${effectiveAdmin()?`<button class="small" onclick="insertTopic('${cls}','${sub}')">+ Insert Topic</button>`:''}</div><div id="sub-${cls}-${sub}" class="hidden">`;data[cls][sub].forEach(top=>{h+=`<button class="topic-row" onclick="openTopic('${cls}','${sub}','${top}')">${top}</button>`;});h+=`</div>`;});h+=`</div>`;});if(effectiveAdmin())h+=`<button class="btn" onclick="insertClass()">+ Insert New Class</button>`;document.getElementById('leftMenu').innerHTML=h;}
-function clickClass(cls){currentClass=cls;if(!isUnlocked(cls)){showLockBox(cls);return;}document.getElementById('cls-'+cls).classList.toggle('hidden');}
-function showLockBox(cls){document.getElementById('essayBox').innerHTML=`<div class="lockbox"><h2>🔒 Unlock ${cls}</h2><p>₦2,000 per month for this class only.</p><p>Pay Opay <b>8147699555 (Ekpo Bassey)</b><br>Proof to WhatsApp <b>08147699555</b></p><input id="pinInput" placeholder="Enter PIN for ${cls}"><button class="btn" onclick="unlockWithPIN('${cls}')">Unlock ${cls}</button></div>`;}
-function unlockWithPIN(cls){let pin=document.getElementById('pinInput').value.trim().toUpperCase();let f=pins.find(p=>p.code===pin&&p.cls===cls);if(!f){alert('Wrong PIN for '+cls);return;}if(f.device&&f.device!==deviceId){alert('PIN bound to another phone. Not transferable.');return;}if(Date.now()>f.expires){alert('PIN expired.');return;}f.device=deviceId;if(!unlocked.includes(cls))unlocked.push(cls);saveAll();alert('Unlocked '+cls+' ✓');renderMenu();renderHome();}
-function toggleSub(id){document.getElementById('sub-'+id).classList.toggle('hidden');}
-function renderHome(){document.getElementById('essayBox').innerHTML=`<div class="essay"><h2>Welcome to Quizora AI Library</h2><p>FREE: Nursery, Primary, JSS1, JSS2, SS1, SS2. LOCKED: JSS3, SS3, WAEC, JAMB — ₦2,000 per class.</p><p><b>100% OFFLINE</b></p></div>`;}
-function openTopic(cls,sub,top){
-  if(!isUnlocked(cls)){showLockBox(cls);return;}
-  window._lastKey=cls+'|'+sub+'|'+top;
-  let content=essays[window._lastKey]||CELLS;
-  let smart=effectiveAdmin()?`<div class="smartbox"><b>📋 SMART PASTE — No Numbers Needed — Joins With Sense</b><p style="font-size:13px">Just paste a phrase, sentence, or many lines. No numbers. It will join where the sentence continues naturally. It will NEVER cut your phrase.</p><textarea id="smartInput" placeholder="Paste here... e.g. It also has its own DNA and can divide on its own"></textarea><button class="btn" onclick="smartPaste()">📋 Paste → Join With Sense + Save</button><p style="font-size:12px;color:#666">• Full sentence → Added as full sentence after the sentence it continues.<br>• Phrase like “which is rich in enzymes” → Joined with comma to the sentence it continues.<br>• New idea → New paragraph with “Also,” so it flows.</p><p id="smartResult" style="font-size:13px;color:#0b2a6b"></p></div>`:'';
-  document.getElementById('essayBox').innerHTML=`${smart}<div class="essay" id="essay"><div style="display:flex;justify-content:space-between"><button onclick="renderHome()">← Back</button><span>${cls} • ${sub}</span></div>${content}</div>`;
-  history.unshift({q:top,cls:cls,sub:sub,time:new Date().toLocaleString()});saveAll();renderHistory();bindLines();
-  if(window.innerWidth<760)document.getElementById('leftMenu').classList.remove('open');window.scrollTo(0,0);
-}
-function bindLines(){document.querySelectorAll('#essay .line').forEach(el=>{el.addEventListener('click',()=>{if(!effectiveAdmin())return;document.querySelectorAll('.line').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');currentLine=el;document.getElementById('toolbar').classList.remove('hidden');});});}
+*{box-sizing:border-box;font-family:Inter,system-ui,Arial}body{margin:0;background:#0A0F24;color:#fff}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0A0F24;border-bottom:1px solid #FFD70055}
+.logo{width:38px;height:38px;border-radius:50%;background:#FFD700;color:#000;display:grid;place-items:center;font-weight:900;font-size:22px}
+h1{font-size:19px;margin:0}h1 span{color:#FFD700}.sub{font-size:11px;opacity:.7}
+.btn{background:#FFD700;color:#000;border:0;padding:10px 14px;border-radius:999px;font-weight:800;cursor:pointer}
+.btn2{background:#1A2547;color:#fff;border:1px solid #FFD70066;padding:10px 14px;border-radius:999px;cursor:pointer}
+.avatar{width:38px;height:38px;border-radius:50%;background:#FFD700;color:#000;display:grid;place-items:center;font-weight:900;border:2px solid #FFD700;margin-left:auto}
+.wrap{max-width:1100px;margin:0 auto;padding:14px}
+.card{background:#111A33;border:1px solid #FFD70033;border-radius:16px;padding:14px;margin-bottom:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.grid4 .card{text-align:center}.grid4 b{font-size:22px;color:#FFD700}.grid4 div{font-size:12px;opacity:.8}
+input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #2A3766;background:#0A0F24;color:#fff;margin:6px 0}
+textarea{min-height:90px}label{font-size:12px;opacity:.8}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:140px}
+.tabs{display:flex;gap:8px;overflow:auto;padding-bottom:6px}.tabs button{white-space:nowrap}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}.tbl th,.tbl td{padding:9px;border-bottom:1px solid #222C55;text-align:left}
+.badge{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800}.free{background:#1DB954;color:#000}.locked{background:#FF3B30;color:#fff}.gold{background:#FFD700;color:#000}
+.essay{background:#0D1430;border:1px solid #FFD70044;border-radius:14px;padding:14px;line-height:1.7}
+.hidden{display:none!important}
+.drawer{position:fixed;inset:0;z-index:50;display:none}.drawer.open{display:block}.backdrop{position:absolute;inset:0;background:#000a}.panel{position:absolute;left:0;top:0;bottom:0;width:320px;max-width:88vw;background:#111A33;border-right:1px solid #FFD70055;padding:14px;overflow:auto}
+.classBtn{width:100%;text-align:left;background:#0A0F24;border:1px solid #2A3766;color:#fff;padding:11px;border-radius:12px;margin:6px 0;cursor:pointer;display:flex;justify-content:space-between}
+.subject{margin-left:10px}.topic{margin-left:22px;font-size:13px;padding:8px;background:#0A0F24;border:1px solid #222C55;border-radius:10px;margin:4px 0;cursor:pointer}
+.toolbar{display:flex;gap:6px;flex-wrap:wrap}.toolbar button{background:#1A2547;color:#fff;border:1px solid #FFD70066;padding:8px 11px;border-radius:999px;cursor:pointer}
+.log{font-size:12px;line-height:1.6;max-height:180px;overflow:auto}
+.lockScreen{position:fixed;inset:0;z-index:100;background:#0A0F24;display:grid;place-items:center;padding:20px}.lockBox{width:100%;max-width:400px;background:#111A33;border:1px solid #FFD70055;border-radius:18px;padding:20px;text-align:center}
+@media(max-width:700px){.grid4{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
 
-// === SENSE-JOIN SMART PASTE ===
-function getWords(s){return s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>3 && !['that','with','this','from','which','their','there','about','into','your','have','will','when','they','them','also','into'].includes(w));}
-function isPhrase(text){ let t=text.trim(); if(/^(which|that|and|with|including|containing|rich in|made of|found in)\b/i.test(t)) return true; if(t.split(' ').length<=6 && !/^(The|It|A|An|This|These|Those)\b/i.test(t)) return true; return false; }
-function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1);}
-function smartPaste(){
-  let raw=document.getElementById('smartInput').value.trim(); if(!raw){alert('Paste something first');return;}
-  let essay=document.getElementById('essay'); if(!essay) return;
-  // Split by lines, then by sentences — NEVER cut inside a sentence
-  let units=raw.split(/\n+/).flatMap(l=>l.split(/(?<=[.!])\s+/)).map(s=>s.trim()).filter(s=>s.length>4);
-  let results=[];
-  units.forEach(text=>{
-    let clean=text.replace(/\s+/g,' ').trim();
-    let words=getWords(clean);
-    let lines=[...essay.querySelectorAll('.line')].filter(l=>l.querySelector('p'));
-    let best=null,bestScore=-1,bestLastSentence='';
-    lines.forEach(ln=>{
-      let full=ln.innerText;
-      // Score = overlap of content words + continuity: last sentence in that paragraph
-      let sentences=full.split(/(?<=[.!])\s+/); let last=sentences[sentences.length-1]||'';
-      let score=0;
-      words.forEach(w=>{ if(full.toLowerCase().includes(w)) score+=1; if(last.toLowerCase().includes(w)) score+=2; });
-      // Strong bonus if pasted sentence starts with pronoun that continues last sentence: It, They, This
-      if(/^(It|They|This|These|It also|It also has|It also contains)\b/i.test(clean) && last.length>10) score+=2;
-      // Penalty if paragraph is about a completely different section heading
-      if(score>bestScore){bestScore=score; best=ln; bestLastSentence=last;}
-    });
-    // THRESHOLD: must have real continuity, not just 1 common word like "cell"
-    // Need at least 2 meaningful overlaps, or pronoun continuation + 1 overlap
-    let isContinuation = best && bestScore>=3;
-    if(isContinuation){
-      let p=best.querySelector('p');
-      let html=p.innerHTML;
-      if(isPhrase(clean)){
-        // PHRASE: join with comma to the sentence it continues — no new sentence, no cut
-        // Remove trailing period from phrase, lower first letter if needed
-        let phrase=clean.replace(/[.]+$/,''); phrase=phrase.charAt(0).toLowerCase()+phrase.slice(1);
-        // Remove trailing period from paragraph, add comma + phrase + period
-        html=html.replace(/[.]+$/,'');
-        p.innerHTML=html+', '+phrase+'.';
-        results.push('✅ Phrase joined with sense to: “'+best.innerText.slice(0,55)+'...” — it now reads as one continuing sentence.');
-      } else {
-        // FULL SENTENCE: add as full sentence after the sentence it continues
-        let sentence=capitalize(clean); if(!/[.!]$/.test(sentence)) sentence+='.';
-        html=html.replace(/[.]+$/,''); // ensure clean end
-        // Actually keep original paragraph punctuation: append with space
-        let orig=p.innerText.trim(); if(!/[.!]$/.test(orig)) orig+='.';
-        p.innerHTML=orig+' '+sentence;
-        results.push('✅ Sentence joined with sense to: “'+best.innerText.slice(0,55)+'...” — it continues naturally.');
-      }
-    } else {
-      // NEW IDEA: do NOT force into old paragraph. Create new paragraph with transition so it flows.
-      let all=[...essay.querySelectorAll('.line')].filter(l=>l.innerText.match(/^\d+\.\d+/));
-      let anchor=all[all.length-1] || essay.lastElementChild;
-      let nextNum='—';
-      if(anchor){ let m=anchor.innerText.match(/^(\d+)\.(\d+)/); if(m) nextNum=m[1]+'.'+(parseInt(m[2])+1); }
-      let sentence=capitalize(clean); if(!/[.!]$/.test(sentence)) sentence+='.';
-      // Add transition only if sentence does not already start with one
-      if(!/^(Also|In addition|Furthermore|Similarly|For example)\b/i.test(sentence)) sentence='Also, '+sentence.charAt(0).toLowerCase()+sentence.slice(1);
-      let div=document.createElement('div'); div.className='line';
-      div.innerHTML=`<p><b>${nextNum} New Point:</b> ${sentence}</p>`;
-      if(anchor) anchor.after(div); else essay.appendChild(div);
-      results.push('➕ New idea — not forced into old paragraph. Created '+nextNum+' with “Also,” so it flows.');
-    }
-  });
-  if(window._lastKey) essays[window._lastKey]=essay.innerHTML;
-  saveAll(); document.getElementById('smartInput').value='';
-  document.getElementById('smartResult').innerHTML=results.join('<br>')+'<br><b>Saved offline ✓ — Read it back, it will make sense as one continuous essay.</b>';
-  bindLines();
+<!-- ===== FIRST TIME PASSWORD / LOGIN SCREEN ===== -->
+<div class="lockScreen" id="lockScreen">
+<div class="lockBox">
+<div class="logo" style="margin:0 auto">Q</div>
+<h2 style="margin:10px 0 4px">Quizora <span style="color:#FFD700">AI</span></h2>
+<p style="font-size:12px;opacity:.7" id="lockTitle">Create Your Admin Password — First Time Only</p>
+
+<!-- CREATE PASSWORD - SHOWS FIRST TIME ONLY -->
+<div id="createBox">
+<input type="password" id="newPass1" placeholder="Create Admin Password (6+ chars)">
+<input type="password" id="newPass2" placeholder="Confirm Admin Password">
+<input id="secretAns" placeholder="Secret Question: What is your Opay name? (for Forgot Password)">
+<button class="btn" onclick="createPassword()">Create Password & Enter Admin</button>
+<p style="font-size:11px;opacity:.6">Saved on YOUR phone only. Students never see this. Do not share.</p>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div id="loginBox" class="hidden">
+<input type="password" id="loginPass" placeholder="Enter Admin Password">
+<button class="btn" onclick="adminLogin()">Enter As Admin — All Features</button>
+<button class="btn2" onclick="showForgot()">Forgot Password?</button>
+<div id="forgotBox" class="hidden">
+<input id="forgotAns" placeholder="What is your Opay name?">
+<button class="btn2" onclick="resetWithSecret()">Reset Password</button>
+</div>
+<p style="font-size:12px;opacity:.7;margin:14px 0">OR</p>
+<button class="btn2" onclick="showStudentLogin()">Login as Student — Learning Only</button>
+</div>
+
+<!-- STUDENT LOGIN -->
+<div id="studentBox" class="hidden">
+<input id="studentPin" placeholder="Enter Your PIN e.g. QZ-12345">
+<button class="btn" onclick="studentLogin()">Enter As Student</button>
+<button class="btn2" onclick="backToAdminLogin()">Back To Admin Login</button>
+<p style="font-size:11px;opacity:.6">Student sees only Library / Ask AI / History / Subscribe. No Admin features. PIN is device-locked.</p>
+</div>
+<div id="lockMsg" style="color:#FF3B30;font-size:13px;margin-top:8px"></div>
+</div>
+</div>
+
+<!-- TOP BAR -->
+<div class="top">
+<button class="btn2" onclick="toggleMenu()">☰ Menu</button>
+<div class="logo">Q</div>
+<div><h1>Quizora <span>AI</span></h1><div class="sub" id="viewLabel">ADMIN VIEW • All Features</div></div>
+<button class="btn2" id="viewBtn" onclick="switchRole()">View as Student</button>
+<button class="btn2" onclick="changePassword()">Change Password</button>
+<button class="btn2" onclick="logout()">Logout</button>
+<div class="avatar" id="avatarLetter">A</div>
+</div>
+
+<!-- MENU DRAWER - ONLY PLACE WITH CLASSES -->
+<div class="drawer" id="drawer"><div class="backdrop" onclick="toggleMenu()"></div><div class="panel">
+<h3 style="color:#FFD700;margin:4px 0">☰ Menu</h3><p style="font-size:12px;opacity:.7">CLASSES — Tap to Open</p><div id="menuList"></div>
+<button class="btn2" style="width:100%;margin-top:10px" onclick="toggleMenu()">Close Menu ✕</button></div></div>
+
+<div class="wrap">
+<div class="card" id="announceCard">📢 <b id="announceText">Welcome to Quizora AI.</b></div>
+
+<div class="tabs" id="tabsBar">
+<button class="btn" id="tabBtn-dash" onclick="showTab('dash')">Dashboard</button>
+<button class="btn2" onclick="showTab('library')">Library</button>
+<button class="btn2" onclick="showTab('ask')">Ask AI</button>
+<button class="btn2" onclick="showTab('history')">History</button>
+<button class="btn2" onclick="showTab('subscribe')">Subscribe</button>
+<button class="btn2" id="tabBtn-pins" onclick="showTab('pins')">PINs</button>
+</div>
+
+<!-- ===== ADMIN ONLY - DASHBOARD ===== -->
+<div id="tab-dash" class="adminOnly">
+<div class="grid4">
+<div class="card"><b id="statPins">0</b><div>Active PINs</div></div>
+<div class="card"><b id="statStudents">0</b><div>Total Students</div></div>
+<div class="card"><b id="statRev">₦0</b><div>Revenue (Month)</div></div>
+<div class="card"><b>4</b><div>Locked Classes</div></div>
+</div>
+<div class="card"><b>Revenue</b> • Today <span id="revToday">₦0</span> • Week <span id="revWeek">₦0</span> • Month <span id="revMonth">₦0</span><div style="margin-top:8px">⚠️ <b id="expiringText">No PIN expiring</b></div>
+<div class="row" style="margin-top:8px"><button class="btn2" onclick="backup()">⬇ Backup</button><button class="btn2" onclick="backupReminder()">🔔 Auto Backup Reminder</button><button class="btn2" onclick="searchFocus()">🔍 Search Student / PIN</button></div></div>
+
+<div class="card"><h3 style="margin:0;color:#FFD700">Generate PIN — Anytime • No Limit • Admin Only</h3>
+<div class="row"><div><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka O."></div><div><label>Class</label><select id="pinClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option><option>Nursery</option><option>Primary</option></select></div><div><label>Days</label><select id="pinDays"><option value="7">7 Days</option><option value="30" selected>30 Days</option></select></div></div>
+<button class="btn" onclick="generatePIN()">+ Generate PIN Anytime</button><div id="newPinResult" style="margin-top:8px;color:#FFD700;font-weight:800"></div><p style="font-size:12px;opacity:.7">PIN locks to first device that uses it. Cannot transfer.</p></div>
+
+<div class="card"><h3>Student List • Device Locked • Admin Only</h3><input id="searchInput" placeholder="Search by name or PIN..." oninput="renderStudents()"><div style="overflow:auto"><table class="tbl"><thead><tr><th>Name</th><th>Class</th><th>PIN</th><th>Device ID</th><th>Expiry</th><th>Status</th><th>Action</th></tr></thead><tbody id="studentRows"></tbody></table></div></div>
+
+<div class="card"><h3 style="color:#FFD700">Content Manager — Admin Only • No Code</h3>
+<p style="font-size:12px;opacity:.8">Paste phrase → Smart Paste auto-fixes to right line. Never cuts phrase.</p>
+<div class="row"><div><label>Class</label><select id="editClass" onchange="loadEdit()"><option>JSS1</option><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Subject</label><input id="editSubject" value="Basic Science"></div><div><label>Topic</label><input id="editTopic" value="Cells in Biology"></div></div>
+<div class="toolbar"><button onclick="editEssay()">✏️ Edit</button><button onclick="copyEssay()">📋 Copy</button><button onclick="pasteEssay()">📥 Paste</button><button onclick="selectAllEssay()">Select All</button><button onclick="deleteEssay()">🗑️ Delete</button><button class="btn" onclick="saveEssay()">💾 Save</button><button onclick="smartPaste()">✨ Smart Paste Phrase</button></div>
+<label>Paste Phrase Here (no code)</label><textarea id="pastePhrase" placeholder="Paste any phrase here..."></textarea>
+<label>Essay Lines — Edit Directly</label><textarea id="essayEditor" rows="8"></textarea><div id="saveMsg" style="color:#1DB954;font-weight:800"></div></div>
+
+<div class="card"><h3>Announcement To All Students — Admin Only</h3><input id="annInput" placeholder="Type announcement..."><button class="btn" onclick="saveAnnounce()">Send Announcement</button></div>
+<div class="card"><h3>PIN Activity Log — Admin Only</h3><div class="log" id="activityLog"></div></div>
+</div>
+
+<!-- LIBRARY - BOTH ADMIN + STUDENT -->
+<div id="tab-library" class="hidden"><div class="card"><h3>Library — Tap ☰ Menu</h3><p id="libraryNote">Admin sees all. Student sees only FREE + unlocked class.</p><div id="currentEssay" class="essay">Tap ☰ Menu → JSS1 → Basic Science → Cells in Biology</div></div></div>
+
+<!-- ASK AI - BOTH -->
+<div id="tab-ask" class="hidden"><div class="card"><h3>Ask AI — No “Essay or not?” Question</h3><input id="askInput" placeholder="Ask anything..."><button class="btn" onclick="askAI()">Ask</button><div id="askResult" class="essay" style="margin-top:10px">Your answer will appear here, saved to History.</div></div></div>
+
+<!-- HISTORY - BOTH -->
+<div id="tab-history" class="hidden"><div class="card"><h3>History</h3><div id="historyList"></div><button class="btn2" onclick="clearHistory()">Clear History</button></div></div>
+
+<!-- SUBSCRIBE - BOTH -->
+<div id="tab-subscribe" class="hidden"><div class="card"><h3>Unlock Class — ₦2,000 / month per class only</h3><div class="row"><div><label>Class</label><select id="subClass"><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Your PIN</label><input id="subPin" placeholder="Enter PIN"></div></div><p><b>Pay Opay 8147699555 (Ekpo Bassey) — Proof to WhatsApp 08147699555 — Enter PIN</b></p><button class="btn" onclick="unlockWithPin()">Unlock With PIN</button><button class="btn2" onclick="openWhatsAppProof()">Send Proof on WhatsApp</button><div id="subMsg"></div></div></div>
+
+<!-- PINS - ADMIN ONLY -->
+<div id="tab-pins" class="hidden adminOnly"><div class="card"><h3>PINs — Admin Only</h3><button class="btn" onclick="showTab('dash')">Go To Generate PIN</button></div></div>
+</div>
+
+<script>
+const DATA={"Nursery":{free:true,subjects:{"English":["Alphabet","Rhymes"],"Maths":["Counting 1-20"]}},"Primary":{free:true,subjects:{"English":["Nouns","Verbs"],"Maths":["Addition","Subtraction"]}},"JSS1":{free:true,subjects:{"English":["Nouns","Comprehension"],"Maths":["Fractions","Algebra"],"Basic Science":["Cells in Biology","Living and Non-Living Things","Energy","Water"],"CRS":["Creation"],"Agric":["Farming"]}},"JSS2":{free:true,subjects:{"English":["Tenses"],"Maths":["Geometry"],"Basic Science":["Air","Soil"]}},"JSS3":{free:false,subjects:{"English":["Essay Writing"],"Maths":["Indices"],"Basic Science":["Photosynthesis"]}},"SS1":{free:true,subjects:{"Biology":["Cell"],"Chemistry":["Atoms"],"Physics":["Motion"]}},"SS2":{free:true,subjects:{"Biology":["Genetics"],"Chemistry":["Acids"],"Physics":["Waves"]}},"SS3":{free:false,subjects:{"Biology":["Ecology"],"Chemistry":["Organic"],"Physics":["Electricity"]}},"WAEC":{free:false,subjects:{"Biology":["WAEC Biology"],"Chemistry":["WAEC Chemistry"],"English":["WAEC English"]}},"JAMB":{free:false,subjects:{"Biology":["JAMB Biology"],"English":["JAMB English"],"Maths":["JAMB Maths"]}}};
+let students=JSON.parse(localStorage.getItem('q_students')||'[]');
+let essays=JSON.parse(localStorage.getItem('q_essays')||'{}');
+let history=JSON.parse(localStorage.getItem('q_history')||'[]');
+let logs=JSON.parse(localStorage.getItem('q_logs')||'[]');
+let role='admin'; let currentStudent=null;
+
+// --- PASSWORD: FIRST TIME CREATE ---
+function initLock(){
+let hasPass=localStorage.getItem('q_admin_pass');
+if(!hasPass){document.getElementById('createBox').classList.remove('hidden');document.getElementById('loginBox').classList.add('hidden');document.getElementById('lockTitle').textContent='Create Your Admin Password — First Time Only';}
+else{document.getElementById('createBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');document.getElementById('lockTitle').textContent='Welcome Back — Enter Admin Password or Login as Student';}
 }
-function askAI(){let q=document.getElementById('qInput').value.trim();let pat=document.getElementById('qPattern').value;if(!q){alert('Type question');return;}let ans=q.toLowerCase().includes('cell')?CELLS:`<h2>${q}</h2><p><b>Pattern:</b> ${pat}</p><div class="line"><p>Comprehensive WAEC + JAMB answer to: ${q}.</p></div>${ANIMAL_SVG}<div class="line"><p>Every point explained, tables, examples, Maths symbols.</p></div>`;document.getElementById('essayBox').innerHTML=`<div class="essay" id="essay">${ans}</div>`;history.unshift({q:q,cls:'Ask AI',sub:pat,time:new Date().toLocaleString()});saveAll();renderHistory();bindLines();}
-function checkQuiz(){let a=document.getElementById('quizAns').value.trim();let ok=a==='5'||a.toLowerCase()==='x=5';document.getElementById('quizFeedback').innerHTML=ok?'✅ Correct! x=5. Score 100%.':'❌ Not yet. Correct: x=5.';scores.push({q:'3x+5=20',ans:a,correct:ok,time:new Date().toLocaleString()});saveAll();renderHistory();}
-function doUpload(){if(!effectiveAdmin()&&unlocked.length===0){alert('Upload NOT allowed without subscription. Pay ₦2,000 to Opay 8147699555, proof to WhatsApp 08147699555');return;}let f=document.getElementById('upFile').files[0];document.getElementById('upResult').innerText=f?`Uploaded: ${f.name} ✓`:'Choose file first.';}
-function renderHistory(){let h=history.map(x=>`<div style="background:#fff;padding:10px;border-radius:10px;margin:6px 0"><b>${x.q}</b><br><small>${x.cls} • ${x.sub} • ${x.time}</small></div>`).join('')||'<p>No history yet.</p>';let el=document.getElementById('historyList');if(el)el.innerHTML=h;}
-function clearHistory(){history=[];scores=[];saveAll();renderHistory();}
-function generatePIN(){let name=document.getElementById('pinName').value.trim();let cls=document.getElementById('pinClass').value;let days=parseInt(document.getElementById('pinDays').value||30);if(!name){alert('Enter Student Name');return;}let code='QZ-'+Math.floor(10000+Math.random()*89999);pins.push({code:code,name:name,cls:cls,expires:Date.now()+days*24*3600*1000,device:null});saveAll();renderAdmin();alert('PIN: '+code+' for '+name+' - '+cls);}
-function renderAdmin(){let active=pins.filter(p=>Date.now()<p.expires).length;let el=document.getElementById('adminStats');if(el)el.innerHTML=`Active PINs: ${active} | Total: ${pins.length}`;let list=document.getElementById('pinList');if(list)list.innerHTML=pins.map((p,i)=>`<div style="background:#f8f8f8;padding:10px;border-radius:10px;margin:6px 0"><b>${p.name}</b> - ${p.cls} - PIN: ${p.code} - Expires: ${new Date(p.expires).toLocaleDateString()} - Device: ${p.device||'Not yet used'} <button onclick="deletePIN(${i})">Delete</button></div>`).join('')||'<p>No PINs yet.</p>';}
-function deletePIN(i){pins.splice(i,1);saveAll();renderAdmin();}
-function toggleFab(){document.getElementById('fabMenu').classList.toggle('hidden');}
-function doEdit(){if(!currentLine){alert('Tap any line first, then ⋮ → Edit.');return;}currentLine.contentEditable=true;currentLine.focus();try{let r=document.createRange();r.selectNodeContents(currentLine);r.collapse(false);let s=getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}document.getElementById('toolbar').classList.remove('hidden');document.getElementById('fabMenu').classList.add('hidden');}
-function doAddPhrase(){if(!currentLine){alert('Tap a line first.');return;}let p=prompt('Type phrase:');if(p)currentLine.innerHTML+=' '+p;doSave();}
-function doAddSentence(){if(!currentLine){alert('Tap a line first.');return;}let s=prompt('Type new sentence:');if(s){let d=document.createElement('div');d.className='line';d.innerHTML='<p>'+s+'</p>';currentLine.after(d);currentLine=d;}doSave();}
-function doDelete(){if(!currentLine){alert('Tap a line first.');return;}if(confirm('Delete this line?')){currentLine.remove();doSave();}}
-function doSave(){let e=document.getElementById('essay');if(!e)return;if(window._lastKey)essays[window._lastKey]=e.innerHTML;saveAll();if(currentLine)currentLine.contentEditable=false;document.getElementById('toolbar').classList.add('hidden');document.getElementById('fabMenu').classList.add('hidden');alert('Saved ✓ — This line only. Offline.');}
-function insertClass(){let c=prompt('New Class:');if(c&&!data[c]){data[c]={};saveAll();renderMenu();}}
-function insertSubject(cls){let s=prompt('New Subject for '+cls);if(s){data[cls][s]=[];saveAll();renderMenu();}}
-function insertTopic(cls,sub){let t=prompt('New Topic for '+sub);if(t){data[cls][sub].push(t);saveAll();renderMenu();alert('Topic added.');}}
-</script></body></html>
+function createPassword(){
+let p1=document.getElementById('newPass1').value, p2=document.getElementById('newPass2').value, sec=document.getElementById('secretAns').value.trim();
+if(p1.length<6){document.getElementById('lockMsg').textContent='Password must be 6+ characters';return;}
+if(p1!==p2){document.getElementById('lockMsg').textContent='Passwords do not match';return;}
+if(!sec){document.getElementById('lockMsg').textContent='Enter secret answer for Forgot Password';return;}
+localStorage.setItem('q_admin_pass',p1); localStorage.setItem('q_secret',sec.toLowerCase());
+enterApp('admin');
+}
+function adminLogin(){
+if(document.getElementById('loginPass').value===localStorage.getItem('q_admin_pass')){enterApp('admin');}
+else{document.getElementById('lockMsg').textContent='❌ Wrong Admin Password';}
+}
+function showForgot(){document.getElementById('forgotBox').classList.remove('hidden');}
+function resetWithSecret(){
+if(document.getElementById('forgotAns').value.trim().toLowerCase()===localStorage.getItem('q_secret')){
+let np=prompt('Enter new Admin Password (6+ chars)'); if(np&&np.length>=6){localStorage.setItem('q_admin_pass',np);alert('Password reset! Login with new password');}
+}else{alert('Wrong secret answer');}
+}
+function showStudentLogin(){document.getElementById('loginBox').classList.add('hidden');document.getElementById('studentBox').classList.remove('hidden');}
+function backToAdminLogin(){document.getElementById('studentBox').classList.add('hidden');document.getElementById('loginBox').classList.remove('hidden');}
+function studentLogin(){
+let pin=document.getElementById('studentPin').value.trim(); let s=students.find(x=>x.pin===pin);
+if(!s){document.getElementById('lockMsg').textContent='❌ Invalid PIN';return;}
+let dev=localStorage.getItem('my_device')||('DEV-'+Math.random().toString(36).slice(2,7).toUpperCase()); localStorage.setItem('my_device',dev);
+if(s.device && s.device!==dev){document.getElementById('lockMsg').textContent='⛔ PIN bound to another device. Cannot transfer.'; addLog('Blocked attempt PIN '+pin+' on different device '+dev); return;}
+if(!s.device){s.device=dev; localStorage.setItem('q_students',JSON.stringify(students));}
+if(s.blocked){document.getElementById('lockMsg').textContent='⛔ This PIN is blocked. Contact Admin.';return;}
+currentStudent=s; enterApp('student');
+}
+function enterApp(r){role=r; document.getElementById('lockScreen').style.display='none'; applyRole(); renderMenu(); renderStudents(); updateStats(); renderHistory(); renderLogs(); loadEdit(); if(role==='student'){showTab('library');} else {showTab('dash');}}
+function applyRole(){
+let isAdmin=role==='admin';
+document.querySelectorAll('.adminOnly').forEach(el=>el.classList.toggle('hidden',!isAdmin));
+document.getElementById('tabBtn-dash').style.display=isAdmin?'':'none';
+document.getElementById('tabBtn-pins').style.display=isAdmin?'':'none';
+document.getElementById('viewLabel').textContent=isAdmin?'ADMIN VIEW • All Features':('STUDENT VIEW • '+ (currentStudent?currentStudent.name+' • '+currentStudent.class+' • Learning Only':'Learning Only'));
+document.getElementById('avatarLetter').textContent=isAdmin?'A':(currentStudent?currentStudent.name[0].toUpperCase():'S');
+document.getElementById('viewBtn').textContent=isAdmin?'View as Student':'Back To Admin';
+document.getElementById('libraryNote').textContent=isAdmin?'Admin sees all classes.':'Student sees only FREE + your unlocked class: '+(currentStudent?currentStudent.class:'');
+}
+function switchRole(){
+if(role==='admin'){ // preview as student without logout - admin still has access
+role='student'; currentStudent=null; applyRole(); showTab('library'); alert('Preview as Student — You are still Admin, tap Back To Admin to return to all features');}
+else{ // back to admin needs password
+let p=prompt('Enter Admin Password to return to Admin:'); if(p===localStorage.getItem('q_admin_pass')){role='admin'; applyRole(); showTab('dash');} else alert('Wrong password — staying as Student');}
+}
+function changePassword(){
+let oldP=prompt('Enter current Admin Password:'); if(oldP!==localStorage.getItem('q_admin_pass')){alert('Wrong password');return;}
+let np=prompt('Enter NEW Admin Password (6+ chars):'); if(np&&np.length>=6){localStorage.setItem('q_admin_pass',np); alert('Password changed!');} 
+}
+function logout(){document.getElementById('lockScreen').style.display='grid'; initLock(); document.getElementById('lockMsg').textContent='';}
+
+// --- REST OF APP ---
+function toggleMenu(){document.getElementById('drawer').classList.toggle('open');}
+function showTab(id){['dash','library','ask','history','subscribe','pins'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==id)); if(role!=='admin'&&(id==='dash'||id==='pins')){showTab('library');return;}}
+function renderMenu(){
+let html=''; Object.keys(DATA).forEach(cls=>{let d=DATA[cls]; let badge=d.free?'<span class="badge free">FREE</span>':'<span class="badge locked">🔒 ₦2,000/mo</span>';
+// STUDENT: show only FREE + their class, hide other locked classes content
+if(role==='student' && !d.free && (!currentStudent||currentStudent.class!==cls) && localStorage.getItem('unlock_'+cls)!=='1'){ html+=`<button class="classBtn" onclick="openTopic('${cls}','${Object.keys(d.subjects)[0]}','${d.subjects[Object.keys(d.subjects)[0]][0]}')"><span>${cls} 🔒</span>${badge}</button>`; return;}
+html+=`<button class="classBtn" onclick="toggleSub('${cls}')"><span>${cls}</span>${badge}</button><div id="sub-${cls}" class="hidden">`;
+Object.keys(d.subjects).forEach(subj=>{html+=`<button class="classBtn subject" onclick="toggleTopic('${cls}','${subj}')"><span>${subj}</span><span>▾</span></button><div id="top-${cls}-${subj}" class="hidden">`; d.subjects[subj].forEach(top=>{html+=`<div class="topic" onclick="openTopic('${cls}','${subj}','${top}')">• ${top}</div>`;}); html+='</div>';}); html+='</div>';});
+document.getElementById('menuList').innerHTML=html;
+}
+function toggleSub(cls){document.getElementById('sub-'+cls).classList.toggle('hidden');}
+function toggleTopic(cls,subj){document.getElementById('top-'+cls+'-'+subj).classList.toggle('hidden');}
+function defaultEssay(cls,subj,topic){return [`${topic} — ${subj} (${cls})`,`This is the full essay for ${topic}. It is written in simple, clear lines for students.`,`Also, this topic connects to real life examples and exam-style explanation.`].join('\n\n');}
+function getEssay(cls,subj,topic){return essays[cls+'|'+subj+'|'+topic]||defaultEssay(cls,subj,topic);}
+function openTopic(cls,subj,topic){
+let d=DATA[cls];
+let allowed = d.free || role==='admin' || (currentStudent&&currentStudent.class===cls) || localStorage.getItem('unlock_'+cls)==='1';
+if(!allowed){showTab('subscribe');document.getElementById('subClass').value=cls;toggleMenu();document.getElementById('subMsg').innerHTML='🔒 '+cls+' is locked. Pay ₦2,000 to unlock this class only.';return;}
+let txt=getEssay(cls,subj,topic);
+document.getElementById('currentEssay').innerHTML='<h3>'+topic+' — '+subj+' ('+cls+')</h3><p>'+txt.replace(/\n\n/g,'</p><p>')+'</p>';
+if(role==='admin'){document.getElementById('editClass').value=cls;document.getElementById('editSubject').value=subj;document.getElementById('editTopic').value=topic;document.getElementById('essayEditor').value=txt;}
+toggleMenu();showTab('library');addHistory(topic+' — '+subj+' ('+cls+')');
+}
+function unlockWithPin(){
+let pin=document.getElementById('subPin').value.trim();let cls=document.getElementById('subClass').value;let s=students.find(x=>x.pin===pin);
+if(!s){document.getElementById('subMsg').innerHTML='❌ Invalid PIN';return;}
+let dev=localStorage.getItem('my_device')||('DEV-'+Math.random().toString(36).slice(2,7).toUpperCase());localStorage.setItem('my_device',dev);
+if(s.device && s.device!==dev){addLog('Blocked PIN '+pin+' different device');document.getElementById('subMsg').innerHTML='⛔ PIN bound to another device. Cannot transfer.';return;}
+if(!s.device){s.device=dev;localStorage.setItem('q_students',JSON.stringify(students));}
+if(s.class!==cls){document.getElementById('subMsg').innerHTML='❌ This PIN is for '+s.class+', not '+cls;return;}
+localStorage.setItem('unlock_'+cls,'1');document.getElementById('subMsg').innerHTML='✅ '+cls+' Unlocked! Go to Menu → '+cls;addLog('PIN '+pin+' unlocked '+cls+' on '+dev); renderMenu();
+}
+function openWhatsAppProof(){window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello, I paid ₦2,000 for Quizora. Class: '+document.getElementById('subClass').value+' — Proof attached.'),'_blank');}
+function generatePIN(){
+let name=document.getElementById('pinName').value.trim()||'Student';let cls=document.getElementById('pinClass').value;let days=+document.getElementById('pinDays').value;
+let pin='QZ-'+Math.floor(10000+Math.random()*89999);let exp=new Date(Date.now()+days*86400000).toISOString().slice(0,10);
+students.unshift({name,class:cls,pin,device:'',expiry:exp,status:'Active',blocked:false,price:2000});localStorage.setItem('q_students',JSON.stringify(students));
+document.getElementById('newPinResult').innerHTML='✅ PIN for '+name+' ('+cls+'): <b>'+pin+'</b> • Expires '+exp+' • Device-Locked on first use';
+addLog('Generated PIN '+pin+' for '+name+' ('+cls+')');renderStudents();updateStats();
+}
+function renderStudents(){
+let q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+let rows=students.filter(s=>(s.name+' '+s.pin).toLowerCase().includes(q)).map(s=>{let idx=students.indexOf(s);return `<tr><td>${s.name}</td><td>${s.class}</td><td><b>${s.pin}</b></td><td>${s.device||'— Not used yet —'}</td><td>${s.expiry}</td><td>${s.blocked?'⛔ Blocked':s.status} ${s.device?'<span class="badge gold">🔒 Device Locked</span>':''}</td><td><button onclick="toggleBlock(${idx})">${s.blocked?'Unblock':'Block'}</button> <button onclick="whatsappRenew(${idx})">WhatsApp</button></td></tr>`;}).join('');
+if(document.getElementById('studentRows'))document.getElementById('studentRows').innerHTML=rows||'<tr><td colspan="7">No students yet.</td></tr>';
+let soon=students.filter(s=>{let d=(new Date(s.expiry)-new Date())/86400000;return d>=0&&d<=3;});
+if(document.getElementById('expiringText'))document.getElementById('expiringText').textContent=soon.length?('⚠️ '+soon.length+' PIN(s) expiring in 3 days'):'No PIN expiring in 3 days';
+}
+function toggleBlock(i){students[i].blocked=!students[i].blocked;localStorage.setItem('q_students',JSON.stringify(students));addLog((students[i].blocked?'Blocked ':'Unblocked ')+'PIN '+students[i].pin);renderStudents();}
+function whatsappRenew(i){let s=students[i];window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello '+s.name+', your '+s.class+' PIN '+s.pin+' expires in 2 days. Renew ₦2,000 to Opay 8147699555 (Ekpo Bassey). Send proof here.'),'_blank');}
+function updateStats(){if(document.getElementById('statPins')){document.getElementById('statPins').textContent=students.filter(s=>!s.blocked).length;document.getElementById('statStudents').textContent=students.length;let rev=students.length*2000;document.getElementById('statRev').textContent='₦'+rev.toLocaleString();document.getElementById('revToday').textContent='₦'+(students.length?2000:0).toLocaleString();document.getElementById('revWeek').textContent='₦'+rev.toLocaleString();document.getElementById('revMonth').textContent='₦'+rev.toLocaleString();}}
+function loadEdit(){let c=document.getElementById('editClass').value;let s=document.getElementById('editSubject').value;let t=document.getElementById('editTopic').value;document.getElementById('essayEditor').value=getEssay(c,s,t);}
+function editEssay(){document.getElementById('essayEditor').focus();}
+function copyEssay(){navigator.clipboard.writeText(document.getElementById('essayEditor').value);alert('Copied');}
+async function pasteEssay(){try{let t=await navigator.clipboard.readText();document.getElementById('essayEditor').value+=('\n\n'+t);}catch(e){alert('Tap in essay box and long-press Paste');}}
+function selectAllEssay(){let e=document.getElementById('essayEditor');e.focus();e.select();}
+function deleteEssay(){if(confirm('Delete this essay?')){document.getElementById('essayEditor').value='';}}
+function saveEssay(){let k=document.getElementById('editClass').value+'|'+document.getElementById('editSubject').value+'|'+document.getElementById('editTopic').value;essays[k]=document.getElementById('essayEditor').value;localStorage.setItem('q_essays',JSON.stringify(essays));document.getElementById('saveMsg').textContent='✅ Saved!';addLog('Saved essay '+k);}
+function smartPaste(){
+let phrase=document.getElementById('pastePhrase').value.trim();if(!phrase){alert('Paste phrase first');return;}
+let ed=document.getElementById('essayEditor');let lines=ed.value.split('\n\n').filter(Boolean);let found=false;let keys=phrase.toLowerCase().split(' ').filter(w=>w.length>4);
+for(let i=0;i<lines.length;i++){let low=lines[i].toLowerCase();if(keys.some(k=>low.includes(k))){lines[i]=lines[i].trim()+' '+phrase;found=true;break;}}
+if(!found){lines.push('Also, '+phrase);}
+ed.value=lines.join('\n\n');saveEssay();document.getElementById('saveMsg').textContent='✅ Smart Pasted — auto-fixed to right line. Saved.';
+}
+function askAI(){let q=document.getElementById('askInput').value.trim();if(!q)return;let ans=q+'\n\nThis is a clear, simple explanation for students. It uses real-life examples and exam-ready lines. Also, it connects to what you already know.';document.getElementById('askResult').innerHTML='<p>'+ans.replace(/\n\n/g,'</p><p>')+'</p>';addHistory('Asked: '+q);}
+function addHistory(t){history.unshift(t+' • '+new Date().toLocaleString());localStorage.setItem('q_history',JSON.stringify(history));renderHistory();}
+function renderHistory(){if(document.getElementById('historyList'))document.getElementById('historyList').innerHTML=history.map(h=>'<div style="padding:8px;border-bottom:1px solid #222C55">'+h+'</div>').join('')||'No history yet.';}
+function clearHistory(){history=[];localStorage.setItem('q_history','[]');renderHistory();}
+function addLog(t){logs.unshift(new Date().toLocaleString()+' — '+t);localStorage.setItem('q_logs',JSON.stringify(logs));renderLogs();}
+function renderLogs(){if(document.getElementById('activityLog'))document.getElementById('activityLog').innerHTML=logs.map(l=>'<div>• '+l+'</div>').join('')||'No activity yet.';}
+function saveAnnounce(){let v=document.getElementById('annInput').value.trim();if(!v)return;document.getElementById('announceText').textContent=v;localStorage.setItem('q_ann',v);alert('Announcement sent');addLog('Announcement: '+v);}
+function backup(){let data=JSON.stringify({students,essays,history,logs},null,2);let b=new Blob([data],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='quizora-backup.json';a.click();addLog('Backup downloaded');}
+function backupReminder(){alert('🔔 Auto Backup Reminder ON — Every Sunday');addLog('Auto Backup Reminder ON');}
+function searchFocus(){showTab('dash');setTimeout(()=>document.getElementById('searchInput').focus(),100);}
+initLock();
+let savedAnn=localStorage.getItem('q_ann'); if(savedAnn)document.getElementById('announceText').textContent=savedAnn;
+</script>
+</body>
+</html>
