@@ -3,214 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quizora AI — Admin OTP You Create</title>
+<title>Quizora AI — Golden Q + Your Photo</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,Arial}
 body{background:#d9d6ff;color:#13132b}
 button{cursor:pointer;border:0;font-family:inherit}
-.top{margin:14px 18px 0;background:linear-gradient(90deg,#7b00ff,#5a00e6 45%,#0066ff);border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;color:#fff}
-.top b{font-size:26px}.top .r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.pill{background:rgba(255,255,255,.22);padding:9px 14px;border-radius:999px;font-weight:700;color:#fff}
+.top{margin:12px;background:linear-gradient(90deg,#7b00ff,#5a00e6 45%,#0066ff);border-radius:14px;padding:12px 16px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{display:flex;align-items:center;gap:10px}
+.qlogo{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500,#FFD700);display:grid;place-items:center;font-size:28px;font-weight:900;color:#5a00e6;box-shadow:0 4px 12px rgba(255,215,0,.6);border:2px solid #fff}
+.qlogo span{font-family:Georgia,serif}
+.top b{font-size:24px}
+.top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.profile-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #FFD700;background:#fff;cursor:pointer}
+.profile-photo.empty{display:grid;place-items:center;font-weight:900;color:#5a00e6;font-size:18px;background:#FFD700}
+.pill{background:rgba(255,255,255,.22);padding:9px 13px;border-radius:999px;font-weight:700;color:#fff}
 .pill.white{background:#fff;color:#5a00e6}.pill.gold{background:#ffd166;color:#3a2400}
-.avatar{width:36px;height:36px;border-radius:50%;background:#ffd166;display:grid;place-items:center;font-weight:900;color:#5a00e6}
-.wrap{display:grid;grid-template-columns:220px 1fr;gap:16px;padding:16px 18px 20px}
-.side{background:#fff;border-radius:14px;padding:14px;height:fit-content;position:sticky;top:16px}
-.nav{display:flex;gap:8px;align-items:center;padding:11px 12px;border-radius:10px;font-weight:700;margin-bottom:6px;cursor:pointer}
-.nav.active{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}
-.nav span{width:28px;height:28px;border-radius:8px;background:#f0eaff;display:grid;place-items:center}
-.main{display:grid;gap:16px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:#fff;border-radius:14px;padding:16px}
-.kpi{display:flex;gap:12px}.kpi .ico{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:22px}
-.kpi h3{font-size:28px}.kpi p{font-size:13px;color:#666}.kpi small{font-weight:700;color:#0a9d5c}
-.row2{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}.row3{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
-h2{font-size:19px}.mut{color:#777;font-size:13px;margin-top:2px}
-.tabs{display:flex;gap:6px}.tab{padding:7px 10px;border-radius:999px;background:#eee;font-weight:700;font-size:13px}.tab.on{background:#5a00e6;color:#fff}
-.chart{height:180px;margin-top:14px}canvas{width:100%;height:100%}
-.list{margin-top:12px;display:grid;gap:12px}.person{display:flex;align-items:center;gap:10px;justify-content:space-between}
-.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
-.badge{padding:7px 11px;border-radius:999px;font-weight:800;font-size:12px;color:#fff}.g{background:#0bb56a}.b{background:#0066ff}.p{background:#7b00ff}.y{background:#e9a800}.grey{background:#9a9aab}
-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}th{text-align:left;color:#666;padding:10px;border-bottom:1px solid #eee}td{padding:11px 10px;border-bottom:1px solid #f0f0f0}
-.pin{padding:6px 9px;border-radius:8px;background:#e8deff;font-weight:800;color:#5a00e6;font-size:12px}
-.btn{padding:10px 14px;border-radius:999px;font-weight:800}.btn-primary{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}.btn-ghost{background:#f1f1f5}
-.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.mini{border:1px solid #eee;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center;cursor:pointer}.mini:hover{border-color:#7b00ff}
+.wrap{padding:0 12px 90px;max-width:1000px;margin:auto}
+.card{background:#fff;border-radius:14px;padding:16px;margin-top:14px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mut{color:#777;font-size:13px}h2{font-size:18px}.list{display:grid;gap:10px;margin-top:12px}
+.item{border:1px solid #eee;border-radius:12px;padding:13px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.item:hover{border-color:#7b00ff}.badge{padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px;color:#fff}.g{background:#0bb56a}.grey{background:#999}
+.btn{padding:11px 14px;border-radius:999px;font-weight:800}.btn-primary{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}.btn-ghost{background:#f1f1f5}.btn-red{background:#ffe1e1;color:#b00}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;font-size:15px}
 .page{display:none}.page.show{display:block}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;font-size:14px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;place-items:center;z-index:10}.modal.open{display:grid}.box{background:#fff;width:min(540px,92%);border-radius:16px;padding:20px;max-height:92vh;overflow:auto}
-.bigpin{font-size:26px;text-align:center;padding:16px;background:#f4f0ff;border-radius:12px;margin:12px 0;font-weight:900;color:#5a00e6;word-break:break-all}
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;display:none;z-index:30}
-.progress{height:12px;background:#eee;border-radius:999px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:linear-gradient(90deg,#7b00ff,#0066ff)}
-.quiz-opt{display:block;width:100%;text-align:left;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;background:#fff;font-weight:700}
-.login{max-width:480px;margin:40px auto;background:#fff;border-radius:16px;padding:24px}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:10px 0;z-index:20}
+.bottom button{background:none;font-weight:800;font-size:13px;color:#555}.bottom button.on{color:#5a00e6}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;place-items:center;z-index:30}.modal.open{display:grid}.box{background:#fff;width:min(560px,92%);border-radius:16px;padding:20px;max-height:90vh;overflow:auto}
+.bigpin{font-size:22px;text-align:center;padding:14px;background:#f4f0ff;border-radius:12px;margin:12px 0;font-weight:900;color:#5a00e6;word-break:break-all}
+.toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;display:none;z-index:40;max-width:92%;text-align:center}
+.login{max-width:440px;margin:30px auto;background:#fff;border-radius:16px;padding:22px}
 .paybox{background:#fff3cd;border:1px dashed #e9a800;border-radius:12px;padding:12px;margin-top:12px}
-@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{position:static}.cards{grid-template-columns:1fr 1fr}.row2,.row3{grid-template-columns:1fr}}
+.back{color:#5a00e6;font-weight:800;cursor:pointer}
+.read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;min-height:80px;border:1px solid transparent;border-radius:10px;padding:10px}
+.read.editing{border:1px solid #7b00ff;background:#fbf7ff;outline:none}
+.editbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.note-hint{background:#f4f0ff;border-radius:10px;padding:10px;margin-top:10px;font-size:13px}
+.placed{background:#e6ffed;border:1px solid #0bb56a;border-radius:10px;padding:10px;margin-top:10px;font-size:13px;display:none}
+@media(min-width:700px){.cards{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
 
-<!-- STEP 1: CREATE YOUR ADMIN OTP - FIRST TIME ONLY -->
-<div id="setupScreen" class="login">
-  <div style="text-align:center"><div style="font-size:44px">🪶</div><h1>Quizora AI</h1><p class="mut">Welcome Admin — Create YOUR One Time Password</p></div>
-  <p style="background:#f4f0ff;border-radius:12px;padding:12px;margin-top:12px"><b>🔐 This is YOUR Admin Password.</b><br><small>System will NOT create it for you. YOU create it. Remember it — you will use it to login every time.</small></p>
-  <label>Create Your Admin One Time Password</label>
-  <input id="setupOtp1" placeholder="Type YOUR OTP e.g. QUIZORA-2026">
-  <label>Confirm Your OTP</label>
-  <input id="setupOtp2" placeholder="Type it again to confirm">
-  <button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="createAdminOtp()">✅ Save My OTP & Continue →</button>
-  <p class="mut" style="text-align:center;margin-top:10px">Already created your OTP before? <a href="#" onclick="showLogin();return false" style="color:#5a00e6;font-weight:800">Go to Login →</a></p>
-</div>
-
-<!-- STEP 2: LOGIN WITH YOUR OTP -->
-<div id="loginScreen" class="login" style="display:none">
-  <div style="text-align:center"><div style="font-size:44px">🪶</div><h1>Quizora AI</h1><p class="mut">Login with the OTP YOU created</p></div>
-  <label>Choose Role</label>
-  <select id="roleSel"><option value="admin">👑 Admin</option><option value="student">🎓 Student</option></select>
-  <label>Enter YOUR One Time Password</label>
-  <input id="loginPin" placeholder="Admin: YOUR Admin OTP • Student: OTP given by Admin">
+<div id="loginScreen" class="login">
+  <!-- GOLDEN Q LOGO - NOT FEATHER -->
+  <div style="text-align:center"><div class="qlogo" style="margin:0 auto;width:64px;height:64px;font-size:42px"><span>Q</span></div><h1 style="margin-top:8px">Quizora AI</h1><p class="mut">Learn • Read • Grow</p></div>
+  <label style="margin-top:14px;display:block">I am a</label><select id="roleSel"><option value="admin">Admin</option><option value="student">Student</option></select>
+  <label style="margin-top:10px;display:block">Enter One Time Password</label><input id="loginPin" type="password" placeholder="Enter your OTP">
   <button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doLogin()">Enter Quizora →</button>
-  <p class="mut" style="text-align:center;margin-top:10px"><a href="#" onclick="showSetup();return false" style="color:#5a00e6;font-weight:800">Forgot / Want to create a new Admin OTP? →</a></p>
-  <div class="paybox"><b>💰 Pay / Renew — Opay: 8147699555</b><br><small>Send payment to Opay, then WhatsApp 08147699555 with name + screenshot.</small></div>
+  <div class="paybox"><b>💰 Renew / Pay — Opay: 8147699555</b><br><small>Pay to Opay, then WhatsApp 08147699555 with name + screenshot.</small></div>
+  <p class="mut" style="text-align:center;margin-top:12px">First time Admin? Use OTP: <b>ADMIN-SETUP</b> once, then change it inside Settings.</p>
 </div>
 
-<!-- APP -->
 <div id="app" style="display:none">
-<div class="top"><div><b>🪶 Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div><div class="r"><span>🔍</span><span>🔔</span><button class="pill" id="switchBtn" onclick="switchRole()">👁️ View as Student</button><button class="pill white" onclick="showPage('announce')">📢 Announcement</button><button class="pill gold" onclick="logout()">Logout</button><div class="avatar" id="topAv">AM</div><b id="topName">Alex Morgan ▾</b></div></div>
+<div class="top">
+  <div class="logo"><div class="qlogo"><span>Q</span></div><div><b>Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div></div>
+  <div class="top-right">
+    <button class="pill white" onclick="showPage('announce')">📢 Announcement</button>
+    <button class="pill gold" onclick="logout()">Logout</button>
+    <!-- YOUR PHOTO TOP RIGHT - ADMIN + STUDENT -->
+    <div style="text-align:center"><img id="topPhoto" class="profile-photo empty" src="" alt="You" onclick="document.getElementById('photoInput').click()" title="Tap to change your photo"><div style="font-size:11px;font-weight:700" id="topPhotoLabel">Tap to add photo</div></div>
+    <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="uploadPhoto(event)">
+  </div>
+</div>
+
 <div class="wrap">
-  <aside class="side" id="sideAdmin">
-    <div class="nav active" onclick="showPage('dash',this)"><span>🏠</span> Dashboard</div>
-    <div class="nav" onclick="showPage('pins',this)"><span>🔑</span> PINs / OTPs</div>
-    <div class="nav" onclick="showPage('students',this)"><span>👥</span> Students</div>
-    <div class="nav" onclick="showPage('classes',this)"><span>📚</span> Classes</div>
-    <div class="nav" onclick="showPage('studio',this)"><span>🎨</span> Content Studio</div>
-    <div class="nav" onclick="showPage('announce',this)"><span>📢</span> Announcements</div>
-    <div class="nav" onclick="showPage('backup',this)"><span>💾</span> Backup / History</div>
-    <div class="nav" onclick="showPage('settings',this)"><span>⚙️</span> Settings / My OTP</div>
-    <div style="margin-top:14px;background:#f4f0ff;border-radius:12px;padding:12px"><b>Quick Action</b><p class="mut">Create Student OTP</p><button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="openPin()">+ Create OTP / PIN</button><div class="paybox" style="margin-top:10px"><b>Opay: 8147699555</b><br><small>WhatsApp: 08147699555</small></div></div>
-  </aside>
-  <aside class="side" id="sideStudent" style="display:none">
-    <div class="nav active" onclick="showPage('sDash',this)"><span>🏠</span> My Dashboard</div>
-    <div class="nav" onclick="showPage('sQuizzes',this)"><span>🧠</span> My Quizzes</div>
-    <div class="nav" onclick="showPage('sClasses',this)"><span>📚</span> My Classes</div>
-    <div class="nav" onclick="showPage('sProgress',this)"><span>📈</span> My Progress</div>
-    <div class="nav" onclick="showPage('sLeader',this)"><span>🏆</span> Leaderboard</div>
-    <div class="nav" onclick="showPage('sAnnounce',this)"><span>📢</span> Announcements</div>
-    <div class="nav" onclick="showPage('sProfile',this)"><span>👤</span> My Profile / OTP</div>
-    <div style="margin-top:14px;background:#fff3cd;border-radius:12px;padding:12px"><b>⏳ OTP Expires</b><p class="mut">PIN-83921 • 12 days left</p><button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="renewPin()">Renew via WhatsApp</button><p class="mut" style="margin-top:8px">Pay to Opay: <b>8147699555</b></p></div>
-  </aside>
-  <main class="main">
-    <section id="dash" class="page show">
-      <div class="cards">
-        <div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">💰</div><div><p>Revenue</p><h3>$24,380</h3><small>▲ +12.5% vs last month</small></div></div></div>
-        <div class="card"><div class="kpi"><div class="ico" style="background:#dbeaff">📍</div><div><p>Active OTPs</p><h3 id="activeCount">142</h3><small>▲ +8 new today</small></div></div></div>
-        <div class="card"><div class="kpi"><div class="ico" style="background:#e8deff">👥</div><div><p>Students</p><h3>1,243</h3><small>▲ +24 this week</small></div></div></div>
-        <div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">🔒</div><div><p>Locked Classes</p><h3>07</h3></div></div></div>
-      </div>
-      <div class="row2">
-        <div class="card"><div style="display:flex;justify-content:space-between"><div><h2>OTP / PIN Activity</h2><p class="mut">Last 30 days</p></div><div class="tabs"><button class="tab on" onclick="drawChart(this)">Daily</button><button class="tab" onclick="drawChart(this)">Weekly</button><button class="tab" onclick="drawChart(this)">Monthly</button></div></div><div class="chart"><canvas id="chart" width="700" height="180"></canvas></div></div>
-        <div class="card"><h2>Recent Students</h2><div class="list" id="recent"></div></div>
-      </div>
-      <div class="row3">
-        <div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap"><div><h2>Student List</h2><p class="mut">Block / WhatsApp Renew / Delete</p></div><div><button class="btn btn-ghost" onclick="toast('Exported CSV')">Export</button> <button class="btn btn-primary" onclick="openPin()">+ Create OTP</button></div></div><table><thead><tr><th>Student</th><th>OTP</th><th>Status</th><th>Last Active</th><th>Actions</th></tr></thead><tbody id="studentsBody"></tbody></table></div>
-        <div class="card"><h2>Content Studio</h2><p class="mut">Create & manage content</p><div class="content-grid" id="contentGrid"></div><div style="text-align:right;margin-top:12px"><button class="btn btn-ghost" onclick="showPage('studio')">Open Studio →</button></div></div>
-      </div>
-    </section>
-    <section id="pins" class="page"><div class="card"><h2>OTP Factory — YOU Create It</h2><p class="mut">Type your own OTP for each student. One OTP = One Device.</p><button class="btn btn-primary" style="margin-top:12px" onclick="openPin()">+ Create OTP / PIN</button><div class="list" id="pinList"></div></div></section>
-    <section id="students" class="page"><div class="card"><h2>Student Control</h2><table><thead><tr><th>Student</th><th>OTP</th><th>Status</th><th>Last Active</th><th>Actions</th></tr></thead><tbody id="studentsBody2"></tbody></table></div></section>
-    <section id="classes" class="page"><div class="card"><h2>Classes</h2><p class="mut">JSS1 • JSS2 • JSS3 • SS1 • SS2 • SS3</p><div class="content-grid" id="classGrid"></div></div></section>
-    <section id="studio" class="page"><div class="card"><h2>Content Studio — Rename / Edit / Add New</h2><input id="newTitle" placeholder="New quiz title e.g. Algebra Vol 4"><button class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add New Content</button><div class="list" id="studioList"></div></div></section>
-    <section id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">📢 Send Announcement</button><div class="list" id="annList"></div></div></section>
-    <section id="backup" class="page"><div class="card"><h2>Backup / History</h2><button class="btn btn-primary" style="margin-top:10px" onclick="downloadBackup()">⬇️ Download Backup</button><div class="list" id="history"></div></div></section>
-    <section id="settings" class="page"><div class="card"><h2>Settings / Change My Admin OTP</h2><label>School Name</label><input value="Quizora AI School"><label>🔐 Change My Admin One Time Password — YOU create new one</label><input id="adminOtpNew" placeholder="Type NEW Admin OTP you want"><button class="btn btn-ghost" style="margin-top:8px" onclick="changeAdminOtp()">Change My Admin OTP</button><label style="margin-top:14px;display:block">WhatsApp</label><input value="08147699555"><label>Opay</label><input value="8147699555"><button class="btn btn-primary" style="margin-top:12px" onclick="toast('Settings saved')">Save Settings</button></div></section>
-    <section id="sDash" class="page"><div class="cards"><div class="card"><div class="kpi"><div class="ico" style="background:#e8deff">🔑</div><div><p>My OTP</p><h3 style="font-size:20px">PIN-83921</h3><small>Active • 12 days left</small></div></div></div><div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">📈</div><div><p>My Progress</p><h3>68%</h3><small>▲ +6%</small></div></div></div><div class="card"><div class="kpi"><div class="ico" style="background:#dbeaff">🔥</div><div><p>Streak</p><h3>7 Days</h3></div></div></div><div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">🏆</div><div><p>My Rank</p><h3>#3</h3></div></div></div></div><div class="row2"><div class="card"><h2>Continue Learning</h2><div class="content-grid" id="studentQuizzes"></div><div class="progress"><i style="width:68%"></i></div><button class="btn btn-primary" style="margin-top:12px" onclick="showPage('sQuizzes')">Continue Quiz →</button></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div><div class="paybox"><b>Renew: Opay 8147699555</b><br><small>Pay, screenshot, WhatsApp 08147699555</small></div></div></div></section>
-    <section id="sQuizzes" class="page"><div class="card"><h2>My Quizzes</h2><div class="content-grid" id="quizList"></div><div id="quizBox" style="display:none;margin-top:16px;border-top:1px solid #eee;padding-top:14px"><h3 id="quizQ"></h3><div id="quizOpts"></div><p class="mut" id="quizScore">Score: 0</p></div></div></section>
-    <section id="sClasses" class="page"><div class="card"><h2>My Classes</h2><div class="content-grid" id="sClassGrid"></div></div></section>
-    <section id="sProgress" class="page"><div class="card"><h2>My Progress</h2><p>Mathematics</p><div class="progress"><i style="width:80%"></i></div><p style="margin-top:10px">Science</p><div class="progress"><i style="width:60%"></i></div><p style="margin-top:10px">English</p><div class="progress"><i style="width:75%"></i></div></div></section>
-    <section id="sLeader" class="page"><div class="card"><h2>Leaderboard</h2><div class="list"><div class="person"><b>🥇 Adaeze O. — 980 pts</b><span class="badge p">1st</span></div><div class="person"><b>🥈 Chidi K. — 920 pts</b><span class="badge b">2nd</span></div><div class="person"><b>🥉 Mia R. — 890 pts (You)</b><span class="badge y">3rd</span></div></div></div></section>
-    <section id="sAnnounce" class="page"><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList2"></div></div></section>
-    <section id="sProfile" class="page"><div class="card"><h2>My Profile / OTP</h2><p><b>Mia Rodriguez</b><br><span class="mut">JSS1</span></p><div class="bigpin">PIN-83921</div><div class="paybox"><b>💰 To Renew: Pay to Opay 8147699555</b><br><small>Then WhatsApp 08147699555</small></div><button class="btn btn-primary" style="margin-top:12px" onclick="renewPin()">Renew via WhatsApp</button> <button class="btn btn-ghost" onclick="copyText('PIN-83921')">Copy OTP</button></div></section>
-  </main>
+<div id="aDash" class="page show">
+  <div class="cards"><div class="card"><p class="mut">Revenue</p><h3 id="revText">₦0</h3></div><div class="card"><p class="mut">Active OTPs</p><h3 id="activeCount">0</h3></div><div class="card"><p class="mut">Students</p><h3 id="stuCount">0</h3></div><div class="card"><p class="mut">Classes</p><h3 id="classCount">0</h3></div></div>
+  <div class="card"><h2>Quick Actions</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn btn-primary" onclick="openPin()">+ Create Student OTP</button><button class="btn btn-ghost" onclick="showPage('classes')">Open Classes →</button><button class="btn btn-ghost" onclick="showPage('studio')">Content Studio →</button></div></div>
+  <div class="card"><h2>Students</h2><div class="list" id="studentsList"></div></div>
+  <div class="card"><h2>Classes — Tap to see Subjects</h2><div class="list" id="classListA"></div></div>
+</div>
+<div id="aStudents" class="page"><div class="card"><h2>Students</h2><button class="btn btn-primary" style="margin-top:10px" onclick="openPin()">+ Create Student OTP</button><div class="list" id="studentsList2"></div></div></div>
+
+<div id="classes" class="page">
+  <div class="card"><h2>Classes</h2><p class="mut">Tap Class → Subject → Topic → Read. Admin can Add / Rename / Delete.</p><div class="list" id="classList"></div>
+    <div id="adminClassTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newClassName" placeholder="New Class e.g. JSS1"><button class="btn btn-primary" style="margin-top:8px" onclick="addClass()">+ Add New Class</button></div></div>
+  <div class="card" id="subjectBox" style="display:none"><p class="back" onclick="backToClasses()">← Back to Classes</p><h2 id="subjectTitle" style="margin-top:8px"></h2><div class="list" id="subjectList"></div>
+    <div id="adminSubjectTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newSubjectName" placeholder="New Subject e.g. Mathematics"><button class="btn btn-primary" style="margin-top:8px" onclick="addSubjectFromView()">+ Add Subject</button><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-ghost" onclick="renameCurrentClass()">Rename Class</button><button class="btn btn-red" onclick="deleteCurrentClass()">Delete Class</button></div></div></div>
+  <div class="card" id="topicBox" style="display:none"><p class="back" onclick="backToSubjects()">← Back to Subjects</p><h2 id="topicTitle" style="margin-top:8px"></h2><div class="list" id="topicList"></div>
+    <div id="adminTopicTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newTopicTitle" placeholder="New Topic"><textarea id="newTopicNote" rows="3" placeholder="Write note..."></textarea><button class="btn btn-primary" style="margin-top:8px" onclick="addTopicFromView()">+ Add Topic</button><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-ghost" onclick="renameCurrentSubject()">Rename Subject</button><button class="btn btn-red" onclick="deleteCurrentSubject()">Delete Subject</button></div></div></div>
+  <div class="card" id="readBox" style="display:none"><p class="back" onclick="backToTopics()">← Back to Topics</p><h2 id="readTitle" style="margin-top:8px"></h2>
+    <div class="read" id="readText" contenteditable="false"></div>
+    <div class="note-hint">🧠 <b>Smart Placement ON:</b> Added phrase will find where it makes sense — beginning, after example, after related sentence, or end if conclusion. Not just to the end.</div>
+    <div class="placed" id="placedInfo"></div><div class="editbar" id="readActions"></div>
+    <div id="addPhraseBox" style="display:none;margin-top:12px"><label><b>Add a phrase / lines</b> — Auto-place where it makes sense</label><textarea id="addPhraseInput" rows="3" placeholder="Type phrase e.g. For example, 1/2 of 10 is 5"></textarea><label>Or force placement (optional)</label><select id="forcePlace"><option value="auto">🤖 Auto — Let system decide</option><option value="start">⬆️ Force: At Beginning</option><option value="end">⬇️ Force: At End</option><option value="after-example">📌 Force: After Example</option></select><button class="btn btn-primary" style="margin-top:8px" onclick="addPhraseSmart()">+ Add Smartly & Save</button></div>
+  </div>
+</div>
+
+<div id="studio" class="page"><div class="card"><h2>Content Studio — Manage Everything</h2>
+<label>Class</label><select id="stClass"></select><label>Subject</label><input id="stSubject" placeholder="e.g. Mathematics"><label>Topic Title</label><input id="stTopic" placeholder="e.g. Fractions"><label>Note / Lesson</label><textarea id="stNote" rows="5" placeholder="Write lesson..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add This Topic</button>
+<div style="margin-top:16px;border-top:1px solid #eee;padding-top:12px"><h3>Manage Classes</h3><input id="studioNewClass" placeholder="New Class name"><button class="btn btn-ghost" style="margin-top:8px" onclick="addClassFromStudio()">+ Add Class</button><div class="list" id="studioClassList"></div></div>
+<div style="margin-top:16px"><h3>All Topics — Edit / Delete</h3><div class="list" id="studioList"></div></div></div></div>
+<div id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">📢 Send Announcement</button><div class="list" id="annList"></div></div></div>
+<div id="backup" class="page"><div class="card"><h2>Backup / History</h2><button class="btn btn-primary" style="margin-top:10px" onclick="downloadBackup()">⬇️ Download Backup</button><div class="list" id="history"></div></div></div>
+<div id="settings" class="page"><div class="card"><h2>Settings — Admin Only</h2>
+<!-- YOUR PHOTO ALSO IN SETTINGS -->
+<div style="text-align:center"><img id="settingsPhoto" class="profile-photo" style="width:90px;height:90px" src="" onclick="document.getElementById('photoInput').click()"><br><button class="btn btn-ghost" style="margin-top:8px" onclick="document.getElementById('photoInput').click()">📷 Change My Photo</button><p class="mut">This photo shows at top right of Admin + Student dashboard</p></div>
+<label>School Name</label><input value="Quizora AI"><label>🔐 Change MY Admin OTP</label><input id="newAdminOtp" type="password" placeholder="Type NEW Admin OTP"><input id="newAdminOtp2" type="password" placeholder="Confirm NEW Admin OTP"><button class="btn btn-primary" style="margin-top:10px" onclick="changeAdminOtp()">Save My New Admin OTP</button><label style="margin-top:14px;display:block">WhatsApp</label><input value="08147699555"><label>Opay</label><input value="8147699555"></div></div>
+<div id="sDash" class="page"><div class="cards"><div class="card"><p class="mut">My OTP</p><h3 id="myOtpText" style="font-size:18px">—</h3></div><div class="card"><p class="mut">My Class</p><h3 id="myClassText">—</h3></div></div><div class="card"><h2>My Classes — Tap to Read</h2><div class="list" id="classListS"></div></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div></div><div class="card"><h2>Renew</h2><div class="paybox"><b>Pay to Opay: 8147699555</b><br><small>Then WhatsApp 08147699555</small></div><button class="btn btn-primary" style="margin-top:10px" onclick="renewPin()">Renew via WhatsApp</button></div></div>
+<div id="sClasses" class="page"><div class="card"><h2>My Classes</h2><div class="list" id="classListS2"></div></div></div>
+<div id="sProfile" class="page"><div class="card"><h2>My Profile</h2><div style="text-align:center"><img id="sProfilePhoto" class="profile-photo" style="width:90px;height:90px" src=""><p id="sProfileText"></p></div><div class="bigpin" id="sProfileOtp"></div><button class="btn btn-primary" onclick="renewPin()">Renew via WhatsApp</button></div></div>
 </div>
 </div>
 
-<div class="modal" id="pinModal"><div class="box"><h2>🔐 Create Student OTP — YOU Choose</h2><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka Okafor"><label>Class</label><select id="pinClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option></select><label>Plan</label><select id="pinPlan"><option>30 days — ₦2,000 — Opay 8147699555</option><option>90 days — ₦5,000</option><option>1 year — ₦15,000</option></select><label>How to create?</label><select id="otpMode" onchange="toggleOtpMode()"><option value="custom">✍️ I will create my own OTP</option><option value="auto">🎲 Auto Generate</option></select><div id="customBox"><label>✍️ Type YOUR OWN OTP</label><input id="customOtp" placeholder="e.g. MIA-2026"></div><div id="autoBox" style="display:none"><p class="mut">System will auto-generate.</p></div><div class="bigpin" id="pinOut">YOUR OTP WILL SHOW HERE</div><button class="btn btn-primary" style="width:100%" onclick="makePin()">Create OTP</button><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn btn-ghost" style="flex:1" onclick="copyPin()">Copy</button><button class="btn btn-ghost" style="flex:1" onclick="whatsappPin()">WhatsApp Share</button><button class="btn btn-ghost" style="flex:1" onclick="closePin()">Close</button></div></div></div>
+<div class="bottom" id="navAdmin"><button class="on" onclick="navTo('aDash',this)">🏠<br>Dashboard</button><button onclick="navTo('aStudents',this)">👥<br>Students</button><button onclick="navTo('classes',this)">📚<br>Classes</button><button onclick="navTo('studio',this)">🎨<br>Studio</button><button onclick="navTo('settings',this)">⚙️<br>Settings</button></div>
+<div class="bottom" id="navStudent" style="display:none"><button class="on" onclick="navTo('sDash',this)">🏠<br>Home</button><button onclick="navTo('sClasses',this)">📚<br>Classes</button><button onclick="navTo('announce',this)">📢<br>Announce</button><button onclick="navTo('sProfile',this)">👤<br>Profile</button></div>
+<div class="modal" id="pinModal"><div class="box"><h2>🔐 Create Student OTP</h2><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka Okafor"><label>Class</label><select id="pinClass"></select><label>✍️ Type OTP YOU Created</label><input id="customOtp" placeholder="e.g. CHIA-2026"><div class="bigpin" id="pinOut">YOUR OTP WILL SHOW HERE</div><button class="btn btn-primary" style="width:100%" onclick="makePin()">Create OTP</button><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-ghost" style="flex:1" onclick="copyPin()">Copy</button><button class="btn btn-ghost" style="flex:1" onclick="whatsappPin()">WhatsApp</button><button class="btn btn-ghost" style="flex:1" onclick="closePin()">Close</button></div></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const WA_NUMBER='2348147699555'; const OPAY='8147699555';
-let role='admin';
-let adminOtp = localStorage.getItem('quizora_admin_otp') || '';
-let students=[{name:'Mia Rodriguez',email:'mia.r@school.edu',pin:'PIN-83921',status:'Active',last:'Today, 10:42 AM',cls:'JSS1'},{name:'James Lee',email:'james.l@school.edu',pin:'PIN-88214',status:'Pending',last:'Yesterday',cls:'SS1'},{name:'Olivia Brown',email:'olivia.b@school.edu',pin:'PIN-77201',status:'Active',last:'Today',cls:'JSS2'}];
-let contents=[{title:'Math Quiz Vol 3',meta:'12 Questions • Published'},{title:'Science Flashcards',meta:'24 Cards • Draft'},{title:'History Challenge',meta:'8 Questions • Published'}];
-let historyList=['Admin created OTP PIN-83921 for Mia Rodriguez','Backup saved'];
-let anns=['Welcome to Quizora AI — New quiz drops Friday 8am'];
-let quizzes=[{title:'Math Quiz Vol 3',meta:'12 Questions',q:'What is 12 × 8?',opts:['96','84','108','92'],ans:0},{title:'Science Flashcards',meta:'24 Cards',q:'Red Planet?',opts:['Venus','Mars','Jupiter','Saturn'],ans:1},{title:'History Challenge',meta:'8 Questions',q:'First President of Nigeria?',opts:['Obasanjo','Azikiwe','Buhari','Yar’Adua'],ans:1}];
-let score=0;
-function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
-function showSetup(){document.getElementById('setupScreen').style.display='block';document.getElementById('loginScreen').style.display='none';document.getElementById('app').style.display='none'}
-function showLogin(){document.getElementById('setupScreen').style.display='none';document.getElementById('loginScreen').style.display='block';document.getElementById('app').style.display='none'}
-if(adminOtp){showLogin()}else{showSetup()}
-function createAdminOtp(){
-  let a=document.getElementById('setupOtp1').value.trim(); let b=document.getElementById('setupOtp2').value.trim();
-  if(!a) return toast('⚠️ Type YOUR Admin OTP first — system will not create it for you');
-  if(a.length<4) return toast('⚠️ OTP too short — use at least 4 characters');
-  if(a!==b) return toast('⚠️ OTPs do not match — type same OTP twice');
-  adminOtp=a; localStorage.setItem('quizora_admin_otp',a);
-  toast('✅ YOUR Admin OTP saved: '+a+' — Now login with it');
-  showLogin(); document.getElementById('loginPin').value=a;
-}
-function changeAdminOtp(){
-  let v=document.getElementById('adminOtpNew').value.trim();
-  if(!v) return toast('Type NEW Admin OTP you want');
-  adminOtp=v; localStorage.setItem('quizora_admin_otp',v); toast('✅ Your Admin OTP changed to: '+v);
-}
-function doLogin(){
-  role=document.getElementById('roleSel').value; let entered=document.getElementById('loginPin').value.trim();
-  if(role=='admin'){
-    if(!adminOtp) return (toast('You have not created your Admin OTP yet — create it first'), showSetup());
-    if(entered!==adminOtp) return toast('❌ Wrong Admin OTP — use the OTP YOU created');
+const WA='2348147699555', OPAY='8147699555';
+let role='admin'; let currentStudent=null;
+let adminOtp = localStorage.getItem('quizora_admin_otp') || 'ADMIN-SETUP';
+let adminPhoto = localStorage.getItem('quizora_admin_photo') || '';
+let studentPhoto = localStorage.getItem('quizora_student_photo') || '';
+let students = JSON.parse(localStorage.getItem('quizora_students')||'[]');
+let anns = JSON.parse(localStorage.getItem('quizora_anns')||'["Welcome to Quizora AI — Tap Classes to read your lessons."]');
+let historyList = JSON.parse(localStorage.getItem('quizora_hist')||'[]');
+let content = JSON.parse(localStorage.getItem('quizora_content')||'null') || {
+ JSS1:{'Mathematics':[{'title':'Fractions','note':'A fraction is a part of a whole.\n\nExample: 1/2 means 1 out of 2 equal parts.\n\nTo add fractions with the same denominator, add the numerators and keep the denominator.\n\nIn conclusion, fractions help us share things equally.'}]},
+ JSS2:{'Mathematics':[{'title':'Algebra Basics','note':'Algebra uses letters to stand for numbers.\n\nExample: x + 3 = 7, so x = 4.'}]},
+ JSS3:{'Mathematics':[{'title':'Indices','note':'Indices show repeated multiplication.\n\nExample: 2 x 2 x 2 = 2^3 = 8.'}]},
+ SS1:{'Mathematics':[{'title':'Quadratic Equations','note':'A quadratic equation has x squared.\n\nExample: x^2 + 3x + 2 = 0'}]},
+ SS2:{'English':[{'title':'Comprehension','note':'Read the passage carefully, then answer the questions in your own words.'}]},
+ SS3:{'Mathematics':[{'title':'Revision','note':'Revise all topics. Practise past questions daily.'}]}
+};
+let curClass='', curSubject='', curTopicIdx=-1, isEditing=false;
+function save(){localStorage.setItem('quizora_students',JSON.stringify(students));localStorage.setItem('quizora_anns',JSON.stringify(anns));localStorage.setItem('quizora_hist',JSON.stringify(historyList));localStorage.setItem('quizora_content',JSON.stringify(content));}
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',3200)}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));let el=document.getElementById(id);if(el)el.classList.add('show');window.scrollTo({top:0,behavior:'smooth'});if(id=='classes')renderClasses()}
+function navTo(id,btn){document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');showPage(id)}
+
+/* ===== YOUR PHOTO TOP RIGHT ===== */
+function updatePhotos(){
+  let top=document.getElementById('topPhoto');
+  let settings=document.getElementById('settingsPhoto');
+  let sProf=document.getElementById('sProfilePhoto');
+  let photo = role=='admin' ? adminPhoto : studentPhoto;
+  // Admin sees his photo, Student sees his own photo. If no photo yet, show Q / initial.
+  if(photo){ top.src=photo; top.classList.remove('empty'); top.alt='Your Photo'; document.getElementById('topPhotoLabel').textContent=role=='admin'?'Your Photo':'Student Photo';
+    if(settings) settings.src=photo;
+    if(sProf) sProf.src=photo;
   } else {
-    if(!entered) return toast('Enter Student OTP given by Admin');
-    if(!students.some(s=>s.pin.toLowerCase()==entered.toLowerCase()) && entered!=='PIN-83921') return toast('❌ Wrong Student OTP — ask Admin for your OTP');
+    top.src=''; top.classList.add('empty'); top.alt='Tap to add photo';
+    // Show golden Q as placeholder in top circle via text? Use background - keep empty style
+    if(settings) settings.src='';
+    if(sProf) sProf.src='';
   }
-  document.getElementById('loginScreen').style.display='none'; document.getElementById('app').style.display='block'; applyRole(); toast(role=='admin'?'Welcome Admin — OTP correct':'Welcome Student — OTP correct');
 }
-function logout(){document.getElementById('app').style.display='none';showLogin();document.getElementById('loginPin').value=''}
-function switchRole(){role=role=='admin'?'student':'admin';applyRole()}
-function applyRole(){let isAdmin=role=='admin';document.getElementById('sideAdmin').style.display=isAdmin?'block':'none';document.getElementById('sideStudent').style.display=isAdmin?'none':'block';document.getElementById('topSub').textContent=isAdmin?'Admin Dashboard':'Student Dashboard — Mia Rodriguez • JSS1';document.getElementById('topName').textContent=isAdmin?'Alex Morgan ▾':'Mia Rodriguez ▾';document.getElementById('topAv').textContent=isAdmin?'AM':'MR';document.getElementById('switchBtn').textContent=isAdmin?'👁️ View as Student':'👑 Back to Admin';document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById(isAdmin?'dash':'sDash').classList.add('show')}
-function showPage(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById(id).classList.add('show');if(el){document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));el.classList.add('active')}window.scrollTo({top:0,behavior:'smooth'})}
-function toggleOtpMode(){let m=document.getElementById('otpMode').value;document.getElementById('customBox').style.display=m=='custom'?'block':'none';document.getElementById('autoBox').style.display=m=='auto'?'block':'none'}
+function uploadPhoto(e){
+  let file=e.target.files[0]; if(!file) return;
+  let reader=new FileReader();
+  reader.onload=function(){ let data=reader.result;
+    if(role=='admin'){ adminPhoto=data; localStorage.setItem('quizora_admin_photo',data); }
+    else { studentPhoto=data; localStorage.setItem('quizora_student_photo',data); }
+    updatePhotos(); toast('✅ Your photo saved — now shows at top right');
+  };
+  reader.readAsDataURL(file);
+}
+function doLogin(){ role=document.getElementById('roleSel').value; let entered=document.getElementById('loginPin').value.trim(); if(!entered) return toast('Enter your OTP'); if(role=='admin'){ if(entered!==adminOtp) return toast('❌ Wrong Admin OTP'); } else { let s=students.find(x=>x.pin.toLowerCase()==entered.toLowerCase()); if(!s) return toast('❌ Wrong Student OTP'); currentStudent=s; } document.getElementById('loginScreen').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('navAdmin').style.display=role=='admin'?'flex':'none'; document.getElementById('navStudent').style.display=role=='admin'?'none':'flex'; document.getElementById('topSub').textContent=role=='admin'?'Admin Dashboard — You':('Student Dashboard — '+(currentStudent?currentStudent.name:'Student')); updatePhotos(); showPage(role=='admin'?'aDash':'sDash'); render(); }
+function logout(){document.getElementById('app').style.display='none';document.getElementById('loginScreen').style.display='block';document.getElementById('loginPin').value=''}
+function changeAdminOtp(){ let a=document.getElementById('newAdminOtp').value.trim(), b=document.getElementById('newAdminOtp2').value.trim(); if(!a) return toast('Type new Admin OTP'); if(a!==b) return toast('OTPs do not match'); adminOtp=a; localStorage.setItem('quizora_admin_otp',a); toast('✅ Your Admin OTP changed.'); document.getElementById('newAdminOtp').value=''; document.getElementById('newAdminOtp2').value=''; }
+function splitSentences(text){ let parts=text.split(/\n+/).map(p=>p.trim()).filter(Boolean); let out=[]; parts.forEach(p=>{ let s=p.match(/[^.!?]+[.!?]+/g)||[p]; s.forEach(s2=>out.push(s2.trim())); }); return out; }
+function words(s){ return s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>3 && !['this','that','with','from','which','when','there','their','about','into','your','have','will','also'].includes(w)); }
+function cleanNote(text){ let t=(text||'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').replace(/\s+([,.!?])/g,'$1').replace(/([.!?])\s+([a-z])/g,(m,p,c)=>p+' '+c.toUpperCase()); t=t.trim(); if(t) t=t.charAt(0).toUpperCase()+t.slice(1); return t; }
+function smartInsert(oldText, newPhrase, force){
+  let base=(oldText||'').trim(); let add=cleanNote(newPhrase); if(!add) return {text:base,where:'Nothing added'}; if(!base) return {text:add,where:'Note was empty — placed at start'}; if(!['.','!','?'].includes(add.slice(-1))) add+='.'; let lower=add.toLowerCase(); let sents=splitSentences(base); let total=sents.length;
+  if(force==='start') return {text:add+' '+base,where:'Placed at BEGINNING (you forced it)'};
+  if(force==='end') return {text:base+' '+add,where:'Placed at END (you forced it)'};
+  if(/^(first|firstly|to begin|to start|before anything|introduction)/.test(lower)) return {text:add+' '+base,where:'Detected "First / To begin" — placed at BEGINNING'};
+  if(/^(in conclusion|finally|in summary|to conclude|overall)/.test(lower)) return {text:base+' '+add,where:'Detected "In conclusion / Finally" — placed at END'};
+  if(/^(for example|for instance|example|e\.g\.|such as)/.test(lower)){ let idx=sents.findIndex(s=>/example/i.test(s)); if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '),where:'Detected "For example" — placed AFTER existing example'}; } sents.splice(1,0,add); return {text:sents.join(' '),where:'Detected "For example" — placed AFTER definition'}; }
+  if(force==='after-example'){ let idx=sents.findIndex(s=>/example/i.test(s)); if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '),where:'Placed AFTER Example'}; } sents.splice(1,0,add); return {text:sents.join(' '),where:'No example — placed after definition'}; }
+  if(/^(however|but|on the other hand|in contrast|although|despite)/.test(lower)){ let at=Math.min(2,total); sents.splice(at,0,add); return {text:sents.join(' '),where:'Detected contrast — placed AFTER main point'}; }
+  let addWords=new Set(words(add)); let bestIdx=-1,bestScore=0; sents.forEach((s,i)=>{ let sw=new Set(words(s)); let score=0; addWords.forEach(w=>{if(sw.has(w))score++}); if(score>bestScore){bestScore=score;bestIdx=i} });
+  if(bestScore>=1){ sents.splice(bestIdx+1,0,add); return {text:sents.join(' '),where:'Found related sentence: "'+sents[bestIdx].slice(0,50)+'..." — placed RIGHT AFTER it'}; }
+  let conclIdx=sents.findIndex(s=>/in conclusion|finally|summary/i.test(s)); if(conclIdx>0){ sents.splice(conclIdx,0,add); return {text:sents.join(' '),where:'Placed BEFORE conclusion'}; }
+  let mid=Math.floor(total/2); sents.splice(mid,0,add); return {text:sents.join(' '),where:'No direct match — placed in MIDDLE where it flows'};
+}
 function render(){
-  let rows=students.map((s,i)=>`<tr><td><b>${s.name}</b><br><small style="color:#777">${s.email} • ${s.cls}</small></td><td><span class="pin">${s.pin}</span></td><td><span class="badge ${s.status=='Active'?'g':s.status=='Pending'?'y':'grey'}">${s.status}</span></td><td>${s.last}</td><td><button onclick="studentMenu(${i})">•••</button></td></tr>`).join('');
-  document.getElementById('studentsBody').innerHTML=rows;document.getElementById('studentsBody2').innerHTML=rows;
-  document.getElementById('recent').innerHTML=students.map(s=>`<div class="person"><div style="display:flex;gap:10px;align-items:center"><div class="av" style="background:#7b00ff">${s.name.split(' ').map(x=>x[0]).join('')}</div><div><b>${s.name}</b><br><small style="color:#777">${s.cls}</small></div></div><span class="badge ${s.status=='Active'?'g':'y'}">${s.status}</span></div>`).join('');
-  document.getElementById('contentGrid').innerHTML=contents.map(c=>`<div class="mini" onclick="showPage('studio')"><span>📘</span><div><b>${c.title}</b><br><small>${c.meta}</small></div></div>`).join('');
-  document.getElementById('studioList').innerHTML=contents.map((c,i)=>`<div class="person"><div><b>${c.title}</b><br><small>${c.meta}</small></div><div><button class="btn btn-ghost" onclick="renameContent(${i})">Rename</button> <button class="btn btn-ghost" onclick="editContent(${i})">Edit</button> <button class="btn btn-ghost" onclick="delContent(${i})">Delete</button></div></div>`).join('');
-  document.getElementById('classGrid').innerHTML=['JSS1','JSS2','JSS3','SS1','SS2','SS3'].map(c=>`<div class="mini"><span>📚</span><div><b>${c}</b><br><small>Tap to open</small></div></div>`).join('');
-  document.getElementById('pinList').innerHTML=students.map(s=>`<div class="person"><div><b>${s.pin}</b> — ${s.name}</div><button class="btn btn-ghost" onclick="copyText('${s.pin}')">Copy</button></div>`).join('');
-  document.getElementById('annList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');document.getElementById('history').innerHTML=historyList.map(h=>`<div>• ${h}</div>`).join('');
-  document.getElementById('sAnnList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');document.getElementById('sAnnList2').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');
-  document.getElementById('studentQuizzes').innerHTML=quizzes.map((q,i)=>`<div class="mini" onclick="startQuiz(${i})"><span>🧠</span><div><b>${q.title}</b><br><small>${q.meta}</small></div></div>`).join('');
-  document.getElementById('quizList').innerHTML=quizzes.map((q,i)=>`<div class="mini" onclick="startQuiz(${i})"><span>🧠</span><div><b>${q.title}</b><br><small>${q.meta}</small></div></div>`).join('');
-  document.getElementById('sClassGrid').innerHTML=['Mathematics','Science','History','English'].map(c=>`<div class="mini"><span>📚</span><div><b>${c}</b><br><small>JSS1</small></div></div>`).join('');
-  document.getElementById('activeCount').textContent=students.filter(s=>s.status=='Active').length+140;
+  document.getElementById('stuCount').textContent=students.length;
+  document.getElementById('activeCount').textContent=students.filter(s=>s.status=='Active').length;
+  document.getElementById('revText').textContent='₦'+(students.length*2000).toLocaleString();
+  document.getElementById('classCount').textContent=Object.keys(content).length;
+  let rows=students.length?students.map((s,i)=>`<div class="item"><div><b>${s.name}</b><br><small class="mut">${s.cls} • ${s.pin}</small></div><span class="badge ${s.status=='Active'?'g':'grey'}">${s.status}</span><button class="btn btn-ghost" onclick="studentMenu(${i})">•••</button></div>`).join(''):'<p class="mut">No students yet.</p>';
+  document.getElementById('studentsList').innerHTML=rows; document.getElementById('studentsList2').innerHTML=rows;
+  document.getElementById('annList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');
+  document.getElementById('sAnnList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');
+  document.getElementById('history').innerHTML=historyList.length?historyList.map(h=>`<div>• ${h}</div>`).join(''):'<p class="mut">No history yet.</p>';
+  let clsOpts=Object.keys(content).map(c=>`<option>${c}</option>`).join('');
+  document.getElementById('stClass').innerHTML=clsOpts; document.getElementById('pinClass').innerHTML=clsOpts;
+  document.getElementById('studioClassList').innerHTML=Object.keys(content).map(c=>`<div class="item"><div><b>${c}</b><br><small class="mut">${Object.keys(content[c]).join(', ')||'No subjects'}</small></div><div><button class="btn btn-ghost" onclick="renameClassPrompt('${c}')">Rename</button> <button class="btn btn-red" onclick="deleteClassPrompt('${c}')">Delete</button></div></div>`).join('');
+  let sList=''; for(let cls in content){ for(let subj in content[cls]){ content[cls][subj].forEach((t,ti)=>{ sList+=`<div class="item"><div><b>${cls} • ${subj} • ${t.title}</b><br><small class="mut">${t.note.slice(0,60)}...</small></div><div><button class="btn btn-ghost" onclick="editTopicDirect('${cls}','${subj}',${ti})">Edit</button> <button class="btn btn-red" onclick="delTopic('${cls}','${subj}',${ti})">Delete</button></div></div>` }) } }
+  document.getElementById('studioList').innerHTML=sList||'<p class="mut">No content yet.</p>';
+  if(currentStudent){ document.getElementById('myOtpText').textContent=currentStudent.pin; document.getElementById('myClassText').textContent=currentStudent.cls; document.getElementById('sProfileText').innerHTML='<b>'+currentStudent.name+'</b><br><small class="mut">'+currentStudent.cls+'</small>'; document.getElementById('sProfileOtp').textContent=currentStudent.pin; }
+  renderClasses(); updatePhotos();
 }
-function studentMenu(i){let s=students[i];let act=prompt(`Student: ${s.name}\nOTP: ${s.pin}\nType: block / unblock / whatsapp / delete`,'block');if(!act)return;act=act.toLowerCase();if(act.includes('block')){s.status='Blocked';toast(s.name+' blocked')}else if(act.includes('unblock')){s.status='Active';toast(s.name+' unblocked')}else if(act.includes('whatsapp')){window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(`Hi ${s.name}, your OTP ${s.pin} expires soon. Renew: Pay to Opay ${OPAY}`))}else if(act.includes('delete')){if(confirm('Delete '+s.name+'?'))students.splice(i,1)}render()}
-function renameContent(i){let n=prompt('Rename',contents[i].title);if(n){contents[i].title=n;render()}}
-function editContent(i){let m=prompt('Edit meta',contents[i].meta);if(m)contents[i].meta=m;render()}
-function delContent(i){if(confirm('Delete?'))contents.splice(i,1);render()}
-function addContent(){let t=document.getElementById('newTitle').value.trim();if(!t)return toast('Type title');contents.unshift({title:t,meta:'Draft'});document.getElementById('newTitle').value='';render();toast('Added')}
-function postAnn(){let v=document.getElementById('annText').value.trim();if(!v)return toast('Type announcement');anns.unshift(v);document.getElementById('annText').value='';render();toast('Sent')}
+function renderClasses(){
+  let isAdmin=role=='admin';
+  document.getElementById('adminClassTools').style.display=isAdmin?'block':'none';
+  document.getElementById('adminSubjectTools').style.display=isAdmin?'block':'none';
+  document.getElementById('adminTopicTools').style.display=isAdmin?'block':'none';
+  let html=Object.keys(content).map(c=>`<div class="item" onclick="openClass('${c}')"><div><b>${c}</b><br><small class="mut">${Object.keys(content[c]).join(' • ')||'No subjects'}</small></div><span>→</span></div>`).join('');
+  document.getElementById('classList').innerHTML=html; document.getElementById('classListA').innerHTML=html;
+  let sHtml = currentStudent && content[currentStudent.cls] ? `<div class="item" onclick="openClass('${currentStudent.cls}')"><div><b>${currentStudent.cls}</b><br><small class="mut">${Object.keys(content[currentStudent.cls]).join(' • ')}</small></div><span>→</span></div>` : html;
+  document.getElementById('classListS').innerHTML=sHtml; document.getElementById('classListS2').innerHTML=sHtml;
+  document.getElementById('subjectBox').style.display='none'; document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none';
+}
+function addClass(){ let n=document.getElementById('newClassName').value.trim(); if(!n) return toast('Type Class name'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); document.getElementById('newClassName').value=''; toast('✅ Class added: '+n); }
+function addClassFromStudio(){ let n=document.getElementById('studioNewClass').value.trim(); if(!n) return toast('Type Class'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); document.getElementById('studioNewClass').value=''; toast('✅ Class added'); }
+function renameClassPrompt(oldName){ let n=prompt('Rename Class',oldName); if(!n||n==oldName) return; content[n]=content[oldName]; delete content[oldName]; save(); render(); toast('Class renamed'); }
+function renameCurrentClass(){ renameClassPrompt(curClass); }
+function deleteClassPrompt(c){ if(!confirm('Delete Class '+c+'?')) return; delete content[c]; save(); render(); toast('Class deleted'); }
+function deleteCurrentClass(){ deleteClassPrompt(curClass); backToClasses(); }
+function addSubjectFromView(){ let n=document.getElementById('newSubjectName').value.trim(); if(!n) return toast('Type Subject'); if(!content[curClass]) content[curClass]={}; if(content[curClass][n]) return toast('Exists'); content[curClass][n]=[]; save(); render(); openClass(curClass); document.getElementById('newSubjectName').value=''; toast('✅ Subject added'); }
+function renameCurrentSubject(){ let n=prompt('Rename Subject',curSubject); if(!n||n==curSubject) return; content[curClass][n]=content[curClass][curSubject]; delete content[curClass][curSubject]; curSubject=n; save(); render(); openClass(curClass); }
+function deleteCurrentSubject(){ if(!confirm('Delete Subject '+curSubject+'?')) return; delete content[curClass][curSubject]; save(); render(); openClass(curClass); }
+function addTopicFromView(){ let title=document.getElementById('newTopicTitle').value.trim(), note=document.getElementById('newTopicNote').value.trim(); if(!title||!note) return toast('Fill Topic + Note'); if(!content[curClass][curSubject]) content[curClass][curSubject]=[]; content[curClass][curSubject].push({title,note:cleanNote(note)}); save(); render(); openClass(curClass); openSubject(curSubject); document.getElementById('newTopicTitle').value=''; document.getElementById('newTopicNote').value=''; toast('✅ Topic added'); }
+function addContent(){ let cls=document.getElementById('stClass').value, subj=document.getElementById('stSubject').value.trim(), topic=document.getElementById('stTopic').value.trim(), note=document.getElementById('stNote').value.trim(); if(!subj||!topic||!note) return toast('Fill Subject, Topic, Note'); if(!content[cls])content[cls]={}; if(!content[cls][subj])content[cls][subj]=[]; content[cls][subj].push({title:topic,note:cleanNote(note)}); historyList.unshift('Admin added: '+cls+' • '+subj+' • '+topic); save(); render(); document.getElementById('stSubject').value=''; document.getElementById('stTopic').value=''; document.getElementById('stNote').value=''; toast('✅ Topic added'); }
+function editTopicDirect(cls,subj,i){ curClass=cls; curSubject=subj; curTopicIdx=i; showPage('classes'); openClass(cls); openSubject(subj); openTopic(i); }
+function delTopic(cls,subj,i){ if(!confirm('Delete this topic?'))return; content[cls][subj].splice(i,1); if(!content[cls][subj].length) delete content[cls][subj]; save(); render(); }
+function openClass(cls){ curClass=cls; document.getElementById('subjectBox').style.display='block'; document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none'; document.getElementById('subjectTitle').textContent=cls+' — Subjects'; let subs=content[cls]||{}; document.getElementById('subjectList').innerHTML=Object.keys(subs).length?Object.keys(subs).map(s=>`<div class="item" onclick="openSubject('${s}')"><div><b>${s}</b><br><small class="mut">${subs[s].length} topic(s)</small></div><span>→</span></div>`).join(''):'<p class="mut">No subjects yet.</p>'; document.getElementById('subjectBox').scrollIntoView({behavior:'smooth'}); }
+function backToClasses(){ document.getElementById('subjectBox').style.display='none'; document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none'; }
+function openSubject(subj){ curSubject=subj; document.getElementById('topicBox').style.display='block'; document.getElementById('readBox').style.display='none'; document.getElementById('topicTitle').textContent=curClass+' • '+subj+' — Topics'; let topics=(content[curClass]||{})[subj]||[]; document.getElementById('topicList').innerHTML=topics.length?topics.map((t,i)=>`<div class="item" onclick="openTopic(${i})"><div><b>${t.title}</b></div><span>📖 Read →</span></div>`).join(''):'<p class="mut">No topics yet.</p>'; document.getElementById('topicBox').scrollIntoView({behavior:'smooth'}); }
+function backToSubjects(){ document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none'; }
+function openTopic(i){ curTopicIdx=i; isEditing=false; let t=content[curClass][curSubject][i]; document.getElementById('readBox').style.display='block'; document.getElementById('readTitle').textContent=curClass+' • '+curSubject+' • '+t.title; let el=document.getElementById('readText'); el.textContent=t.note; el.contentEditable=false; el.classList.remove('editing'); document.getElementById('placedInfo').style.display='none'; renderReadActions(); document.getElementById('addPhraseBox').style.display='none'; document.getElementById('readBox').scrollIntoView({behavior:'smooth'}); }
+function backToTopics(){ document.getElementById('readBox').style.display='none'; }
+function renderReadActions(){ let isAdmin=role=='admin'; let html=`<button class="btn btn-ghost" onclick="copyReading()">📋 Copy</button><button class="btn btn-ghost" onclick="pasteReading()">📥 Paste</button>`; if(isAdmin){ html+=`<button class="btn btn-primary" onclick="toggleEditReading()">${isEditing?'💾 Save Edit':'✏️ Edit While Reading'}</button><button class="btn btn-ghost" onclick="toggleAddPhrase()">+ Add Phrase — Auto-Place</button><button class="btn btn-ghost" onclick="renameTopicFromRead()">Rename Topic</button><button class="btn btn-red" onclick="deleteTopicFromRead()">Delete Topic</button>`; } document.getElementById('readActions').innerHTML=html; }
+function toggleEditReading(){ let el=document.getElementById('readText'); if(!isEditing){ isEditing=true; el.contentEditable=true; el.classList.add('editing'); el.focus(); toast('✏️ Editing ON — type, paste, delete, then Save'); } else { let newText=cleanNote(el.innerText); content[curClass][curSubject][curTopicIdx].note=newText; el.textContent=newText; el.contentEditable=false; el.classList.remove('editing'); isEditing=false; save(); render(); toast('✅ Saved — continuity fixed'); } renderReadActions(); }
+function copyReading(){ navigator.clipboard.writeText(document.getElementById('readText').innerText); toast('📋 Copied'); }
+async function pasteReading(){ try{ let t=await navigator.clipboard.readText(); if(!t) return toast('Clipboard empty'); if(role!=='admin') return toast('Student can copy only'); let old=content[curClass][curSubject][curTopicIdx].note; let res=smartInsert(old,t,'auto'); content[curClass][curSubject][curTopicIdx].note=res.text; document.getElementById('readText').textContent=res.text; showPlaced(res.where); save(); render(); toast('📥 Pasted smartly'); }catch(e){ toast('Allow clipboard, or long-press to paste while editing'); } }
+function toggleAddPhrase(){ let b=document.getElementById('addPhraseBox'); b.style.display=b.style.display=='none'?'block':'none'; }
+function addPhraseSmart(){ let phrase=document.getElementById('addPhraseInput').value.trim(); if(!phrase) return toast('Type phrase'); let force=document.getElementById('forcePlace').value; let old=content[curClass][curSubject][curTopicIdx].note; let res=smartInsert(old, phrase, force); content[curClass][curSubject][curTopicIdx].note=res.text; document.getElementById('readText').textContent=res.text; document.getElementById('addPhraseInput').value=''; document.getElementById('addPhraseBox').style.display='none'; showPlaced(res.where); save(); render(); toast('✅ Added smartly'); }
+function showPlaced(msg){ let el=document.getElementById('placedInfo'); el.style.display='block'; el.innerHTML='✅ <b>Placed:</b> '+msg; }
+function renameTopicFromRead(){ let t=content[curClass][curSubject][curTopicIdx]; let n=prompt('Rename Topic',t.title); if(n){ t.title=n; save(); render(); openClass(curClass); openSubject(curSubject); openTopic(curTopicIdx); } }
+function deleteTopicFromRead(){ if(!confirm('Delete this topic?')) return; content[curClass][curSubject].splice(curTopicIdx,1); if(!content[curClass][curSubject].length) delete content[curClass][curSubject]; save(); render(); backToTopics(); toast('Topic deleted'); }
+function postAnn(){ let v=document.getElementById('annText').value.trim(); if(!v) return toast('Type announcement'); anns.unshift(v); document.getElementById('annText').value=''; historyList.unshift('Announcement: '+v.slice(0,40)); save(); render(); toast('Sent'); }
 function openPin(){document.getElementById('pinModal').classList.add('open')}function closePin(){document.getElementById('pinModal').classList.remove('open')}
 let lastPin='';
-function makePin(){let name=document.getElementById('pinName').value.trim()||'New Student';let cls=document.getElementById('pinClass').value;let mode=document.getElementById('otpMode').value;let custom=document.getElementById('customOtp').value.trim();if(mode=='custom'){if(!custom)return toast('⚠️ Type YOUR OTP first');if(students.some(s=>s.pin.toLowerCase()==custom.toLowerCase()))return toast('⚠️ OTP already exists');lastPin=custom}else{lastPin='PIN-'+Math.floor(10000+Math.random()*89999)}document.getElementById('pinOut').textContent=lastPin;students.unshift({name,email:name.toLowerCase().replace(/\s/g,'.')+'@school.edu',pin:lastPin,status:'Active',last:'Just now',cls});render();toast('✅ OTP created by YOU: '+lastPin)}
-function copyPin(){copyText(lastPin)}function copyText(t){navigator.clipboard.writeText(t);toast('Copied: '+t)}
-function whatsappPin(){window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(`Your Quizora OTP is ${lastPin}. Pay to Opay ${OPAY} if not paid.`))}
-function renewPin(){window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(`Hi, I want to renew my OTP PIN-83921. I paid to Opay ${OPAY}.`))}
-function downloadBackup(){let d=JSON.stringify({students,contents,anns},null,2);let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([d],{type:'application/json'}));a.download='quizora-backup.json';a.click();toast('Backup downloaded')}
-function startQuiz(i){let q=quizzes[i];document.getElementById('quizBox').style.display='block';document.getElementById('quizQ').textContent=q.title+': '+q.q;document.getElementById('quizOpts').innerHTML=q.opts.map((o,oi)=>`<button class="quiz-opt" onclick="answerQuiz(${i},${oi},this)">${o}</button>`).join('')}
-function answerQuiz(qi,oi,btn){let q=quizzes[qi];if(oi==q.ans){score+=10;btn.style.background='#d1ffd1';toast('Correct! +10')}else{btn.style.background='#ffd1d1';toast('Wrong — '+q.opts[q.ans])}document.getElementById('quizScore').textContent='Score: '+score}
-function drawChart(btn){if(btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on')}let c=document.getElementById('chart');if(!c)return;let ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle='#e5e5f0';ctx.beginPath();for(let y=0;y<5;y++){ctx.moveTo(0,y*36);ctx.lineTo(700,y*36)}ctx.stroke();let pts=[[0,150],[100,110],[200,95],[300,70],[400,95],[500,55],[600,70],[700,25]];ctx.beginPath();ctx.fillStyle='rgba(123,0,255,.15)';ctx.moveTo(0,180);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.lineTo(700,180);ctx.fill();ctx.beginPath();ctx.strokeStyle='#7b00ff';ctx.lineWidth=3;pts.forEach((p,i)=>i==0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));ctx.stroke()}
-render();drawChart();
+function makePin(){ let name=document.getElementById('pinName').value.trim(); let cls=document.getElementById('pinClass').value; let otp=document.getElementById('customOtp').value.trim(); if(!name) return toast('Type student name'); if(!otp) return toast('YOU must type OTP'); if(students.some(s=>s.pin.toLowerCase()==otp.toLowerCase())) return toast('OTP exists'); lastPin=otp; students.unshift({name,cls,pin:otp,status:'Active'}); historyList.unshift('Admin created OTP '+otp+' for '+name); save(); render(); document.getElementById('pinOut').textContent=otp; toast('✅ OTP created: '+otp); }
+function copyPin(){navigator.clipboard.writeText(lastPin);toast('Copied')}
+function whatsappPin(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Your Quizora OTP is '+lastPin+'. Pay to Opay '+OPAY+' if not paid.'))}
+function studentMenu(i){ let s=students[i]; let a=prompt('Student: '+s.name+'\nType: block / unblock / whatsapp / delete','block'); if(!a)return; a=a.toLowerCase(); if(a.includes('block')){s.status='Blocked';toast('Blocked')} else if(a.includes('unblock')){s.status='Active';toast('Unblocked')} else if(a.includes('whatsapp')){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi '+s.name+', your OTP '+s.pin+' expires soon. Renew: Pay to Opay '+OPAY))} else if(a.includes('delete')){ if(confirm('Delete '+s.name+'?')) students.splice(i,1)} save(); render(); }
+function renewPin(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to renew my OTP. I paid to Opay '+OPAY+'.'))}
+function downloadBackup(){ let d=JSON.stringify({students,content,anns},null,2); let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([d],{type:'application/json'})); a.download='quizora-backup.json'; a.click(); toast('Backup downloaded'); }
+render(); updatePhotos();
 </script>
 </body>
 </html>
