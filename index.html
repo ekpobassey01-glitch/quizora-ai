@@ -37,7 +37,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 </head>
 <body>
 
-<!-- LOGIN - SAME SAFE STYLE AS TEST THAT WORKED -->
 <div id="loginScreen" class="login">
 <div style="text-align:center"><div class="qlogo" style="margin:0 auto;width:64px;height:64px;font-size:42px"><span>Q</span></div><h1>Quizora AI</h1></div>
 <div class="tabs2"><button type="button" id="tabAdmin" class="on" onclick="setTab('admin')">Admin</button><button type="button" id="tabStudent" onclick="setTab('student')">Student</button></div>
@@ -83,7 +82,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div class="toast" id="toast"></div>
 
 <script>
-// SAFE HELPERS - same as test that worked
 function el(id){ return document.getElementById(id); }
 function getLS(k, fb){ try{ var v=localStorage.getItem(k); return v ? JSON.parse(v) : fb; }catch(e){ return fb; } }
 function setLS(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
@@ -91,14 +89,11 @@ function getStr(k, fb){ try{ return localStorage.getItem(k) || fb; }catch(e){ re
 function setStr(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 function showStatus(m, type){ var e=el('loginStatus'); if(!e) return; e.textContent=m; e.className='status '+type; }
 function toast(m){ var t=el('toast'); if(!t) return; t.textContent=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; }, 3400); }
-
 var WA='2348147699555', OPAY='8147699555';
 var FREE_CLASSES=['JSS1','JSS2','SS1','SS2'];
 var LOCKED_CLASSES=['JSS3','SS3','WAEC','JAMB'];
 var PRICE=2000;
-var role='';
-var currentStudent=null;
-var isPreview=false;
+var role=''; var currentStudent=null; var isPreview=false;
 var adminData=getLS('quizora_admin_data', null);
 var students=getLS('quizora_students', []);
 var anns=getLS('quizora_anns', ["Welcome to Quizora AI — Free: JSS1, JSS2, SS1, SS2. Locked: JSS3, SS3, WAEC, JAMB — N2,000 per section per month."]);
@@ -117,11 +112,9 @@ var curClass='', curSubject='', curTopicIdx=-1, isEditing=false, openClassName='
 var myDeviceId=getStr('quizora_device_id','') || ('DEV-'+Math.random().toString(36).slice(2,10).toUpperCase());
 setStr('quizora_device_id', myDeviceId);
 function save(){ setLS('quizora_students', students); setLS('quizora_anns', anns); setLS('quizora_content', content); }
-
-// LOGIN - same as test
 function setTab(t){ el('tabAdmin').className=t==='admin'?'on':''; el('tabStudent').className=t==='student'?'on':''; el('adminLoginBox').style.display=t==='admin'?'block':'none'; el('studentLoginBox').style.display=t==='student'?'block':'none'; showStatus(t==='admin'?'Admin selected':'Student selected — Login or Create My Account', 'info'); updateHint(); }
 function setStuMode(m){ el('stuLoginTab').className=m==='login'?'on':''; el('stuCreateTab').className=m==='create'?'on':''; el('stuLoginForm').style.display=m==='login'?'block':'none'; el('stuCreateForm').style.display=m==='create'?'block':'none'; }
-function updateHint(){ var h=el('adminHint'); var b=el('adminLoginBtn'); if(!adminData){ if(h) h.textContent='First time? Type a password you want — it will become your password.'; } else { if(h) h.textContent='Welcome back. Enter password for "'+adminData.user+'".'; var u=el('settingsAdminUser'); if(u) u.value=adminData.user; } }
+function updateHint(){ var h=el('adminHint'); if(!adminData){ if(h) h.textContent='First time? Type a password you want — it will become your password.'; } else { if(h) h.textContent='Welcome back. Enter password for "'+adminData.user+'".'; var u=el('settingsAdminUser'); if(u) u.value=adminData.user; } }
 function doAdmin(){
   var u=(el('adminUser').value||'').trim(); var p=(el('adminPass').value||'').trim();
   if(!u){ showStatus('❌ Enter Admin Username','err'); return; }
@@ -151,8 +144,6 @@ function doStudentLogin(){
 }
 function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS phone only. Content stays. Continue?')) return; try{ localStorage.removeItem('quizora_admin_data'); localStorage.removeItem('quizora_students'); }catch(e){} adminData=null; students=[]; save(); el('adminUser').value=''; el('adminPass').value=''; showStatus('✅ Login reset. Create Admin again.','ok'); updateHint(); }
 function logout(){ isPreview=false; role=''; currentStudent=null; el('app').style.display='none'; el('loginScreen').style.display='block'; el('navAdmin').classList.remove('show'); el('navStudent').style.display='none'; el('previewBanner').style.display='none'; el('switchBtn').style.display='none'; el('adminPass').value=''; el('studentPass').value=''; showStatus('Logged out. Login again.','info'); }
-
-// APP NAV - guarded
 function requireAdmin(){ if(role!=='admin'){ toast('❌ Students cannot access Admin.'); return false; } if(isPreview){ toast('Previewing as Student. Tap Back to Admin.'); return false; } return true; }
 function showPage(id){
   var adminPages=['aDash','aStudents','studio','settings'];
@@ -199,8 +190,6 @@ function smartInsert(oldText, newPhrase, force){
   var mid=Math.floor(total/2); sents.splice(mid,0,add); return {text:sents.join(' '), where:'Placed in MIDDLE where it flows, NOT forced to end', after:mid-1};
 }
 function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-// CLASSES DROPDOWN - guarded, no crash if element missing
 function classRow(cls){
   try{
   var locked=isLocked(cls); var can=canOpen(cls);
@@ -236,7 +225,6 @@ function addSubjectInline(cls){ if(!requireAdmin()) return; var e=el('newSub-'+c
 function renameSubjectInline(cls,subj){ if(!requireAdmin()) return; var n=prompt('Rename Subject',subj); if(!n||n===subj) return; content[cls][n]=content[cls][subj]; delete content[cls][subj]; openSubjectName=n; save(); render(); }
 function deleteSubjectInline(cls,subj){ if(!requireAdmin()) return; if(!confirm('Delete Subject '+subj+'?')) return; delete content[cls][subj]; openSubjectName=''; save(); render(); }
 function addTopicInline(cls,subj){ if(!requireAdmin()) return; var tEl=el('newTopic-'+cls+'-'+subj); var nEl=el('newNote-'+cls+'-'+subj); var title=(tEl.value||'').trim(); var note=(nEl.value||'').trim(); if(!title||!note) return toast('Fill Topic + Note'); if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title:title, note:cleanNote(note), images:[]}); save(); render(); toast('✅ Topic added'); }
-
 function render(){
   try{
   var total=0; students.forEach(function(s){ total+=(s.subs?s.subs.length:0); });
@@ -262,8 +250,6 @@ function deleteClassPrompt(c){ if(!requireAdmin()) return; if(!confirm('Delete C
 function addContent(){ if(!requireAdmin()) return; var cls=el('stClass').value; var subj=(el('stSubject').value||'').trim(); var topic=(el('stTopic').value||'').trim(); var note=(el('stNote').value||'').trim(); if(!subj||!topic||!note) return toast('Fill Subject, Topic, Note'); if(!content[cls]) content[cls]={}; if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title:topic, note:cleanNote(note), images:[]}); save(); render(); el('stSubject').value=''; el('stTopic').value=''; el('stNote').value=''; toast('✅ Topic added'); }
 function editTopicDirect(cls,subj,i){ if(!requireAdmin()) return; openClassName=cls; openSubjectName=subj; showPage('classes'); renderClasses(); openTopic(cls,subj,i); }
 function delTopic(cls,subj,i){ if(!requireAdmin()) return; if(!confirm('Delete this topic?')) return; content[cls][subj].splice(i,1); if(!content[cls][subj].length) delete content[cls][subj]; save(); render(); }
-
-// READING + SMART PHRASE + DIAGRAM
 function renderReadingContent(topic){
   var sents=splitS(topic.note||''); var imgs=topic.images||[]; var html='';
   imgs.forEach(function(im){ if(im.after===-1) html+=diagramHtml(im); });
@@ -317,8 +303,6 @@ function deleteTopic(){ if(!requireAdmin()) return; if(!confirm('Delete this top
 function postAnn(){ if(role!=='admin'){ toast('Students cannot send announcements'); return; } var v=(el('annText').value||'').trim(); if(!v) return toast('Type announcement'); anns.unshift(v); el('annText').value=''; save(); render(); toast('Sent'); }
 function studentMenu(i){ if(!requireAdmin()) return; var s=students[i]; var a=prompt('Student: '+s.name+'\nSubs: '+(s.subs||[]).join(', ')+'\n\nType: unlock WAEC / unlock JSS3 / unlock SS3 / unlock JAMB / lock WAEC / reset device / block / unblock / whatsapp / delete','unlock WAEC'); if(!a) return; a=a.toLowerCase(); if(a.indexOf('unlock')>=0){ var target=null; if(a.indexOf('waec')>=0) target='WAEC'; else if(a.indexOf('jamb')>=0) target='JAMB'; else if(a.indexOf('jss3')>=0) target='JSS3'; else if(a.indexOf('ss3')>=0) target='SS3'; if(target){ if(!s.subs) s.subs=[]; if(s.subs.indexOf(target)<0) s.subs.push(target); toast('✅ Unlocked '+target); } } else if(a.indexOf('lock')>=0){ var t2=null; if(a.indexOf('waec')>=0) t2='WAEC'; else if(a.indexOf('jamb')>=0) t2='JAMB'; else if(a.indexOf('jss3')>=0) t2='JSS3'; else if(a.indexOf('ss3')>=0) t2='SS3'; if(t2){ s.subs=(s.subs||[]).filter(function(x){ return x!==t2; }); toast('Locked '+t2); } } else if(a.indexOf('reset')>=0){ s.deviceId=''; toast('✅ Device reset'); } else if(a.indexOf('block')>=0){ s.status='Blocked'; toast('Blocked'); } else if(a.indexOf('unblock')>=0){ s.status='Active'; toast('Unblocked'); } else if(a.indexOf('whatsapp')>=0){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi '+s.name+', renew: Pay ₦2,000 per locked section to Opay '+OPAY)); } else if(a.indexOf('delete')>=0){ if(confirm('Delete '+s.name+'?')) students.splice(i,1); } save(); render(); }
 function renewPin(){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe — ₦2,000/month. My Username is '+(currentStudent?currentStudent.name:'')+'. I paid to Opay '+OPAY+'.')); }
-
-// Init - SAFE, does not crash if one element missing
 updateHint();
 if(adminData){ showStatus('Welcome back. Admin saved as "'+adminData.user+'". Enter its password, or tap Reset Login if you forgot it.','info'); }
 else { showStatus('Ready. First time Admin: type Username + new Password + Enter.','info'); }
