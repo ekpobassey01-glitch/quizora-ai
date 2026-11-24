@@ -1,0 +1,11 @@
+{
+  "name": "Quizora AI",
+  "short_name": "Quizora",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4f6fb",
+  "theme_color": "#312e81",
+  "description": "Learn anywhere, even offline.",
+  "icons": []
+}
