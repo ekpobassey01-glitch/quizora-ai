@@ -23,7 +23,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 .login{max-width:420px;margin:20px auto;background:#fff;border-radius:16px;padding:24px}
 .tabs2{display:flex;background:#f1f1f5;border-radius:999px;padding:4px;margin-top:16px}.tabs2 button{flex:1;padding:12px;border-radius:999px;font-weight:800;background:none}.tabs2 button.on{background:#5a00e6;color:#fff}
 .paybox{background:#fff3cd;border:1px dashed #e9a800;border-radius:12px;padding:12px;margin-top:12px}
-.status{margin-top:12px;padding:12px;border-radius:10px;font-weight:700;font-size:14px;display:none;text-align:center}.status.ok{background:#e6ffed;color:#0a7a3a;display:block}.status.err{background:#ffe1e1;color:#b00;display:block}.status.info{background:#f4f0ff;color:#5a00e6;display:block}
+.status{display:none !important}
+#adminHint{display:none !important}
 .read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;padding:10px;border-radius:10px}.read.editing{border:2px solid #7b00ff;background:#fbf7ff}
 .editbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.placed{background:#e6ffed;border:1px solid #0bb56a;border-radius:10px;padding:10px;margin-top:10px;font-size:13px;display:none}
 .drop{border:1px solid #eee;border-radius:12px;overflow:hidden}.drop-head{padding:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#fff}.drop-body{display:none;padding:0 12px 12px;background:#fcfcff}.drop-body.open{display:block}
@@ -43,7 +44,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div id="adminLoginBox">
 <label style="margin-top:14px;display:block">Admin Username</label><input id="adminUser" placeholder="Admin Username" autocomplete="off">
 <label style="margin-top:10px;display:block">Password</label><input id="adminPass" type="password" placeholder="Password" autocomplete="new-password">
-<p class="mut" id="adminHint" style="margin-top:8px">First time? Type a password you want - it will become your password.</p>
+<p class="mut" id="adminHint" style="margin-top:8px">Hidden</p>
 <button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doAdmin()">Enter</button>
 <button type="button" class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="resetLogin()">Reset Login if stuck</button>
 </div>
@@ -52,13 +53,14 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div id="stuLoginForm"><label style="margin-top:14px;display:block">Student Username</label><input id="studentUser" placeholder="Your Username" autocomplete="off"><label style="margin-top:10px;display:block">Password</label><input id="studentPass" type="password" placeholder="Your Password" autocomplete="new-password"><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentLogin()">Login</button></div>
 <div id="stuCreateForm" style="display:none"><label style="margin-top:14px;display:block">Choose Your Username</label><input id="newStuUser" placeholder="e.g. Chiamaka123" autocomplete="off"><label style="margin-top:10px;display:block">Create Your Password</label><input id="newStuPass" type="password" placeholder="Create a password" autocomplete="new-password"><label style="margin-top:10px;display:block">Confirm Password</label><input id="newStuPass2" type="password" placeholder="Type it again" autocomplete="new-password"><label style="margin-top:10px;display:block">Your Class</label><select id="newStuClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentCreate()">Create My Account and Enter</button></div>
 </div>
-<div class="status info" id="loginStatus">Ready. Choose Admin or Student, then Enter.</div>
+<div class="status info" id="loginStatus">Hidden</div>
 </div>
 
 <script>
 function el(id){ return document.getElementById(id); }
-function showStatus(m, type){ var e=el('loginStatus'); if(!e) return; e.textContent=m; e.className='status '+type; }
-function setTab(t){ el('tabAdmin').className=t==='admin'?'on':''; el('tabStudent').className=t==='student'?'on':''; el('adminLoginBox').style.display=t==='admin'?'block':'none'; el('studentLoginBox').style.display=t==='student'?'block':'none'; showStatus(t==='admin'?'Admin selected':'Student selected - Login or Create My Account','info'); }
+function showToast(m){ var t=document.getElementById('toast2'); if(!t){ t=document.createElement('div'); t.id='toast2'; t.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;z-index:99;max-width:92%;text-align:center'; document.body.appendChild(t); } t.textContent=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; },2500); }
+function showStatus(m, type){ showToast(m); }
+function setTab(t){ el('tabAdmin').className=t==='admin'?'on':''; el('tabStudent').className=t==='student'?'on':''; el('adminLoginBox').style.display=t==='admin'?'block':'none'; el('studentLoginBox').style.display=t==='student'?'block':'none'; }
 function setStuMode(m){ el('stuLoginTab').className=m==='login'?'on':''; el('stuCreateTab').className=m==='create'?'on':''; el('stuLoginForm').style.display=m==='login'?'block':'none'; el('stuCreateForm').style.display=m==='create'?'block':'none'; }
 function getAdmin(){ try{ var v=localStorage.getItem('quizora_admin_data'); return v?JSON.parse(v):null; }catch(e){ return null; } }
 function getStudents(){ try{ var v=localStorage.getItem('quizora_students'); return v?JSON.parse(v):[]; }catch(e){ return []; } }
@@ -81,10 +83,10 @@ function doAdmin(){
   if(!u){ showStatus('Enter Admin Username','err'); return; }
   if(!p){ showStatus('Enter Password','err'); return; }
   var saved=getAdmin();
-  if(!saved){ try{ localStorage.setItem('quizora_admin_data', JSON.stringify({user:u, pass:p})); }catch(e){} window.__role='admin'; window.__currentStudent=null; showStatus('Admin created for '+u+' - Entering...','ok'); setTimeout(function(){ window.enterAppSafe(); },400); return; }
-  if(u.toLowerCase()!==saved.user.toLowerCase()){ showStatus('Wrong Admin Username. Saved is '+saved.user+'. Or tap Reset Login.','err'); return; }
-  if(p!==saved.pass){ showStatus('Wrong Password for '+u+'. Or tap Reset Login.','err'); return; }
-  window.__role='admin'; window.__currentStudent=null; showStatus('Welcome back '+u,'ok'); setTimeout(function(){ window.enterAppSafe(); },400);
+  if(!saved){ try{ localStorage.setItem('quizora_admin_data', JSON.stringify({user:u, pass:p})); }catch(e){} window.__role='admin'; window.__currentStudent=null; setTimeout(function(){ window.enterAppSafe(); },300); return; }
+  if(u.toLowerCase()!==saved.user.toLowerCase()){ showStatus('Wrong Admin Username. Saved is '+saved.user,'err'); return; }
+  if(p!==saved.pass){ showStatus('Wrong Password','err'); return; }
+  window.__role='admin'; window.__currentStudent=null; setTimeout(function(){ window.enterAppSafe(); },300);
 }
 function doStudentCreate(){
   var u=(el('newStuUser').value||'').trim(); var p=(el('newStuPass').value||'').trim(); var p2=(el('newStuPass2').value||'').trim(); var cls=el('newStuClass').value;
@@ -95,7 +97,7 @@ function doStudentCreate(){
   for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase()){ showStatus('Username exists - choose another','err'); return; } }
   var dev=''; try{ dev=localStorage.getItem('quizora_device_id')||('DEV-'+Math.random().toString(36).slice(2,10).toUpperCase()); localStorage.setItem('quizora_device_id',dev); }catch(e){}
   var ns={name:u, cls:cls, pin:p, status:'Active', subs:[], deviceId:dev}; list.unshift(ns); try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){}
-  window.__role='student'; window.__currentStudent=ns; showStatus('Account created! Welcome '+u,'ok'); setTimeout(function(){ window.enterAppSafe(); },400);
+  window.__role='student'; window.__currentStudent=ns; setTimeout(function(){ window.enterAppSafe(); },300);
 }
 function doStudentLogin(){
   var u=(el('studentUser').value||'').trim(); var p=(el('studentPass').value||'').trim();
@@ -107,10 +109,9 @@ function doStudentLogin(){
   var dev=''; try{ dev=localStorage.getItem('quizora_device_id')||''; }catch(e){}
   if(!found.deviceId){ found.deviceId=dev; try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){} }
   else if(found.deviceId!==dev){ showStatus('Locked to another device. Ask Admin to Reset Device.','err'); return; }
-  window.__role='student'; window.__currentStudent=found; showStatus('Welcome '+u,'ok'); setTimeout(function(){ window.enterAppSafe(); },400);
+  window.__role='student'; window.__currentStudent=found; setTimeout(function(){ window.enterAppSafe(); },300);
 }
 function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS phone only. Content stays.')) return; try{ localStorage.removeItem('quizora_admin_data'); localStorage.removeItem('quizora_students'); }catch(e){} el('adminUser').value=''; el('adminPass').value=''; showStatus('Login reset. Create Admin again.','ok'); }
-(function(){ var s=getAdmin(); if(s){ showStatus('Welcome back. Admin saved as '+s.user+'. Enter its password, or tap Reset Login if you forgot it.','info'); } else { showStatus('Ready. First time Admin: type Username + new Password + Enter.','info'); } })();
 </script>
 
 <div id="app" style="display:none">
@@ -118,18 +119,18 @@ function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS
 <div class="preview-banner" id="previewBanner">Previewing as Student - Admin only. Tap Back to Admin.</div>
 <div class="wrap">
 <div id="aDash" class="page show">
-<div class="cards"><div class="card"><p class="mut">Revenue</p><h3 id="revText">N0</h3></div><div class="card"><p class="mut">Students</p><h3 id="stuCount">0</h3></div><div class="card"><p class="mut">Locked</p><h3>4</h3><small class="mut">JSS3 - SS3 - WAEC - JAMB</small></div><div class="card"><p class="mut">Free</p><h3>4</h3><small class="mut">JSS1 - JSS2 - SS1 - SS2</small></div></div>
+<div class="cards"><div class="card"><p class="mut">Revenue</p><h3 id="revText">₦0</h3></div><div class="card"><p class="mut">Students</p><h3 id="stuCount">0</h3></div><div class="card"><p class="mut">Locked</p><h3>4</h3><small class="mut">JSS3 - SS3 - WAEC - JAMB</small></div><div class="card"><p class="mut">Free</p><h3>4</h3><small class="mut">JSS1 - JSS2 - SS1 - SS2</small></div></div>
 <div class="card"><h2>Quick Actions</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn btn-primary" id="quickSwitchBtn" style="display:none" onclick="toggleView()">View as Student</button><button type="button" class="btn btn-ghost" onclick="showPage('aStudents')">View Students</button><button type="button" class="btn btn-ghost" onclick="showPage('classes')">Open Classes</button><button type="button" class="btn btn-ghost" onclick="showPage('studio')">Content Studio</button></div></div>
 <div class="card"><h2>Students - Tap ... to Unlock / Reset Device</h2><div class="list" id="studentsList"></div></div>
 <div class="card"><h2>Classes - Dropdown</h2><p class="mut">Tap Class - Subject - Topic - Read</p><div class="list" id="classListA"></div></div>
-<div class="card"><h2>Payment - Admin Only</h2><div class="paybox"><b>Opay: 8147699555</b> - WhatsApp: 08147699555<br><small>Locked: N2,000 per section / month</small></div></div>
+<div class="card"><h2>Payment - Admin Only</h2><div class="paybox"><b>Opay: 8147699555</b> - WhatsApp: 08147699555<br><small>Locked: ₦2,000 per section / month</small></div></div>
 </div>
 <div id="aStudents" class="page"><div class="card"><h2>Students</h2><div class="list" id="studentsList2"></div></div></div>
 <div id="classes" class="page"><div class="card"><h2>Classes - Dropdown</h2><div class="list" id="classList"></div><div id="adminClassTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newClassName" placeholder="New Class"><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addClass()">+ Add New Class</button></div></div></div>
 <div id="studio" class="page"><div class="card"><h2>Content Studio - Add / Edit / Delete</h2><label>Class</label><select id="stClass"></select><label>Subject</label><input id="stSubject" placeholder="e.g. Mathematics"><label>Topic Title</label><input id="stTopic" placeholder="e.g. Fractions"><label>Note</label><textarea id="stNote" rows="5" placeholder="Write lesson..."></textarea><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add This Topic</button><div style="margin-top:16px;border-top:1px solid #eee;padding-top:12px"><h3>Manage Classes</h3><input id="studioNewClass" placeholder="New Class"><button type="button" class="btn btn-ghost" style="margin-top:8px" onclick="addClassFromStudio()">+ Add Class</button><div class="list" id="studioClassList"></div></div><div style="margin-top:16px"><h3>All Topics</h3><div class="list" id="studioList"></div></div></div></div>
 <div id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">Send</button><div class="list" id="annList"></div></div></div>
-<div id="settings" class="page"><div class="card"><h2>Settings - Admin Only</h2><label>Admin Username</label><input id="settingsAdminUser"><label>Change MY Admin Password</label><input id="newAdminOtp" type="password" placeholder="New Password"><input id="newAdminOtp2" type="password" placeholder="Confirm"><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="changeAdminOtp()">Save My New Password</button><div class="paybox"><b>Lock Rule:</b> FREE = JSS1, JSS2, SS1, SS2<br>LOCKED = JSS3, SS3, WAEC, JAMB - N2,000 / section / month</div></div></div>
-<div id="sDash" class="page"><div class="cards"><div class="card"><p class="mut">My Username</p><h3 id="myOtpText">-</h3></div><div class="card"><p class="mut">My Subscriptions</p><h3 id="mySubsText" style="font-size:14px">Free Classes Only</h3></div></div><div class="card"><h2>My Classes - Dropdown</h2><p class="mut">Free: JSS1, JSS2, SS1, SS2 - Locked: JSS3, SS3, WAEC, JAMB - N2,000 / section</p><div class="list" id="classListS"></div></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div></div><div class="card"><h2>Subscribe</h2><div class="paybox"><b>Pay N2,000 per locked section to Opay: 8147699555</b></div><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
+<div id="settings" class="page"><div class="card"><h2>Settings - Admin Only</h2><label>Admin Username</label><input id="settingsAdminUser"><label>Change MY Admin Password</label><input id="newAdminOtp" type="password" placeholder="New Password"><input id="newAdminOtp2" type="password" placeholder="Confirm"><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="changeAdminOtp()">Save My New Password</button><div class="paybox"><b>Lock Rule:</b> FREE = JSS1, JSS2, SS1, SS2<br>LOCKED = JSS3, SS3, WAEC, JAMB - ₦2,000 / section / month</div></div></div>
+<div id="sDash" class="page"><div class="cards"><div class="card"><p class="mut">My Username</p><h3 id="myOtpText">-</h3></div><div class="card"><p class="mut">My Subscriptions</p><h3 id="mySubsText" style="font-size:14px">Free Classes Only</h3></div></div><div class="card"><h2>My Classes - Dropdown</h2><p class="mut">Free: JSS1, JSS2, SS1, SS2 - Locked: JSS3, SS3, WAEC, JAMB - ₦2,000 / section</p><div class="list" id="classListS"></div></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div></div><div class="card"><h2>Subscribe</h2><div class="paybox"><b>Pay ₦2,000 per locked section to Opay: 8147699555</b></div><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
 <div id="sClasses" class="page"><div class="card"><h2>My Classes - Dropdown</h2><div class="list" id="classListS2"></div></div></div>
 <div id="sProfile" class="page"><div class="card"><h2>My Profile</h2><p id="sProfileText"></p><div style="background:#f4f0ff;padding:14px;border-radius:12px;margin:12px 0;font-weight:800;text-align:center" id="sProfileOtp"></div><p class="mut" id="sProfileSubs"></p><button type="button" class="btn btn-primary" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
 </div>
@@ -149,7 +150,21 @@ try{ anns=JSON.parse(localStorage.getItem('quizora_anns')||'[]'); }catch(e){ ann
 if(!anns.length) anns=['Welcome to Quizora AI - Free: JSS1, JSS2, SS1, SS2. Locked: JSS3, SS3, WAEC, JAMB - N2,000 per section per month.'];
 var classesData=null;
 try{ classesData=JSON.parse(localStorage.getItem('quizora_content')||'null'); }catch(e){ classesData=null; }
-if(!classesData){
+if(classesData && !Array.isArray(classesData)){
+  var newArr=[];
+  for(var k in classesData){
+    var subs=[];
+    for(var s in classesData[k]){
+      var tops=[]; var arr=classesData[k][s];
+      for(var i=0;i<arr.length;i++){ tops.push(arr[i]); }
+      subs.push({name:s, topics:tops});
+    }
+    newArr.push({name:k, subjects:subs});
+  }
+  classesData=newArr;
+  try{ localStorage.setItem('quizora_content', JSON.stringify(classesData)); }catch(e){}
+}
+if(!classesData || !classesData.length){
   classesData=[
     {name:'JSS1', subjects:[{name:'Mathematics', topics:[{title:'Fractions', note:'A fraction is a part of a whole. Example: 1/2 means 1 out of 2 equal parts. To add fractions with the same denominator, add the numerators and keep the denominator. In conclusion, fractions help us share things equally.', images:[]}]}]},
     {name:'JSS2', subjects:[{name:'Mathematics', topics:[{title:'Algebra Basics', note:'Algebra uses letters to stand for numbers. Example: x + 3 = 7, so x = 4.', images:[]}]}]},
@@ -169,7 +184,7 @@ function saveStudentsApp(list){ try{ localStorage.setItem('quizora_students', JS
 function roleNow(){ return window.__role||''; }
 function curStu(){ return window.__currentStudent||null; }
 function requireAdmin(){ if(roleNow()!=='admin'){ toast2('Students cannot access Admin.'); return false; } if(window.__preview){ toast2('Previewing as Student. Tap Back to Admin.'); return false; } return true; }
-window.logout=function(){ window.__preview=false; window.__role=''; window.__currentStudent=null; document.getElementById('app').style.display='none'; document.getElementById('loginScreen').style.display='block'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='none'; document.getElementById('previewBanner').style.display='none'; document.getElementById('switchBtn').style.display='none'; document.getElementById('adminPass').value=''; document.getElementById('studentPass').value=''; showStatus('Logged out. Login again.','info'); };
+window.logout=function(){ window.__preview=false; window.__role=''; window.__currentStudent=null; document.getElementById('app').style.display='none'; document.getElementById('loginScreen').style.display='block'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='none'; document.getElementById('previewBanner').style.display='none'; document.getElementById('switchBtn').style.display='none'; document.getElementById('adminPass').value=''; document.getElementById('studentPass').value=''; };
 window.showPage=function(id){
   var adminPages=['aDash','aStudents','studio','settings'];
   if(adminPages.indexOf(id)>=0 && roleNow()!=='admin'){ toast2('Admin only'); return; }
@@ -235,7 +250,7 @@ window.addTopicInline=function(ci,si){ if(!requireAdmin()) return; var tEl=docum
 window.renderApp=function(){
   var list=getStudentsApp(); var total=0; for(var i=0;i<list.length;i++) total+=(list[i].subs?list[i].subs.length:0);
   var sc=document.getElementById('stuCount'); if(sc) sc.textContent=list.length;
-  var rv=document.getElementById('revText'); if(rv) rv.textContent='N'+(total*PRICE_NUM).toLocaleString();
+  var rv=document.getElementById('revText'); if(rv) rv.textContent='₦'+(total*PRICE_NUM).toLocaleString();
   var rows=''; if(list.length){ for(var j=0;j<list.length;j++){ var s=list[j]; rows+='<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center"><div><b>'+esc(s.name)+'</b><br><small class="mut">'+esc(s.cls)+' - Subs: '+esc((s.subs||[]).join(', ')||'Free only')+' - '+esc(s.status)+'</small></div><button type="button" class="btn btn-ghost" onclick="studentMenu('+j+')">...</button></div>'; } } else { rows='<p class="mut">No students yet.</p>'; }
   var a=document.getElementById('studentsList'); if(a) a.innerHTML=rows; var b=document.getElementById('studentsList2'); if(b) b.innerHTML=rows;
   var annHtml=''; for(var k=0;k<anns.length;k++) annHtml+='<div>Announcement: '+esc(anns[k])+'</div>';
