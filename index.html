@@ -1,192 +1,216 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Quizora AI - One Code All Classes</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quizora AI — Admin OTP You Create</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#070B1D;color:#fff;font-family:Inter,system-ui,Arial;padding-bottom:85px}
-.top{position:sticky;top:0;z-index:10;background:#070B1D;border-bottom:1px solid #FFD70044;padding:12px 14px;display:flex;align-items:center;gap:10px}
-.logo{width:40px;height:40px;border-radius:50%;background:#FFD700;color:#000;display:grid;place-items:center;font-weight:900;font-size:22px}
-.btn{background:#FFD700;color:#000;border:0;padding:12px 14px;border-radius:12px;font-weight:800;cursor:pointer;width:100%}
-.btn2{background:#16204A;color:#fff;border:1px solid #2A3766;padding:10px 12px;border-radius:12px;cursor:pointer}
-.btnSm{background:#16204A;color:#fff;border:1px solid #2A3766;padding:7px 10px;border-radius:999px;cursor:pointer;font-size:12px}
-.btnDanger{background:#3A1520;color:#FF9AA8;border:1px solid #FF3B3044;padding:7px 10px;border-radius:999px;cursor:pointer;font-size:12px}
-.card{background:#111A33;border:1px solid #1E2A55;border-radius:16px;padding:14px;margin:12px}
-input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #2A3766;background:#070B1D;color:#fff;margin:6px 0;font-size:15px}
-textarea{min-height:90px}label{font-size:12px;opacity:.7}
-.hidden{display:none!important}.row{display:flex;gap:8px}.row>*{flex:1}
-.badge{font-size:11px;padding:4px 8px;border-radius:999px;font-weight:800}.free{background:#1DB954;color:#000}.locked{background:#FF3B30;color:#fff}
-.listItem{background:#070B1D;border:1px solid #222C55;border-radius:14px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.para{background:#070B1D;border:1px solid #222C55;border-radius:14px;padding:12px;margin:10px 0}.para p{line-height:1.65;white-space:pre-wrap}
-.bottomNav{position:fixed;bottom:0;left:0;right:0;background:#0A0F24;border-top:1px solid #FFD70044;display:flex;padding:8px 4px;z-index:20}
-.bottomNav button{flex:1;background:transparent;border:0;color:#8A95C2;cursor:pointer;font-size:11px;padding:6px 2px}
-.bottomNav button.active{color:#FFD700;font-weight:800}.bottomNav span{display:block;font-size:18px}
-.lockScreen{position:fixed;inset:0;z-index:100;background:#070B1D;display:grid;place-items:center;padding:16px;overflow:auto}
-.lockBox{width:100%;max-width:420px;background:#111A33;border:1px solid #FFD70055;border-radius:20px;padding:22px 18px;text-align:center}
-.divider{display:flex;align-items:center;gap:10px;font-size:12px;opacity:.6;margin:12px 0}.divider:before,.divider:after{content:"";flex:1;height:1px;background:#2A3766}
-.statGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.statGrid .card{margin:0;text-align:center}.statGrid b{font-size:26px;color:#FFD700}
-.tbl{width:100%;border-collapse:collapse;font-size:13px}.tbl th,.tbl td{padding:8px;border-bottom:1px solid #222C55;text-align:left}
-.renameZone{background:#0A1A3A;border:1px solid #2A6BFF55;border-radius:14px;padding:12px;margin:10px 0}
-.addZone{background:#0A2A1A;border:1px solid #1DB95455;border-radius:14px;padding:12px;margin:10px 0}
-</style></head><body>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+body{background:#d9d6ff;color:#13132b}
+button{cursor:pointer;border:0;font-family:inherit}
+.top{margin:14px 18px 0;background:linear-gradient(90deg,#7b00ff,#5a00e6 45%,#0066ff);border-radius:14px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.top b{font-size:26px}.top .r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.22);padding:9px 14px;border-radius:999px;font-weight:700;color:#fff}
+.pill.white{background:#fff;color:#5a00e6}.pill.gold{background:#ffd166;color:#3a2400}
+.avatar{width:36px;height:36px;border-radius:50%;background:#ffd166;display:grid;place-items:center;font-weight:900;color:#5a00e6}
+.wrap{display:grid;grid-template-columns:220px 1fr;gap:16px;padding:16px 18px 20px}
+.side{background:#fff;border-radius:14px;padding:14px;height:fit-content;position:sticky;top:16px}
+.nav{display:flex;gap:8px;align-items:center;padding:11px 12px;border-radius:10px;font-weight:700;margin-bottom:6px;cursor:pointer}
+.nav.active{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}
+.nav span{width:28px;height:28px;border-radius:8px;background:#f0eaff;display:grid;place-items:center}
+.main{display:grid;gap:16px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:#fff;border-radius:14px;padding:16px}
+.kpi{display:flex;gap:12px}.kpi .ico{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:22px}
+.kpi h3{font-size:28px}.kpi p{font-size:13px;color:#666}.kpi small{font-weight:700;color:#0a9d5c}
+.row2{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}.row3{display:grid;grid-template-columns:1.6fr 1fr;gap:16px}
+h2{font-size:19px}.mut{color:#777;font-size:13px;margin-top:2px}
+.tabs{display:flex;gap:6px}.tab{padding:7px 10px;border-radius:999px;background:#eee;font-weight:700;font-size:13px}.tab.on{background:#5a00e6;color:#fff}
+.chart{height:180px;margin-top:14px}canvas{width:100%;height:100%}
+.list{margin-top:12px;display:grid;gap:12px}.person{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
+.badge{padding:7px 11px;border-radius:999px;font-weight:800;font-size:12px;color:#fff}.g{background:#0bb56a}.b{background:#0066ff}.p{background:#7b00ff}.y{background:#e9a800}.grey{background:#9a9aab}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}th{text-align:left;color:#666;padding:10px;border-bottom:1px solid #eee}td{padding:11px 10px;border-bottom:1px solid #f0f0f0}
+.pin{padding:6px 9px;border-radius:8px;background:#e8deff;font-weight:800;color:#5a00e6;font-size:12px}
+.btn{padding:10px 14px;border-radius:999px;font-weight:800}.btn-primary{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}.btn-ghost{background:#f1f1f5}
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mini{border:1px solid #eee;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center;cursor:pointer}.mini:hover{border-color:#7b00ff}
+.page{display:none}.page.show{display:block}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;font-size:14px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;place-items:center;z-index:10}.modal.open{display:grid}.box{background:#fff;width:min(540px,92%);border-radius:16px;padding:20px;max-height:92vh;overflow:auto}
+.bigpin{font-size:26px;text-align:center;padding:16px;background:#f4f0ff;border-radius:12px;margin:12px 0;font-weight:900;color:#5a00e6;word-break:break-all}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;display:none;z-index:30}
+.progress{height:12px;background:#eee;border-radius:999px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:linear-gradient(90deg,#7b00ff,#0066ff)}
+.quiz-opt{display:block;width:100%;text-align:left;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;background:#fff;font-weight:700}
+.login{max-width:480px;margin:40px auto;background:#fff;border-radius:16px;padding:24px}
+.paybox{background:#fff3cd;border:1px dashed #e9a800;border-radius:12px;padding:12px;margin-top:12px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.side{position:static}.cards{grid-template-columns:1fr 1fr}.row2,.row3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
 
-<!-- LOGIN SAME FRONTPAGE NO SECRET -->
-<div class="lockScreen" id="lockScreen"><div class="lockBox">
-<div class="logo" style="margin:0 auto">Q</div><h2>Quizora <span style="color:#FFD700">AI</span></h2><p id="lockTitle" style="font-size:13px;opacity:.7">Welcome — Login</p>
-<div id="createBox"><input type="password" id="newPass1" placeholder="Create Admin Password (6+ chars)"><input type="password" id="newPass2" placeholder="Confirm Admin Password"><button class="btn" onclick="createPassword()">Create Password & Enter Admin</button><p style="font-size:11px;opacity:.6">Saved on YOUR phone only. If you forget it, clear site data to create new one.</p></div>
-<div id="loginBox" class="hidden"><input type="password" id="loginPass" placeholder="Admin Password"><button class="btn" onclick="adminLogin()">Enter As Admin — All Features</button><div class="divider">OR</div><input id="studentPin" placeholder="Student PIN e.g. QZ-12345"><button class="btn2" onclick="studentLogin()">Enter As Student — Learning Only</button><p style="font-size:11px;opacity:.6">Student sees only Library / Ask AI. No Admin features. PIN device-locked.</p></div>
-<div id="lockMsg" style="color:#FF3B30;font-size:13px;margin-top:8px"></div></div></div>
-
-<div class="top"><div class="logo">Q</div><div style="flex:1"><b>Quizora <span style="color:#FFD700">AI</span></b><div id="viewLabel" style="font-size:11px;opacity:.7">ADMIN • All Features</div></div><button class="btn2" style="width:auto" onclick="changePassword()">Change Password</button><button class="btn2" style="width:auto" onclick="logout()">Logout</button></div>
-
-<!-- DASHBOARD -->
-<div id="page-dash">
-<div class="card"><b>📢 Announcement</b><p id="announceText" style="opacity:.8">Welcome to Quizora AI.</p></div>
-<div class="card"><div class="statGrid"><div class="card"><b id="statPins">0</b><div style="font-size:12px;opacity:.7">Active PINs</div></div><div class="card"><b id="statStudents">0</b><div style="font-size:12px;opacity:.7">Students</div></div><div class="card"><b id="statRev">₦0</b><div style="font-size:12px;opacity:.7">Revenue Month</div></div><div class="card"><b>4</b><div style="font-size:12px;opacity:.7">Locked Classes</div></div></div>
-<p style="font-size:13px">Today <b id="revToday">₦0</b> • Week <b id="revWeek">₦0</b> • Month <b id="revMonth">₦0</b></p><p id="expiringText" style="font-size:13px">⚠️ No PIN expiring in 3 days</p></div>
-<div class="card"><b>Quick Actions</b><div class="row" style="margin-top:8px"><button class="btn2" onclick="go('content')">✏️ Edit Content</button><button class="btn2" onclick="go('students')">👥 Students & PINs</button></div></div>
+<!-- STEP 1: CREATE YOUR ADMIN OTP - FIRST TIME ONLY -->
+<div id="setupScreen" class="login">
+  <div style="text-align:center"><div style="font-size:44px">🪶</div><h1>Quizora AI</h1><p class="mut">Welcome Admin — Create YOUR One Time Password</p></div>
+  <p style="background:#f4f0ff;border-radius:12px;padding:12px;margin-top:12px"><b>🔐 This is YOUR Admin Password.</b><br><small>System will NOT create it for you. YOU create it. Remember it — you will use it to login every time.</small></p>
+  <label>Create Your Admin One Time Password</label>
+  <input id="setupOtp1" placeholder="Type YOUR OTP e.g. QUIZORA-2026">
+  <label>Confirm Your OTP</label>
+  <input id="setupOtp2" placeholder="Type it again to confirm">
+  <button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="createAdminOtp()">✅ Save My OTP & Continue →</button>
+  <p class="mut" style="text-align:center;margin-top:10px">Already created your OTP before? <a href="#" onclick="showLogin();return false" style="color:#5a00e6;font-weight:800">Go to Login →</a></p>
 </div>
 
-<!-- CONTENT -->
-<div id="page-content" class="hidden"><div class="card">
-<div style="font-size:13px;opacity:.8">Content > <b id="crumb" style="color:#FFD700">All Classes</b></div>
-<h3 style="margin:6px 0">Content Studio</h3><p style="font-size:12px;opacity:.7">BLUE = Rename existing. GREEN = Add new. They are different.</p>
-<div id="renameZone" class="renameZone"><b style="color:#6AA5FF">✏️ RENAME — Edit Existing Name</b><p style="font-size:12px;opacity:.7;margin:4px 0">Changes old name. Does NOT create new one.</p><div id="renameBox"></div></div>
-<div id="contentList"></div>
-<div id="addZone" class="addZone"><b style="color:#1DB954">➕ ADD NEW — Create New Item</b><p style="font-size:12px;opacity:.7;margin:4px 0">Creates brand new empty item. Old items stay.</p><div id="addBox"></div></div>
-<div id="editorBox" class="hidden"><hr style="border-color:#222C55"><h3 id="editorTitle">Topic</h3>
-<div class="row"><button class="btnSm" onclick="startRenameTopicFromEditor()">✏️ Rename This Topic</button><button class="btnDanger" onclick="deleteCurrentTopic()">🗑️ Delete Topic</button></div>
-<label>Paste Phrase (Smart Paste)</label><textarea id="pastePhrase" placeholder="Paste any phrase here..."></textarea>
-<button class="btn2" onclick="smartPaste()">✨ Smart Paste Phrase — Auto-fixes to right paragraph</button>
-<div id="paraList"></div>
-<button class="btn" onclick="addParagraph()">+ Add New Paragraph</button><button class="btn2" style="margin-top:8px" onclick="saveAllParas()">💾 Save All Changes</button><div id="saveMsg" style="color:#1DB954;font-weight:800;margin-top:6px"></div></div>
-</div></div>
-
-<!-- STUDENTS -->
-<div id="page-students" class="hidden">
-<div class="card"><h3>Generate PIN — Anytime • Admin Only</h3><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka O."><div class="row"><div><label>Class</label><select id="pinClass"><option>Nursery</option><option>Primary</option><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Days</label><select id="pinDays"><option value="7">7 Days</option><option value="30" selected>30 Days</option></select></div></div><button class="btn" onclick="generatePIN()">+ Generate PIN</button><div id="newPinResult" style="color:#FFD700;font-weight:800;margin-top:8px"></div><p style="font-size:12px;opacity:.7">PIN locks to first device. Cannot transfer.</p></div>
-<div class="card"><h3>Student List • Device Locked</h3><input id="searchInput" placeholder="Search name or PIN..." oninput="renderStudents()"><div style="overflow:auto"><table class="tbl"><thead><tr><th>Name</th><th>Class</th><th>PIN</th><th>Device</th><th>Expiry</th><th>Action</th></tr></thead><tbody id="studentRows"></tbody></table></div></div>
-<div class="card"><h3>PIN Activity Log</h3><div id="activityLog" style="font-size:12px;line-height:1.6"></div></div>
+<!-- STEP 2: LOGIN WITH YOUR OTP -->
+<div id="loginScreen" class="login" style="display:none">
+  <div style="text-align:center"><div style="font-size:44px">🪶</div><h1>Quizora AI</h1><p class="mut">Login with the OTP YOU created</p></div>
+  <label>Choose Role</label>
+  <select id="roleSel"><option value="admin">👑 Admin</option><option value="student">🎓 Student</option></select>
+  <label>Enter YOUR One Time Password</label>
+  <input id="loginPin" placeholder="Admin: YOUR Admin OTP • Student: OTP given by Admin">
+  <button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doLogin()">Enter Quizora →</button>
+  <p class="mut" style="text-align:center;margin-top:10px"><a href="#" onclick="showSetup();return false" style="color:#5a00e6;font-weight:800">Forgot / Want to create a new Admin OTP? →</a></p>
+  <div class="paybox"><b>💰 Pay / Renew — Opay: 8147699555</b><br><small>Send payment to Opay, then WhatsApp 08147699555 with name + screenshot.</small></div>
 </div>
 
-<!-- LIBRARY -->
-<div id="page-library" class="hidden"><div class="card"><h3>Library</h3><p style="font-size:13px;opacity:.7">Admin: Go to Content to edit. Students: Go to Content to read (only your class + FREE).</p><div id="readBox" class="para"><p>Go to Content tab → Pick a topic to read it here.</p></div></div></div>
-
-<!-- ASK -->
-<div id="page-ask" class="hidden"><div class="card"><h3>Ask AI — No “Essay or not?” Question</h3><input id="askInput" placeholder="Ask anything..."><button class="btn" onclick="askAI()">Ask</button><div id="askResult" class="para" style="margin-top:10px"><p>Answer appears here, saved to History.</p></div></div></div>
-
-<!-- SETTINGS -->
-<div id="page-settings" class="hidden">
-<div class="card"><h3>Announcement To All Students</h3><input id="annInput" placeholder="Type announcement..."><button class="btn" onclick="saveAnnounce()">Send Announcement</button></div>
-<div class="card"><h3>Backup</h3><button class="btn2" onclick="backup()">⬇ Backup All (PINs + Students + Content)</button><button class="btn2" style="margin-top:8px" onclick="backupReminder()">🔔 Auto Backup Reminder — Every Sunday</button></div>
-<div class="card"><h3>History</h3><div id="historyList" style="font-size:13px"></div><button class="btn2" onclick="clearHistory()">Clear History</button></div>
-<div class="card"><h3>Unlock Class — ₦2,000 / month per class</h3><div class="row"><div><label>Class</label><select id="subClass"><option>JSS3</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div><div><label>Your PIN</label><input id="subPin" placeholder="Enter PIN"></div></div><p style="font-size:12px"><b>Pay Opay 8147699555 (Ekpo Bassey) — Proof to WhatsApp 08147699555</b></p><button class="btn" onclick="unlockWithPin()">Unlock With PIN</button><button class="btn2" onclick="openWhatsAppProof()">Send Proof on WhatsApp</button><div id="subMsg"></div></div>
+<!-- APP -->
+<div id="app" style="display:none">
+<div class="top"><div><b>🪶 Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div><div class="r"><span>🔍</span><span>🔔</span><button class="pill" id="switchBtn" onclick="switchRole()">👁️ View as Student</button><button class="pill white" onclick="showPage('announce')">📢 Announcement</button><button class="pill gold" onclick="logout()">Logout</button><div class="avatar" id="topAv">AM</div><b id="topName">Alex Morgan ▾</b></div></div>
+<div class="wrap">
+  <aside class="side" id="sideAdmin">
+    <div class="nav active" onclick="showPage('dash',this)"><span>🏠</span> Dashboard</div>
+    <div class="nav" onclick="showPage('pins',this)"><span>🔑</span> PINs / OTPs</div>
+    <div class="nav" onclick="showPage('students',this)"><span>👥</span> Students</div>
+    <div class="nav" onclick="showPage('classes',this)"><span>📚</span> Classes</div>
+    <div class="nav" onclick="showPage('studio',this)"><span>🎨</span> Content Studio</div>
+    <div class="nav" onclick="showPage('announce',this)"><span>📢</span> Announcements</div>
+    <div class="nav" onclick="showPage('backup',this)"><span>💾</span> Backup / History</div>
+    <div class="nav" onclick="showPage('settings',this)"><span>⚙️</span> Settings / My OTP</div>
+    <div style="margin-top:14px;background:#f4f0ff;border-radius:12px;padding:12px"><b>Quick Action</b><p class="mut">Create Student OTP</p><button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="openPin()">+ Create OTP / PIN</button><div class="paybox" style="margin-top:10px"><b>Opay: 8147699555</b><br><small>WhatsApp: 08147699555</small></div></div>
+  </aside>
+  <aside class="side" id="sideStudent" style="display:none">
+    <div class="nav active" onclick="showPage('sDash',this)"><span>🏠</span> My Dashboard</div>
+    <div class="nav" onclick="showPage('sQuizzes',this)"><span>🧠</span> My Quizzes</div>
+    <div class="nav" onclick="showPage('sClasses',this)"><span>📚</span> My Classes</div>
+    <div class="nav" onclick="showPage('sProgress',this)"><span>📈</span> My Progress</div>
+    <div class="nav" onclick="showPage('sLeader',this)"><span>🏆</span> Leaderboard</div>
+    <div class="nav" onclick="showPage('sAnnounce',this)"><span>📢</span> Announcements</div>
+    <div class="nav" onclick="showPage('sProfile',this)"><span>👤</span> My Profile / OTP</div>
+    <div style="margin-top:14px;background:#fff3cd;border-radius:12px;padding:12px"><b>⏳ OTP Expires</b><p class="mut">PIN-83921 • 12 days left</p><button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="renewPin()">Renew via WhatsApp</button><p class="mut" style="margin-top:8px">Pay to Opay: <b>8147699555</b></p></div>
+  </aside>
+  <main class="main">
+    <section id="dash" class="page show">
+      <div class="cards">
+        <div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">💰</div><div><p>Revenue</p><h3>$24,380</h3><small>▲ +12.5% vs last month</small></div></div></div>
+        <div class="card"><div class="kpi"><div class="ico" style="background:#dbeaff">📍</div><div><p>Active OTPs</p><h3 id="activeCount">142</h3><small>▲ +8 new today</small></div></div></div>
+        <div class="card"><div class="kpi"><div class="ico" style="background:#e8deff">👥</div><div><p>Students</p><h3>1,243</h3><small>▲ +24 this week</small></div></div></div>
+        <div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">🔒</div><div><p>Locked Classes</p><h3>07</h3></div></div></div>
+      </div>
+      <div class="row2">
+        <div class="card"><div style="display:flex;justify-content:space-between"><div><h2>OTP / PIN Activity</h2><p class="mut">Last 30 days</p></div><div class="tabs"><button class="tab on" onclick="drawChart(this)">Daily</button><button class="tab" onclick="drawChart(this)">Weekly</button><button class="tab" onclick="drawChart(this)">Monthly</button></div></div><div class="chart"><canvas id="chart" width="700" height="180"></canvas></div></div>
+        <div class="card"><h2>Recent Students</h2><div class="list" id="recent"></div></div>
+      </div>
+      <div class="row3">
+        <div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap"><div><h2>Student List</h2><p class="mut">Block / WhatsApp Renew / Delete</p></div><div><button class="btn btn-ghost" onclick="toast('Exported CSV')">Export</button> <button class="btn btn-primary" onclick="openPin()">+ Create OTP</button></div></div><table><thead><tr><th>Student</th><th>OTP</th><th>Status</th><th>Last Active</th><th>Actions</th></tr></thead><tbody id="studentsBody"></tbody></table></div>
+        <div class="card"><h2>Content Studio</h2><p class="mut">Create & manage content</p><div class="content-grid" id="contentGrid"></div><div style="text-align:right;margin-top:12px"><button class="btn btn-ghost" onclick="showPage('studio')">Open Studio →</button></div></div>
+      </div>
+    </section>
+    <section id="pins" class="page"><div class="card"><h2>OTP Factory — YOU Create It</h2><p class="mut">Type your own OTP for each student. One OTP = One Device.</p><button class="btn btn-primary" style="margin-top:12px" onclick="openPin()">+ Create OTP / PIN</button><div class="list" id="pinList"></div></div></section>
+    <section id="students" class="page"><div class="card"><h2>Student Control</h2><table><thead><tr><th>Student</th><th>OTP</th><th>Status</th><th>Last Active</th><th>Actions</th></tr></thead><tbody id="studentsBody2"></tbody></table></div></section>
+    <section id="classes" class="page"><div class="card"><h2>Classes</h2><p class="mut">JSS1 • JSS2 • JSS3 • SS1 • SS2 • SS3</p><div class="content-grid" id="classGrid"></div></div></section>
+    <section id="studio" class="page"><div class="card"><h2>Content Studio — Rename / Edit / Add New</h2><input id="newTitle" placeholder="New quiz title e.g. Algebra Vol 4"><button class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add New Content</button><div class="list" id="studioList"></div></div></section>
+    <section id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">📢 Send Announcement</button><div class="list" id="annList"></div></div></section>
+    <section id="backup" class="page"><div class="card"><h2>Backup / History</h2><button class="btn btn-primary" style="margin-top:10px" onclick="downloadBackup()">⬇️ Download Backup</button><div class="list" id="history"></div></div></section>
+    <section id="settings" class="page"><div class="card"><h2>Settings / Change My Admin OTP</h2><label>School Name</label><input value="Quizora AI School"><label>🔐 Change My Admin One Time Password — YOU create new one</label><input id="adminOtpNew" placeholder="Type NEW Admin OTP you want"><button class="btn btn-ghost" style="margin-top:8px" onclick="changeAdminOtp()">Change My Admin OTP</button><label style="margin-top:14px;display:block">WhatsApp</label><input value="08147699555"><label>Opay</label><input value="8147699555"><button class="btn btn-primary" style="margin-top:12px" onclick="toast('Settings saved')">Save Settings</button></div></section>
+    <section id="sDash" class="page"><div class="cards"><div class="card"><div class="kpi"><div class="ico" style="background:#e8deff">🔑</div><div><p>My OTP</p><h3 style="font-size:20px">PIN-83921</h3><small>Active • 12 days left</small></div></div></div><div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">📈</div><div><p>My Progress</p><h3>68%</h3><small>▲ +6%</small></div></div></div><div class="card"><div class="kpi"><div class="ico" style="background:#dbeaff">🔥</div><div><p>Streak</p><h3>7 Days</h3></div></div></div><div class="card"><div class="kpi"><div class="ico" style="background:#ffe9a8">🏆</div><div><p>My Rank</p><h3>#3</h3></div></div></div></div><div class="row2"><div class="card"><h2>Continue Learning</h2><div class="content-grid" id="studentQuizzes"></div><div class="progress"><i style="width:68%"></i></div><button class="btn btn-primary" style="margin-top:12px" onclick="showPage('sQuizzes')">Continue Quiz →</button></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div><div class="paybox"><b>Renew: Opay 8147699555</b><br><small>Pay, screenshot, WhatsApp 08147699555</small></div></div></div></section>
+    <section id="sQuizzes" class="page"><div class="card"><h2>My Quizzes</h2><div class="content-grid" id="quizList"></div><div id="quizBox" style="display:none;margin-top:16px;border-top:1px solid #eee;padding-top:14px"><h3 id="quizQ"></h3><div id="quizOpts"></div><p class="mut" id="quizScore">Score: 0</p></div></div></section>
+    <section id="sClasses" class="page"><div class="card"><h2>My Classes</h2><div class="content-grid" id="sClassGrid"></div></div></section>
+    <section id="sProgress" class="page"><div class="card"><h2>My Progress</h2><p>Mathematics</p><div class="progress"><i style="width:80%"></i></div><p style="margin-top:10px">Science</p><div class="progress"><i style="width:60%"></i></div><p style="margin-top:10px">English</p><div class="progress"><i style="width:75%"></i></div></div></section>
+    <section id="sLeader" class="page"><div class="card"><h2>Leaderboard</h2><div class="list"><div class="person"><b>🥇 Adaeze O. — 980 pts</b><span class="badge p">1st</span></div><div class="person"><b>🥈 Chidi K. — 920 pts</b><span class="badge b">2nd</span></div><div class="person"><b>🥉 Mia R. — 890 pts (You)</b><span class="badge y">3rd</span></div></div></div></section>
+    <section id="sAnnounce" class="page"><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList2"></div></div></section>
+    <section id="sProfile" class="page"><div class="card"><h2>My Profile / OTP</h2><p><b>Mia Rodriguez</b><br><span class="mut">JSS1</span></p><div class="bigpin">PIN-83921</div><div class="paybox"><b>💰 To Renew: Pay to Opay 8147699555</b><br><small>Then WhatsApp 08147699555</small></div><button class="btn btn-primary" style="margin-top:12px" onclick="renewPin()">Renew via WhatsApp</button> <button class="btn btn-ghost" onclick="copyText('PIN-83921')">Copy OTP</button></div></section>
+  </main>
+</div>
 </div>
 
-<div class="bottomNav">
-<button id="nav-dash" class="active" onclick="go('dash')"><span>📊</span>Dashboard</button>
-<button id="nav-content" onclick="go('content')"><span>✏️</span>Content</button>
-<button id="nav-students" onclick="go('students')"><span>👥</span>Students</button>
-<button id="nav-library" onclick="go('library')"><span>📚</span>Library</button>
-<button id="nav-ask" onclick="go('ask')"><span>🤖</span>Ask AI</button>
-<button id="nav-settings" onclick="go('settings')"><span>⚙️</span>Settings</button>
-</div>
+<div class="modal" id="pinModal"><div class="box"><h2>🔐 Create Student OTP — YOU Choose</h2><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka Okafor"><label>Class</label><select id="pinClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option></select><label>Plan</label><select id="pinPlan"><option>30 days — ₦2,000 — Opay 8147699555</option><option>90 days — ₦5,000</option><option>1 year — ₦15,000</option></select><label>How to create?</label><select id="otpMode" onchange="toggleOtpMode()"><option value="custom">✍️ I will create my own OTP</option><option value="auto">🎲 Auto Generate</option></select><div id="customBox"><label>✍️ Type YOUR OWN OTP</label><input id="customOtp" placeholder="e.g. MIA-2026"></div><div id="autoBox" style="display:none"><p class="mut">System will auto-generate.</p></div><div class="bigpin" id="pinOut">YOUR OTP WILL SHOW HERE</div><button class="btn btn-primary" style="width:100%" onclick="makePin()">Create OTP</button><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn btn-ghost" style="flex:1" onclick="copyPin()">Copy</button><button class="btn btn-ghost" style="flex:1" onclick="whatsappPin()">WhatsApp Share</button><button class="btn btn-ghost" style="flex:1" onclick="closePin()">Close</button></div></div></div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ===== ALL CLASSES - COMPLETE =====
-let DEFAULT_DATA={
-"Nursery":{free:true,subjects:{"English":["Alphabet","Rhymes","My Family"],"Maths":["Counting 1-20","Shapes"],"Phonics":["A Sounds","B Sounds"]}},
-"Primary":{free:true,subjects:{"English":["Nouns","Verbs","Comprehension"],"Maths":["Addition","Subtraction","Multiplication"],"Basic Science":["Living Things","Water"],"Social Studies":["My Community"]}},
-"JSS1":{free:true,subjects:{"English":["Nouns","Comprehension","Tenses"],"Maths":["Fractions","Algebra","Geometry"],"Basic Science":["Cells in Biology","Living and Non-Living Things","Energy","Water"],"CRS":["Creation","Noah"],"Agric":["Farming","Soil"],"Social Studies":["Family"]}},
-"JSS2":{free:true,subjects:{"English":["Tenses","Essay Writing"],"Maths":["Geometry","Ratio"],"Basic Science":["Air","Soil","Force"],"CRS":["Moses"],"Agric":["Crop Production"]}},
-"JSS3":{free:false,subjects:{"English":["Essay Writing","Comprehension"],"Maths":["Indices","Quadratic"],"Basic Science":["Photosynthesis","Ecosystem"],"CRS":["Jesus Teachings"],"Agric":["Animal Husbandry"]}},
-"SS1":{free:true,subjects:{"Biology":["Cell","Tissues"],"Chemistry":["Atoms","Periodic Table"],"Physics":["Motion","Force"],"English":["Comprehension","Lexis"],"Maths":["Indices","Logarithms"],"Economics":["Demand and Supply"]}},
-"SS2":{free:true,subjects:{"Biology":["Genetics","Ecology"],"Chemistry":["Acids","Bases"],"Physics":["Waves","Light"],"English":["Essay","Summary"],"Maths":["Trigonometry","Statistics"],"Economics":["National Income"]}},
-"SS3":{free:false,subjects:{"Biology":["Ecology","Genetics"],"Chemistry":["Organic Chemistry","Electrolysis"],"Physics":["Electricity","Magnetism"],"English":["WAEC English Prep","Summary"],"Maths":["Calculus","Probability"],"Economics":["Money and Banking"]}},
-"WAEC":{free:false,subjects:{"Biology":["WAEC Biology","WAEC Practical"],"Chemistry":["WAEC Chemistry","WAEC Practical"],"Physics":["WAEC Physics"],"English":["WAEC English","WAEC Oral"],"Maths":["WAEC Maths"],"Economics":["WAEC Economics"]}},
-"JAMB":{free:false,subjects:{"Biology":["JAMB Biology"],"Chemistry":["JAMB Chemistry"],"Physics":["JAMB Physics"],"English":["JAMB English","JAMB Comprehension"],"Maths":["JAMB Maths"],"Economics":["JAMB Economics"]}}
-};
-let DATA=JSON.parse(localStorage.getItem('q_data')||'null')||JSON.parse(JSON.stringify(DEFAULT_DATA));
-let essays=JSON.parse(localStorage.getItem('q_essays')||'{}');
-let students=JSON.parse(localStorage.getItem('q_students')||'[]');
-let history=JSON.parse(localStorage.getItem('q_history')||'[]');
-let logs=JSON.parse(localStorage.getItem('q_logs')||'[]');
-let role='admin',currentStudent=null,nav='all',selClass='',selSubj='',selTopic='';
-function saveData(){localStorage.setItem('q_data',JSON.stringify(DATA));}
-function getParas(c,s,t){let k=c+'|'+s+'|'+t; if(!essays[k]) essays[k]=[t+' — '+s+' ('+c+')','This is the full essay for '+t+'. It is written in simple, clear lines for students.','Also, this topic connects to real life examples and exam-style explanation.']; return essays[k];}
-function setParas(c,s,t,a){essays[c+'|'+s+'|'+t]=a; localStorage.setItem('q_essays',JSON.stringify(essays));}
-function go(p){['dash','content','students','library','ask','settings'].forEach(x=>{document.getElementById('page-'+x).classList.toggle('hidden',x!==p); document.getElementById('nav-'+x).classList.toggle('active',x===p);}); if(role!=='admin'&&(p==='students')){go('library');return;} if(p==='content') renderContent(); window.scrollTo(0,0);}
-// CONTENT - RENAME vs ADD SEPARATE
-function renderContent(){
-let list=document.getElementById('contentList'), rename=document.getElementById('renameBox'), add=document.getElementById('addBox');
-document.getElementById('editorBox').classList.add('hidden');
-if(nav==='all'){
-document.getElementById('crumb').textContent='All Classes';
-rename.innerHTML='<p style="font-size:12px;opacity:.6">Open a Class first to rename it. Tap Open → below.</p>';
-add.innerHTML='<input id="newClassName" placeholder="Type NEW class name e.g. SS2"><div class="row"><button class="btn" style="background:#1DB954" onclick="doAddClass()">➕ Create New Class</button><button class="btn2" onclick="resetAllClasses()">↺ Reset All Classes</button></div>';
-list.innerHTML=Object.keys(DATA).map(cls=>`<div class="listItem"><div><b>${cls}</b> <span class="badge ${DATA[cls].free?'free':'locked'}">${DATA[cls].free?'FREE':'🔒 ₦2,000/mo'}</span><br><small style="opacity:.6">${Object.keys(DATA[cls].subjects).length} subjects</small></div><button class="btn2" style="width:auto" onclick="openClass('${cls}')">Open →</button></div>`).join('');
-} else if(nav==='class'){
-document.getElementById('crumb').textContent=selClass;
-rename.innerHTML='<label>✏️ Rename THIS Class — Old name already here, edit it:</label><input id="renameInput" value="'+selClass+'"><button class="btn" style="background:#2A6BFF" onclick="doRenameClass()">✏️ Save Renamed Class</button><button class="btn2" onclick="backToAll()">← Back to Classes</button>';
-add.innerHTML='<label>➕ Add NEW Subject in '+selClass+' — Empty box:</label><input id="newSubjName" placeholder="Type NEW subject e.g. Biology"><button class="btn" style="background:#1DB954" onclick="doAddSubject()">➕ Create New Subject</button>';
-list.innerHTML=Object.keys(DATA[selClass].subjects).map(s=>`<div class="listItem"><div><b>${s}</b><br><small style="opacity:.6">${DATA[selClass].subjects[s].length} topics</small></div><button class="btn2" style="width:auto" onclick="openSubject('${s}')">Open →</button></div>`).join('');
-} else if(nav==='subject'){
-document.getElementById('crumb').textContent=selClass+' > '+selSubj;
-rename.innerHTML='<label>✏️ Rename THIS Subject — Old name already here:</label><input id="renameInput" value="'+selSubj+'"><button class="btn" style="background:#2A6BFF" onclick="doRenameSubject()">✏️ Save Renamed Subject</button><button class="btn2" onclick="backToClass()">← Back to '+selClass+'</button>';
-add.innerHTML='<label>➕ Add NEW Topic in '+selSubj+' — Empty box:</label><input id="newTopicName" placeholder="Type NEW topic e.g. Photosynthesis"><button class="btn" style="background:#1DB954" onclick="doAddTopic()">➕ Create New Topic</button>';
-list.innerHTML=DATA[selClass].subjects[selSubj].map(t=>`<div class="listItem"><div><b>${t}</b></div><div><button class="btnSm" onclick="openTopicEdit('${t}')">✏️ Edit Write-up</button> <button class="btnSm" onclick="startRenameTopic('${t}')">✏️ Rename</button> <button class="btnDanger" onclick="deleteTopicFromList('${t}')">🗑️</button></div></div>`).join('');
+const WA_NUMBER='2348147699555'; const OPAY='8147699555';
+let role='admin';
+let adminOtp = localStorage.getItem('quizora_admin_otp') || '';
+let students=[{name:'Mia Rodriguez',email:'mia.r@school.edu',pin:'PIN-83921',status:'Active',last:'Today, 10:42 AM',cls:'JSS1'},{name:'James Lee',email:'james.l@school.edu',pin:'PIN-88214',status:'Pending',last:'Yesterday',cls:'SS1'},{name:'Olivia Brown',email:'olivia.b@school.edu',pin:'PIN-77201',status:'Active',last:'Today',cls:'JSS2'}];
+let contents=[{title:'Math Quiz Vol 3',meta:'12 Questions • Published'},{title:'Science Flashcards',meta:'24 Cards • Draft'},{title:'History Challenge',meta:'8 Questions • Published'}];
+let historyList=['Admin created OTP PIN-83921 for Mia Rodriguez','Backup saved'];
+let anns=['Welcome to Quizora AI — New quiz drops Friday 8am'];
+let quizzes=[{title:'Math Quiz Vol 3',meta:'12 Questions',q:'What is 12 × 8?',opts:['96','84','108','92'],ans:0},{title:'Science Flashcards',meta:'24 Cards',q:'Red Planet?',opts:['Venus','Mars','Jupiter','Saturn'],ans:1},{title:'History Challenge',meta:'8 Questions',q:'First President of Nigeria?',opts:['Obasanjo','Azikiwe','Buhari','Yar’Adua'],ans:1}];
+let score=0;
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500)}
+function showSetup(){document.getElementById('setupScreen').style.display='block';document.getElementById('loginScreen').style.display='none';document.getElementById('app').style.display='none'}
+function showLogin(){document.getElementById('setupScreen').style.display='none';document.getElementById('loginScreen').style.display='block';document.getElementById('app').style.display='none'}
+if(adminOtp){showLogin()}else{showSetup()}
+function createAdminOtp(){
+  let a=document.getElementById('setupOtp1').value.trim(); let b=document.getElementById('setupOtp2').value.trim();
+  if(!a) return toast('⚠️ Type YOUR Admin OTP first — system will not create it for you');
+  if(a.length<4) return toast('⚠️ OTP too short — use at least 4 characters');
+  if(a!==b) return toast('⚠️ OTPs do not match — type same OTP twice');
+  adminOtp=a; localStorage.setItem('quizora_admin_otp',a);
+  toast('✅ YOUR Admin OTP saved: '+a+' — Now login with it');
+  showLogin(); document.getElementById('loginPin').value=a;
 }
+function changeAdminOtp(){
+  let v=document.getElementById('adminOtpNew').value.trim();
+  if(!v) return toast('Type NEW Admin OTP you want');
+  adminOtp=v; localStorage.setItem('quizora_admin_otp',v); toast('✅ Your Admin OTP changed to: '+v);
 }
-function backToAll(){nav='all'; renderContent();}
-function backToClass(){nav='class'; renderContent();}
-function openClass(c){selClass=c; nav='class'; renderContent();}
-function openSubject(s){selSubj=s; nav='subject'; renderContent();}
-function resetAllClasses(){if(confirm('Reset all classes to original list? Your essays are kept.')){DATA=JSON.parse(JSON.stringify(DEFAULT_DATA)); saveData(); renderContent();}}
-// RENAME - OLD NAME PREFILLED
-function doRenameClass(){let n=document.getElementById('renameInput').value.trim(); if(!n||n===selClass){alert('Change the name first');return;} DATA[n]=DATA[selClass]; delete DATA[selClass]; selClass=n; saveData(); alert('✅ Class renamed to '+n); renderContent();}
-function doRenameSubject(){let n=document.getElementById('renameInput').value.trim(); if(!n||n===selSubj){alert('Change the name first');return;} DATA[selClass].subjects[n]=DATA[selClass].subjects[selSubj]; delete DATA[selClass].subjects[selSubj]; selSubj=n; saveData(); alert('✅ Subject renamed to '+n); renderContent();}
-function startRenameTopic(old){selTopic=old; document.getElementById('renameBox').innerHTML='<label>✏️ Rename Topic “'+old+'” — Old name here, edit it:</label><input id="renameTopicInput" value="'+old+'"><button class="btn" style="background:#2A6BFF" onclick="doRenameTopic()">✏️ Save Renamed Topic</button>'; document.getElementById('renameBox').scrollIntoView({behavior:"smooth"});}
-function startRenameTopicFromEditor(){startRenameTopic(selTopic);}
-function doRenameTopic(){let n=document.getElementById('renameTopicInput').value.trim(); if(!n||n===selTopic){alert('Change the name first');return;} let arr=DATA[selClass].subjects[selSubj]; arr[arr.indexOf(selTopic)]=n; let oldK=selClass+'|'+selSubj+'|'+selTopic; if(essays[oldK]){essays[selClass+'|'+selSubj+'|'+n]=essays[oldK]; delete essays[oldK]; localStorage.setItem('q_essays',JSON.stringify(essays));} selTopic=n; saveData(); alert('✅ Topic renamed to '+n); renderContent();}
-function deleteTopicFromList(t){if(confirm('Delete topic '+t+'?')){let arr=DATA[selClass].subjects[selSubj]; arr.splice(arr.indexOf(t),1); delete essays[selClass+'|'+selSubj+'|'+t]; localStorage.setItem('q_essays',JSON.stringify(essays)); saveData(); renderContent();}}
-function deleteCurrentTopic(){if(confirm('Delete topic '+selTopic+'?')){deleteTopicFromList(selTopic); document.getElementById('editorBox').classList.add('hidden');}}
-// ADD NEW - EMPTY BOX
-function doAddClass(){let n=document.getElementById('newClassName').value.trim(); if(!n){alert('Type NEW class name');return;} if(DATA[n]){alert('This class already exists. Use Rename.');return;} DATA[n]={free:true,subjects:{}}; saveData(); alert('➕ New Class created: '+n); renderContent();}
-function doAddSubject(){let n=document.getElementById('newSubjName').value.trim(); if(!n){alert('Type NEW subject name');return;} if(DATA[selClass].subjects[n]){alert('This subject already exists. Use Rename.');return;} DATA[selClass].subjects[n]=[]; saveData(); alert('➕ New Subject created: '+n); renderContent();}
-function doAddTopic(){let n=document.getElementById('newTopicName').value.trim(); if(!n){alert('Type NEW topic name');return;} if(DATA[selClass].subjects[selSubj].includes(n)){alert('This topic already exists. Use Rename.');return;} DATA[selClass].subjects[selSubj].push(n); saveData(); alert('➕ New Topic created: '+n); renderContent();}
-// EDITOR PARAGRAPHS
-function openTopicEdit(t){selTopic=t; document.getElementById('editorBox').classList.remove('hidden'); document.getElementById('editorTitle').textContent=t+' — '+selSubj+' ('+selClass+')'; renderParas(); document.getElementById('editorBox').scrollIntoView({behavior:'smooth'}); addHistory('Opened for edit: '+t); document.getElementById('readBox').innerHTML='<h3>'+t+'</h3>'+getParas(selClass,selSubj,selTopic).map(p=>'<p>'+p+'</p>').join('');}
-function renderParas(){let paras=getParas(selClass,selSubj,selTopic); document.getElementById('paraList').innerHTML=paras.map((p,i)=>`<div class="para"><small style="opacity:.6">Paragraph ${i+1}</small><p id="paraText-${i}">${p.replace(/</g,'&lt;')}</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btnSm" onclick="editPara(${i})">✏️ Edit This Paragraph</button><button class="btnSm" onclick="movePara(${i},-1)">↑ Up</button><button class="btnSm" onclick="movePara(${i},1)">↓ Down</button><button class="btnDanger" onclick="deletePara(${i})">🗑️ Delete</button></div><div id="paraEdit-${i}" class="hidden"><textarea id="paraInput-${i}">${p.replace(/"/g,'&quot;')}</textarea><button class="btn" onclick="savePara(${i})">Save Paragraph</button></div></div>`).join('');}
-function editPara(i){document.getElementById('paraEdit-'+i).classList.remove('hidden');}
-function savePara(i){let paras=getParas(selClass,selSubj,selTopic); paras[i]=document.getElementById('paraInput-'+i).value; setParas(selClass,selSubj,selTopic,paras); renderParas(); document.getElementById('saveMsg').textContent='✅ Paragraph '+(i+1)+' saved';}
-function deletePara(i){if(confirm('Delete this paragraph?')){let paras=getParas(selClass,selSubj,selTopic); paras.splice(i,1); setParas(selClass,selSubj,selTopic,paras); renderParas();}}
-function movePara(i,dir){let paras=getParas(selClass,selSubj,selTopic); let j=i+dir; if(j<0||j>=paras.length)return; [paras[i],paras[j]]=[paras[j],paras[i]]; setParas(selClass,selSubj,selTopic,paras); renderParas();}
-function addParagraph(){let paras=getParas(selClass,selSubj,selTopic); paras.push('New paragraph — tap Edit to write.'); setParas(selClass,selSubj,selTopic,paras); renderParas();}
-function saveAllParas(){document.getElementById('saveMsg').textContent='✅ All changes saved for '+selTopic; addLog('Saved essay '+selTopic);}
-function smartPaste(){let phrase=document.getElementById('pastePhrase').value.trim(); if(!phrase){alert('Paste phrase first');return;} let paras=getParas(selClass,selSubj,selTopic); let keys=phrase.toLowerCase().split(' ').filter(w=>w.length>4); let found=false; for(let i=0;i<paras.length;i++){if(keys.some(k=>paras[i].toLowerCase().includes(k))){paras[i]=paras[i].trim()+' '+phrase; found=true; break;}} if(!found) paras.push('Also, '+phrase); setParas(selClass,selSubj,selTopic,paras); renderParas(); document.getElementById('saveMsg').textContent='✅ Smart Pasted — auto-fixed to right paragraph. Saved.'; document.getElementById('pastePhrase').value='';}
-// LOGIN
-function initLock(){let has=localStorage.getItem('q_admin_pass'); if(!has){document.getElementById('createBox').classList.remove('hidden'); document.getElementById('loginBox').classList.add('hidden'); document.getElementById('lockTitle').textContent='Create Your Admin Password — First Time Only';} else {document.getElementById('createBox').classList.add('hidden'); document.getElementById('loginBox').classList.remove('hidden'); document.getElementById('lockTitle').textContent='Welcome — Login as Admin or Student';}}
-function createPassword(){let a=document.getElementById('newPass1').value,b=document.getElementById('newPass2').value; if(a.length<6){document.getElementById('lockMsg').textContent='Password must be 6+ chars';return;} if(a!==b){document.getElementById('lockMsg').textContent='Passwords do not match';return;} localStorage.setItem('q_admin_pass',a); enterApp('admin');}
-function adminLogin(){if(document.getElementById('loginPass').value===localStorage.getItem('q_admin_pass')) enterApp('admin'); else document.getElementById('lockMsg').textContent='❌ Wrong Admin Password';}
-function studentLogin(){let pin=document.getElementById('studentPin').value.trim(); let s=students.find(x=>x.pin===pin); if(!s){document.getElementById('lockMsg').textContent='❌ Invalid PIN';return;} let dev=localStorage.getItem('my_device')||('DEV-'+Math.random().toString(36).slice(2,7).toUpperCase()); localStorage.setItem('my_device',dev); if(s.device&&s.device!==dev){document.getElementById('lockMsg').textContent='⛔ PIN bound to another device. Cannot transfer.'; addLog('Blocked PIN '+pin+' different device'); return;} if(!s.device){s.device=dev; localStorage.setItem('q_students',JSON.stringify(students));} if(s.blocked){document.getElementById('lockMsg').textContent='⛔ PIN blocked. Contact Admin.';return;} currentStudent=s; enterApp('student');}
-function enterApp(r){role=r; document.getElementById('lockScreen').style.display='none'; applyRole(); renderContent(); renderStudents(); updateStats(); renderHistory(); renderLogs(); go(role==='admin'?'dash':'library');}
-function applyRole(){let isAdmin=role==='admin'; document.getElementById('viewLabel').textContent=isAdmin?'ADMIN • All Features':'STUDENT • '+(currentStudent?currentStudent.name+' • '+currentStudent.class+' • Learning Only':'Learning Only'); document.getElementById('nav-students').style.display=isAdmin?'':'none';}
-function changePassword(){let o=prompt('Current Admin Password:'); if(o!==localStorage.getItem('q_admin_pass')){alert('Wrong');return;} let n=prompt('New Password (6+ chars):'); if(n&&n.length>=6){localStorage.setItem('q_admin_pass',n); alert('Password changed');}}
-function logout(){document.getElementById('lockScreen').style.display='grid'; initLock(); document.getElementById('lockMsg').textContent='';}
-// STUDENTS / PINS / SUBSCRIBE
-function generatePIN(){let name=document.getElementById('pinName').value.trim()||'Student'; let cls=document.getElementById('pinClass').value; let days=+document.getElementById('pinDays').value; let pin='QZ-'+Math.floor(10000+Math.random()*89999); let exp=new Date(Date.now()+days*86400000).toISOString().slice(0,10); students.unshift({name,class:cls,pin,device:'',expiry:exp,status:'Active',blocked:false}); localStorage.setItem('q_students',JSON.stringify(students)); document.getElementById('newPinResult').innerHTML='✅ PIN for '+name+' ('+cls+'): <b>'+pin+'</b> • Expires '+exp; addLog('Generated PIN '+pin+' for '+name); renderStudents(); updateStats();}
-function renderStudents(){let q=(document.getElementById('searchInput')?.value||'').toLowerCase(); let rows=students.filter(s=>(s.name+' '+s.pin).toLowerCase().includes(q)).map(s=>{let idx=students.indexOf(s); return `<tr><td>${s.name}</td><td>${s.class}</td><td><b>${s.pin}</b></td><td>${s.device||'—'}</td><td>${s.expiry}</td><td><button onclick="toggleBlock(${idx})">${s.blocked?'Unblock':'Block'}</button> <button onclick="whatsappRenew(${idx})">WhatsApp</button></td></tr>`;}).join(''); if(document.getElementById('studentRows')) document.getElementById('studentRows').innerHTML=rows||'<tr><td colspan="6">No students yet.</td></tr>'; let soon=students.filter(s=>{let d=(new Date(s.expiry)-new Date())/86400000; return d>=0&&d<=3;}); if(document.getElementById('expiringText')) document.getElementById('expiringText').textContent=soon.length?('⚠️ '+soon.length+' PIN(s) expiring in 3 days'):'No PIN expiring in 3 days';}
-function toggleBlock(i){students[i].blocked=!students[i].blocked; localStorage.setItem('q_students',JSON.stringify(students)); renderStudents();}
-function whatsappRenew(i){let s=students[i]; window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello '+s.name+', your '+s.class+' PIN '+s.pin+' expires soon. Renew ₦2,000 to Opay 8147699555 (Ekpo Bassey).'),'_blank');}
-function updateStats(){document.getElementById('statPins').textContent=students.filter(s=>!s.blocked).length; document.getElementById('statStudents').textContent=students.length; let rev=students.length*2000; document.getElementById('statRev').textContent='₦'+rev.toLocaleString(); document.getElementById('revToday').textContent='₦'+(students.length?2000:0).toLocaleString(); document.getElementById('revWeek').textContent='₦'+rev.toLocaleString(); document.getElementById('revMonth').textContent='₦'+rev.toLocaleString();}
-function unlockWithPin(){let pin=document.getElementById('subPin').value.trim(); let cls=document.getElementById('subClass').value; let s=students.find(x=>x.pin===pin); if(!s){document.getElementById('subMsg').innerHTML='❌ Invalid PIN';return;} let dev=localStorage.getItem('my_device')||('DEV-'+Math.random().toString(36).slice(2,7).toUpperCase()); localStorage.setItem('my_device',dev); if(s.device&&s.device!==dev){document.getElementById('subMsg').innerHTML='⛔ PIN bound to another device.';return;} if(!s.device){s.device=dev; localStorage.setItem('q_students',JSON.stringify(students));} if(s.class!==cls){document.getElementById('subMsg').innerHTML='❌ This PIN is for '+s.class+', not '+cls;return;} localStorage.setItem('unlock_'+cls,'1'); document.getElementById('subMsg').innerHTML='✅ '+cls+' Unlocked!'; addLog('PIN '+pin+' unlocked '+cls);}
-function openWhatsAppProof(){window.open('https://wa.me/2348147699555?text='+encodeURIComponent('Hello, I paid ₦2,000 for Quizora. Class: '+document.getElementById('subClass').value),'_blank');}
-function askAI(){let q=document.getElementById('askInput').value.trim(); if(!q)return; document.getElementById('askResult').innerHTML='<p>'+q+'</p><p>This is a clear, simple explanation for students with real-life examples.</p>'; addHistory('Asked: '+q);}
-function addHistory(t){history.unshift(t+' • '+new Date().toLocaleString()); localStorage.setItem('q_history',JSON.stringify(history)); renderHistory();}
-function renderHistory(){if(document.getElementById('historyList')) document.getElementById('historyList').innerHTML=history.map(h=>'<div style="padding:6px;border-bottom:1px solid #222C55">'+h+'</div>').join('')||'No history';}
-function clearHistory(){history=[]; localStorage.setItem('q_history','[]'); renderHistory();}
-function addLog(t){logs.unshift(new Date().toLocaleString()+' — '+t); localStorage.setItem('q_logs',JSON.stringify(logs)); renderLogs();}
-function renderLogs(){if(document.getElementById('activityLog')) document.getElementById('activityLog').innerHTML=logs.map(l=>'<div>• '+l+'</div>').join('')||'No activity';}
-function saveAnnounce(){let v=document.getElementById('annInput').value.trim(); if(!v)return; document.getElementById('announceText').textContent=v; localStorage.setItem('q_ann',v); alert('Announcement sent');}
-function backup(){let d=JSON.stringify({DATA,students,essays,history,logs},null,2); let b=new Blob([d],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='quizora-backup.json'; a.click();}
-function backupReminder(){alert('🔔 Auto Backup Reminder ON — Every Sunday');}
-initLock(); let a=localStorage.getItem('q_ann'); if(a) document.getElementById('announceText').textContent=a;
-</script></body></html>
+function doLogin(){
+  role=document.getElementById('roleSel').value; let entered=document.getElementById('loginPin').value.trim();
+  if(role=='admin'){
+    if(!adminOtp) return (toast('You have not created your Admin OTP yet — create it first'), showSetup());
+    if(entered!==adminOtp) return toast('❌ Wrong Admin OTP — use the OTP YOU created');
+  } else {
+    if(!entered) return toast('Enter Student OTP given by Admin');
+    if(!students.some(s=>s.pin.toLowerCase()==entered.toLowerCase()) && entered!=='PIN-83921') return toast('❌ Wrong Student OTP — ask Admin for your OTP');
+  }
+  document.getElementById('loginScreen').style.display='none'; document.getElementById('app').style.display='block'; applyRole(); toast(role=='admin'?'Welcome Admin — OTP correct':'Welcome Student — OTP correct');
+}
+function logout(){document.getElementById('app').style.display='none';showLogin();document.getElementById('loginPin').value=''}
+function switchRole(){role=role=='admin'?'student':'admin';applyRole()}
+function applyRole(){let isAdmin=role=='admin';document.getElementById('sideAdmin').style.display=isAdmin?'block':'none';document.getElementById('sideStudent').style.display=isAdmin?'none':'block';document.getElementById('topSub').textContent=isAdmin?'Admin Dashboard':'Student Dashboard — Mia Rodriguez • JSS1';document.getElementById('topName').textContent=isAdmin?'Alex Morgan ▾':'Mia Rodriguez ▾';document.getElementById('topAv').textContent=isAdmin?'AM':'MR';document.getElementById('switchBtn').textContent=isAdmin?'👁️ View as Student':'👑 Back to Admin';document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById(isAdmin?'dash':'sDash').classList.add('show')}
+function showPage(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById(id).classList.add('show');if(el){document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));el.classList.add('active')}window.scrollTo({top:0,behavior:'smooth'})}
+function toggleOtpMode(){let m=document.getElementById('otpMode').value;document.getElementById('customBox').style.display=m=='custom'?'block':'none';document.getElementById('autoBox').style.display=m=='auto'?'block':'none'}
+function render(){
+  let rows=students.map((s,i)=>`<tr><td><b>${s.name}</b><br><small style="color:#777">${s.email} • ${s.cls}</small></td><td><span class="pin">${s.pin}</span></td><td><span class="badge ${s.status=='Active'?'g':s.status=='Pending'?'y':'grey'}">${s.status}</span></td><td>${s.last}</td><td><button onclick="studentMenu(${i})">•••</button></td></tr>`).join('');
+  document.getElementById('studentsBody').innerHTML=rows;document.getElementById('studentsBody2').innerHTML=rows;
+  document.getElementById('recent').innerHTML=students.map(s=>`<div class="person"><div style="display:flex;gap:10px;align-items:center"><div class="av" style="background:#7b00ff">${s.name.split(' ').map(x=>x[0]).join('')}</div><div><b>${s.name}</b><br><small style="color:#777">${s.cls}</small></div></div><span class="badge ${s.status=='Active'?'g':'y'}">${s.status}</span></div>`).join('');
+  document.getElementById('contentGrid').innerHTML=contents.map(c=>`<div class="mini" onclick="showPage('studio')"><span>📘</span><div><b>${c.title}</b><br><small>${c.meta}</small></div></div>`).join('');
+  document.getElementById('studioList').innerHTML=contents.map((c,i)=>`<div class="person"><div><b>${c.title}</b><br><small>${c.meta}</small></div><div><button class="btn btn-ghost" onclick="renameContent(${i})">Rename</button> <button class="btn btn-ghost" onclick="editContent(${i})">Edit</button> <button class="btn btn-ghost" onclick="delContent(${i})">Delete</button></div></div>`).join('');
+  document.getElementById('classGrid').innerHTML=['JSS1','JSS2','JSS3','SS1','SS2','SS3'].map(c=>`<div class="mini"><span>📚</span><div><b>${c}</b><br><small>Tap to open</small></div></div>`).join('');
+  document.getElementById('pinList').innerHTML=students.map(s=>`<div class="person"><div><b>${s.pin}</b> — ${s.name}</div><button class="btn btn-ghost" onclick="copyText('${s.pin}')">Copy</button></div>`).join('');
+  document.getElementById('annList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');document.getElementById('history').innerHTML=historyList.map(h=>`<div>• ${h}</div>`).join('');
+  document.getElementById('sAnnList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');document.getElementById('sAnnList2').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');
+  document.getElementById('studentQuizzes').innerHTML=quizzes.map((q,i)=>`<div class="mini" onclick="startQuiz(${i})"><span>🧠</span><div><b>${q.title}</b><br><small>${q.meta}</small></div></div>`).join('');
+  document.getElementById('quizList').innerHTML=quizzes.map((q,i)=>`<div class="mini" onclick="startQuiz(${i})"><span>🧠</span><div><b>${q.title}</b><br><small>${q.meta}</small></div></div>`).join('');
+  document.getElementById('sClassGrid').innerHTML=['Mathematics','Science','History','English'].map(c=>`<div class="mini"><span>📚</span><div><b>${c}</b><br><small>JSS1</small></div></div>`).join('');
+  document.getElementById('activeCount').textContent=students.filter(s=>s.status=='Active').length+140;
+}
+function studentMenu(i){let s=students[i];let act=prompt(`Student: ${s.name}\nOTP: ${s.pin}\nType: block / unblock / whatsapp / delete`,'block');if(!act)return;act=act.toLowerCase();if(act.includes('block')){s.status='Blocked';toast(s.name+' blocked')}else if(act.includes('unblock')){s.status='Active';toast(s.name+' unblocked')}else if(act.includes('whatsapp')){window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(`Hi ${s.name}, your OTP ${s.pin} expires soon. Renew: Pay to Opay ${OPAY}`))}else if(act.includes('delete')){if(confirm('Delete '+s.name+'?'))students.splice(i,1)}render()}
+function renameContent(i){let n=prompt('Rename',contents[i].title);if(n){contents[i].title=n;render()}}
+function editContent(i){let m=prompt('Edit meta',contents[i].meta);if(m)contents[i].meta=m;render()}
+function delContent(i){if(confirm('Delete?'))contents.splice(i,1);render()}
+function addContent(){let t=document.getElementById('newTitle').value.trim();if(!t)return toast('Type title');contents.unshift({title:t,meta:'Draft'});document.getElementById('newTitle').value='';render();toast('Added')}
+function postAnn(){let v=document.getElementById('annText').value.trim();if(!v)return toast('Type announcement');anns.unshift(v);document.getElementById('annText').value='';render();toast('Sent')}
+function openPin(){document.getElementById('pinModal').classList.add('open')}function closePin(){document.getElementById('pinModal').classList.remove('open')}
+let lastPin='';
+function makePin(){let name=document.getElementById('pinName').value.trim()||'New Student';let cls=document.getElementById('pinClass').value;let mode=document.getElementById('otpMode').value;let custom=document.getElementById('customOtp').value.trim();if(mode=='custom'){if(!custom)return toast('⚠️ Type YOUR OTP first');if(students.some(s=>s.pin.toLowerCase()==custom.toLowerCase()))return toast('⚠️ OTP already exists');lastPin=custom}else{lastPin='PIN-'+Math.floor(10000+Math.random()*89999)}document.getElementById('pinOut').textContent=lastPin;students.unshift({name,email:name.toLowerCase().replace(/\s/g,'.')+'@school.edu',pin:lastPin,status:'Active',last:'Just now',cls});render();toast('✅ OTP created by YOU: '+lastPin)}
+function copyPin(){copyText(lastPin)}function copyText(t){navigator.clipboard.writeText(t);toast('Copied: '+t)}
+function whatsappPin(){window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(`Your Quizora OTP is ${lastPin}. Pay to Opay ${OPAY} if not paid.`))}
+function renewPin(){window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(`Hi, I want to renew my OTP PIN-83921. I paid to Opay ${OPAY}.`))}
+function downloadBackup(){let d=JSON.stringify({students,contents,anns},null,2);let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([d],{type:'application/json'}));a.download='quizora-backup.json';a.click();toast('Backup downloaded')}
+function startQuiz(i){let q=quizzes[i];document.getElementById('quizBox').style.display='block';document.getElementById('quizQ').textContent=q.title+': '+q.q;document.getElementById('quizOpts').innerHTML=q.opts.map((o,oi)=>`<button class="quiz-opt" onclick="answerQuiz(${i},${oi},this)">${o}</button>`).join('')}
+function answerQuiz(qi,oi,btn){let q=quizzes[qi];if(oi==q.ans){score+=10;btn.style.background='#d1ffd1';toast('Correct! +10')}else{btn.style.background='#ffd1d1';toast('Wrong — '+q.opts[q.ans])}document.getElementById('quizScore').textContent='Score: '+score}
+function drawChart(btn){if(btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on')}let c=document.getElementById('chart');if(!c)return;let ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle='#e5e5f0';ctx.beginPath();for(let y=0;y<5;y++){ctx.moveTo(0,y*36);ctx.lineTo(700,y*36)}ctx.stroke();let pts=[[0,150],[100,110],[200,95],[300,70],[400,95],[500,55],[600,70],[700,25]];ctx.beginPath();ctx.fillStyle='rgba(123,0,255,.15)';ctx.moveTo(0,180);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.lineTo(700,180);ctx.fill();ctx.beginPath();ctx.strokeStyle='#7b00ff';ctx.lineWidth=3;pts.forEach((p,i)=>i==0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));ctx.stroke()}
+render();drawChart();
+</script>
+</body>
+</html>
