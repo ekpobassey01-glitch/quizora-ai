@@ -3,252 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quizora AI — Golden Q + Your Photo</title>
+<title>Quizora AI</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,Arial}
 body{background:#d9d6ff;color:#13132b}
 button{cursor:pointer;border:0;font-family:inherit}
 .top{margin:12px;background:linear-gradient(90deg,#7b00ff,#5a00e6 45%,#0066ff);border-radius:14px;padding:12px 16px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.logo{display:flex;align-items:center;gap:10px}
-.qlogo{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500,#FFD700);display:grid;place-items:center;font-size:28px;font-weight:900;color:#5a00e6;box-shadow:0 4px 12px rgba(255,215,0,.6);border:2px solid #fff}
-.qlogo span{font-family:Georgia,serif}
-.top b{font-size:24px}
-.top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.profile-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #FFD700;background:#fff;cursor:pointer}
-.profile-photo.empty{display:grid;place-items:center;font-weight:900;color:#5a00e6;font-size:18px;background:#FFD700}
-.pill{background:rgba(255,255,255,.22);padding:9px 13px;border-radius:999px;font-weight:700;color:#fff}
-.pill.white{background:#fff;color:#5a00e6}.pill.gold{background:#ffd166;color:#3a2400}
+.logo{display:flex;align-items:center;gap:10px}.qlogo{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500,#FFD700);display:grid;place-items:center;font-size:28px;font-weight:900;color:#5a00e6;border:2px solid #fff}
+.top b{font-size:24px}.top-right{display:flex;align-items:center;gap:10px}.profile-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:3px solid #FFD700;background:#FFD700;cursor:pointer}
+.pill{background:rgba(255,255,255,.22);padding:9px 13px;border-radius:999px;font-weight:700;color:#fff}.pill.white{background:#fff;color:#5a00e6}.pill.gold{background:#ffd166;color:#3a2400}
 .wrap{padding:0 12px 90px;max-width:1000px;margin:auto}
-.card{background:#fff;border-radius:14px;padding:16px;margin-top:14px;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.card{background:#fff;border-radius:14px;padding:16px;margin-top:14px}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .mut{color:#777;font-size:13px}h2{font-size:18px}.list{display:grid;gap:10px;margin-top:12px}
-.item{border:1px solid #eee;border-radius:12px;padding:13px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.item:hover{border-color:#7b00ff}.badge{padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px;color:#fff}.g{background:#0bb56a}.grey{background:#999}
 .btn{padding:11px 14px;border-radius:999px;font-weight:800}.btn-primary{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}.btn-ghost{background:#f1f1f5}.btn-red{background:#ffe1e1;color:#b00}
 input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;font-size:15px}
 .page{display:none}.page.show{display:block}
-.bottom{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:10px 0;z-index:20}
-.bottom button{background:none;font-weight:800;font-size:13px;color:#555}.bottom button.on{color:#5a00e6}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;display:none;justify-content:space-around;padding:10px 0;z-index:20}.bottom.show{display:flex}.bottom button{background:none;font-weight:800;font-size:13px;color:#555}.bottom button.on{color:#5a00e6}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;place-items:center;z-index:30}.modal.open{display:grid}.box{background:#fff;width:min(560px,92%);border-radius:16px;padding:20px;max-height:90vh;overflow:auto}
 .bigpin{font-size:22px;text-align:center;padding:14px;background:#f4f0ff;border-radius:12px;margin:12px 0;font-weight:900;color:#5a00e6;word-break:break-all}
 .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;display:none;z-index:40;max-width:92%;text-align:center}
-.login{max-width:440px;margin:30px auto;background:#fff;border-radius:16px;padding:22px}
+.login{max-width:420px;margin:36px auto;background:#fff;border-radius:16px;padding:24px}
+.tabs2{display:flex;background:#f1f1f5;border-radius:999px;padding:4px;margin-top:16px}.tabs2 button{flex:1;padding:11px;border-radius:999px;font-weight:800;background:none}.tabs2 button.on{background:#5a00e6;color:#fff}
 .paybox{background:#fff3cd;border:1px dashed #e9a800;border-radius:12px;padding:12px;margin-top:12px}
-.back{color:#5a00e6;font-weight:800;cursor:pointer}
-.read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;min-height:80px;border:1px solid transparent;border-radius:10px;padding:10px}
-.read.editing{border:1px solid #7b00ff;background:#fbf7ff;outline:none}
-.editbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.note-hint{background:#f4f0ff;border-radius:10px;padding:10px;margin-top:10px;font-size:13px}
-.placed{background:#e6ffed;border:1px solid #0bb56a;border-radius:10px;padding:10px;margin-top:10px;font-size:13px;display:none}
+.read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;min-height:80px;border:1px solid transparent;border-radius:10px;padding:10px}.read.editing{border:1px solid #7b00ff;background:#fbf7ff;outline:none}
+.editbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.note-hint{background:#f4f0ff;border-radius:10px;padding:10px;margin-top:10px;font-size:13px}.placed{background:#e6ffed;border:1px solid #0bb56a;border-radius:10px;padding:10px;margin-top:10px;font-size:13px;display:none}
+.drop{border:1px solid #eee;border-radius:12px;overflow:hidden}.drop-head{padding:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#fff}.drop-body{display:none;padding:0 12px 12px;background:#fcfcff}.drop-body.open{display:block}
+.drop-sub{border:1px solid #eee;border-radius:10px;margin-top:8px;overflow:hidden;background:#fff}.drop-sub-head{padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.drop-sub-body{display:none;padding:0 10px 10px}.drop-sub-body.open{display:block}
+.topic-item{border:1px solid #eee;border-radius:10px;padding:12px;margin-top:8px;cursor:pointer;background:#fff}
+.lock-badge{background:#e9a800;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}.free-badge{background:#0bb56a;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
 @media(min-width:700px){.cards{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
 
+<!-- CLEAN FRONTPAGE -->
 <div id="loginScreen" class="login">
-  <!-- GOLDEN Q LOGO - NOT FEATHER -->
-  <div style="text-align:center"><div class="qlogo" style="margin:0 auto;width:64px;height:64px;font-size:42px"><span>Q</span></div><h1 style="margin-top:8px">Quizora AI</h1><p class="mut">Learn • Read • Grow</p></div>
-  <label style="margin-top:14px;display:block">I am a</label><select id="roleSel"><option value="admin">Admin</option><option value="student">Student</option></select>
-  <label style="margin-top:10px;display:block">Enter One Time Password</label><input id="loginPin" type="password" placeholder="Enter your OTP">
-  <button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doLogin()">Enter Quizora →</button>
-  <div class="paybox"><b>💰 Renew / Pay — Opay: 8147699555</b><br><small>Pay to Opay, then WhatsApp 08147699555 with name + screenshot.</small></div>
-  <p class="mut" style="text-align:center;margin-top:12px">First time Admin? Use OTP: <b>ADMIN-SETUP</b> once, then change it inside Settings.</p>
+  <div style="text-align:center"><div class="qlogo" style="margin:0 auto;width:64px;height:64px;font-size:42px"><span>Q</span></div><h1 style="margin-top:8px">Quizora AI</h1></div>
+  <div class="tabs2"><button id="tabAdmin" class="on" onclick="setLoginTab('admin')">Admin</button><button id="tabStudent" onclick="setLoginTab('student')">Student</button></div>
+
+  <!-- ADMIN -->
+  <div id="adminLoginBox"><label style="margin-top:16px;display:block">Admin Username</label><input id="adminUser" placeholder="Admin Username"><label style="margin-top:10px;display:block">Password</label><input id="adminPass" type="password" placeholder="Password"><p class="mut" id="adminHint" style="margin-top:8px">First time? Type a password you want — it will become your password.</p><button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" id="adminLoginBtn" onclick="doAdminLogin()">Enter →</button></div>
+
+  <!-- STUDENT - THEY CREATE THEIR OWN USERNAME + PASSWORD -->
+  <div id="studentLoginBox" style="display:none">
+    <div class="tabs2" style="margin-top:12px"><button id="stuLoginTab" class="on" onclick="setStudentMode('login')">Login</button><button id="stuCreateTab" onclick="setStudentMode('create')">Create My Account</button></div>
+    <!-- LOGIN -->
+    <div id="stuLoginForm"><label style="margin-top:14px;display:block">Student Username</label><input id="studentUser" placeholder="Your Username"><label style="margin-top:10px;display:block">Password</label><input id="studentPass" type="password" placeholder="Your Password"><button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentLogin()">Login →</button><p class="mut" style="text-align:center;margin-top:8px">No account yet? Tap <b>Create My Account</b> above.</p></div>
+    <!-- CREATE ACCOUNT - STUDENT CREATES IT, NOT ADMIN -->
+    <div id="stuCreateForm" style="display:none"><label style="margin-top:14px;display:block">Choose Your Username</label><input id="newStuUser" placeholder="e.g. Chiamaka123"><label style="margin-top:10px;display:block">Create Your Password</label><input id="newStuPass" type="password" placeholder="Create a password you will remember"><label style="margin-top:10px;display:block">Confirm Password</label><input id="newStuPass2" type="password" placeholder="Type it again"><label style="margin-top:10px;display:block">Your Class</label><select id="newStuClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select><button class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentCreate()">Create My Account & Enter →</button><p class="mut" style="text-align:center;margin-top:8px">You create it. Admin does NOT give you a password.</p></div>
+  </div>
 </div>
 
 <div id="app" style="display:none">
-<div class="top">
-  <div class="logo"><div class="qlogo"><span>Q</span></div><div><b>Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div></div>
-  <div class="top-right">
-    <button class="pill white" onclick="showPage('announce')">📢 Announcement</button>
-    <button class="pill gold" onclick="logout()">Logout</button>
-    <!-- YOUR PHOTO TOP RIGHT - ADMIN + STUDENT -->
-    <div style="text-align:center"><img id="topPhoto" class="profile-photo empty" src="" alt="You" onclick="document.getElementById('photoInput').click()" title="Tap to change your photo"><div style="font-size:11px;font-weight:700" id="topPhotoLabel">Tap to add photo</div></div>
-    <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="uploadPhoto(event)">
-  </div>
-</div>
-
+<div class="top"><div class="logo"><div class="qlogo"><span>Q</span></div><div><b>Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div></div><div class="top-right"><button class="pill white" onclick="showPage('announce')">📢 Announcement</button><button class="pill gold" onclick="logout()">Logout</button><img id="topPhoto" class="profile-photo" src="" onclick="document.getElementById('photoInput').click()"><input type="file" id="photoInput" accept="image/*" style="display:none" onchange="uploadPhoto(event)"></div></div>
 <div class="wrap">
 <div id="aDash" class="page show">
-  <div class="cards"><div class="card"><p class="mut">Revenue</p><h3 id="revText">₦0</h3></div><div class="card"><p class="mut">Active OTPs</p><h3 id="activeCount">0</h3></div><div class="card"><p class="mut">Students</p><h3 id="stuCount">0</h3></div><div class="card"><p class="mut">Classes</p><h3 id="classCount">0</h3></div></div>
-  <div class="card"><h2>Quick Actions</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn btn-primary" onclick="openPin()">+ Create Student OTP</button><button class="btn btn-ghost" onclick="showPage('classes')">Open Classes →</button><button class="btn btn-ghost" onclick="showPage('studio')">Content Studio →</button></div></div>
-  <div class="card"><h2>Students</h2><div class="list" id="studentsList"></div></div>
-  <div class="card"><h2>Classes — Tap to see Subjects</h2><div class="list" id="classListA"></div></div>
+  <div class="cards"><div class="card"><p class="mut">Revenue</p><h3 id="revText">₦0</h3><small class="mut">₦2,000 x locked subscriptions</small></div><div class="card"><p class="mut">Students</p><h3 id="stuCount">0</h3><small class="mut">Students who created their own account</small></div><div class="card"><p class="mut">Locked</p><h3>4</h3><small class="mut">JSS3 • SS3 • WAEC • JAMB</small></div><div class="card"><p class="mut">Free</p><h3>4</h3><small class="mut">JSS1 • JSS2 • SS1 • SS2</small></div></div>
+  <div class="card"><h2>Quick Actions</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn btn-ghost" onclick="showPage('aStudents')">View Students →</button><button class="btn btn-ghost" onclick="showPage('classes')">Open Classes →</button><button class="btn btn-ghost" onclick="showPage('studio')">Content Studio →</button></div><p class="mut" style="margin-top:8px">Admin does NOT create student passwords. Students create their own on login page.</p></div>
+  <div class="card"><h2>Students — Tap ••• to Unlock Locked Class / Reset Device</h2><div class="list" id="studentsList"></div></div>
+  <div class="card"><h2>Classes — Dropdown</h2><p class="mut">Tap Class ▼ → Subjects ▼ → Topics → Read</p><div class="list" id="classListA"></div></div>
+  <div class="card"><h2>Payment — Admin Only</h2><div class="paybox"><b>Opay: 8147699555</b> • WhatsApp: 08147699555<br><small>Locked: ₦2,000 per section / month</small></div></div>
 </div>
-<div id="aStudents" class="page"><div class="card"><h2>Students</h2><button class="btn btn-primary" style="margin-top:10px" onclick="openPin()">+ Create Student OTP</button><div class="list" id="studentsList2"></div></div></div>
+<div id="aStudents" class="page"><div class="card"><h2>Students</h2><p class="mut">These students created their own Username + Password. You cannot see their password — you only unlock classes, block, or reset device.</p><div class="list" id="studentsList2"></div></div></div>
 
-<div id="classes" class="page">
-  <div class="card"><h2>Classes</h2><p class="mut">Tap Class → Subject → Topic → Read. Admin can Add / Rename / Delete.</p><div class="list" id="classList"></div>
-    <div id="adminClassTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newClassName" placeholder="New Class e.g. JSS1"><button class="btn btn-primary" style="margin-top:8px" onclick="addClass()">+ Add New Class</button></div></div>
-  <div class="card" id="subjectBox" style="display:none"><p class="back" onclick="backToClasses()">← Back to Classes</p><h2 id="subjectTitle" style="margin-top:8px"></h2><div class="list" id="subjectList"></div>
-    <div id="adminSubjectTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newSubjectName" placeholder="New Subject e.g. Mathematics"><button class="btn btn-primary" style="margin-top:8px" onclick="addSubjectFromView()">+ Add Subject</button><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-ghost" onclick="renameCurrentClass()">Rename Class</button><button class="btn btn-red" onclick="deleteCurrentClass()">Delete Class</button></div></div></div>
-  <div class="card" id="topicBox" style="display:none"><p class="back" onclick="backToSubjects()">← Back to Subjects</p><h2 id="topicTitle" style="margin-top:8px"></h2><div class="list" id="topicList"></div>
-    <div id="adminTopicTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newTopicTitle" placeholder="New Topic"><textarea id="newTopicNote" rows="3" placeholder="Write note..."></textarea><button class="btn btn-primary" style="margin-top:8px" onclick="addTopicFromView()">+ Add Topic</button><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-ghost" onclick="renameCurrentSubject()">Rename Subject</button><button class="btn btn-red" onclick="deleteCurrentSubject()">Delete Subject</button></div></div></div>
-  <div class="card" id="readBox" style="display:none"><p class="back" onclick="backToTopics()">← Back to Topics</p><h2 id="readTitle" style="margin-top:8px"></h2>
-    <div class="read" id="readText" contenteditable="false"></div>
-    <div class="note-hint">🧠 <b>Smart Placement ON:</b> Added phrase will find where it makes sense — beginning, after example, after related sentence, or end if conclusion. Not just to the end.</div>
-    <div class="placed" id="placedInfo"></div><div class="editbar" id="readActions"></div>
-    <div id="addPhraseBox" style="display:none;margin-top:12px"><label><b>Add a phrase / lines</b> — Auto-place where it makes sense</label><textarea id="addPhraseInput" rows="3" placeholder="Type phrase e.g. For example, 1/2 of 10 is 5"></textarea><label>Or force placement (optional)</label><select id="forcePlace"><option value="auto">🤖 Auto — Let system decide</option><option value="start">⬆️ Force: At Beginning</option><option value="end">⬇️ Force: At End</option><option value="after-example">📌 Force: After Example</option></select><button class="btn btn-primary" style="margin-top:8px" onclick="addPhraseSmart()">+ Add Smartly & Save</button></div>
-  </div>
-</div>
+<div id="classes" class="page"><div class="card"><h2>Classes — Dropdown</h2><p class="mut">Tap Class ▼ to open Subjects. Tap Subject ▼ to open Topics.</p><div class="list" id="classList"></div><div id="adminClassTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newClassName" placeholder="New Class"><button class="btn btn-primary" style="margin-top:8px" onclick="addClass()">+ Add New Class</button></div></div></div>
 
-<div id="studio" class="page"><div class="card"><h2>Content Studio — Manage Everything</h2>
-<label>Class</label><select id="stClass"></select><label>Subject</label><input id="stSubject" placeholder="e.g. Mathematics"><label>Topic Title</label><input id="stTopic" placeholder="e.g. Fractions"><label>Note / Lesson</label><textarea id="stNote" rows="5" placeholder="Write lesson..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add This Topic</button>
-<div style="margin-top:16px;border-top:1px solid #eee;padding-top:12px"><h3>Manage Classes</h3><input id="studioNewClass" placeholder="New Class name"><button class="btn btn-ghost" style="margin-top:8px" onclick="addClassFromStudio()">+ Add Class</button><div class="list" id="studioClassList"></div></div>
-<div style="margin-top:16px"><h3>All Topics — Edit / Delete</h3><div class="list" id="studioList"></div></div></div></div>
-<div id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">📢 Send Announcement</button><div class="list" id="annList"></div></div></div>
+<div id="studio" class="page"><div class="card"><h2>Content Studio</h2><label>Class</label><select id="stClass"></select><label>Subject</label><input id="stSubject" placeholder="e.g. Mathematics"><label>Topic Title</label><input id="stTopic" placeholder="e.g. Fractions"><label>Note</label><textarea id="stNote" rows="5" placeholder="Write lesson..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add This Topic</button><div style="margin-top:16px;border-top:1px solid #eee;padding-top:12px"><h3>Manage Classes</h3><input id="studioNewClass" placeholder="New Class"><button class="btn btn-ghost" style="margin-top:8px" onclick="addClassFromStudio()">+ Add Class</button><div class="list" id="studioClassList"></div></div><div style="margin-top:16px"><h3>All Topics</h3><div class="list" id="studioList"></div></div></div></div>
+<div id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">📢 Send</button><div class="list" id="annList"></div></div></div>
 <div id="backup" class="page"><div class="card"><h2>Backup / History</h2><button class="btn btn-primary" style="margin-top:10px" onclick="downloadBackup()">⬇️ Download Backup</button><div class="list" id="history"></div></div></div>
-<div id="settings" class="page"><div class="card"><h2>Settings — Admin Only</h2>
-<!-- YOUR PHOTO ALSO IN SETTINGS -->
-<div style="text-align:center"><img id="settingsPhoto" class="profile-photo" style="width:90px;height:90px" src="" onclick="document.getElementById('photoInput').click()"><br><button class="btn btn-ghost" style="margin-top:8px" onclick="document.getElementById('photoInput').click()">📷 Change My Photo</button><p class="mut">This photo shows at top right of Admin + Student dashboard</p></div>
-<label>School Name</label><input value="Quizora AI"><label>🔐 Change MY Admin OTP</label><input id="newAdminOtp" type="password" placeholder="Type NEW Admin OTP"><input id="newAdminOtp2" type="password" placeholder="Confirm NEW Admin OTP"><button class="btn btn-primary" style="margin-top:10px" onclick="changeAdminOtp()">Save My New Admin OTP</button><label style="margin-top:14px;display:block">WhatsApp</label><input value="08147699555"><label>Opay</label><input value="8147699555"></div></div>
-<div id="sDash" class="page"><div class="cards"><div class="card"><p class="mut">My OTP</p><h3 id="myOtpText" style="font-size:18px">—</h3></div><div class="card"><p class="mut">My Class</p><h3 id="myClassText">—</h3></div></div><div class="card"><h2>My Classes — Tap to Read</h2><div class="list" id="classListS"></div></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div></div><div class="card"><h2>Renew</h2><div class="paybox"><b>Pay to Opay: 8147699555</b><br><small>Then WhatsApp 08147699555</small></div><button class="btn btn-primary" style="margin-top:10px" onclick="renewPin()">Renew via WhatsApp</button></div></div>
-<div id="sClasses" class="page"><div class="card"><h2>My Classes</h2><div class="list" id="classListS2"></div></div></div>
-<div id="sProfile" class="page"><div class="card"><h2>My Profile</h2><div style="text-align:center"><img id="sProfilePhoto" class="profile-photo" style="width:90px;height:90px" src=""><p id="sProfileText"></p></div><div class="bigpin" id="sProfileOtp"></div><button class="btn btn-primary" onclick="renewPin()">Renew via WhatsApp</button></div></div>
+<div id="settings" class="page"><div class="card"><h2>Settings — Admin Only</h2><div style="text-align:center"><img id="settingsPhoto" class="profile-photo" style="width:90px;height:90px" src="" onclick="document.getElementById('photoInput').click()"><br><button class="btn btn-ghost" style="margin-top:8px" onclick="document.getElementById('photoInput').click()">📷 Change My Photo</button></div><label>Admin Username</label><input id="settingsAdminUser" value=""><label>🔐 Change MY Admin Password</label><input id="newAdminOtp" type="password" placeholder="New Password"><input id="newAdminOtp2" type="password" placeholder="Confirm"><button class="btn btn-primary" style="margin-top:10px" onclick="changeAdminOtp()">Save My New Password</button><label style="margin-top:14px;display:block">WhatsApp</label><input value="08147699555"><label>Opay</label><input value="8147699555"><div class="paybox"><b>Lock Rule:</b> FREE = JSS1, JSS2, SS1, SS2<br>LOCKED = JSS3, SS3, WAEC, JAMB — ₦2,000 per section / month</div></div></div>
+
+<div id="sDash" class="page"><div class="cards"><div class="card"><p class="mut">My Username</p><h3 id="myOtpText" style="font-size:18px">—</h3></div><div class="card"><p class="mut">My Subscriptions</p><h3 id="mySubsText" style="font-size:14px">Free Classes Only</h3></div></div><div class="card"><h2>My Classes — Dropdown</h2><p class="mut">🟢 Free: JSS1, JSS2, SS1, SS2 • 🔒 Locked: JSS3, SS3, WAEC, JAMB — ₦2,000 / section / month</p><div class="list" id="classListS"></div></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div></div><div class="card"><h2>Subscribe to Locked Class</h2><div class="paybox"><b>Pay ₦2,000 per locked section to Opay: 8147699555</b><br><small>Then WhatsApp 08147699555 with your Username + which class you paid for.</small></div><button class="btn btn-primary" style="margin-top:10px" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
+<div id="sClasses" class="page"><div class="card"><h2>My Classes — Dropdown</h2><div class="list" id="classListS2"></div></div></div>
+<div id="sProfile" class="page"><div class="card"><h2>My Profile</h2><div style="text-align:center"><img id="sProfilePhoto" class="profile-photo" style="width:90px;height:90px" src=""><p id="sProfileText"></p></div><div class="bigpin" id="sProfileOtp"></div><p class="mut" id="sProfileSubs"></p><button class="btn btn-primary" onclick="renewPin()">Subscribe / Renew via WhatsApp</button></div></div>
 </div>
 </div>
 
 <div class="bottom" id="navAdmin"><button class="on" onclick="navTo('aDash',this)">🏠<br>Dashboard</button><button onclick="navTo('aStudents',this)">👥<br>Students</button><button onclick="navTo('classes',this)">📚<br>Classes</button><button onclick="navTo('studio',this)">🎨<br>Studio</button><button onclick="navTo('settings',this)">⚙️<br>Settings</button></div>
 <div class="bottom" id="navStudent" style="display:none"><button class="on" onclick="navTo('sDash',this)">🏠<br>Home</button><button onclick="navTo('sClasses',this)">📚<br>Classes</button><button onclick="navTo('announce',this)">📢<br>Announce</button><button onclick="navTo('sProfile',this)">👤<br>Profile</button></div>
-<div class="modal" id="pinModal"><div class="box"><h2>🔐 Create Student OTP</h2><label>Student Name</label><input id="pinName" placeholder="e.g. Chiamaka Okafor"><label>Class</label><select id="pinClass"></select><label>✍️ Type OTP YOU Created</label><input id="customOtp" placeholder="e.g. CHIA-2026"><div class="bigpin" id="pinOut">YOUR OTP WILL SHOW HERE</div><button class="btn btn-primary" style="width:100%" onclick="makePin()">Create OTP</button><div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-ghost" style="flex:1" onclick="copyPin()">Copy</button><button class="btn btn-ghost" style="flex:1" onclick="whatsappPin()">WhatsApp</button><button class="btn btn-ghost" style="flex:1" onclick="closePin()">Close</button></div></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 const WA='2348147699555', OPAY='8147699555';
-let role='admin'; let currentStudent=null;
-let adminOtp = localStorage.getItem('quizora_admin_otp') || 'ADMIN-SETUP';
+const FREE_CLASSES=['JSS1','JSS2','SS1','SS2'];
+const LOCKED_CLASSES=['JSS3','SS3','WAEC','JAMB'];
+const PRICE=2000;
+let role='admin'; let currentStudent=null; let loginTab='admin'; let studentMode='login';
+let adminData = JSON.parse(localStorage.getItem('quizora_admin_data')||'null') || null;
 let adminPhoto = localStorage.getItem('quizora_admin_photo') || '';
 let studentPhoto = localStorage.getItem('quizora_student_photo') || '';
+// Students now created by THEMSELVES: {name, cls, pin (their own password), status, subs, deviceId}
 let students = JSON.parse(localStorage.getItem('quizora_students')||'[]');
-let anns = JSON.parse(localStorage.getItem('quizora_anns')||'["Welcome to Quizora AI — Tap Classes to read your lessons."]');
+let anns = JSON.parse(localStorage.getItem('quizora_anns')||'["Welcome to Quizora AI — Free: JSS1, JSS2, SS1, SS2. Locked: JSS3, SS3, WAEC, JAMB — N2,000 per section per month."]');
 let historyList = JSON.parse(localStorage.getItem('quizora_hist')||'[]');
 let content = JSON.parse(localStorage.getItem('quizora_content')||'null') || {
  JSS1:{'Mathematics':[{'title':'Fractions','note':'A fraction is a part of a whole.\n\nExample: 1/2 means 1 out of 2 equal parts.\n\nTo add fractions with the same denominator, add the numerators and keep the denominator.\n\nIn conclusion, fractions help us share things equally.'}]},
  JSS2:{'Mathematics':[{'title':'Algebra Basics','note':'Algebra uses letters to stand for numbers.\n\nExample: x + 3 = 7, so x = 4.'}]},
- JSS3:{'Mathematics':[{'title':'Indices','note':'Indices show repeated multiplication.\n\nExample: 2 x 2 x 2 = 2^3 = 8.'}]},
+ JSS3:{'Mathematics':[{'title':'BECE Prep — Indices','note':'Indices show repeated multiplication.\n\nExample: 2 x 2 x 2 = 2^3 = 8.'}]},
  SS1:{'Mathematics':[{'title':'Quadratic Equations','note':'A quadratic equation has x squared.\n\nExample: x^2 + 3x + 2 = 0'}]},
  SS2:{'English':[{'title':'Comprehension','note':'Read the passage carefully, then answer the questions in your own words.'}]},
- SS3:{'Mathematics':[{'title':'Revision','note':'Revise all topics. Practise past questions daily.'}]}
+ SS3:{'Mathematics':[{'title':'WAEC Prep — Revision','note':'Revise all topics. Practise past questions daily.'}]},
+ WAEC:{'Mathematics':[{'title':'WAEC — Past Questions','note':'WAEC Mathematics: Practise past questions. Show all workings.\n\nExample: Solve 2x + 5 = 15.'}],'English':[{'title':'WAEC — Oral English','note':'Oral English: Stress, intonation and vowel sounds.'}]},
+ JAMB:{'Mathematics':[{'title':'JAMB — CBT Practice','note':'JAMB CBT: 40 questions, time management is key.'}],'English':[{'title':'JAMB — Use of English','note':'Use of English: Comprehension, lexis, oral English.'}]}
 };
 let curClass='', curSubject='', curTopicIdx=-1, isEditing=false;
+let openClassName='', openSubjectName='';
+let myDeviceId = localStorage.getItem('quizora_device_id') || ('DEV-'+Math.random().toString(36).slice(2,10).toUpperCase());
+localStorage.setItem('quizora_device_id',myDeviceId);
 function save(){localStorage.setItem('quizora_students',JSON.stringify(students));localStorage.setItem('quizora_anns',JSON.stringify(anns));localStorage.setItem('quizora_hist',JSON.stringify(historyList));localStorage.setItem('quizora_content',JSON.stringify(content));}
-function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',3200)}
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));let el=document.getElementById(id);if(el)el.classList.add('show');window.scrollTo({top:0,behavior:'smooth'});if(id=='classes')renderClasses()}
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',3400)}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));let el=document.getElementById(id);if(el)el.classList.add('show');window.scrollTo({top:0,behavior:'smooth'});if(id=='classes'||id=='sDash'||id=='sClasses')renderClasses()}
 function navTo(id,btn){document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');showPage(id)}
-
-/* ===== YOUR PHOTO TOP RIGHT ===== */
-function updatePhotos(){
-  let top=document.getElementById('topPhoto');
-  let settings=document.getElementById('settingsPhoto');
-  let sProf=document.getElementById('sProfilePhoto');
-  let photo = role=='admin' ? adminPhoto : studentPhoto;
-  // Admin sees his photo, Student sees his own photo. If no photo yet, show Q / initial.
-  if(photo){ top.src=photo; top.classList.remove('empty'); top.alt='Your Photo'; document.getElementById('topPhotoLabel').textContent=role=='admin'?'Your Photo':'Student Photo';
-    if(settings) settings.src=photo;
-    if(sProf) sProf.src=photo;
-  } else {
-    top.src=''; top.classList.add('empty'); top.alt='Tap to add photo';
-    // Show golden Q as placeholder in top circle via text? Use background - keep empty style
-    if(settings) settings.src='';
-    if(sProf) sProf.src='';
-  }
+function setLoginTab(t){ loginTab=t; document.getElementById('tabAdmin').classList.toggle('on',t=='admin'); document.getElementById('tabStudent').classList.toggle('on',t=='student'); document.getElementById('adminLoginBox').style.display=t=='admin'?'block':'none'; document.getElementById('studentLoginBox').style.display=t=='student'?'block':'none'; updateAdminHint(); }
+function setStudentMode(m){ studentMode=m; document.getElementById('stuLoginTab').classList.toggle('on',m=='login'); document.getElementById('stuCreateTab').classList.toggle('on',m=='create'); document.getElementById('stuLoginForm').style.display=m=='login'?'block':'none'; document.getElementById('stuCreateForm').style.display=m=='create'?'block':'none'; }
+function updateAdminHint(){ let hint=document.getElementById('adminHint'); let btn=document.getElementById('adminLoginBtn'); if(!adminData){ hint.textContent='First time? Type a password you want — it will become your password.'; btn.textContent='Create My Password & Enter →'; } else { hint.textContent='Welcome back. Enter the password you already created.'; btn.textContent='Login →'; } let u=document.getElementById('settingsAdminUser'); if(u && adminData) u.value=adminData.user; }
+function enterApp(){ document.getElementById('loginScreen').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('navAdmin').classList.toggle('show',role=='admin'); if(role!='admin'){ document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='flex'; } else { document.getElementById('navStudent').style.display='none'; } document.getElementById('topSub').textContent=role=='admin'?'Admin Dashboard — You':('Student Dashboard — '+(currentStudent?currentStudent.name:'Student')); updatePhotos(); showPage(role=='admin'?'aDash':'sDash'); render(); }
+function doAdminLogin(){ let user=document.getElementById('adminUser').value.trim(); let pass=document.getElementById('adminPass').value.trim(); if(!user) return toast('Enter Admin Username'); if(!pass) return toast('Enter Password'); if(!adminData){ adminData={user:user,pass:pass}; localStorage.setItem('quizora_admin_data',JSON.stringify(adminData)); role='admin'; toast('✅ Your Admin password created.'); enterApp(); updateAdminHint(); return; } if(user.toLowerCase()!==adminData.user.toLowerCase()) return toast('❌ Wrong Admin Username'); if(pass!==adminData.pass) return toast('❌ Wrong Password'); role='admin'; enterApp(); }
+/* STUDENT CREATES OWN ACCOUNT - ADMIN DOES NOT GIVE PASSWORD */
+function doStudentCreate(){
+  let user=document.getElementById('newStuUser').value.trim(); let pass=document.getElementById('newStuPass').value.trim(); let pass2=document.getElementById('newStuPass2').value.trim(); let cls=document.getElementById('newStuClass').value;
+  if(!user) return toast('Choose a Username'); if(user.length<3) return toast('Username too short'); if(!pass) return toast('Create a Password'); if(pass.length<4) return toast('Password too short — use 4+ characters'); if(pass!==pass2) return toast('Passwords do not match');
+  if(students.some(s=>s.name.toLowerCase()==user.toLowerCase())) return toast('❌ That Username already exists — choose another one');
+  let newStu={name:user, cls:cls, pin:pass, status:'Active', subs:[], deviceId:myDeviceId};
+  students.unshift(newStu); historyList.unshift('New student created own account: '+user+' ('+cls+')'); save();
+  currentStudent=newStu; role='student'; toast('✅ Account created! Welcome '+user+'. Your password is locked to this device.');
+  enterApp();
 }
-function uploadPhoto(e){
-  let file=e.target.files[0]; if(!file) return;
-  let reader=new FileReader();
-  reader.onload=function(){ let data=reader.result;
-    if(role=='admin'){ adminPhoto=data; localStorage.setItem('quizora_admin_photo',data); }
-    else { studentPhoto=data; localStorage.setItem('quizora_student_photo',data); }
-    updatePhotos(); toast('✅ Your photo saved — now shows at top right');
-  };
-  reader.readAsDataURL(file);
+function doStudentLogin(){
+  let user=document.getElementById('studentUser').value.trim(); let pass=document.getElementById('studentPass').value.trim();
+  if(!user) return toast('Enter Your Username'); if(!pass) return toast('Enter Your Password');
+  let s=students.find(x=>x.name.toLowerCase()==user.toLowerCase() && x.pin==pass);
+  if(!s) return toast('❌ Wrong Username or Password. If you have no account, tap Create My Account.');
+  if(s.status=='Blocked') return toast('❌ Your account is Blocked. Contact Admin.');
+  if(!s.deviceId){ s.deviceId=myDeviceId; save(); }
+  else if(s.deviceId!==myDeviceId){ return toast('❌ This account is locked to another device. It is NOT transferable. Ask Admin to Reset Device.'); }
+  currentStudent=s; role='student'; enterApp();
 }
-function doLogin(){ role=document.getElementById('roleSel').value; let entered=document.getElementById('loginPin').value.trim(); if(!entered) return toast('Enter your OTP'); if(role=='admin'){ if(entered!==adminOtp) return toast('❌ Wrong Admin OTP'); } else { let s=students.find(x=>x.pin.toLowerCase()==entered.toLowerCase()); if(!s) return toast('❌ Wrong Student OTP'); currentStudent=s; } document.getElementById('loginScreen').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('navAdmin').style.display=role=='admin'?'flex':'none'; document.getElementById('navStudent').style.display=role=='admin'?'none':'flex'; document.getElementById('topSub').textContent=role=='admin'?'Admin Dashboard — You':('Student Dashboard — '+(currentStudent?currentStudent.name:'Student')); updatePhotos(); showPage(role=='admin'?'aDash':'sDash'); render(); }
-function logout(){document.getElementById('app').style.display='none';document.getElementById('loginScreen').style.display='block';document.getElementById('loginPin').value=''}
-function changeAdminOtp(){ let a=document.getElementById('newAdminOtp').value.trim(), b=document.getElementById('newAdminOtp2').value.trim(); if(!a) return toast('Type new Admin OTP'); if(a!==b) return toast('OTPs do not match'); adminOtp=a; localStorage.setItem('quizora_admin_otp',a); toast('✅ Your Admin OTP changed.'); document.getElementById('newAdminOtp').value=''; document.getElementById('newAdminOtp2').value=''; }
+function logout(){document.getElementById('app').style.display='none';document.getElementById('loginScreen').style.display='block';document.getElementById('navAdmin').classList.remove('show');document.getElementById('navStudent').style.display='none';document.getElementById('adminPass').value='';document.getElementById('studentPass').value='';}
+function updatePhotos(){ let photo = role=='admin' ? adminPhoto : studentPhoto; let top=document.getElementById('topPhoto'); if(photo) top.src=photo; let sp=document.getElementById('settingsPhoto'); if(sp && photo) sp.src=photo; let sProf=document.getElementById('sProfilePhoto'); if(sProf && photo) sProf.src=photo; }
+function uploadPhoto(e){ let file=e.target.files[0]; if(!file) return; let r=new FileReader(); r.onload=function(){ let d=r.result; if(role=='admin'){ adminPhoto=d; localStorage.setItem('quizora_admin_photo',d); } else { studentPhoto=d; localStorage.setItem('quizora_student_photo',d); } updatePhotos(); toast('✅ Photo saved — top right'); }; r.readAsDataURL(file); }
+function changeAdminOtp(){ let a=document.getElementById('newAdminOtp').value.trim(), b=document.getElementById('newAdminOtp2').value.trim(); if(!a) return toast('Type new password'); if(a!==b) return toast('Passwords do not match'); if(!adminData) adminData={user:'Admin',pass:a}; else adminData.pass=a; localStorage.setItem('quizora_admin_data',JSON.stringify(adminData)); toast('✅ Your Admin password changed.'); document.getElementById('newAdminOtp').value=''; document.getElementById('newAdminOtp2').value=''; updateAdminHint(); }
+function isLocked(cls){ return LOCKED_CLASSES.includes(cls); }
+function canStudentOpen(cls){ if(role=='admin') return true; if(FREE_CLASSES.includes(cls)) return true; if(currentStudent && currentStudent.subs && currentStudent.subs.includes(cls)) return true; return false; }
 function splitSentences(text){ let parts=text.split(/\n+/).map(p=>p.trim()).filter(Boolean); let out=[]; parts.forEach(p=>{ let s=p.match(/[^.!?]+[.!?]+/g)||[p]; s.forEach(s2=>out.push(s2.trim())); }); return out; }
 function words(s){ return s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>3 && !['this','that','with','from','which','when','there','their','about','into','your','have','will','also'].includes(w)); }
 function cleanNote(text){ let t=(text||'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').replace(/\s+([,.!?])/g,'$1').replace(/([.!?])\s+([a-z])/g,(m,p,c)=>p+' '+c.toUpperCase()); t=t.trim(); if(t) t=t.charAt(0).toUpperCase()+t.slice(1); return t; }
 function smartInsert(oldText, newPhrase, force){
   let base=(oldText||'').trim(); let add=cleanNote(newPhrase); if(!add) return {text:base,where:'Nothing added'}; if(!base) return {text:add,where:'Note was empty — placed at start'}; if(!['.','!','?'].includes(add.slice(-1))) add+='.'; let lower=add.toLowerCase(); let sents=splitSentences(base); let total=sents.length;
-  if(force==='start') return {text:add+' '+base,where:'Placed at BEGINNING (you forced it)'};
-  if(force==='end') return {text:base+' '+add,where:'Placed at END (you forced it)'};
-  if(/^(first|firstly|to begin|to start|before anything|introduction)/.test(lower)) return {text:add+' '+base,where:'Detected "First / To begin" — placed at BEGINNING'};
-  if(/^(in conclusion|finally|in summary|to conclude|overall)/.test(lower)) return {text:base+' '+add,where:'Detected "In conclusion / Finally" — placed at END'};
-  if(/^(for example|for instance|example|e\.g\.|such as)/.test(lower)){ let idx=sents.findIndex(s=>/example/i.test(s)); if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '),where:'Detected "For example" — placed AFTER existing example'}; } sents.splice(1,0,add); return {text:sents.join(' '),where:'Detected "For example" — placed AFTER definition'}; }
+  if(force==='start') return {text:add+' '+base,where:'Placed at BEGINNING'};
+  if(force==='end') return {text:base+' '+add,where:'Placed at END'};
+  if(/^(first|firstly|to begin|to start|before anything|introduction)/.test(lower)) return {text:add+' '+base,where:'Detected "First" — placed at BEGINNING'};
+  if(/^(in conclusion|finally|in summary|to conclude|overall)/.test(lower)) return {text:base+' '+add,where:'Detected "In conclusion" — placed at END'};
+  if(/^(for example|for instance|example|e\.g\.|such as)/.test(lower)){ let idx=sents.findIndex(s=>/example/i.test(s)); if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '),where:'Detected "For example" — placed AFTER example'}; } sents.splice(1,0,add); return {text:sents.join(' '),where:'Detected "For example" — placed AFTER definition'}; }
   if(force==='after-example'){ let idx=sents.findIndex(s=>/example/i.test(s)); if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '),where:'Placed AFTER Example'}; } sents.splice(1,0,add); return {text:sents.join(' '),where:'No example — placed after definition'}; }
   if(/^(however|but|on the other hand|in contrast|although|despite)/.test(lower)){ let at=Math.min(2,total); sents.splice(at,0,add); return {text:sents.join(' '),where:'Detected contrast — placed AFTER main point'}; }
   let addWords=new Set(words(add)); let bestIdx=-1,bestScore=0; sents.forEach((s,i)=>{ let sw=new Set(words(s)); let score=0; addWords.forEach(w=>{if(sw.has(w))score++}); if(score>bestScore){bestScore=score;bestIdx=i} });
-  if(bestScore>=1){ sents.splice(bestIdx+1,0,add); return {text:sents.join(' '),where:'Found related sentence: "'+sents[bestIdx].slice(0,50)+'..." — placed RIGHT AFTER it'}; }
+  if(bestScore>=1){ sents.splice(bestIdx+1,0,add); return {text:sents.join(' '),where:'Found related sentence — placed RIGHT AFTER it'}; }
   let conclIdx=sents.findIndex(s=>/in conclusion|finally|summary/i.test(s)); if(conclIdx>0){ sents.splice(conclIdx,0,add); return {text:sents.join(' '),where:'Placed BEFORE conclusion'}; }
-  let mid=Math.floor(total/2); sents.splice(mid,0,add); return {text:sents.join(' '),where:'No direct match — placed in MIDDLE where it flows'};
+  let mid=Math.floor(total/2); sents.splice(mid,0,add); return {text:sents.join(' '),where:'Placed in MIDDLE where it flows'};
 }
+function classRow(cls){
+  let locked=isLocked(cls); let canOpen=canStudentOpen(cls);
+  let badge=locked ? (canOpen && role!='admin' ? '<span class="lock-badge" style="background:#0bb56a">✅ Subscribed</span>' : '<span class="lock-badge">🔒 LOCKED • ₦2,000/mo</span>') : '<span class="free-badge">🟢 FREE</span>';
+  let arrow = openClassName==cls ? '▲' : '▼'; let subjects=content[cls]||{}; let subHtml='';
+  if(openClassName==cls){
+    if(!canOpen){ subHtml=`<div style="padding:12px;background:#fff3cd;border-radius:10px;margin-top:8px"><b>🔒 ${cls} is Locked</b><br><small>Pay ₦2,000 for ${cls} only — per month — to Opay ${OPAY}, then WhatsApp 08147699555 with your Username + "${cls}".</small><br><button class="btn btn-primary" style="margin-top:8px" onclick="event.stopPropagation();subscribeTo('${cls}')">Subscribe to ${cls} — ₦2,000</button></div>`; }
+    else { subHtml=Object.keys(subjects).length ? Object.keys(subjects).map(subj=>subjectRow(cls,subj)).join('') : `<p class="mut" style="padding:10px">No subjects yet.</p>`; if(role=='admin') subHtml+=`<div style="margin-top:10px"><input id="newSub-${cls}" placeholder="New Subject in ${cls}"><button class="btn btn-primary" style="margin-top:6px" onclick="event.stopPropagation();addSubjectInline('${cls}')">+ Add Subject</button> <button class="btn btn-ghost" onclick="event.stopPropagation();renameClassPrompt('${cls}')">Rename Class</button> <button class="btn btn-red" onclick="event.stopPropagation();deleteClassPrompt('${cls}')">Delete Class</button></div>`; }
+  }
+  return `<div class="drop"><div class="drop-head" onclick="toggleClass('${cls}')"><div><b>${cls}</b><br><small class="mut">${Object.keys(subjects).join(' • ')||'No subjects yet'}</small></div><div style="display:flex;gap:6px;align-items:center">${badge}<span>${arrow}</span></div></div><div class="drop-body ${openClassName==cls?'open':''}">${subHtml}</div></div>`;
+}
+function subjectRow(cls, subj){
+  let topics=(content[cls]||{})[subj]||[]; let isOpen = openClassName==cls && openSubjectName==subj; let arrow=isOpen?'▲':'▼'; let topicsHtml='';
+  if(isOpen){ topicsHtml=topics.length?topics.map((t,i)=>`<div class="topic-item" onclick="event.stopPropagation();openTopicFromDropdown('${cls}','${subj}',${i})"><div><b>${t.title}</b></div><span>📖 Read →</span></div>`).join(''):'<p class="mut">No topics yet.</p>'; if(role=='admin') topicsHtml+=`<div style="margin-top:10px"><input id="newTopic-${cls}-${subj}" placeholder="New Topic"><textarea id="newNote-${cls}-${subj}" rows="2" placeholder="Write note..."></textarea><button class="btn btn-primary" style="margin-top:6px" onclick="event.stopPropagation();addTopicInline('${cls}','${subj}')">+ Add Topic</button> <button class="btn btn-ghost" onclick="event.stopPropagation();renameSubjectInline('${cls}','${subj}')">Rename Subject</button> <button class="btn btn-red" onclick="event.stopPropagation();deleteSubjectInline('${cls}','${subj}')">Delete Subject</button></div>`; }
+  return `<div class="drop-sub"><div class="drop-sub-head" onclick="event.stopPropagation();toggleSubject('${cls}','${subj}')"><div><b>${subj}</b><br><small class="mut">${topics.length} topic(s)</small></div><span>${arrow}</span></div><div class="drop-sub-body ${isOpen?'open':''}">${topicsHtml}</div></div>`;
+}
+function toggleClass(cls){ openClassName = openClassName==cls ? '' : cls; openSubjectName=''; renderClasses(); }
+function toggleSubject(cls, subj){ openClassName=cls; openSubjectName = openSubjectName==subj ? '' : subj; renderClasses(); }
+function subscribeTo(cls){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe to '+cls+' — ₦2,000/month. My Username is '+(currentStudent?currentStudent.name:'')+'. I paid to Opay '+OPAY+'.')); }
+function renderClasses(){
+  let isAdmin=role=='admin'; document.getElementById('adminClassTools').style.display=isAdmin?'block':'none';
+  let order=['JSS1','JSS2','JSS3','SS1','SS2','SS3','WAEC','JAMB']; let all=Object.keys(content); let sorted=[...order.filter(c=>all.includes(c)), ...all.filter(c=>!order.includes(c))];
+  let html=sorted.map(c=>classRow(c)).join('');
+  document.getElementById('classList').innerHTML=html; document.getElementById('classListA').innerHTML=html; document.getElementById('classListS').innerHTML=html; document.getElementById('classListS2').innerHTML=html;
+}
+function addSubjectInline(cls){ let el=document.getElementById('newSub-'+cls); let n=el.value.trim(); if(!n) return toast('Type Subject'); if(!content[cls]) content[cls]={}; if(content[cls][n]) return toast('Exists'); content[cls][n]=[]; save(); render(); toast('✅ Subject added'); }
+function renameSubjectInline(cls,subj){ let n=prompt('Rename Subject',subj); if(!n||n==subj) return; content[cls][n]=content[cls][subj]; delete content[cls][subj]; openSubjectName=n; save(); render(); }
+function deleteSubjectInline(cls,subj){ if(!confirm('Delete Subject '+subj+'?')) return; delete content[cls][subj]; openSubjectName=''; save(); render(); }
+function addTopicInline(cls,subj){ let tEl=document.getElementById('newTopic-'+cls+'-'+subj); let nEl=document.getElementById('newNote-'+cls+'-'+subj); let title=tEl.value.trim(), note=nEl.value.trim(); if(!title||!note) return toast('Fill Topic + Note'); if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title,note:cleanNote(note)}); save(); render(); toast('✅ Topic added'); }
 function render(){
+  let totalSubs=students.reduce((a,s)=>a+(s.subs?s.subs.length:0),0);
   document.getElementById('stuCount').textContent=students.length;
-  document.getElementById('activeCount').textContent=students.filter(s=>s.status=='Active').length;
-  document.getElementById('revText').textContent='₦'+(students.length*2000).toLocaleString();
-  document.getElementById('classCount').textContent=Object.keys(content).length;
-  let rows=students.length?students.map((s,i)=>`<div class="item"><div><b>${s.name}</b><br><small class="mut">${s.cls} • ${s.pin}</small></div><span class="badge ${s.status=='Active'?'g':'grey'}">${s.status}</span><button class="btn btn-ghost" onclick="studentMenu(${i})">•••</button></div>`).join(''):'<p class="mut">No students yet.</p>';
+  document.getElementById('revText').textContent='₦'+(totalSubs*PRICE).toLocaleString();
+  // Admin sees Username + Class + Subs, NOT password
+  let rows=students.length?students.map((s,i)=>`<div class="item" style="flex-direction:column;align-items:flex-start"><div style="width:100%;display:flex;justify-content:space-between"><div><b>${s.name}</b><br><small class="mut">${s.cls} • Subs: ${(s.subs||[]).join(', ')||'Free only'} • ${s.deviceId?'🔒 Device Locked':'No device yet'} • ${s.status}</small><br><small class="mut" style="color:#999">Password: •••••• (Student created it — Admin cannot see it)</small></div><button class="btn btn-ghost" onclick="studentMenu(${i})">•••</button></div></div>`).join(''):'<p class="mut">No students yet. Students will appear here when they create their own account.</p>';
   document.getElementById('studentsList').innerHTML=rows; document.getElementById('studentsList2').innerHTML=rows;
   document.getElementById('annList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');
   document.getElementById('sAnnList').innerHTML=anns.map(a=>`<div>📢 ${a}</div>`).join('');
   document.getElementById('history').innerHTML=historyList.length?historyList.map(h=>`<div>• ${h}</div>`).join(''):'<p class="mut">No history yet.</p>';
   let clsOpts=Object.keys(content).map(c=>`<option>${c}</option>`).join('');
-  document.getElementById('stClass').innerHTML=clsOpts; document.getElementById('pinClass').innerHTML=clsOpts;
-  document.getElementById('studioClassList').innerHTML=Object.keys(content).map(c=>`<div class="item"><div><b>${c}</b><br><small class="mut">${Object.keys(content[c]).join(', ')||'No subjects'}</small></div><div><button class="btn btn-ghost" onclick="renameClassPrompt('${c}')">Rename</button> <button class="btn btn-red" onclick="deleteClassPrompt('${c}')">Delete</button></div></div>`).join('');
-  let sList=''; for(let cls in content){ for(let subj in content[cls]){ content[cls][subj].forEach((t,ti)=>{ sList+=`<div class="item"><div><b>${cls} • ${subj} • ${t.title}</b><br><small class="mut">${t.note.slice(0,60)}...</small></div><div><button class="btn btn-ghost" onclick="editTopicDirect('${cls}','${subj}',${ti})">Edit</button> <button class="btn btn-red" onclick="delTopic('${cls}','${subj}',${ti})">Delete</button></div></div>` }) } }
+  document.getElementById('stClass').innerHTML=clsOpts;
+  document.getElementById('studioClassList').innerHTML=Object.keys(content).map(c=>`<div class="item"><div><b>${c}</b> ${isLocked(c)?'<span style="background:#e9a800;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px">LOCKED</span>':'<span style="background:#0bb56a;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px">FREE</span>'}<br><small class="mut">${Object.keys(content[c]).join(', ')||'No subjects'}</small></div><div><button class="btn btn-ghost" onclick="renameClassPrompt('${c}')">Rename</button> <button class="btn btn-red" onclick="deleteClassPrompt('${c}')">Delete</button></div></div>`).join('');
+  let sList=''; for(let cls in content){ for(let subj in content[cls]){ content[cls][subj].forEach((t,ti)=>{ sList+=`<div class="item"><div><b>${cls} • ${subj} • ${t.title}</b></div><div><button class="btn btn-ghost" onclick="editTopicDirect('${cls}','${subj}',${ti})">Edit</button> <button class="btn btn-red" onclick="delTopic('${cls}','${subj}',${ti})">Delete</button></div></div>` }) } }
   document.getElementById('studioList').innerHTML=sList||'<p class="mut">No content yet.</p>';
-  if(currentStudent){ document.getElementById('myOtpText').textContent=currentStudent.pin; document.getElementById('myClassText').textContent=currentStudent.cls; document.getElementById('sProfileText').innerHTML='<b>'+currentStudent.name+'</b><br><small class="mut">'+currentStudent.cls+'</small>'; document.getElementById('sProfileOtp').textContent=currentStudent.pin; }
+  if(currentStudent){ document.getElementById('myOtpText').textContent=currentStudent.name; document.getElementById('mySubsText').textContent=(currentStudent.subs&&currentStudent.subs.length)?currentStudent.subs.join(', '):'Free Classes Only'; document.getElementById('sProfileText').innerHTML='<b>'+currentStudent.name+'</b><br><small class="mut">'+currentStudent.cls+' • Subs: '+((currentStudent.subs||[]).join(', ')||'Free only')+'</small>'; document.getElementById('sProfileOtp').textContent='Username: '+currentStudent.name+' • Class: '+currentStudent.cls; let sp=document.getElementById('sProfileSubs'); if(sp) sp.textContent='Subscribed Locked: '+((currentStudent.subs||[]).join(', ')||'None — Free only'); }
   renderClasses(); updatePhotos();
 }
-function renderClasses(){
-  let isAdmin=role=='admin';
-  document.getElementById('adminClassTools').style.display=isAdmin?'block':'none';
-  document.getElementById('adminSubjectTools').style.display=isAdmin?'block':'none';
-  document.getElementById('adminTopicTools').style.display=isAdmin?'block':'none';
-  let html=Object.keys(content).map(c=>`<div class="item" onclick="openClass('${c}')"><div><b>${c}</b><br><small class="mut">${Object.keys(content[c]).join(' • ')||'No subjects'}</small></div><span>→</span></div>`).join('');
-  document.getElementById('classList').innerHTML=html; document.getElementById('classListA').innerHTML=html;
-  let sHtml = currentStudent && content[currentStudent.cls] ? `<div class="item" onclick="openClass('${currentStudent.cls}')"><div><b>${currentStudent.cls}</b><br><small class="mut">${Object.keys(content[currentStudent.cls]).join(' • ')}</small></div><span>→</span></div>` : html;
-  document.getElementById('classListS').innerHTML=sHtml; document.getElementById('classListS2').innerHTML=sHtml;
-  document.getElementById('subjectBox').style.display='none'; document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none';
-}
-function addClass(){ let n=document.getElementById('newClassName').value.trim(); if(!n) return toast('Type Class name'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); document.getElementById('newClassName').value=''; toast('✅ Class added: '+n); }
+function addClass(){ let n=document.getElementById('newClassName').value.trim(); if(!n) return toast('Type Class'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); document.getElementById('newClassName').value=''; toast('✅ Class added'); }
 function addClassFromStudio(){ let n=document.getElementById('studioNewClass').value.trim(); if(!n) return toast('Type Class'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); document.getElementById('studioNewClass').value=''; toast('✅ Class added'); }
 function renameClassPrompt(oldName){ let n=prompt('Rename Class',oldName); if(!n||n==oldName) return; content[n]=content[oldName]; delete content[oldName]; save(); render(); toast('Class renamed'); }
-function renameCurrentClass(){ renameClassPrompt(curClass); }
 function deleteClassPrompt(c){ if(!confirm('Delete Class '+c+'?')) return; delete content[c]; save(); render(); toast('Class deleted'); }
-function deleteCurrentClass(){ deleteClassPrompt(curClass); backToClasses(); }
-function addSubjectFromView(){ let n=document.getElementById('newSubjectName').value.trim(); if(!n) return toast('Type Subject'); if(!content[curClass]) content[curClass]={}; if(content[curClass][n]) return toast('Exists'); content[curClass][n]=[]; save(); render(); openClass(curClass); document.getElementById('newSubjectName').value=''; toast('✅ Subject added'); }
-function renameCurrentSubject(){ let n=prompt('Rename Subject',curSubject); if(!n||n==curSubject) return; content[curClass][n]=content[curClass][curSubject]; delete content[curClass][curSubject]; curSubject=n; save(); render(); openClass(curClass); }
-function deleteCurrentSubject(){ if(!confirm('Delete Subject '+curSubject+'?')) return; delete content[curClass][curSubject]; save(); render(); openClass(curClass); }
-function addTopicFromView(){ let title=document.getElementById('newTopicTitle').value.trim(), note=document.getElementById('newTopicNote').value.trim(); if(!title||!note) return toast('Fill Topic + Note'); if(!content[curClass][curSubject]) content[curClass][curSubject]=[]; content[curClass][curSubject].push({title,note:cleanNote(note)}); save(); render(); openClass(curClass); openSubject(curSubject); document.getElementById('newTopicTitle').value=''; document.getElementById('newTopicNote').value=''; toast('✅ Topic added'); }
 function addContent(){ let cls=document.getElementById('stClass').value, subj=document.getElementById('stSubject').value.trim(), topic=document.getElementById('stTopic').value.trim(), note=document.getElementById('stNote').value.trim(); if(!subj||!topic||!note) return toast('Fill Subject, Topic, Note'); if(!content[cls])content[cls]={}; if(!content[cls][subj])content[cls][subj]=[]; content[cls][subj].push({title:topic,note:cleanNote(note)}); historyList.unshift('Admin added: '+cls+' • '+subj+' • '+topic); save(); render(); document.getElementById('stSubject').value=''; document.getElementById('stTopic').value=''; document.getElementById('stNote').value=''; toast('✅ Topic added'); }
-function editTopicDirect(cls,subj,i){ curClass=cls; curSubject=subj; curTopicIdx=i; showPage('classes'); openClass(cls); openSubject(subj); openTopic(i); }
+function editTopicDirect(cls,subj,i){ openClassName=cls; openSubjectName=subj; showPage('classes'); renderClasses(); openTopicFromDropdown(cls,subj,i); }
 function delTopic(cls,subj,i){ if(!confirm('Delete this topic?'))return; content[cls][subj].splice(i,1); if(!content[cls][subj].length) delete content[cls][subj]; save(); render(); }
-function openClass(cls){ curClass=cls; document.getElementById('subjectBox').style.display='block'; document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none'; document.getElementById('subjectTitle').textContent=cls+' — Subjects'; let subs=content[cls]||{}; document.getElementById('subjectList').innerHTML=Object.keys(subs).length?Object.keys(subs).map(s=>`<div class="item" onclick="openSubject('${s}')"><div><b>${s}</b><br><small class="mut">${subs[s].length} topic(s)</small></div><span>→</span></div>`).join(''):'<p class="mut">No subjects yet.</p>'; document.getElementById('subjectBox').scrollIntoView({behavior:'smooth'}); }
-function backToClasses(){ document.getElementById('subjectBox').style.display='none'; document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none'; }
-function openSubject(subj){ curSubject=subj; document.getElementById('topicBox').style.display='block'; document.getElementById('readBox').style.display='none'; document.getElementById('topicTitle').textContent=curClass+' • '+subj+' — Topics'; let topics=(content[curClass]||{})[subj]||[]; document.getElementById('topicList').innerHTML=topics.length?topics.map((t,i)=>`<div class="item" onclick="openTopic(${i})"><div><b>${t.title}</b></div><span>📖 Read →</span></div>`).join(''):'<p class="mut">No topics yet.</p>'; document.getElementById('topicBox').scrollIntoView({behavior:'smooth'}); }
-function backToSubjects(){ document.getElementById('topicBox').style.display='none'; document.getElementById('readBox').style.display='none'; }
-function openTopic(i){ curTopicIdx=i; isEditing=false; let t=content[curClass][curSubject][i]; document.getElementById('readBox').style.display='block'; document.getElementById('readTitle').textContent=curClass+' • '+curSubject+' • '+t.title; let el=document.getElementById('readText'); el.textContent=t.note; el.contentEditable=false; el.classList.remove('editing'); document.getElementById('placedInfo').style.display='none'; renderReadActions(); document.getElementById('addPhraseBox').style.display='none'; document.getElementById('readBox').scrollIntoView({behavior:'smooth'}); }
-function backToTopics(){ document.getElementById('readBox').style.display='none'; }
-function renderReadActions(){ let isAdmin=role=='admin'; let html=`<button class="btn btn-ghost" onclick="copyReading()">📋 Copy</button><button class="btn btn-ghost" onclick="pasteReading()">📥 Paste</button>`; if(isAdmin){ html+=`<button class="btn btn-primary" onclick="toggleEditReading()">${isEditing?'💾 Save Edit':'✏️ Edit While Reading'}</button><button class="btn btn-ghost" onclick="toggleAddPhrase()">+ Add Phrase — Auto-Place</button><button class="btn btn-ghost" onclick="renameTopicFromRead()">Rename Topic</button><button class="btn btn-red" onclick="deleteTopicFromRead()">Delete Topic</button>`; } document.getElementById('readActions').innerHTML=html; }
-function toggleEditReading(){ let el=document.getElementById('readText'); if(!isEditing){ isEditing=true; el.contentEditable=true; el.classList.add('editing'); el.focus(); toast('✏️ Editing ON — type, paste, delete, then Save'); } else { let newText=cleanNote(el.innerText); content[curClass][curSubject][curTopicIdx].note=newText; el.textContent=newText; el.contentEditable=false; el.classList.remove('editing'); isEditing=false; save(); render(); toast('✅ Saved — continuity fixed'); } renderReadActions(); }
-function copyReading(){ navigator.clipboard.writeText(document.getElementById('readText').innerText); toast('📋 Copied'); }
-async function pasteReading(){ try{ let t=await navigator.clipboard.readText(); if(!t) return toast('Clipboard empty'); if(role!=='admin') return toast('Student can copy only'); let old=content[curClass][curSubject][curTopicIdx].note; let res=smartInsert(old,t,'auto'); content[curClass][curSubject][curTopicIdx].note=res.text; document.getElementById('readText').textContent=res.text; showPlaced(res.where); save(); render(); toast('📥 Pasted smartly'); }catch(e){ toast('Allow clipboard, or long-press to paste while editing'); } }
-function toggleAddPhrase(){ let b=document.getElementById('addPhraseBox'); b.style.display=b.style.display=='none'?'block':'none'; }
-function addPhraseSmart(){ let phrase=document.getElementById('addPhraseInput').value.trim(); if(!phrase) return toast('Type phrase'); let force=document.getElementById('forcePlace').value; let old=content[curClass][curSubject][curTopicIdx].note; let res=smartInsert(old, phrase, force); content[curClass][curSubject][curTopicIdx].note=res.text; document.getElementById('readText').textContent=res.text; document.getElementById('addPhraseInput').value=''; document.getElementById('addPhraseBox').style.display='none'; showPlaced(res.where); save(); render(); toast('✅ Added smartly'); }
-function showPlaced(msg){ let el=document.getElementById('placedInfo'); el.style.display='block'; el.innerHTML='✅ <b>Placed:</b> '+msg; }
-function renameTopicFromRead(){ let t=content[curClass][curSubject][curTopicIdx]; let n=prompt('Rename Topic',t.title); if(n){ t.title=n; save(); render(); openClass(curClass); openSubject(curSubject); openTopic(curTopicIdx); } }
-function deleteTopicFromRead(){ if(!confirm('Delete this topic?')) return; content[curClass][curSubject].splice(curTopicIdx,1); if(!content[curClass][curSubject].length) delete content[curClass][curSubject]; save(); render(); backToTopics(); toast('Topic deleted'); }
+function openTopicFromDropdown(cls,subj,i){
+  if(!canStudentOpen(cls)){ toast('🔒 '+cls+' is Locked — Subscribe ₦2,000'); subscribeTo(cls); return; }
+  curClass=cls; curSubject=subj; curTopicIdx=i; isEditing=false;
+  let existing=document.getElementById('readBoxGlobal'); if(!existing){ existing=document.createElement('div'); existing.id='readBoxGlobal'; existing.className='card'; document.querySelector('.wrap').appendChild(existing); }
+  let t=content[cls][subj][i];
+  existing.innerHTML=`<p class="back" onclick="document.getElementById('readBoxGlobal').remove()">← Close Reading</p><h2 style="margin-top:8px">${cls} • ${subj} • ${t.title}</h2><div class="read" id="readTextGlobal" contenteditable="false">${escapeHtml(t.note)}</div><div class="note-hint">🧠 Smart Placement ON</div><div class="placed" id="placedInfoGlobal"></div><div class="editbar" id="readActionsGlobal"></div><div id="addPhraseBoxGlobal" style="display:none;margin-top:12px"><label><b>Add a phrase / lines</b></label><textarea id="addPhraseInputGlobal" rows="3" placeholder="Type phrase..."></textarea><select id="forcePlaceGlobal"><option value="auto">🤖 Auto</option><option value="start">⬆️ At Beginning</option><option value="end">⬇️ At End</option><option value="after-example">📌 After Example</option></select><button class="btn btn-primary" style="margin-top:8px" onclick="addPhraseSmartGlobal()">+ Add Smartly & Save</button></div>`;
+  window._readEl=document.getElementById('readTextGlobal'); renderReadActionsGlobal(); existing.scrollIntoView({behavior:'smooth'});
+}
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function renderReadActionsGlobal(){ let isAdmin=role=='admin'; let html=`<button class="btn btn-ghost" onclick="copyReadingGlobal()">📋 Copy</button><button class="btn btn-ghost" onclick="pasteReadingGlobal()">📥 Paste</button>`; if(isAdmin){ html+=`<button class="btn btn-primary" onclick="toggleEditGlobal()">${isEditing?'💾 Save Edit':'✏️ Edit While Reading'}</button><button class="btn btn-ghost" onclick="toggleAddPhraseGlobal()">+ Add Phrase — Auto-Place</button><button class="btn btn-ghost" onclick="renameTopicGlobal()">Rename Topic</button><button class="btn btn-red" onclick="deleteTopicGlobal()">Delete Topic</button>`; } let el=document.getElementById('readActionsGlobal'); if(el) el.innerHTML=html; }
+function toggleEditGlobal(){ let el=window._readEl; if(!el) return; if(!isEditing){ isEditing=true; el.contentEditable=true; el.classList.add('editing'); el.focus(); toast('✏️ Editing ON'); } else { let nt=cleanNote(el.innerText); content[curClass][curSubject][curTopicIdx].note=nt; el.textContent=nt; el.contentEditable=false; el.classList.remove('editing'); isEditing=false; save(); render(); toast('✅ Saved'); } renderReadActionsGlobal(); }
+function copyReadingGlobal(){ navigator.clipboard.writeText(window._readEl.innerText); toast('📋 Copied'); }
+async function pasteReadingGlobal(){ try{ let t=await navigator.clipboard.readText(); if(!t) return toast('Clipboard empty'); if(role!=='admin') return toast('Student can copy only'); let old=content[curClass][curSubject][curTopicIdx].note; let res=smartInsert(old,t,'auto'); content[curClass][curSubject][curTopicIdx].note=res.text; window._readEl.textContent=res.text; showPlacedGlobal(res.where); save(); render(); toast('📥 Pasted smartly'); }catch(e){ toast('Allow clipboard'); } }
+function toggleAddPhraseGlobal(){ let b=document.getElementById('addPhraseBoxGlobal'); b.style.display=b.style.display=='none'?'block':'none'; }
+function addPhraseSmartGlobal(){ let phrase=document.getElementById('addPhraseInputGlobal').value.trim(); if(!phrase) return toast('Type phrase'); let force=document.getElementById('forcePlaceGlobal').value; let old=content[curClass][curSubject][curTopicIdx].note; let res=smartInsert(old,phrase,force); content[curClass][curSubject][curTopicIdx].note=res.text; window._readEl.textContent=res.text; document.getElementById('addPhraseInputGlobal').value=''; document.getElementById('addPhraseBoxGlobal').style.display='none'; showPlacedGlobal(res.where); save(); render(); toast('✅ Added smartly'); }
+function showPlacedGlobal(msg){ let el=document.getElementById('placedInfoGlobal'); if(el){ el.style.display='block'; el.innerHTML='✅ <b>Placed:</b> '+msg; } }
+function renameTopicGlobal(){ let t=content[curClass][curSubject][curTopicIdx]; let n=prompt('Rename Topic',t.title); if(n){ t.title=n; save(); render(); openTopicFromDropdown(curClass,curSubject,curTopicIdx); } }
+function deleteTopicGlobal(){ if(!confirm('Delete this topic?')) return; content[curClass][curSubject].splice(curTopicIdx,1); if(!content[curClass][curSubject].length) delete content[curClass][curSubject]; save(); render(); let el=document.getElementById('readBoxGlobal'); if(el) el.remove(); toast('Topic deleted'); }
 function postAnn(){ let v=document.getElementById('annText').value.trim(); if(!v) return toast('Type announcement'); anns.unshift(v); document.getElementById('annText').value=''; historyList.unshift('Announcement: '+v.slice(0,40)); save(); render(); toast('Sent'); }
-function openPin(){document.getElementById('pinModal').classList.add('open')}function closePin(){document.getElementById('pinModal').classList.remove('open')}
-let lastPin='';
-function makePin(){ let name=document.getElementById('pinName').value.trim(); let cls=document.getElementById('pinClass').value; let otp=document.getElementById('customOtp').value.trim(); if(!name) return toast('Type student name'); if(!otp) return toast('YOU must type OTP'); if(students.some(s=>s.pin.toLowerCase()==otp.toLowerCase())) return toast('OTP exists'); lastPin=otp; students.unshift({name,cls,pin:otp,status:'Active'}); historyList.unshift('Admin created OTP '+otp+' for '+name); save(); render(); document.getElementById('pinOut').textContent=otp; toast('✅ OTP created: '+otp); }
-function copyPin(){navigator.clipboard.writeText(lastPin);toast('Copied')}
-function whatsappPin(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Your Quizora OTP is '+lastPin+'. Pay to Opay '+OPAY+' if not paid.'))}
-function studentMenu(i){ let s=students[i]; let a=prompt('Student: '+s.name+'\nType: block / unblock / whatsapp / delete','block'); if(!a)return; a=a.toLowerCase(); if(a.includes('block')){s.status='Blocked';toast('Blocked')} else if(a.includes('unblock')){s.status='Active';toast('Unblocked')} else if(a.includes('whatsapp')){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi '+s.name+', your OTP '+s.pin+' expires soon. Renew: Pay to Opay '+OPAY))} else if(a.includes('delete')){ if(confirm('Delete '+s.name+'?')) students.splice(i,1)} save(); render(); }
-function renewPin(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to renew my OTP. I paid to Opay '+OPAY+'.'))}
-function downloadBackup(){ let d=JSON.stringify({students,content,anns},null,2); let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([d],{type:'application/json'})); a.download='quizora-backup.json'; a.click(); toast('Backup downloaded'); }
-render(); updatePhotos();
+function studentMenu(i){
+  let s=students[i];
+  let a=prompt('Student: '+s.name+'\nSubs: '+(s.subs||[]).join(', ')+' | Device: '+(s.deviceId||'Not locked')+'\n\nType one:\n- unlock WAEC / unlock JSS3 / unlock SS3 / unlock JAMB\n- lock WAEC (remove)\n- reset device\n- block / unblock / whatsapp / delete','unlock WAEC');
+  if(!a) return; a=a.toLowerCase();
+  if(a.includes('unlock')){ let target=null; if(a.includes('waec')) target='WAEC'; else if(a.includes('jamb')) target='JAMB'; else if(a.includes('jss3')) target='JSS3'; else if(a.includes('ss3')) target='SS3'; if(target){ if(!s.subs) s.subs=[]; if(!s.subs.includes(target)) s.subs.push(target); toast('✅ Unlocked '+target+' for '+s.name); } }
+  else if(a.includes('lock') && !a.includes('unlock')){ let target=null; if(a.includes('waec')) target='WAEC'; else if(a.includes('jamb')) target='JAMB'; else if(a.includes('jss3')) target='JSS3'; else if(a.includes('ss3')) target='SS3'; if(target){ s.subs=(s.subs||[]).filter(x=>x!==target); toast('Locked '+target+' again'); } }
+  else if(a.includes('reset')){ s.deviceId=''; toast('✅ Device reset — student can login on new phone once, then it locks again'); }
+  else if(a.includes('block')){ s.status='Blocked'; toast('Blocked'); }
+  else if(a.includes('unblock')){ s.status='Active'; toast('Unblocked'); }
+  else if(a.includes('whatsapp')){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi '+s.name+', renew: Pay ₦2,000 per locked section to Opay '+OPAY)); }
+  else if(a.includes('delete')){ if(confirm('Delete '+s.name+'?')) students.splice(i,1); }
+  save(); render();
+}
+function renewPin(){window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe to a locked class — ₦2,000/month. My Username is '+(currentStudent?currentStudent.name:'')+'. I paid to Opay '+OPAY+'.'))}
+function downloadBackup(){ let d=JSON.stringify({students:students.map(s=>({name:s.name,cls:s.cls,subs:s.subs,status:s.status})),content,anns},null,2); let a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([d],{type:'application/json'})); a.download='quizora-backup.json'; a.click(); toast('Backup downloaded'); }
+updateAdminHint(); render();
 </script>
 </body>
 </html>
