@@ -10,12 +10,15 @@
 <style>
 :root{--ink:#172033;--muted:#667085;--brand:#4f46e5;--brand2:#7c3aed;--gold:#f5b942;--bg:#f4f6fb;--card:#fff;--line:#e6e9f2;--green:#168653;--red:#c03945;--shadow:0 12px 35px #17203312}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit}.hidden{display:none!important}
-.topbar{background:linear-gradient(115deg,#25206b,#4f46e5 62%,#7c3aed);color:#fff;padding:17px max(18px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #1d1b5a30}
+.topbar{background:linear-gradient(115deg,#25206b,#4f46e5 62%,#7c3aed);color:#fff;padding:14px max(18px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #1d1b5a30}
 .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;letter-spacing:-.5px}.brandmark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#fff,#f5c95f);color:#33256d;display:grid;place-items:center;font-weight:1000;font-size:20px}
-.top-actions{display:flex;gap:8px;align-items:center}.status{font-size:12px;background:#ffffff20;border:1px solid #ffffff40;border-radius:99px;padding:6px 10px}
+.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.status{font-size:12px;background:#ffffff20;border:1px solid #ffffff40;border-radius:99px;padding:6px 10px}
+.admin-top-badge{display:flex;align-items:center;gap:7px;background:#ffffff1f;border:1px solid #ffffff45;border-radius:99px;padding:3px 10px 3px 4px;font-size:12px;font-weight:750}
+.avatar-sm{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#ffffff33;border:1.5px solid #f8d36b;display:grid;place-items:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0}
+.avatar-lg{width:76px;height:76px;border-radius:50%;object-fit:cover;background:#eef0ff;border:2px solid var(--brand);display:grid;place-items:center;font-size:24px;font-weight:900;color:#3730a3;flex-shrink:0}
 .wrap{max-width:1200px;margin:0 auto;padding:24px 18px}.hero{background:linear-gradient(135deg,#25206b,#4f46e5 65%,#8b5cf6);border-radius:26px;padding:34px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow)}.hero:after{content:"Q";position:absolute;right:30px;top:-70px;font-size:290px;font-weight:1000;color:#ffffff0d}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.05;margin:0 0 12px;max-width:650px;letter-spacing:-1.5px}.hero p{max-width:620px;color:#e7e5ff;margin:0 0 22px}.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid #ffffff55;background:#ffffff16;padding:7px 12px;border-radius:99px;font-size:12px;font-weight:700}
-.auth-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;margin-top:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}.card h2,.card h3{margin:0 0 8px;letter-spacing:-.3px}.muted{color:var(--muted)}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:750;color:#344054}.field input,.field textarea,.field select,.input{width:100%;padding:12px 13px;border:1px solid #d9deea;border-radius:12px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);box-shadow:0 0 0 3px #4f46e51a}.field textarea{min-height:120px;resize:vertical}.btn{background:var(--brand);color:#fff;border-radius:12px;padding:11px 15px;font-weight:800;box-shadow:0 5px 12px #4f46e525}.btn:hover{filter:brightness(1.05)}.btn.secondary{background:#eef0ff;color:#3730a3;box-shadow:none}.btn.ghost{background:#fff;color:#475467;border:1px solid var(--line);box-shadow:none}.btn.danger{background:#fff0f0;color:var(--red);box-shadow:none}.btn.gold{background:var(--gold);color:#33256d}.btn.small{padding:7px 10px;font-size:12px;border-radius:9px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tabs{display:flex;gap:6px;background:#f1f2f8;padding:5px;border-radius:12px;margin:16px 0}.tab{flex:1;padding:9px;border-radius:9px;background:transparent;color:#667085;font-weight:800}.tab.active{background:#fff;color:#3730a3;box-shadow:0 2px 7px #17203312}.note{background:#f8f7ff;border:1px solid #e8e5ff;border-radius:13px;padding:12px;color:#4c4782;font-size:13px}
-.app{display:grid;grid-template-columns:245px 1fr;gap:20px;align-items:start}.sidebar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px;position:sticky;top:85px}.navbtn{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border-radius:11px;background:transparent;color:#475467;text-align:left;font-weight:750;margin:3px 0}.navbtn.active{background:#eeedff;color:#4338ca}.main{min-width:0}.pagehead{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 0 17px}.pagehead h1{margin:0;font-size:25px;letter-spacing:-.7px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.stat strong{display:block;font-size:25px;letter-spacing:-1px}.stat span{font-size:12px;color:var(--muted);font-weight:700}.split{display:grid;grid-template-columns:330px 1fr;gap:16px}.tree{max-height:70vh;overflow:auto}.tree-row{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:10px}.tree-row:hover{background:#f7f7fc}.tree-row.selected{background:#efefff}.tree-row input{accent-color:var(--brand);width:17px;height:17px}.tree-row .name{flex:1;font-weight:750}.indent{margin-left:22px}.topic-btn{display:block;width:100%;text-align:left;padding:9px 11px;background:#f8f9fc;border:1px solid #edf0f5;border-radius:10px;margin:6px 0;color:#344054}.topic-btn.active{border-color:#a5a1ff;background:#f0efff;color:#3730a3;font-weight:800}.content-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;margin:12px 0}.content-card p{white-space:pre-wrap;margin:8px 0}.content-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.content-tools button{font-size:12px}.diagram{max-width:100%;max-height:380px;object-fit:contain;border-radius:12px;border:1px solid var(--line);display:block;margin:12px auto}.locked{color:#9a5b00;background:#fff5df;border:1px solid #ffe1a6;padding:12px;border-radius:12px}.empty{padding:35px 15px;text-align:center;color:var(--muted)}.modalback{position:fixed;inset:0;background:#10182888;display:grid;place-items:center;padding:16px;z-index:30}.modal{background:#fff;border-radius:18px;padding:22px;width:min(560px,100%);max-height:90vh;overflow:auto}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#182230;color:#fff;padding:11px 16px;border-radius:99px;z-index:50;box-shadow:var(--shadow);max-width:90%;text-align:center}.badge{display:inline-block;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:850;background:#eef0ff;color:#4338ca}.badge.free{background:#e7f8ef;color:#147447}.badge.lock{background:#fff2d8;color:#925b00}.student-class{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px;border:1px solid var(--line);border-radius:14px;margin:9px 0;background:#fff}.student-class h3{margin:0}.announcement{border-left:4px solid var(--gold);padding:12px 15px;background:#fffaf0;border-radius:0 12px 12px 0;margin:10px 0}
+.auth-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;margin-top:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}.card h2,.card h3{margin:0 0 8px;letter-spacing:-.3px}.muted{color:var(--muted)}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:750;color:#344054}.field input,.field textarea,.field select,.input{width:100%;padding:12px 13px;border:1px solid #d9deea;border-radius:12px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);box-shadow:0 0 0 3px #4f46e51a}.field textarea{min-height:120px;resize:vertical}.btn{background:var(--brand);color:#fff;border-radius:12px;padding:11px 15px;font-weight:800;box-shadow:0 5px 12px #4f46e525;display:inline-flex;align-items:center;justify-content:center;gap:6px}.btn:hover{filter:brightness(1.05)}.btn.secondary{background:#eef0ff;color:#3730a3;box-shadow:none}.btn.ghost{background:#fff;color:#475467;border:1px solid var(--line);box-shadow:none}.btn.danger{background:#fff0f0;color:var(--red);box-shadow:none}.btn.gold{background:var(--gold);color:#33256d}.btn.small{padding:7px 10px;font-size:12px;border-radius:9px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tabs{display:flex;gap:6px;background:#f1f2f8;padding:5px;border-radius:12px;margin:16px 0}.tab{flex:1;padding:9px;border-radius:9px;background:transparent;color:#667085;font-weight:800}.tab.active{background:#fff;color:#3730a3;box-shadow:0 2px 7px #17203312}.note{background:#f8f7ff;border:1px solid #e8e5ff;border-radius:13px;padding:12px;color:#4c4782;font-size:13px;white-space:pre-line}
+.app{display:grid;grid-template-columns:245px 1fr;gap:20px;align-items:start}.sidebar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px;position:sticky;top:85px}.navbtn{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border-radius:11px;background:transparent;color:#475467;text-align:left;font-weight:750;margin:3px 0}.navbtn.active{background:#eeedff;color:#4338ca}.main{min-width:0}.pagehead{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 0 17px;flex-wrap:wrap}.pagehead h1{margin:0;font-size:25px;letter-spacing:-.7px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.stat strong{display:block;font-size:25px;letter-spacing:-1px}.stat span{font-size:12px;color:var(--muted);font-weight:700}.split{display:grid;grid-template-columns:330px 1fr;gap:16px}.tree{max-height:70vh;overflow:auto}.tree-row{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:10px}.tree-row:hover{background:#f7f7fc}.tree-row.selected{background:#efefff}.tree-row input{accent-color:var(--brand);width:17px;height:17px}.tree-row .name{flex:1;font-weight:750}.indent{margin-left:22px}.topic-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#f8f9fc;border:1px solid #edf0f5;border-radius:10px;margin:6px 0;color:#344054}.topic-row.active{border-color:#a5a1ff;background:#f0efff;color:#3730a3;font-weight:800}.topic-row input[type="checkbox"]{accent-color:var(--brand);width:16px;height:16px}.topic-open{flex:1;text-align:left;background:transparent;padding:2px 4px;color:inherit;font-weight:inherit}.content-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;margin:12px 0}.content-card p{white-space:pre-wrap;margin:8px 0}.content-card h4.subhead{margin:4px 0 8px;color:#312e81;font-size:16px}.content-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.content-tools button{font-size:12px}.diagram{max-width:100%;max-height:380px;object-fit:contain;border-radius:12px;border:1px solid var(--line);display:block;margin:12px auto}.locked{color:#9a5b00;background:#fff5df;border:1px solid #ffe1a6;padding:12px;border-radius:12px}.empty{padding:35px 15px;text-align:center;color:var(--muted)}.modalback{position:fixed;inset:0;background:#10182888;display:grid;place-items:center;padding:16px;z-index:30}.modal{background:#fff;border-radius:18px;padding:22px;width:min(580px,100%);max-height:90vh;overflow:auto}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#182230;color:#fff;padding:11px 16px;border-radius:99px;z-index:50;box-shadow:var(--shadow);max-width:90%;text-align:center}.badge{display:inline-block;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:850;background:#eef0ff;color:#4338ca}.badge.free{background:#e7f8ef;color:#147447}.badge.lock{background:#fff2d8;color:#925b00}.student-class{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px;border:1px solid var(--line);border-radius:14px;margin:9px 0;background:#fff;flex-wrap:wrap}.student-class h3{margin:0}.announcement{border-left:4px solid var(--gold);padding:12px 15px;background:#fffaf0;border-radius:0 12px 12px 0;margin:10px 0}.ledger-table{width:100%;border-collapse:collapse;font-size:13px}.ledger-table th,.ledger-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}.code-pin{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f4f6fb;padding:4px 8px;border-radius:7px;font-weight:800;color:#312e81}
 @media(max-width:850px){.auth-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:4px;padding:8px}.navbtn{white-space:nowrap;width:auto;margin:0}.split{grid-template-columns:1fr}.tree{max-height:none}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.wrap{padding:15px 12px}.hero{padding:25px 20px}.card{padding:17px}.topbar{padding:12px}.brand{font-size:18px}.status{display:none}.pagehead{align-items:flex-start;flex-direction:column}.stats{gap:8px}.stat{padding:13px}}
 </style>
@@ -23,7 +26,15 @@
 <body>
 <header class="topbar">
  <div class="brand"><span class="brandmark">Q</span> Quizora <span style="color:#f8d36b">AI</span></div>
- <div class="top-actions"><span id="netStatus" class="status">Checking connection…</span><button id="logoutBtn" class="btn small gold hidden" onclick="logout()">Sign out</button></div>
+ <div class="top-actions">
+  <span id="netStatus" class="status">Checking connection…</span>
+  <button id="roleSwitchBtn" class="btn small gold hidden" onclick="toggleAdminView()">Switch to Student view</button>
+  <div id="globalAdminBadge" class="admin-top-badge hidden" title="Administrator">
+   <span id="globalAdminAvatarWrap"></span>
+   <span>Admin</span>
+  </div>
+  <button id="logoutBtn" class="btn small ghost hidden" style="color:#fff;border-color:#ffffff55" onclick="logout()">Sign out</button>
+ </div>
 </header>
 <main id="root" class="wrap">
  <section id="welcome">
@@ -70,7 +81,8 @@
    <div class="card">
     <h2>Study on your terms</h2>
     <p class="muted">Quizora keeps your learning materials organised and available on your device.</p>
-    <div class="note" style="margin:14px 0"><b>How offline learning works</b><br>Connect once, sign in and download your available lessons. Install Quizora on your phone. Your saved lessons and diagrams remain available offline on that device.</div>
+    <div class="note" style="margin:14px 0"><b>How offline learning works</b>
+Connect once, create your account or sign in, and save your available lessons. Once set up on your device, you can study offline without mobile data.</div>
     <h3 style="margin-top:20px">Built for focused learning</h3>
     <p class="muted">Clear class and subject organisation, readable notes, diagrams and a distraction-free learning experience.</p>
    </div>
@@ -86,83 +98,870 @@
 <div id="modalRoot"></div><div id="toast" class="toast hidden"></div>
 <script>
 const $=id=>document.getElementById(id);
-let authType='student',studentMode='login',me=null,cache=null,page='dashboard',activeClass=null,activeSubject=null,activeTopic=null,activeContent=null;
 const FREE_CLASSES=['JSS1','JSS2','SS1','SS2'];
-const DEVICE_KEY='quizora_device_id',CACHE_KEY='quizora_offline_cache',PROFILE_KEY='quizora_offline_profile';
-function deviceId(){let x=localStorage.getItem(DEVICE_KEY);if(!x){x=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random());localStorage.setItem(DEVICE_KEY,x)}return x}
-function toast(s){$('toast').textContent=s;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),3000)}
+const LOCKED_CLASSES=['JSS3','SS3','WAEC','JAMB'];
+const MONTHLY_FEE=2000;
+const OPAY_ACCOUNT='8147699555';
+const OPAY_NAME='Ekpo Bassey';
+const WHATSAPP_NUMBER='08147699555';
+const DEVICE_KEY='quizora_device_id',PROFILE_KEY='quizora_offline_profile',ADMIN_AVATAR_KEY='quizora_admin_avatar',SUBS_KEY='quizora_local_subscriptions';
+
+let authType='student',studentMode='login',me=null,cache=null,page='dashboard',viewMode='admin';
+let activeClass=null,activeSubject=null,activeTopic=null,topicTicked=false,activeContent=null;
+
+function deviceId(){let x=localStorage.getItem(DEVICE_KEY);if(!x){x=(crypto.randomUUID?crypto.randomUUID():'DEV-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8).toUpperCase());localStorage.setItem(DEVICE_KEY,x)}return x}
+function toast(s){$('toast').textContent=s;$('toast').classList.remove('hidden');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3200)}
 function online(){return navigator.onLine}
-function net(){ $('netStatus').textContent=online()?'● Online':'● Offline mode';$('netStatus').style.color=online()?'#e8fff2':'#ffe4a8'}
+function net(){$('netStatus').textContent=online()?'● Online':'● Offline mode';$('netStatus').style.color=online()?'#e8fff2':'#ffe4a8'}
 window.addEventListener('online',net);window.addEventListener('offline',net);net();
 if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
-async function api(action,data={}){if(!online())throw new Error('You are offline. Connect to the internet to make this change.');let r=await fetch('/api',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({action,...data})});let j=await r.json().catch(()=>({error:'Server returned an invalid response'}));if(!r.ok||j.error)throw new Error(j.error||'Request failed');return j}
+
+function getLocalSubs(){try{return JSON.parse(localStorage.getItem(SUBS_KEY)||'[]')}catch(e){return[]}}
+function saveLocalSubs(list){localStorage.setItem(SUBS_KEY,JSON.stringify(list||[]))}
+function getAdminAvatar(){return cache?.adminAvatar||localStorage.getItem(ADMIN_AVATAR_KEY)||''}
+function setAdminAvatar(url){if(url)localStorage.setItem(ADMIN_AVATAR_KEY,url);else localStorage.removeItem(ADMIN_AVATAR_KEY);if(cache)cache.adminAvatar=url||''}
+
+function avatarHTML(url,label,sizeClass='avatar-sm'){
+ const letter=esc((label||'Q').trim().charAt(0).toUpperCase()||'Q');
+ if(url) return `<img class="${sizeClass}" src="${url}" alt="${attr(label||'Avatar')}">`;
+ return `<span class="${sizeClass}">${letter}</span>`;
+}
+
+async function api(action,data={}){
+ if(!online()) throw new Error('You are offline. Connect to the internet to sync or update server records.');
+ let r=await fetch('/api',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({action,deviceId:deviceId(),...data})});
+ let j=await r.json().catch(()=>({error:'Server returned an invalid response'}));
+ if(!r.ok||j.error) throw new Error(j.error||'Request failed');
+ return j;
+}
+
 function setAuth(t){authType=t;$('studentTab').classList.toggle('active',t==='student');$('adminTab').classList.toggle('active',t==='admin');$('studentAuth').classList.toggle('hidden',t!=='student');$('adminAuth').classList.toggle('hidden',t!=='admin');if(t==='admin')checkAdminSetup()}
 function setStudentMode(m){studentMode=m;$('loginTab').classList.toggle('active',m==='login');$('registerTab').classList.toggle('active',m==='register');$('studentLoginForm').classList.toggle('hidden',m!=='login');$('studentRegisterForm').classList.toggle('hidden',m!=='register')}
 async function checkAdminSetup(){try{let x=await api('status');$('adminSetupForm').classList.toggle('hidden',x.adminExists);$('adminLoginForm').classList.toggle('hidden',!x.adminExists)}catch(e){$('adminSetupForm').classList.add('hidden');$('adminLoginForm').classList.remove('hidden')}}
-function showApp(){ $('welcome').classList.add('hidden');$('workspace').classList.remove('hidden');$('logoutBtn').classList.remove('hidden');render()}
-function showWelcome(){ $('welcome').classList.remove('hidden');$('workspace').classList.add('hidden');$('logoutBtn').classList.add('hidden')}
-async function studentRegister(){let name=$('regName').value.trim(),p=$('regPass').value,p2=$('regPass2').value,cl=$('regClass').value;if(!name||p.length<6||p!==p2)return toast('Enter your name and matching passwords of at least 6 characters.');try{let r=await api('register',{name,password:p,className:cl,deviceId:deviceId()});me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));await refreshData();toast('Account created. Your lessons are being saved for offline use.');showApp()}catch(e){toast(e.message)}}
-async function studentLogin(){let name=$('loginName').value.trim(),password=$('loginPass').value;if(!name||!password)return toast('Enter your name and password.');try{let r=await api('login',{name,password,role:'student',deviceId:deviceId()});me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));await refreshData();showApp()}catch(e){toast(e.message)}}
-async function adminLogin(){try{let r=await api('login',{name:$('adminName').value.trim(),password:$('adminPass').value,role:'admin',deviceId:deviceId()});me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));await refreshData();showApp()}catch(e){toast(e.message)}}
-async function adminSetup(){try{let r=await api('adminSetup',{setupKey:$('setupKey').value,name:$('setupName').value.trim(),password:$('setupPass').value});toast('Administrator created. Sign in now.');$('adminSetupForm').classList.add('hidden');$('adminLoginForm').classList.remove('hidden');$('adminName').value=r.name}catch(e){toast(e.message)}}
-async function logout(){if(online()){try{await api('logout')}catch(e){}}me=null;localStorage.removeItem(PROFILE_KEY);showWelcome()}
+
+function effectiveRole(){return me?.role==='admin'?(viewMode==='student'?'student':'admin'):'student'}
+
+function updateTopbar(){
+ const showAppState=Boolean(me&&cache);
+ $('logoutBtn').classList.toggle('hidden',!showAppState);
+ const isRealAdmin=me?.role==='admin';
+ $('roleSwitchBtn').classList.toggle('hidden',!isRealAdmin);
+ if(isRealAdmin){
+  $('roleSwitchBtn').textContent=effectiveRole()==='admin'?'Switch to Student view':'Back to Admin view';
+ }
+ const admAvatar=getAdminAvatar();
+ $('globalAdminBadge').classList.toggle('hidden',!showAppState);
+ $('globalAdminAvatarWrap').innerHTML=avatarHTML(admAvatar,'Administrator','avatar-sm');
+}
+
+function showApp(){$('welcome').classList.add('hidden');$('workspace').classList.remove('hidden');if(me?.role==='admin'&&!viewMode)viewMode='admin';updateTopbar();render()}
+function showWelcome(){$('welcome').classList.remove('hidden');$('workspace').classList.add('hidden');$('logoutBtn').classList.add('hidden');$('roleSwitchBtn').classList.add('hidden');$('globalAdminBadge').classList.add('hidden')}
+function toggleAdminView(){if(me?.role!=='admin')return;viewMode=effectiveRole()==='admin'?'student':'admin';page='dashboard';updateTopbar();render();toast(viewMode==='student'?'Switched to Student view':'Switched back to Administrator view')}
+
+async function studentRegister(){
+ let name=$('regName').value.trim(),p=$('regPass').value,p2=$('regPass2').value,cl=$('regClass').value;
+ if(!name||p.length<6||p!==p2) return toast('Enter your name and matching passwords of at least 6 characters.');
+ try{
+  let r=await api('register',{name,password:p,className:cl,deviceId:deviceId()});
+  me=r.user;viewMode='student';localStorage.setItem(PROFILE_KEY,JSON.stringify(me));
+  await refreshData();toast('Account created. Saving lessons for offline study…');showApp();
+ }catch(e){toast(e.message)}
+}
+async function studentLogin(){
+ let name=$('loginName').value.trim(),password=$('loginPass').value;
+ if(!name||!password) return toast('Enter your name and password.');
+ try{
+  let r=await api('login',{name,password,role:'student',deviceId:deviceId()});
+  me=r.user;viewMode='student';localStorage.setItem(PROFILE_KEY,JSON.stringify(me));
+  await refreshData();showApp();
+ }catch(e){toast(e.message)}
+}
+async function adminLogin(){
+ try{
+  let r=await api('login',{name:$('adminName').value.trim(),password:$('adminPass').value,role:'admin',deviceId:deviceId()});
+  me=r.user;viewMode='admin';localStorage.setItem(PROFILE_KEY,JSON.stringify(me));
+  await refreshData();showApp();
+ }catch(e){toast(e.message)}
+}
+async function adminSetup(){
+ try{
+  let r=await api('adminSetup',{setupKey:$('setupKey').value,name:$('setupName').value.trim(),password:$('setupPass').value});
+  toast('Administrator created. Sign in now.');$('adminSetupForm').classList.add('hidden');$('adminLoginForm').classList.remove('hidden');$('adminName').value=r.name;
+ }catch(e){toast(e.message)}
+}
+async function logout(){
+ if(online()){try{await api('logout')}catch(e){}}
+ me=null;viewMode='admin';localStorage.removeItem(PROFILE_KEY);showWelcome();
+}
+
 function openLocalDB(){return new Promise((resolve,reject)=>{let r=indexedDB.open('QuizoraOffline',1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('kv'))r.result.createObjectStore('kv')};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
 async function localPut(key,value){let d=await openLocalDB();return new Promise((resolve,reject)=>{let t=d.transaction('kv','readwrite');t.objectStore('kv').put(value,key);t.oncomplete=()=>resolve();t.onerror=()=>reject(t.error)})}
 async function localGet(key){let d=await openLocalDB();return new Promise((resolve,reject)=>{let t=d.transaction('kv','readonly'),r=t.objectStore('kv').get(key);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
-async function refreshData(){try{let r=await api('bootstrap');cache=r;await localPut('cache',r);me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));}catch(e){let saved=await localGet('cache').catch(()=>null);if(saved){cache=saved;me=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');if(!me)throw e}else throw e}}
-async function resumeOffline(){try{let p=localStorage.getItem(PROFILE_KEY),c=await localGet('cache');if(p&&c){me=JSON.parse(p);cache=c;showApp();if(online())refreshData().then(render).catch(()=>{})}}catch(e){}}
+
+async function refreshData(){
+ try{
+  let r=await api('bootstrap');
+  cache=r;
+  if(r.adminAvatar) setAdminAvatar(r.adminAvatar);
+  if(Array.isArray(r.subscriptions)) saveLocalSubs(r.subscriptions);
+  await localPut('cache',cache);
+  me=r.user||me;
+  if(me) localStorage.setItem(PROFILE_KEY,JSON.stringify(me));
+ }catch(e){
+  let saved=await localGet('cache').catch(()=>null);
+  if(saved){
+   cache=saved;
+   me=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
+   if(!me) throw e;
+  }else throw e;
+ }
+}
+
+async function resumeOffline(){
+ try{
+  let p=localStorage.getItem(PROFILE_KEY),c=await localGet('cache');
+  if(p&&c){
+   me=JSON.parse(p);cache=c;
+   if(c.adminAvatar) setAdminAvatar(c.adminAvatar);
+   viewMode=me.role==='admin'?'admin':'student';
+   showApp();
+   if(online()) refreshData().then(render).catch(()=>{});
+  }
+ }catch(e){}
+}
 resumeOffline();
-function navItems(){return me.role==='admin'?[['dashboard','▦','Dashboard'],['manage','▤','Classes & Content'],['students','♙','Students'],['announcements','◉','Announcements'],['settings','⚙','Settings']]:[['dashboard','⌂','Home'],['classes','▤','My Classes'],['announcements','◉','Announcements'],['profile','♙','My Profile']]}
-function render(){if(!me||!cache)return;let items=navItems();if(!items.some(x=>x[0]===page))page='dashboard';$('sidebar').innerHTML=`<div style="padding:9px 10px 14px;font-weight:850">${esc(me.name)}<div class="muted" style="font-size:11px">${me.role==='admin'?'Administrator':'Student account'}</div></div>`+items.map(x=>`<button class="navbtn ${page===x[0]?'active':''}" onclick="go('${x[0]}')"><span>${x[1]}</span>${x[2]}</button>`).join('')+`<div style="padding:10px"><button class="btn ghost small" style="width:100%" onclick="syncNow()">⇩ Save lessons offline</button></div>`;if(me.role==='admin')renderAdmin();else renderStudent()}
+
+function isClassUnlocked(className){
+ if(!LOCKED_CLASSES.includes(String(className||'').toUpperCase())) return true;
+ if(effectiveRole()==='admin') return true;
+ const code=String(className).toUpperCase();
+ const treeMatch=(cache?.tree||[]).find(c=>String(c.name).toUpperCase()===code);
+ if(treeMatch?.unlocked) return true;
+ const now=Date.now();
+ const myId=me?.id||me?.name||'';
+ const dev=deviceId();
+ return getLocalSubs().some(s=>{
+  const sameSec=String(s.sectionCode||s.className||'').toUpperCase()===code;
+  const active=s.status!=='revoked'&&(!s.expiresAt||new Date(s.expiresAt).getTime()>now);
+  const rightUser=!s.studentId||!myId||String(s.studentId)===String(myId)||String(s.studentName||'').toLowerCase()===String(me?.name||'').toLowerCase();
+  const rightDev=!s.boundDeviceId||s.boundDeviceId===dev;
+  return sameSec&&active&&rightUser&&rightDev;
+ });
+}
+
+function navItems(){
+ if(effectiveRole()==='admin'){
+  return [
+   ['dashboard','▦','Dashboard'],
+   ['manage','▤','Classes & Content'],
+   ['financial','₦','Financial'],
+   ['students','♙','Students'],
+   ['announcements','◉','Announcements'],
+   ['profile','☺','My Profile'],
+   ['settings','⚙','Settings']
+  ];
+ }
+ return [
+  ['dashboard','⌂','Home'],
+  ['classes','▤','My Classes'],
+  ['announcements','◉','Announcements'],
+  ['profile','♙','My Profile']
+ ];
+}
+
+function render(){
+ if(!me||!cache) return;
+ updateTopbar();
+ let items=navItems();
+ if(!items.some(x=>x[0]===page)) page='dashboard';
+ $('sidebar').innerHTML=`<div style="display:flex;align-items:center;gap:10px;padding:9px 10px 14px">${avatarHTML(me.avatar||me.avatar_data||'',me.name,'avatar-sm')}<div><div style="font-weight:850">${esc(me.name)}</div><div class="muted" style="font-size:11px">${effectiveRole()==='admin'?'Administrator':'Student account'}</div></div></div>`+
+  items.map(x=>`<button class="navbtn ${page===x[0]?'active':''}" onclick="go('${x[0]}')"><span>${x[1]}</span>${x[2]}</button>`).join('')+
+  `<div style="padding:10px"><button class="btn ghost small" style="width:100%" onclick="syncNow()">⇩ Save lessons offline</button></div>`;
+ if(effectiveRole()==='admin') renderAdmin();
+ else renderStudent();
+}
+
 function go(p){page=p;render()}
-function renderAdmin(){let total=(cache.students||[]).length,classes=cache.tree||[];if(page==='dashboard'){$('main').innerHTML=`<div class="pagehead"><div><h1>Administrator dashboard</h1><div class="muted">Manage your learning platform.</div></div><span class="badge">ADMIN</span></div><div class="stats"><div class="stat"><strong>${total}</strong><span>STUDENTS</span></div><div class="stat"><strong>${classes.length}</strong><span>CLASSES</span></div><div class="stat"><strong>${classes.reduce((a,c)=>a+c.subjects.length,0)}</strong><span>SUBJECTS</span></div><div class="stat"><strong>${classes.reduce((a,c)=>a+c.subjects.reduce((b,s)=>b+s.topics.length,0),0)}</strong><span>TOPICS</span></div></div><div class="card"><h2>Welcome to Quizora AI</h2><p class="muted">Use Classes & Content to build your learning library. Select a class and subject with their checkboxes; new topics will automatically be placed under the selected subject.</p><button class="btn" onclick="go('manage')">Manage learning content</button></div>`}
-else if(page==='manage')renderManager();
-else if(page==='students')renderStudents();
-else if(page==='announcements')renderAnnouncements(true);
-else if(page==='settings')$('main').innerHTML=`<div class="pagehead"><h1>Settings</h1></div><div class="card"><h2>Offline and security</h2><p class="muted">Student learning materials are cached on each device. Administrator changes require an internet connection and are synchronised with the shared database.</p><button class="btn secondary" onclick="syncNow()">Synchronise content</button><button class="btn ghost" style="margin-left:7px" onclick="logout()">Sign out</button></div>`}
-function renderManager(){let tree=cache.tree||[];if(!activeClass&&tree[0])activeClass=tree[0].id;let c=tree.find(x=>x.id===activeClass);if(c&&!activeSubject&&c.subjects[0])activeSubject=c.subjects[0].id;let s=c?.subjects.find(x=>x.id===activeSubject);if(s&&!activeTopic&&s.topics[0])activeTopic=s.topics[0].id;let t=s?.topics.find(x=>x.id===activeTopic);$('main').innerHTML=`<div class="pagehead"><div><h1>Classes & Content</h1><div class="muted">Organise classes, subjects, topics and learning materials.</div></div><button class="btn small" onclick="addClass()">＋ Add class</button></div><div class="split"><div class="card tree"><h3>Learning structure</h3><p class="muted" style="font-size:12px">Tick a class and subject to set the destination for new topics.</p>${tree.map(cl=>`<div class="tree-row ${cl.id===activeClass?'selected':''}"><input type="checkbox" ${cl.id===activeClass?'checked':''} onchange="selectClass('${cl.id}',this.checked)"><span class="name" onclick="selectClass('${cl.id}',true)">${esc(cl.name)}</span><button class="btn ghost small" onclick="renameItem('class','${cl.id}','${attr(cl.name)}')">Edit</button><button class="btn danger small" onclick="deleteItem('class','${cl.id}')">×</button></div>${cl.id===activeClass?`<div class="indent">${cl.subjects.map(sb=>`<div class="tree-row ${sb.id===activeSubject?'selected':''}"><input type="checkbox" ${sb.id===activeSubject?'checked':''} onchange="selectSubject('${cl.id}','${sb.id}',this.checked)"><span class="name" onclick="selectSubject('${cl.id}','${sb.id}',true)">${esc(sb.name)}</span><button class="btn ghost small" onclick="renameItem('subject','${sb.id}','${attr(sb.name)}')">Edit</button><button class="btn danger small" onclick="deleteItem('subject','${sb.id}')">×</button></div>`).join('')}<button class="btn secondary small" onclick="addSubject('${cl.id}')">＋ Add subject</button></div>`:''}`).join('')}</div><div><div class="card"><div class="pagehead"><div><h3>${esc(c?.name||'Select a class')} ${s?' / '+esc(s.name):''}</h3><div class="muted" style="font-size:12px">Selected destination for new topics</div></div><button class="btn small" onclick="addTopic()">＋ Add topic</button></div>${s?`<div class="field"><label>Choose subject</label><select onchange="selectSubject('${c.id}',this.value,true)">${c.subjects.map(x=>`<option value="${x.id}" ${x.id===activeSubject?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><h3>Topics</h3>${s.topics.map(tp=>`<button class="topic-btn ${tp.id===activeTopic?'active':''}" onclick="selectTopic('${tp.id}')">${esc(tp.name)} <span class="muted">›</span></button>`).join('')||'<p class="muted">No topics yet. Add your first topic.</p>'}<div class="btnrow"><button class="btn ghost small" onclick="renameItem('subject','${s.id}','${attr(s.name)}')">Rename subject</button><button class="btn danger small" onclick="deleteItem('subject','${s.id}')">Delete subject</button></div>`:'<div class="empty">Select a class, then tick or choose a subject.</div>'}</div>${t?renderTopicEditor(t):'<div class="card empty">Select a topic to add or edit learning content. You can create topics without adding notes.</div>'}</div></div>`}
-function renderTopicEditor(t){let blocks=t.content||[];return `<div class="card" style="margin-top:15px"><div class="pagehead"><div><h3>${esc(t.name)}</h3><div class="muted" style="font-size:12px">Topic content editor — edit while reading.</div></div><div class="btnrow"><button class="btn ghost small" onclick="renameItem('topic','${t.id}','${attr(t.name)}')">Rename</button><button class="btn danger small" onclick="deleteItem('topic','${t.id}')">Delete</button></div></div><div class="btnrow"><button class="btn small" onclick="addPhrase()">＋ Add phrase</button><button class="btn secondary small" onclick="addNotes()">＋ Add notes</button><label class="btn ghost small">＋ Add diagram<input type="file" accept="image/*" hidden onchange="uploadDiagram(this.files[0])"></label></div>${blocks.length?blocks.map(b=>`<article class="content-card"><span class="badge">${b.kind==='phrase'?'PHRASE':'NOTES'}</span><p>${esc(b.body)}</p><div class="content-tools"><button class="btn ghost small" onclick="copyText('${b.id}')">Copy</button><button class="btn secondary small" onclick="editContent('${b.id}')">Edit</button><button class="btn ghost small" onclick="activeContent='${b.id}';toast('Next uploaded diagram will be attached here.')">Attach diagram here</button><button class="btn danger small" onclick="removeContent('${b.id}')">Remove</button></div>${(t.diagrams||[]).filter(d=>d.content_id===b.id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}"><button class="btn danger small" onclick="removeDiagram('${d.id}')">Remove diagram</button>`).join('')}</article>`).join(''):'<div class="empty">This topic has no notes yet. Add a phrase or create a full note.</div>'}${(t.diagrams||[]).filter(d=>!d.content_id).map(d=>`<div class="content-card"><img class="diagram" src="${d.data_url}" alt="${attr(d.name)}"><button class="btn danger small" onclick="removeDiagram('${d.id}')">Remove diagram</button></div>`).join('')}</div>`}
-function renderStudents(){let list=cache.students||[];$('main').innerHTML=`<div class="pagehead"><div><h1>Students</h1><div class="muted">Manage access and subscriptions.</div></div><button class="btn small" onclick="refreshData().then(render)">Refresh</button></div><div class="card">${list.length?list.map(u=>`<div class="student-class"><div><b>${esc(u.name)}</b><div class="muted" style="font-size:12px">${u.blocked?'Blocked':'Active'} · ${esc(u.class_name||'No class')}</div></div><div class="btnrow"><button class="btn ${u.blocked?'secondary':'ghost'} small" onclick="studentAction('${u.id}','block',${!u.blocked})">${u.blocked?'Unblock':'Block'}</button><button class="btn small" onclick="studentAction('${u.id}','subscription')">Subscription</button><button class="btn ghost small" onclick="resetStudentDevice('${u.id}')">Reset device</button></div></div>`).join(''):'<div class="empty">No students have registered yet.</div>'}</div>`}
-function renderAnnouncements(admin){let a=cache.announcements||[];$('main').innerHTML=`<div class="pagehead"><div><h1>Announcements</h1><div class="muted">Updates for Quizora students.</div></div>${admin?'<button class="btn small" onclick="addAnnouncement()">＋ New announcement</button>':''}</div><div class="card">${a.length?a.map(x=>`<div class="announcement"><b>${esc(x.title)}</b><p>${esc(x.body)}</p>${admin?`<button class="btn danger small" onclick="deleteAnnouncement('${x.id}')">Delete</button>`:''}</div>`).join(''):'<div class="empty">No announcements yet.</div>'}</div>`}
-function renderStudent(){if(page==='dashboard'||page==='classes'){let tree=cache.tree||[];$('main').innerHTML=`<div class="pagehead"><div><h1>${page==='dashboard'?'Welcome, '+esc(me.name):'My Classes'}</h1><div class="muted">Choose a class to continue learning.</div></div><span class="badge free">Offline-ready</span></div><div class="note">Tap “Save lessons offline” while connected to download your available learning materials.</div>${tree.map(c=>{let locked=!(FREE_CLASSES.includes(c.name))&&!c.unlocked;return `<div class="student-class"><div><h3>${esc(c.name)}</h3><div class="muted" style="font-size:12px">${c.subjects.length} subjects</div></div>${locked?'<div class="btnrow"><span class="badge lock">🔒 Subscription</span><a class="btn small gold" style="text-decoration:none" href="https://wa.me/2348147699555?text=Hello%2C%20I%20want%20to%20subscribe%20to%20Quizora" target="_blank" rel="noopener">Subscribe</a></div>':`<button class="btn small" onclick="openStudentClass('${c.id}')">Open class</button>`}</div>`}).join('')}`;return}
-if(page==='announcements')renderAnnouncements(false);else if(page==='profile')$('main').innerHTML=`<div class="pagehead"><h1>My Profile</h1></div><div class="card"><h2>${esc(me.name)}</h2><p class="muted">Student account · ${esc(me.class_name||'')}</p><p class="muted">Your offline lessons are stored on this device.</p></div>`;else if(page==='reading')renderStudentReading()}
-function openStudentClass(id){activeClass=id;page='subjects';renderStudentSubjects()}
-function renderStudentSubjects(){let c=(cache.tree||[]).find(x=>x.id===activeClass);if(!c)return;let locked=!(FREE_CLASSES.includes(c.name))&&!c.unlocked;if(locked){$('main').innerHTML=`<div class="locked">🔒 ${esc(c.name)} is locked. An active subscription is required.</div>`;return}$('main').innerHTML=`<div class="pagehead"><div><h1>${esc(c.name)}</h1><div class="muted">Select a subject.</div></div><button class="btn ghost small" onclick="go('classes')">Back to classes</button></div>`+c.subjects.map(s=>`<div class="student-class"><h3>${esc(s.name)}</h3><button class="btn small" onclick="openStudentSubject('${s.id}')">View topics</button></div>`).join('')}
-function openStudentSubject(id){activeSubject=id;let c=(cache.tree||[]).find(x=>x.id===activeClass),s=c.subjects.find(x=>x.id===id);$('main').innerHTML=`<div class="pagehead"><div><h1>${esc(s.name)}</h1><div class="muted">${esc(c.name)} · Topics</div></div><button class="btn ghost small" onclick="renderStudentSubjects()">Back</button></div>`+s.topics.map(t=>`<button class="topic-btn" onclick="activeTopic='${t.id}';page='reading';renderStudentReading()">${esc(t.name)} ›</button>`).join('')}
-function renderStudentReading(){let t=findTopic(activeTopic);if(!t){$('main').innerHTML='<div class="empty">Topic not found.</div>';return}let blocks=(t.content||[]).map(b=>`<article class="content-card"><p>${esc(b.body)}</p>${(t.diagrams||[]).filter(d=>d.content_id===b.id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}">`).join('')}</article>`).join('');let loose=(t.diagrams||[]).filter(d=>!d.content_id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}">`).join('');$('main').innerHTML=`<div class="pagehead"><div><h1>${esc(t.name)}</h1><div class="muted">Learning notes</div></div><button class="btn ghost small" onclick="openStudentSubject(activeSubject)">Back to topics</button></div>${blocks}${loose}${blocks||loose?'':'<div class="empty">Notes for this topic have not been added yet.</div>'}`}
+
+function getFinanceSummary(){
+ const subs=getLocalSubs();
+ const activeSubs=subs.filter(s=>s.status!=='revoked'&&(!s.expiresAt||new Date(s.expiresAt).getTime()>Date.now()));
+ const totalRevenue=activeSubs.reduce((sum,s)=>sum+(Number(s.amountNgn)||MONTHLY_FEE),0);
+ const bySection={};
+ LOCKED_CLASSES.forEach(sec=>{bySection[sec]=activeSubs.filter(s=>String(s.sectionCode||s.className||'').toUpperCase()===sec).length});
+ return {subs,activeSubs,totalRevenue,bySection};
+}
+
+function renderAdmin(){
+ let total=(cache.students||[]).length,classes=cache.tree||[];
+ if(page==='dashboard'){
+  const fin=getFinanceSummary();
+  $('main').innerHTML=`<div class="pagehead"><div><h1>Administrator dashboard</h1><div class="muted">Manage your learning platform, content, and ₦2,000/month section PINs.</div></div><span class="badge">ADMIN</span></div>
+  <div class="stats">
+   <div class="stat"><strong>${total}</strong><span>STUDENTS</span></div>
+   <div class="stat"><strong>${classes.length}</strong><span>CLASSES</span></div>
+   <div class="stat"><strong>₦${fin.totalRevenue.toLocaleString()}</strong><span>ACTIVE SUBSCRIPTIONS</span></div>
+   <div class="stat"><strong>${classes.reduce((a,c)=>a+c.subjects.reduce((b,s)=>b+s.topics.length,0),0)}</strong><span>TOPICS</span></div>
+  </div>
+  <div class="card"><h2>Welcome to Quizora AI</h2><p class="muted">Select a class and tick a topic to keep it checked while typing lines, subtopics, or uploading photos and .docx files. Locked sections (JSS3, SS3, WAEC, JAMB) unlock with non-transferable PINs at ₦2,000/month via OPay ${OPAY_ACCOUNT} (${OPAY_NAME}).</p><div class="btnrow"><button class="btn" onclick="go('manage')">Manage learning content</button><button class="btn secondary" onclick="go('financial')">Open Financial & PINs</button></div></div>`;
+ }
+ else if(page==='manage') renderManager();
+ else if(page==='financial') renderFinancial();
+ else if(page==='students') renderStudents();
+ else if(page==='announcements') renderAnnouncements(true);
+ else if(page==='profile') renderProfileEditor();
+ else if(page==='settings') $('main').innerHTML=`<div class="pagehead"><h1>Settings</h1></div><div class="card"><h2>Offline and security</h2><p class="muted">After initial account creation and sync, lessons, profiles, and unlocked PINs remain available offline on the device. Non-transferable PINs bind to the subscriber's account and device.</p><div class="btnrow"><button class="btn secondary" onclick="syncNow()">Synchronise content</button><button class="btn ghost" onclick="go('profile')">Profile photo</button><button class="btn ghost" onclick="logout()">Sign out</button></div></div>`;
+}
+
+function renderFinancial(){
+ const fin=getFinanceSummary();
+ const students=cache.students||[];
+ $('main').innerHTML=`<div class="pagehead"><div><h1>Financial & Subscriber PINs</h1><div class="muted">₦${MONTHLY_FEE.toLocaleString()} per locked section (JSS3, SS3, WAEC, JAMB) per month · OPay ${OPAY_ACCOUNT} (${OPAY_NAME}) · WhatsApp ${WHATSAPP_NUMBER}</div></div><span class="badge">FINANCE</span></div>
+ <div class="stats">
+  <div class="stat"><strong>₦${fin.totalRevenue.toLocaleString()}</strong><span>ACTIVE MONTHLY VALUE</span></div>
+  <div class="stat"><strong>${fin.activeSubs.length}</strong><span>ACTIVE PINS</span></div>
+  <div class="stat"><strong>${fin.subs.length}</strong><span>TOTAL ISSUED PINS</span></div>
+  <div class="stat"><strong>₦${MONTHLY_FEE.toLocaleString()}</strong><span>RATE / SECTION / MO</span></div>
+ </div>
+ <div class="card">
+  <h3>Generate Non-Transferable Subscriber PIN</h3>
+  <p class="muted" style="font-size:13px">Confirm payment of ₦2,000 to OPay <b>${OPAY_ACCOUNT}</b> (${OPAY_NAME}) via WhatsApp proof on <b>${WHATSAPP_NUMBER}</b>, then generate a PIN bound to the student and device.</p>
+  <div class="field"><label>Student name / username</label><input id="pinStudent" list="studentNamesList" placeholder="Enter student name"><datalist id="studentNamesList">${students.map(s=>`<option value="${attr(s.name)}">`).join('')}</datalist></div>
+  <div class="field"><label>Locked section (₦2,000 / month)</label><select id="pinSection">${LOCKED_CLASSES.map(sec=>`<option value="${sec}">${sec} — ₦2,000/month (${fin.bySection[sec]||0} active)</option>`).join('')}</select></div>
+  <div class="field"><label>Bind to specific Device ID (optional — auto-binds on first student redemption if left blank)</label><input id="pinDevice" placeholder="Leave blank to auto-bind on first device"></div>
+  <div class="field"><label>Duration (days)</label><input id="pinDays" type="number" value="30" min="1"></div>
+  <button class="btn" onclick="generateSubscriberPin()">Generate PIN</button>
+  <div id="generatedPinBox" class="note hidden" style="margin-top:12px"></div>
+ </div>
+ <div class="card" style="margin-top:16px">
+  <h3>Issued PINs & Subscription Ledger</h3>
+  ${fin.subs.length?`<div style="overflow:auto"><table class="ledger-table"><thead><tr><th>PIN</th><th>Student</th><th>Section</th><th>Fee</th><th>Device Lock</th><th>Status</th><th>Action</th></tr></thead><tbody>${fin.subs.map(s=>{
+   const expired=s.expiresAt&&new Date(s.expiresAt).getTime()<=Date.now();
+   const st=s.status==='revoked'?'Revoked':expired?'Expired':'Active';
+   return `<tr><td><span class="code-pin">${esc(s.pinCode)}</span></td><td>${esc(s.studentName||s.studentId||'Student')}</td><td><span class="badge">${esc(s.sectionCode||s.className)}</span></td><td>₦${Number(s.amountNgn||MONTHLY_FEE).toLocaleString()}</td><td class="muted" style="font-size:11px">${s.boundDeviceId?esc(String(s.boundDeviceId).slice(0,12))+'…':'Binds on 1st use'}</td><td><span class="badge ${st==='Active'?'free':'lock'}">${st}</span></td><td>${s.status!=='revoked'?`<button class="btn danger small" onclick="revokePin('${attr(s.pinCode)}')">Revoke</button>`:''}</td></tr>`;
+  }).join('')}</tbody></table></div>`:'<div class="empty">No subscriber PINs generated yet.</div>'}
+ </div>`;
+}
+
+async function generateSubscriberPin(){
+ const studentName=$('pinStudent').value.trim();
+ const sectionCode=$('pinSection').value;
+ const boundDeviceId=$('pinDevice').value.trim()||null;
+ const days=Math.max(1,Number($('pinDays').value)||30);
+ if(!studentName) return toast('Enter the student name/username first.');
+ const code='QZ-'+sectionCode+'-'+Math.random().toString(36).slice(2,6).toUpperCase()+'-'+Math.floor(1000+Math.random()*9000);
+ const now=new Date();
+ const expiresAt=new Date(now.getTime()+days*86400000).toISOString();
+ const record={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),pinCode:code,studentName,sectionCode,amountNgn:MONTHLY_FEE,boundDeviceId,status:'active',createdAt:now.toISOString(),expiresAt};
+ const nextSubs=[record,...getLocalSubs()];
+ saveLocalSubs(nextSubs);
+ if(cache) cache.subscriptions=nextSubs;
+ await localPut('cache',cache||{});
+ $('generatedPinBox').classList.remove('hidden');
+ $('generatedPinBox').innerHTML=`<b>PIN Generated:</b> <span class="code-pin">${esc(code)}</span><br>Student: <b>${esc(studentName)}</b> · Section: <b>${esc(sectionCode)}</b> · Amount: <b>₦${MONTHLY_FEE.toLocaleString()}/mo</b><br>Non-transferable: ${boundDeviceId?`Bound to device <code>${esc(boundDeviceId)}</code>`:'Will lock to the first device that redeems it.'}`;
+ if(online()){try{await api('generatePin',record);await refreshData()}catch(e){}}
+ toast('Subscriber PIN generated.');
+}
+
+async function revokePin(pinCode){
+ if(!confirm('Revoke PIN '+pinCode+'?')) return;
+ const nextSubs=getLocalSubs().map(s=>s.pinCode===pinCode?{...s,status:'revoked'}:s);
+ saveLocalSubs(nextSubs);
+ if(cache) cache.subscriptions=nextSubs;
+ await localPut('cache',cache||{});
+ if(online()){try{await api('revokePin',{pinCode});await refreshData()}catch(e){}}
+ renderFinancial();
+ toast('PIN revoked.');
+}
+
+function renderManager(){
+ let tree=cache.tree||[];
+ if(!activeClass&&tree[0]) activeClass=tree[0].id;
+ let c=tree.find(x=>x.id===activeClass);
+ if(c&&!activeSubject&&c.subjects[0]) activeSubject=c.subjects[0].id;
+ let s=c?.subjects.find(x=>x.id===activeSubject);
+ if(s&&!activeTopic&&s.topics[0]){activeTopic=s.topics[0].id;topicTicked=true}
+ let t=s?.topics.find(x=>x.id===activeTopic);
+ if(!t) topicTicked=false;
+
+ $('main').innerHTML=`<div class="pagehead"><div><h1>Classes & Content</h1><div class="muted">Tick a class and topic—the tick stays until you untick. Typed lines, subtopics, photos, and .docx files auto-place on save.</div></div><button class="btn small" onclick="addClass()">＋ Add class</button></div>
+ <div class="split">
+  <div class="card tree">
+   <h3>Learning structure</h3>
+   <p class="muted" style="font-size:12px">Tick a class and subject to set the destination. Ticked topics stay checked until unticked.</p>
+   ${tree.map(cl=>`<div class="tree-row ${cl.id===activeClass?'selected':''}">
+    <input type="checkbox" ${cl.id===activeClass?'checked':''} onchange="selectClass('${cl.id}',this.checked)">
+    <span class="name" onclick="selectClass('${cl.id}',true)">${esc(cl.name)}</span>
+    <button class="btn ghost small" onclick="renameItem('class','${cl.id}','${attr(cl.name)}')">Edit</button>
+    <button class="btn danger small" onclick="deleteItem('class','${cl.id}')">×</button>
+   </div>${cl.id===activeClass?`<div class="indent">${cl.subjects.map(sb=>`<div class="tree-row ${sb.id===activeSubject?'selected':''}">
+    <input type="checkbox" ${sb.id===activeSubject?'checked':''} onchange="selectSubject('${cl.id}','${sb.id}',this.checked)">
+    <span class="name" onclick="selectSubject('${cl.id}','${sb.id}',true)">${esc(sb.name)}</span>
+    <button class="btn ghost small" onclick="renameItem('subject','${sb.id}','${attr(sb.name)}')">Edit</button>
+    <button class="btn danger small" onclick="deleteItem('subject','${sb.id}')">×</button>
+   </div>`).join('')}<button class="btn secondary small" onclick="addSubject('${cl.id}')">＋ Add subject</button></div>`:''}`).join('')}
+  </div>
+  <div>
+   <div class="card">
+    <div class="pagehead">
+     <div><h3>${esc(c?.name||'Select a class')} ${s?' / '+esc(s.name):''}</h3><div class="muted" style="font-size:12px">${topicTicked&&t?`Sticky tick active on: <b>${esc(t.name)}</b> (until unticked)`:'Selected destination for new topics'}</div></div>
+     <div class="btnrow">
+      <button class="btn small" onclick="addTopic(false)">＋ Add topic only</button>
+      <button class="btn secondary small" onclick="addTopic(true)">＋ Topic + notes</button>
+     </div>
+    </div>
+    ${s?`<div class="field"><label>Choose subject</label><select onchange="selectSubject('${c.id}',this.value,true)">${c.subjects.map(x=>`<option value="${x.id}" ${x.id===activeSubject?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div>
+    <h3>Topics</h3>
+    ${s.topics.map(tp=>{
+     const isThisTicked=(tp.id===activeTopic&&topicTicked);
+     return `<div class="topic-row ${tp.id===activeTopic?'active':''}">
+      <input type="checkbox" ${isThisTicked?'checked':''} title="Keep ticked to auto-place typed lines and photos" onchange="toggleTopicSticky('${tp.id}',this.checked)">
+      <button class="topic-open" onclick="selectTopic('${tp.id}',true)">${esc(tp.name)}</button>
+      <button class="btn ghost small" onclick="renameItem('topic','${tp.id}','${attr(tp.name)}')">Edit</button>
+      <button class="btn danger small" onclick="deleteItem('topic','${tp.id}')">Delete</button>
+     </div>`;
+    }).join('')||'<p class="muted">No topics yet. Add a topic only (for later) or with notes.</p>'}
+    <div class="btnrow" style="margin-top:10px"><button class="btn ghost small" onclick="renameItem('subject','${s.id}','${attr(s.name)}')">Rename subject</button><button class="btn danger small" onclick="deleteItem('subject','${s.id}')">Delete subject</button></div>`:'<div class="empty">Select a class, then tick or choose a subject.</div>'}
+   </div>
+   ${t?renderTopicEditor(t):'<div class="card empty">Select or tick a topic to add or edit learning content. You can add topics only and fill content later.</div>'}
+  </div>
+ </div>`;
+}
+
+function renderTopicEditor(t){
+ let blocks=t.content||[];
+ return `<div class="card" style="margin-top:15px">
+  <div class="pagehead">
+   <div>
+    <h3>${esc(t.name)} ${topicTicked?'<span class="badge free">TICKED · AUTO-PLACE ON</span>':'<span class="badge">UNTICKED</span>'}</h3>
+    <div class="muted" style="font-size:12px">Type phrases/subtopics, upload photos, or upload .docx / text files.</div>
+   </div>
+   <div class="btnrow">
+    <button class="btn ghost small" onclick="renameItem('topic','${t.id}','${attr(t.name)}')">Edit</button>
+    <button class="btn danger small" onclick="deleteItem('topic','${t.id}')">Delete</button>
+   </div>
+  </div>
+  <div class="btnrow">
+   <button class="btn small" onclick="addPhrase()">＋ Type / add line</button>
+   <button class="btn secondary small" onclick="addNotes()">＋ Add notes</button>
+   <label class="btn ghost small">＋ Upload photos<input type="file" accept="image/*" multiple hidden onchange="uploadPhotos(this.files)"></label>
+   <label class="btn ghost small">＋ Upload file (.docx / .txt)<input type="file" accept=".docx,.txt,.md,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden onchange="uploadDocOrFile(this.files[0]);this.value=''"></label>
+  </div>
+  ${blocks.length?blocks.map(b=>{
+   const isSub=b.kind==='subtopic'||isSubtopicText(b.body);
+   return `<article class="content-card">
+    <span class="badge">${isSub?'SUBTOPIC':b.kind==='phrase'?'LINE / PHRASE':'NOTES'}</span>
+    ${isSub?`<h4 class="subhead">${esc(b.body)}</h4>`:`<p>${esc(b.body)}</p>`}
+    <div class="content-tools">
+     <button class="btn ghost small" onclick="copyText('${b.id}')">Copy</button>
+     <button class="btn secondary small" onclick="editContent('${b.id}')">Edit</button>
+     <button class="btn ghost small" onclick="activeContent='${b.id}';toast('Next uploaded photo will be placed at this section.')">Place photo here</button>
+     <button class="btn danger small" onclick="deleteContent('${b.id}')">Delete</button>
+    </div>
+    ${(t.diagrams||[]).filter(d=>d.content_id===b.id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}"><button class="btn danger small" onclick="removeDiagram('${d.id}')">Delete photo</button>`).join('')}
+   </article>`;
+  }).join(''):'<div class="empty">This topic has no content yet. Add a topic only for later, or type lines, add notes, upload photos, or upload a .docx file.</div>'}
+  ${(t.diagrams||[]).filter(d=>!d.content_id).map(d=>`<div class="content-card"><img class="diagram" src="${d.data_url}" alt="${attr(d.name)}"><button class="btn danger small" onclick="removeDiagram('${d.id}')">Delete photo</button></div>`).join('')}
+ </div>`;
+}
+
+function renderStudents(){
+ let list=cache.students||[];
+ $('main').innerHTML=`<div class="pagehead"><div><h1>Students</h1><div class="muted">Manage student access, non-transferable PIN subscriptions, and devices.</div></div><button class="btn small" onclick="refreshData().then(render)">Refresh</button></div>
+ <div class="card">${list.length?list.map(u=>`<div class="student-class">
+  <div style="display:flex;align-items:center;gap:10px">${avatarHTML(u.avatar||u.avatar_data||'',u.name,'avatar-sm')}<div><b>${esc(u.name)}</b><div class="muted" style="font-size:12px">${u.blocked?'Blocked':'Active'} · ${esc(u.class_name||'No class')}</div></div></div>
+  <div class="btnrow">
+   <button class="btn ${u.blocked?'secondary':'ghost'} small" onclick="studentAction('${u.id}','block',${!u.blocked})">${u.blocked?'Unblock':'Block'}</button>
+   <button class="btn small" onclick="studentAction('${u.id}','subscription','${attr(u.name)}')">Issue PIN</button>
+   <button class="btn ghost small" onclick="resetStudentDevice('${u.id}')">Reset device</button>
+  </div>
+ </div>`).join(''):'<div class="empty">No students have registered yet.</div>'}</div>`;
+}
+
+function renderAnnouncements(admin){
+ let a=cache.announcements||[];
+ $('main').innerHTML=`<div class="pagehead"><div><h1>Announcements</h1><div class="muted">Updates for Quizora students.</div></div>${admin?'<button class="btn small" onclick="addAnnouncement()">＋ New announcement</button>':''}</div>
+ <div class="card">${a.length?a.map(x=>`<div class="announcement"><b>${esc(x.title)}</b><p>${esc(x.body)}</p>${admin?`<button class="btn danger small" onclick="deleteAnnouncement('${x.id}')">Delete</button>`:''}</div>`).join(''):'<div class="empty">No announcements yet.</div>'}</div>`;
+}
+
+function renderProfileEditor(){
+ const avatar=me.avatar||me.avatar_data||'';
+ $('main').innerHTML=`<div class="pagehead"><div><h1>My Profile</h1><div class="muted">${effectiveRole()==='admin'?'Your photo also appears in the top-right corner of every dashboard.':'Upload your profile photo. The administrator photo appears in the top-right of your dashboard.'}</div></div></div>
+ <div class="card">
+  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+   ${avatarHTML(avatar,me.name,'avatar-lg')}
+   <div>
+    <h2 style="margin:0">${esc(me.name)}</h2>
+    <div class="muted">${effectiveRole()==='admin'?'Administrator':'Student account'} ${me.class_name?'· '+esc(me.class_name):''}</div>
+    <div class="btnrow" style="margin-top:10px">
+     <label class="btn small">Upload profile photo<input type="file" accept="image/*" hidden onchange="uploadProfilePhoto(this.files[0]);this.value=''"></label>
+    </div>
+   </div>
+  </div>
+ </div>`;
+}
+
+function compressImageDataUrl(file,maxSize=360,quality=0.82){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onload=()=>{
+   const img=new Image();
+   img.onload=()=>{
+    const scale=Math.min(1,maxSize/Math.max(img.width||maxSize,img.height||maxSize));
+    const w=Math.max(1,Math.round((img.width||maxSize)*scale));
+    const h=Math.max(1,Math.round((img.height||maxSize)*scale));
+    const canvas=document.createElement('canvas');
+    canvas.width=w;canvas.height=h;
+    const ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0,w,h);
+    resolve(canvas.toDataURL('image/jpeg',quality));
+   };
+   img.onerror=()=>reject(new Error('Could not read image'));
+   img.src=reader.result;
+  };
+  reader.onerror=()=>reject(new Error('Could not load file'));
+  reader.readAsDataURL(file);
+ });
+}
+
+async function uploadProfilePhoto(file){
+ if(!file) return;
+ try{
+  const dataUrl=await compressImageDataUrl(file,360,0.82);
+  me.avatar=dataUrl;me.avatar_data=dataUrl;
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(me));
+  if(effectiveRole()==='admin'||me.role==='admin') setAdminAvatar(dataUrl);
+  if(cache) await localPut('cache',cache);
+  if(online()){try{await api('saveProfilePhoto',{dataUrl,isAdmin:effectiveRole()==='admin'||me.role==='admin'});await refreshData()}catch(e){}}
+  render();toast('Profile photo updated.');
+ }catch(e){toast(e.message)}
+}
+
+function renderStudent(){
+ if(page==='dashboard'||page==='classes'){
+  let tree=cache.tree||[];
+  $('main').innerHTML=`<div class="pagehead"><div><h1>${page==='dashboard'?'Welcome, '+esc(me.name):'My Classes'}</h1><div class="muted">JSS3, SS3, WAEC and JAMB are ₦${MONTHLY_FEE.toLocaleString()}/section/month.</div></div><span class="badge free">Offline-ready</span></div>
+  <div class="note">After initial account setup and syncing, your lessons work offline without data. Locked sections (JSS3, SS3, WAEC, JAMB) cost ₦2,000/month each via OPay <b>${OPAY_ACCOUNT}</b> (${OPAY_NAME}) with proof sent to WhatsApp <b>${WHATSAPP_NUMBER}</b>.</div>
+  ${tree.map(c=>{
+   const unlocked=isClassUnlocked(c.name);
+   return `<div class="student-class">
+    <div><h3>${esc(c.name)}</h3><div class="muted" style="font-size:12px">${c.subjects.length} subjects · ${unlocked?'Unlocked':'₦2,000/month locked section'}</div></div>
+    ${unlocked?`<button class="btn small" onclick="openStudentClass('${c.id}')">Open class</button>`:`<div class="btnrow"><span class="badge lock">🔒 ₦2,000/mo</span><button class="btn small gold" onclick="openUnlockModal('${attr(c.name)}')">Unlock / Pay</button></div>`}
+   </div>`;
+  }).join('')}`;
+  return;
+ }
+ if(page==='announcements') renderAnnouncements(false);
+ else if(page==='profile') renderProfileEditor();
+ else if(page==='reading') renderStudentReading();
+}
+
+function openUnlockModal(sectionName){
+ const sec=String(sectionName||'WAEC').toUpperCase();
+ modal(`<h2>Unlock ${esc(sec)} — ₦${MONTHLY_FEE.toLocaleString()}/month</h2>
+  <p class="muted">This section is locked until subscribed at <b>₦2,000 per month</b>.</p>
+  <div class="note">
+   <b>1. Pay ₦2,000 to OPay:</b> ${OPAY_ACCOUNT} (${OPAY_NAME})<br>
+   <b>2. Send proof of payment on WhatsApp:</b> ${WHATSAPP_NUMBER} (include your name: <b>${esc(me.name)}</b> & section: <b>${esc(sec)}</b>)<br>
+   <b>3. Enter your non-transferable PIN below</b> (bound to your account & this device).
+  </div>
+  <div class="field"><label>Subscriber PIN</label><input id="redeemPinInput" placeholder="e.g. QZ-${sec}-XXXX-1234"></div>
+  <div class="btnrow">
+   <button class="btn" onclick="redeemPin('${attr(sec)}')">Activate PIN</button>
+   <a class="btn gold small" style="text-decoration:none" href="https://wa.me/2348147699555?text=${encodeURIComponent('Hello, I paid ₦2,000 for '+sec+' on Quizora. My name is '+me.name)}" target="_blank" rel="noopener">Send WhatsApp proof</a>
+   <button class="btn ghost" onclick="closeModal()">Close</button>
+  </div>`);
+}
+
+async function redeemPin(sectionName){
+ const pinCode=($('redeemPinInput')?.value||'').trim().toUpperCase();
+ if(!pinCode) return toast('Enter your subscriber PIN first.');
+ const sec=String(sectionName).toUpperCase();
+ const subs=getLocalSubs();
+ const found=subs.find(s=>String(s.pinCode||'').toUpperCase()===pinCode);
+ if(found){
+  if(found.status==='revoked') return toast('This PIN has been revoked.');
+  if(found.expiresAt&&new Date(found.expiresAt).getTime()<=Date.now()) return toast('This PIN has expired.');
+  if(String(found.sectionCode||'').toUpperCase()!==sec) return toast('This PIN is for '+found.sectionCode+', not '+sec+'.');
+  if(found.boundDeviceId&&found.boundDeviceId!==deviceId()) return toast('This PIN is non-transferable and bound to another device.');
+  found.boundDeviceId=deviceId();
+  found.studentId=me.id||found.studentId;
+  found.studentName=me.name;
+  saveLocalSubs(subs);
+ }else if(online()){
+  try{
+   const res=await api('redeemPin',{pinCode,sectionCode:sec,studentName:me.name});
+   const rec=res.subscription||{id:crypto.randomUUID(),pinCode,sectionCode:sec,studentName:me.name,amountNgn:MONTHLY_FEE,boundDeviceId:deviceId(),status:'active',expiresAt:new Date(Date.now()+30*86400000).toISOString()};
+   saveLocalSubs([rec,...subs]);
+  }catch(e){return toast(e.message)}
+ }else{
+  return toast('Connect to the internet once to verify a newly issued PIN, or enter a PIN synced on this device.');
+ }
+ (cache?.tree||[]).forEach(c=>{if(String(c.name).toUpperCase()===sec)c.unlocked=true});
+ if(cache){cache.subscriptions=getLocalSubs();await localPut('cache',cache)}
+ closeModal();
+ render();
+ toast(sec+' unlocked for 1 month on this device!');
+}
+
+function openStudentClass(id){
+ let c=(cache.tree||[]).find(x=>x.id===id);
+ if(!c) return;
+ if(!isClassUnlocked(c.name)) return openUnlockModal(c.name);
+ activeClass=id;page='subjects';renderStudentSubjects();
+}
+
+function renderStudentSubjects(){
+ let c=(cache.tree||[]).find(x=>x.id===activeClass);
+ if(!c) return;
+ if(!isClassUnlocked(c.name)){$('main').innerHTML=`<div class="locked">🔒 ${esc(c.name)} requires a ₦2,000/month subscription.</div>`;return}
+ $('main').innerHTML=`<div class="pagehead"><div><h1>${esc(c.name)}</h1><div class="muted">Select a subject.</div></div><button class="btn ghost small" onclick="go('classes')">Back to classes</button></div>`+
+  c.subjects.map(s=>`<div class="student-class"><h3>${esc(s.name)}</h3><button class="btn small" onclick="openStudentSubject('${s.id}')">View topics</button></div>`).join('');
+}
+
+function openStudentSubject(id){
+ activeSubject=id;
+ let c=(cache.tree||[]).find(x=>x.id===activeClass),s=c.subjects.find(x=>x.id===id);
+ $('main').innerHTML=`<div class="pagehead"><div><h1>${esc(s.name)}</h1><div class="muted">${esc(c.name)} · Topics</div></div><button class="btn ghost small" onclick="renderStudentSubjects()">Back</button></div>`+
+  s.topics.map(t=>`<button class="topic-row" style="width:100%;text-align:left" onclick="activeTopic='${t.id}';page='reading';renderStudentReading()"><span class="topic-open">${esc(t.name)}</span><span>›</span></button>`).join('');
+}
+
+function renderStudentReading(){
+ let t=findTopic(activeTopic);
+ if(!t){$('main').innerHTML='<div class="empty">Topic not found.</div>';return}
+ let blocks=(t.content||[]).map(b=>{
+  const isSub=b.kind==='subtopic'||isSubtopicText(b.body);
+  return `<article class="content-card">${isSub?`<h4 class="subhead">${esc(b.body)}</h4>`:`<p>${esc(b.body)}</p>`}${(t.diagrams||[]).filter(d=>d.content_id===b.id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}">`).join('')}</article>`;
+ }).join('');
+ let loose=(t.diagrams||[]).filter(d=>!d.content_id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}">`).join('');
+ $('main').innerHTML=`<div class="pagehead"><div><h1>${esc(t.name)}</h1><div class="muted">Learning notes</div></div><button class="btn ghost small" onclick="openStudentSubject(activeSubject)">Back to topics</button></div>${blocks}${loose}${blocks||loose?'':'<div class="empty">Notes for this topic have not been added yet.</div>'}`;
+}
+
 function findTopic(id){for(let c of cache.tree||[])for(let s of c.subjects)for(let t of s.topics)if(t.id===id)return t;return null}
-function selectClass(id,checked){activeClass=checked?id:null;activeSubject=null;activeTopic=null;renderManager()}
-function selectSubject(cid,id,checked){activeClass=cid;activeSubject=checked?id:null;activeTopic=null;renderManager()}
-function selectTopic(id){activeTopic=id;renderManager()}
+function findTopicParent(tid){for(let c of cache.tree||[])for(let s of c.subjects)for(let t of s.topics)if(t.id===tid)return{c,s,t};return null}
+
+function selectClass(id,checked){activeClass=checked?id:null;activeSubject=null;activeTopic=null;topicTicked=false;renderManager()}
+function selectSubject(cid,id,checked){activeClass=cid;activeSubject=checked?id:null;activeTopic=null;topicTicked=false;renderManager()}
+function selectTopic(id,keepTick=false){activeTopic=id;if(keepTick)topicTicked=true;renderManager()}
+function toggleTopicSticky(id,checked){activeTopic=id;topicTicked=Boolean(checked);renderManager();toast(topicTicked?'Topic ticked—new lines & photos will auto-place here until unticked.':'Topic unticked.')}
+
 function ask(title,placeholder,callback,initial=''){modal(`<h2>${title}</h2><div class="field"><input id="modalValue" value="${attr(initial)}" placeholder="${attr(placeholder)}"></div><div class="btnrow"><button class="btn" onclick="window.modalDone($('modalValue').value)">Save</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);window.modalDone=v=>{closeModal();callback(v)}}
 function modal(html){$('modalRoot').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`}
 function closeModal(){$('modalRoot').innerHTML=''}
-async function addClass(){ask('Add class','e.g. SS1',async v=>{if(v.trim())await mutate('saveClass',{name:v.trim()})})}
-async function addSubject(cid){ask('Add subject','e.g. Mathematics',async v=>{if(v.trim())await mutate('saveSubject',{classId:cid,name:v.trim()})})}
-async function addTopic(){if(!activeClass||!activeSubject)return toast('Tick a class and a subject first.');ask('Add topic','Topic title',async v=>{if(v.trim())await mutate('saveTopic',{classId:activeClass,subjectId:activeSubject,name:v.trim()})})}
-async function renameItem(type,id,old){ask('Rename '+type,'Enter a new name',async v=>{if(v.trim())await mutate('renameItem',{type,id,name:v.trim()})},old)}
-async function deleteItem(type,id){if(!confirm('Delete this '+type+' and its nested content?'))return;await mutate('deleteItem',{type,id})}
-async function mutate(action,data){try{await api(action,data);await refreshData();render();toast('Saved successfully.')}catch(e){toast(e.message)}}
-function addPhrase(){let t=findTopic(activeTopic);if(!t)return;modal(`<h2>Add phrase</h2><p class="muted">Add a sentence or a few lines. Quizora will suggest a logical position in the most relevant existing note.</p><div class="field"><label>Phrase or lines</label><textarea id="phraseText" placeholder="Write the addition here…"></textarea></div><div class="note" id="smartPreview">The suggested insertion will appear here as you type. Review it before saving.</div><div class="btnrow" style="margin-top:12px"><button class="btn" onclick="savePhrase()">Smart fix & save</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);$('phraseText').addEventListener('input',previewPhrase)}
-function previewPhrase(){let v=$('phraseText')?.value.trim();let t=findTopic(activeTopic);if(!v||!t){$('smartPreview').textContent='The suggested insertion will appear here as you type.';return}let notes=(t.content||[]).filter(x=>x.kind==='note');let aw=new Set(words(v)),target=null,best=-1;for(let n of notes){let nw=new Set(words(n.body)),score=[...aw].filter(w=>nw.has(w)).length;if(score>best){best=score;target=n}}$('smartPreview').textContent=target&&best>0?'Suggested placement in “'+target.body.slice(0,70)+'…”:\n\n'+smartInsert(target.body,v):'No closely related note was found. The phrase will be saved as a separate content item.'}
+
+async function addClass(){ask('Add class','e.g. SS1',async v=>{if(v.trim())await saveLocalOrRemote('saveClass',{name:v.trim()})})}
+async function addSubject(cid){ask('Add subject','e.g. Mathematics',async v=>{if(v.trim())await saveLocalOrRemote('saveSubject',{classId:cid,name:v.trim()})})}
+
+async function addTopic(withNotes=false){
+ if(!activeClass||!activeSubject) return toast('Tick a class and a subject first.');
+ if(!withNotes){
+  ask('Add topic only (fill content later)','Topic title',async v=>{
+   if(!v.trim()) return;
+   await saveLocalOrRemote('saveTopic',{classId:activeClass,subjectId:activeSubject,name:v.trim(),initialContent:[]});
+  });
+  return;
+ }
+ modal(`<h2>Add topic with content</h2>
+  <div class="field"><label>Topic title</label><input id="newTopicTitle" placeholder="e.g. Quadratic Equations"></div>
+  <div class="field"><label>Initial notes / content (optional)</label><textarea id="newTopicBody" placeholder="Write lesson notes or subtopics…"></textarea></div>
+  <div class="btnrow"><button class="btn" onclick="submitTopicWithNotes()">Save topic</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+}
+
+async function submitTopicWithNotes(){
+ const name=($('newTopicTitle')?.value||'').trim();
+ const body=($('newTopicBody')?.value||'').trim();
+ if(!name) return toast('Enter a topic title.');
+ const blocks=body?splitIntoBlocks(body):[];
+ closeModal();
+ await saveLocalOrRemote('saveTopic',{classId:activeClass,subjectId:activeSubject,name,initialContent:blocks});
+}
+
+async function renameItem(type,id,old){ask('Rename '+type,'Enter a new name',async v=>{if(v.trim())await saveLocalOrRemote('renameItem',{type,id,name:v.trim()})},old)}
+async function deleteItem(type,id){if(!confirm('Delete this '+type+' and its nested content?'))return;await saveLocalOrRemote('deleteItem',{type,id})}
+
+function applyLocalMutation(action,data){
+ const tree=cache.tree||(cache.tree=[]);
+ const uid=()=>crypto.randomUUID?crypto.randomUUID():'id-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
+ if(action==='saveClass'){
+  tree.push({id:uid(),name:data.name,subjects:[]});
+ }else if(action==='saveSubject'){
+  const c=tree.find(x=>x.id===data.classId);
+  if(c) c.subjects.push({id:uid(),name:data.name,topics:[]});
+ }else if(action==='saveTopic'){
+  const c=tree.find(x=>x.id===data.classId);
+  const s=c?.subjects.find(x=>x.id===data.subjectId);
+  if(s){
+   const tid=uid();
+   s.topics.push({id:tid,name:data.name,content:data.initialContent||[],diagrams:[]});
+   activeTopic=tid;topicTicked=true;
+  }
+ }else if(action==='renameItem'){
+  for(const c of tree){
+   if(data.type==='class'&&c.id===data.id) c.name=data.name;
+   for(const s of c.subjects){
+    if(data.type==='subject'&&s.id===data.id) s.name=data.name;
+    for(const t of s.topics){if(data.type==='topic'&&t.id===data.id) t.name=data.name}
+   }
+  }
+ }else if(action==='deleteItem'){
+  if(data.type==='class') cache.tree=tree.filter(c=>c.id!==data.id);
+  for(const c of tree){
+   if(data.type==='subject') c.subjects=c.subjects.filter(s=>s.id!==data.id);
+   for(const s of c.subjects){
+    if(data.type==='topic') s.topics=s.topics.filter(t=>t.id!==data.id);
+   }
+  }
+ }else if(action==='saveContent'){
+  const t=findTopic(data.topicId);
+  if(t){
+   t.content=t.content||[];
+   const item={id:data.id||uid(),kind:data.kind||'note',body:data.body,position:data.position??t.content.length};
+   const idx=Math.max(0,Math.min(t.content.length,Number(data.insertAtIndex??t.content.length)));
+   t.content.splice(idx,0,item);
+  }
+ }else if(action==='updateContent'){
+  const t=findTopic(activeTopic);
+  const b=t?.content?.find(x=>x.id===data.id);
+  if(b) b.body=data.body;
+ }else if(action==='deleteContent'){
+  const t=findTopic(activeTopic);
+  if(t&&t.content) t.content=t.content.filter(x=>x.id!==data.id);
+ }else if(action==='saveDiagram'){
+  const t=findTopic(data.topicId||activeTopic);
+  if(t){t.diagrams=t.diagrams||[];t.diagrams.push({id:data.id||uid(),content_id:data.contentId||null,name:data.name,mime:data.mime,data_url:data.dataUrl})}
+ }else if(action==='deleteDiagram'){
+  const t=findTopic(activeTopic);
+  if(t&&t.diagrams) t.diagrams=t.diagrams.filter(d=>d.id!==data.id);
+ }else if(action==='saveAnnouncement'){
+  cache.announcements=cache.announcements||[];
+  cache.announcements.unshift({id:uid(),title:data.title,body:data.body});
+ }else if(action==='deleteAnnouncement'){
+  cache.announcements=(cache.announcements||[]).filter(x=>x.id!==data.id);
+ }else if(action==='setStudentBlocked'){
+  const u=(cache.students||[]).find(x=>x.id===data.id);if(u) u.blocked=data.blocked;
+ }else if(action==='resetDevice'){
+  const u=(cache.students||[]).find(x=>x.id===data.id);if(u) u.device_id=null;
+ }
+}
+
+async function saveLocalOrRemote(action,data){
+ applyLocalMutation(action,data);
+ await localPut('cache',cache);
+ if(online()){
+  try{await api(action,data);await refreshData()}catch(e){}
+ }
+ render();
+ toast('Saved.');
+}
+
+function isSubtopicText(line){
+ const s=String(line||'').trim();
+ if(!s||s.length>90) return false;
+ if(/^(subtopic|section|part|unit|topic|chapter)\s*[:\-–]/i.test(s)) return true;
+ if(/^\d+(\.\d+)*\s+[A-Z]/.test(s)&&!/[.!?]$/.test(s)) return true;
+ if(!/[.!?]$/.test(s)&&s.split(/\s+/).length<=7&&/^[A-Z]/.test(s)) return true;
+ return false;
+}
+
+function splitIntoBlocks(rawText){
+ const lines=String(rawText||'').split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+ const blocks=[];
+ let paraBuf=[];
+ const flushPara=()=>{
+  if(paraBuf.length){
+   blocks.push({id:crypto.randomUUID?crypto.randomUUID():'b-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),kind:'note',body:paraBuf.join(' ')});
+   paraBuf=[];
+  }
+ };
+ for(const line of lines){
+  if(isSubtopicText(line)){
+   flushPara();
+   blocks.push({id:crypto.randomUUID?crypto.randomUUID():'b-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),kind:'subtopic',body:line});
+  }else{
+   paraBuf.push(line);
+  }
+ }
+ flushPara();
+ return blocks;
+}
+
 function sentenceParts(text){return (text.match(/[^.!?]+[.!?]?/g)||[]).map(x=>x.trim()).filter(Boolean)}
-function words(s){return (s.toLowerCase().match(/[a-z]{3,}/g)||[]).filter(x=>!['the','and','that','this','with','from','when','which','into','their','there','then','than','also','will','have','has','are','was','were','for','not','you','your'].includes(x))}
-function smartInsert(existing,addition){let parts=sentenceParts(existing),aw=new Set(words(addition));if(!parts.length)return addition;let best=parts.length,score=-1;parts.forEach((p,i)=>{let pw=words(p),overlap=pw.filter(w=>aw.has(w)).length;let connector=/^(therefore|thus|hence|however|for example|for instance|in addition|also|consequently|this means|as a result)\b/i.test(addition);let s=overlap+(connector&&i>0?1:0);if(s>score){score=s;best=i+1}});let before=parts.slice(0,best),after=parts.slice(best);return [...before,addition.trim(),...after].join(' ').replace(/\s+/g,' ').trim()}
-async function savePhrase(){let v=$('phraseText').value.trim();if(!v)return toast('Write the phrase first.');let t=findTopic(activeTopic);let notes=(t.content||[]).filter(x=>x.kind==='note');let target=null,best=-1;let aw=new Set(words(v));for(let n of notes){let nw=new Set(words(n.body));let score=[...aw].filter(w=>nw.has(w)).length;if(score>best){best=score;target=n}}try{if(target&&best>0){let updated=smartInsert(target.body,v);await api('updateContent',{id:target.id,body:updated})}else{await api('saveContent',{topicId:activeTopic,id:crypto.randomUUID(),kind:'phrase',body:v,position:999999})}await refreshData();closeModal();render();toast(target&&best>0?'Phrase inserted into the most relevant note. Please review its flow.':'Phrase saved. Add more context or move it if needed.')}catch(e){toast(e.message)}}
-function addNotes(){modal(`<h2>Add notes</h2><p class="muted">Create a separate note under this topic. This can be a full lesson or a new section.</p><div class="field"><label>Note title (optional)</label><input id="noteTitle" placeholder="e.g. Meaning of force"></div><div class="field"><label>Notes</label><textarea id="noteBody" style="min-height:190px" placeholder="Write your lesson notes…"></textarea></div><div class="btnrow"><button class="btn" onclick="saveNotes()">Save notes</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`)}
-async function saveNotes(){let body=$('noteBody').value.trim(),title=$('noteTitle').value.trim();if(!body)return toast('Write your notes first.');await mutate('saveContent',{topicId:activeTopic,id:crypto.randomUUID(),kind:'note',body:title?title+'\\n\\n'+body:body,position:999999});closeModal()}
-function editContent(id){let t=findTopic(activeTopic),b=t.content.find(x=>x.id===id);modal(`<h2>Edit content</h2><div class="field"><textarea id="editBody" style="min-height:220px">${esc(b.body)}</textarea></div><div class="btnrow"><button class="btn" onclick="saveEdit('${id}')">Save changes</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`)}
-async function saveEdit(id){let body=$('editBody').value.trim();if(!body)return toast('Content cannot be empty.');await mutate('updateContent',{id,body});closeModal()}
-async function removeContent(id){if(confirm('Remove this content?'))await mutate('deleteContent',{id})}
-async function copyText(id){let t=findTopic(activeTopic),b=t.content.find(x=>x.id===id);try{await navigator.clipboard.writeText(b.body);toast('Copied.')}catch(e){toast('Copy is not available in this browser. Select and copy the text instead.')}}
-async function uploadDiagram(file){if(!file)return;if(file.size>2*1024*1024)return toast('Please use an image smaller than 2 MB.');let reader=new FileReader();reader.onload=async()=>{let t=findTopic(activeTopic),target=activeContent||null;try{await api('saveDiagram',{id:crypto.randomUUID(),topicId:activeTopic,contentId:target,name:file.name,mime:file.type,dataUrl:reader.result});await refreshData();render();toast('Diagram uploaded.')}catch(e){toast(e.message)}};reader.readAsDataURL(file)}
-async function removeDiagram(id){if(confirm('Remove this diagram?'))await mutate('deleteDiagram',{id})}
+function words(s){return (String(s||'').toLowerCase().match(/[a-z]{3,}/g)||[]).filter(x=>!['the','and','that','this','with','from','when','which','into','their','there','then','than','also','will','have','has','are','was','were','for','not','you','your'].includes(x))}
+
+function smartInsert(existing,addition){
+ let parts=sentenceParts(existing),aw=new Set(words(addition));
+ if(!parts.length) return addition;
+ let best=parts.length,score=-1;
+ parts.forEach((p,i)=>{
+  let pw=words(p),overlap=pw.filter(w=>aw.has(w)).length;
+  let connector=/^(therefore|thus|hence|however|for example|for instance|in addition|also|consequently|this means|as a result)\b/i.test(addition);
+  let s=overlap+(connector&&i>0?1:0);
+  if(s>score){score=s;best=i+1}
+ });
+ return [...parts.slice(0,best),addition.trim(),...parts.slice(best)].join(' ').replace(/\s+/g,' ').trim();
+}
+
+function computeSmartPlacement(topic,inputText){
+ const blocks=topic?.content||[];
+ const sub=isSubtopicText(inputText);
+ const aw=new Set(words(inputText));
+ let bestIdx=blocks.length,bestScore=0,targetBlock=null;
+ blocks.forEach((b,idx)=>{
+  const bw=new Set(words(b.body));
+  const overlap=[...aw].filter(w=>bw.has(w)).length;
+  if(sub&&isSubtopicText(b.body)&&overlap>0){
+   // Insert right after the matching subtopic's block group
+   let endIdx=idx+1;
+   while(endIdx<blocks.length&&!isSubtopicText(blocks[endIdx].body)) endIdx++;
+   bestIdx=endIdx;bestScore=overlap+2;targetBlock=b;
+  }else if(!sub&&overlap>bestScore){
+   bestScore=overlap;bestIdx=idx;targetBlock=b;
+  }
+ });
+ return {sub,bestIdx,bestScore,targetBlock};
+}
+
+function addPhrase(){
+ let t=findTopic(activeTopic);if(!t) return;
+ modal(`<h2>Type line / phrase / subtopic</h2>
+  <p class="muted">As long as the topic box stays ticked, anything you type is placed at its best spot on save (as a subtopic or inside the matching paragraph).</p>
+  <div class="field"><label>Line, phrase, or subtopic</label><textarea id="phraseText" placeholder="Type a line, subtopic, or sentence…"></textarea></div>
+  <div class="note" id="smartPreview">Type above to preview automatic placement.</div>
+  <div class="btnrow" style="margin-top:12px"><button class="btn" onclick="savePhrase()">Save & auto-place</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+ $('phraseText').addEventListener('input',previewPhrase);
+}
+
+function previewPhrase(){
+ let v=($('phraseText')?.value||'').trim(),t=findTopic(activeTopic);
+ if(!v||!t){$('smartPreview').textContent='Type above to preview automatic placement.';return}
+ const p=computeSmartPlacement(t,v);
+ if(p.sub){
+  $('smartPreview').textContent=`Will be placed as a SUBTOPIC at position #${p.bestIdx+1}`+(p.targetBlock?` (related to "${p.targetBlock.body.slice(0,50)}…")`:'');
+ }else if(p.targetBlock&&p.bestScore>0){
+  $('smartPreview').textContent=`Will merge into matching note ("${p.targetBlock.body.slice(0,55)}…"):\n\n`+smartInsert(p.targetBlock.body,v);
+ }else{
+  $('smartPreview').textContent=`Will be placed in sequence at section #${p.bestIdx+1}.`;
+ }
+}
+
+async function savePhrase(){
+ let v=($('phraseText')?.value||'').trim();
+ if(!v) return toast('Type something first.');
+ let t=findTopic(activeTopic);if(!t) return;
+ const p=computeSmartPlacement(t,v);
+ closeModal();
+ if(!p.sub&&p.targetBlock&&p.bestScore>0){
+  await saveLocalOrRemote('updateContent',{id:p.targetBlock.id,body:smartInsert(p.targetBlock.body,v)});
+ }else{
+  await saveLocalOrRemote('saveContent',{topicId:activeTopic,id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),kind:p.sub?'subtopic':'phrase',body:v,insertAtIndex:p.bestIdx});
+ }
+}
+
+function addNotes(){
+ modal(`<h2>Add notes</h2><p class="muted">Add a note or multi-line lesson under this topic.</p><div class="field"><label>Note title (optional)</label><input id="noteTitle" placeholder="e.g. Meaning of force"></div><div class="field"><label>Notes</label><textarea id="noteBody" style="min-height:190px" placeholder="Write your lesson notes…"></textarea></div><div class="btnrow"><button class="btn" onclick="saveNotes()">Save notes</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+}
+async function saveNotes(){
+ let body=($('noteBody')?.value||'').trim(),title=($('noteTitle')?.value||'').trim();
+ if(!body) return toast('Write your notes first.');
+ const full=title?title+'\n\n'+body:body;
+ closeModal();
+ await saveLocalOrRemote('saveContent',{topicId:activeTopic,id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),kind:'note',body:full,insertAtIndex:(findTopic(activeTopic)?.content||[]).length});
+}
+
+function editContent(id){
+ let t=findTopic(activeTopic),b=t?.content?.find(x=>x.id===id);if(!b) return;
+ modal(`<h2>Edit content</h2><div class="field"><textarea id="editBody" style="min-height:220px">${esc(b.body)}</textarea></div><div class="btnrow"><button class="btn" onclick="saveEdit('${id}')">Save changes</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+}
+async function saveEdit(id){let body=($('editBody')?.value||'').trim();if(!body) return toast('Content cannot be empty.');closeModal();await saveLocalOrRemote('updateContent',{id,body})}
+async function deleteContent(id){if(confirm('Delete this content?')) await saveLocalOrRemote('deleteContent',{id})}
+async function copyText(id){let t=findTopic(activeTopic),b=t?.content?.find(x=>x.id===id);if(!b) return;try{await navigator.clipboard.writeText(b.body);toast('Copied.')}catch(e){toast('Select and copy the text manually.')}}
+
+async function uploadPhotos(files){
+ if(!files||!files.length) return;
+ let t=findTopic(activeTopic);if(!t) return toast('Select or tick a topic first.');
+ for(const file of Array.from(files)){
+  if(!file.type.startsWith('image/')) continue;
+  const dataUrl=await compressImageDataUrl(file,900,0.82);
+  const p=computeSmartPlacement(t,file.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' '));
+  const attachTo=activeContent||(p.targetBlock&&p.bestScore>0?p.targetBlock.id:null);
+  await saveLocalOrRemote('saveDiagram',{id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2,5),topicId:activeTopic,contentId:attachTo,name:file.name,mime:file.type,dataUrl});
+ }
+ toast('Photo(s) uploaded and placed.');
+}
+async function removeDiagram(id){if(confirm('Delete this photo?')) await saveLocalOrRemote('deleteDiagram',{id})}
+
+// Lightweight offline .docx XML text extractor (reads word/document.xml inside zip)
+async function extractDocxText(file){
+ const buf=await file.arrayBuffer();
+ const bytes=new Uint8Array(buf);
+ const view=new DataView(buf);
+ let offset=0;
+ while(offset+30<bytes.length){
+  const sig=view.getUint32(offset,true);
+  if(sig!==0x04034b50) break;
+  const method=view.getUint16(offset+8,true);
+  const compSize=view.getUint32(offset+18,true);
+  const nameLen=view.getUint16(offset+26,true);
+  const extraLen=view.getUint16(offset+28,true);
+  const nameBytes=bytes.slice(offset+30,offset+30+nameLen);
+  const name=new TextDecoder().decode(nameBytes);
+  const dataStart=offset+30+nameLen+extraLen;
+  const compBytes=bytes.slice(dataStart,dataStart+compSize);
+  if(name==='word/document.xml'){
+   let xmlText='';
+   if(method===0){
+    xmlText=new TextDecoder().decode(compBytes);
+   }else if(method===8&&typeof DecompressionStream!=='undefined'){
+    const ds=new DecompressionStream('deflate-raw');
+    const writer=ds.writable.getWriter();
+    writer.write(compBytes);writer.close();
+    const outBuf=await new Response(ds.readable).arrayBuffer();
+    xmlText=new TextDecoder().decode(outBuf);
+   }
+   if(xmlText){
+    const doc=new DOMParser().parseFromString(xmlText,'application/xml');
+    const paras=[...doc.getElementsByTagNameNS('*','p')];
+    const lines=paras.map(p=>{
+     const runs=[...p.getElementsByTagNameNS('*','t')].map(t=>t.textContent||'').join('');
+     return runs.trim();
+    }).filter(Boolean);
+    return lines.join('\n');
+   }
+  }
+  offset=dataStart+compSize;
+ }
+ throw new Error('Could not parse .docx file. Try saving as .docx or .txt.');
+}
+
+async function uploadDocOrFile(file){
+ if(!file) return;
+ let t=findTopic(activeTopic);if(!t) return toast('Select or tick a topic first.');
+ try{
+  let text='';
+  if(/\.docx$/i.test(file.name)) text=await extractDocxText(file);
+  else text=await file.text();
+  text=String(text||'').trim();
+  if(!text) return toast('No readable text found in file.');
+  const blocks=splitIntoBlocks(text);
+  for(const b of blocks){
+   await saveLocalOrRemote('saveContent',{topicId:activeTopic,id:b.id,kind:b.kind,body:b.body,insertAtIndex:(findTopic(activeTopic)?.content||[]).length});
+  }
+  toast(`Imported ${blocks.length} section(s) from ${file.name}.`);
+ }catch(e){toast(e.message)}
+}
+
 async function addAnnouncement(){modal(`<h2>New announcement</h2><div class="field"><label>Title</label><input id="annTitle"></div><div class="field"><label>Message</label><textarea id="annBody"></textarea></div><div class="btnrow"><button class="btn" onclick="saveAnnouncement()">Publish</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`)}
-async function saveAnnouncement(){let title=$('annTitle').value.trim(),body=$('annBody').value.trim();if(!title||!body)return toast('Enter a title and message.');await mutate('saveAnnouncement',{title,body});closeModal()}
-async function deleteAnnouncement(id){if(confirm('Delete announcement?'))await mutate('deleteAnnouncement',{id})}
-async function studentAction(id,action,value){if(action==='block'){await mutate('setStudentBlocked',{id,blocked:value});return}let cl=prompt('Enter class to unlock (JSS3, SS3, WAEC or JAMB):');if(!cl)return;let days=prompt('Subscription duration in days (e.g. 365):','365');if(!days)return;await mutate('setSubscription',{userId:id,className:cl.toUpperCase(),days:Number(days)})}
-async function resetStudentDevice(id){if(confirm('Allow this student to register a new device on their next sign-in?'))await mutate('resetDevice',{id})}
-async function syncNow(){if(!online())return toast('Connect to the internet to download or synchronise lessons.');try{await refreshData();render();toast('Your available lessons have been saved on this device for offline study.')}catch(e){toast(e.message)}}
+async function saveAnnouncement(){let title=($('annTitle')?.value||'').trim(),body=($('annBody')?.value||'').trim();if(!title||!body) return toast('Enter a title and message.');closeModal();await saveLocalOrRemote('saveAnnouncement',{title,body})}
+async function deleteAnnouncement(id){if(confirm('Delete announcement?')) await saveLocalOrRemote('deleteAnnouncement',{id})}
+
+async function studentAction(id,action,valueOrName){
+ if(action==='block'){await saveLocalOrRemote('setStudentBlocked',{id,blocked:valueOrName});return}
+ page='financial';render();
+ if($('pinStudent')) $('pinStudent').value=valueOrName||'';
+ toast('Choose a locked section and generate a non-transferable PIN.');
+}
+async function resetStudentDevice(id){if(confirm('Allow this student to register a new device on their next sign-in?')) await saveLocalOrRemote('resetDevice',{id})}
+async function syncNow(){if(!online()) return toast('Connect to the internet to download or synchronise lessons.');try{await refreshData();render();toast('Your available lessons have been saved on this device for offline study.')}catch(e){toast(e.message)}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function attr(s){return esc(s).replace(/`/g,'&#96;')}
 </script>
