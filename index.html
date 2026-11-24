@@ -1,414 +1,169 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quizora AI</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#312e81">
+<meta name="description" content="Quizora AI — learn anywhere, even offline.">
+<link rel="manifest" href="/manifest.webmanifest">
+<title>Quizora AI — Learn Without Limits</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
-body{background:#d9d6ff;color:#13132b}
-button{cursor:pointer;border:0}
-.top{margin:12px;background:linear-gradient(90deg,#7b00ff,#5a00e6 45%,#0066ff);border-radius:14px;padding:12px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.qlogo{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500);display:grid;place-items:center;font-size:28px;font-weight:900;color:#5a00e6;border:2px solid #fff}
-.pill{background:rgba(255,255,255,.22);padding:9px 12px;border-radius:999px;font-weight:700;color:#fff}.pill.white{background:#fff;color:#5a00e6}.pill.gold{background:#ffd166;color:#3a2400}.pill.switch{background:#FFD700;color:#3a2400}
-.wrap{padding:0 12px 90px;max-width:1000px;margin:auto}
-.card{background:#fff;border-radius:14px;padding:16px;margin-top:14px}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.mut{color:#777;font-size:13px}h2{font-size:18px}.list{display:grid;gap:10px;margin-top:12px}
-.btn{padding:11px 14px;border-radius:999px;font-weight:800}.btn-primary{background:linear-gradient(90deg,#7b00ff,#0066ff);color:#fff}.btn-ghost{background:#f1f1f5}.btn-red{background:#ffe1e1;color:#b00}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-top:8px;font-size:15px}
-input[type=checkbox]{width:22px;height:22px;accent-color:#5a00e6;cursor:pointer;flex-shrink:0}
-.page{display:none}.page.show{display:block}
-.bottom{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;display:none;justify-content:space-around;padding:10px 0;z-index:20}.bottom.show{display:flex}.bottom button{background:none;font-weight:800;font-size:13px;color:#555}.bottom button.on{color:#5a00e6}
-.toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;display:none;z-index:40;max-width:92%;text-align:center}
-.login{max-width:420px;margin:20px auto;background:#fff;border-radius:16px;padding:24px}
-.tabs2{display:flex;background:#f1f1f5;border-radius:999px;padding:4px;margin-top:16px}.tabs2 button{flex:1;padding:12px;border-radius:999px;font-weight:800;background:none}.tabs2 button.on{background:#5a00e6;color:#fff}
-.paybox{background:#fff3cd;border:1px dashed #e9a800;border-radius:12px;padding:12px;margin-top:12px}
-.status{display:none !important}
-#adminHint{display:none !important}
-.read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;padding:10px;border-radius:10px}.read.editing{border:2px solid #7b00ff;background:#fbf7ff}
-.editbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.placed{background:#e6ffed;border:1px solid #0bb56a;border-radius:10px;padding:10px;margin-top:10px;font-size:13px;display:none}
-.drop{border:1px solid #eee;border-radius:12px;overflow:hidden}.drop-head{padding:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#fff;gap:10px}.drop-body{display:none;padding:0 12px 12px;background:#fcfcff}.drop-body.open{display:block}
-.drop-sub{border:1px solid #eee;border-radius:10px;margin-top:8px;background:#fff}.drop-sub-head{padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}.drop-sub-body{display:none;padding:0 10px 10px}.drop-sub-body.open{display:block}
-.topic-item{border:1px solid #eee;border-radius:10px;padding:12px;margin-top:8px;cursor:pointer;background:#fff;display:flex;justify-content:space-between;align-items:center}
-.lock-badge{background:#e9a800;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}.free-badge{background:#0bb56a;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
-.preview-banner{background:#FFD700;color:#3a2400;padding:10px;border-radius:10px;font-weight:800;text-align:center;margin:12px 12px 0;display:none}
-.diagram{margin:14px 0;text-align:center;background:#fbf7ff;border:1px solid #eee;border-radius:12px;padding:12px}.diagram img{max-width:100%;border-radius:10px;max-height:320px}
-.addbox{margin-top:12px;border-top:2px solid #7b00ff;padding-top:12px;display:none}.addbox.phrase{border-color:#0066ff}.addbox.notes{border-color:#0bb56a}
-.tickbar{background:#e6ffed;border:2px solid #0bb56a;border-radius:12px;padding:12px;margin-top:12px;font-weight:800}.tickbar.none{background:#fff3cd;border-color:#e9a800}
-.tickrow{display:flex;align-items:center;gap:10px}.tickrow label{cursor:pointer;display:flex;align-items:center;gap:10px;flex:1}
-@media(min-width:700px){.cards{grid-template-columns:repeat(4,1fr)}}
+:root{--ink:#172033;--muted:#667085;--brand:#4f46e5;--brand2:#7c3aed;--gold:#f5b942;--bg:#f4f6fb;--card:#fff;--line:#e6e9f2;--green:#168653;--red:#c03945;--shadow:0 12px 35px #17203312}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit}.hidden{display:none!important}
+.topbar{background:linear-gradient(115deg,#25206b,#4f46e5 62%,#7c3aed);color:#fff;padding:17px max(18px,calc((100% - 1200px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10;box-shadow:0 5px 20px #1d1b5a30}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;letter-spacing:-.5px}.brandmark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,#fff,#f5c95f);color:#33256d;display:grid;place-items:center;font-weight:1000;font-size:20px}
+.top-actions{display:flex;gap:8px;align-items:center}.status{font-size:12px;background:#ffffff20;border:1px solid #ffffff40;border-radius:99px;padding:6px 10px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 18px}.hero{background:linear-gradient(135deg,#25206b,#4f46e5 65%,#8b5cf6);border-radius:26px;padding:34px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow)}.hero:after{content:"Q";position:absolute;right:30px;top:-70px;font-size:290px;font-weight:1000;color:#ffffff0d}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.05;margin:0 0 12px;max-width:650px;letter-spacing:-1.5px}.hero p{max-width:620px;color:#e7e5ff;margin:0 0 22px}.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid #ffffff55;background:#ffffff16;padding:7px 12px;border-radius:99px;font-size:12px;font-weight:700}
+.auth-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;margin-top:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}.card h2,.card h3{margin:0 0 8px;letter-spacing:-.3px}.muted{color:var(--muted)}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;font-weight:750;color:#344054}.field input,.field textarea,.field select,.input{width:100%;padding:12px 13px;border:1px solid #d9deea;border-radius:12px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);box-shadow:0 0 0 3px #4f46e51a}.field textarea{min-height:120px;resize:vertical}.btn{background:var(--brand);color:#fff;border-radius:12px;padding:11px 15px;font-weight:800;box-shadow:0 5px 12px #4f46e525}.btn:hover{filter:brightness(1.05)}.btn.secondary{background:#eef0ff;color:#3730a3;box-shadow:none}.btn.ghost{background:#fff;color:#475467;border:1px solid var(--line);box-shadow:none}.btn.danger{background:#fff0f0;color:var(--red);box-shadow:none}.btn.gold{background:var(--gold);color:#33256d}.btn.small{padding:7px 10px;font-size:12px;border-radius:9px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tabs{display:flex;gap:6px;background:#f1f2f8;padding:5px;border-radius:12px;margin:16px 0}.tab{flex:1;padding:9px;border-radius:9px;background:transparent;color:#667085;font-weight:800}.tab.active{background:#fff;color:#3730a3;box-shadow:0 2px 7px #17203312}.note{background:#f8f7ff;border:1px solid #e8e5ff;border-radius:13px;padding:12px;color:#4c4782;font-size:13px}
+.app{display:grid;grid-template-columns:245px 1fr;gap:20px;align-items:start}.sidebar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:13px;position:sticky;top:85px}.navbtn{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border-radius:11px;background:transparent;color:#475467;text-align:left;font-weight:750;margin:3px 0}.navbtn.active{background:#eeedff;color:#4338ca}.main{min-width:0}.pagehead{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 0 17px}.pagehead h1{margin:0;font-size:25px;letter-spacing:-.7px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.stat strong{display:block;font-size:25px;letter-spacing:-1px}.stat span{font-size:12px;color:var(--muted);font-weight:700}.split{display:grid;grid-template-columns:330px 1fr;gap:16px}.tree{max-height:70vh;overflow:auto}.tree-row{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:10px}.tree-row:hover{background:#f7f7fc}.tree-row.selected{background:#efefff}.tree-row input{accent-color:var(--brand);width:17px;height:17px}.tree-row .name{flex:1;font-weight:750}.indent{margin-left:22px}.topic-btn{display:block;width:100%;text-align:left;padding:9px 11px;background:#f8f9fc;border:1px solid #edf0f5;border-radius:10px;margin:6px 0;color:#344054}.topic-btn.active{border-color:#a5a1ff;background:#f0efff;color:#3730a3;font-weight:800}.content-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px;margin:12px 0}.content-card p{white-space:pre-wrap;margin:8px 0}.content-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.content-tools button{font-size:12px}.diagram{max-width:100%;max-height:380px;object-fit:contain;border-radius:12px;border:1px solid var(--line);display:block;margin:12px auto}.locked{color:#9a5b00;background:#fff5df;border:1px solid #ffe1a6;padding:12px;border-radius:12px}.empty{padding:35px 15px;text-align:center;color:var(--muted)}.modalback{position:fixed;inset:0;background:#10182888;display:grid;place-items:center;padding:16px;z-index:30}.modal{background:#fff;border-radius:18px;padding:22px;width:min(560px,100%);max-height:90vh;overflow:auto}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#182230;color:#fff;padding:11px 16px;border-radius:99px;z-index:50;box-shadow:var(--shadow);max-width:90%;text-align:center}.badge{display:inline-block;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:850;background:#eef0ff;color:#4338ca}.badge.free{background:#e7f8ef;color:#147447}.badge.lock{background:#fff2d8;color:#925b00}.student-class{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px;border:1px solid var(--line);border-radius:14px;margin:9px 0;background:#fff}.student-class h3{margin:0}.announcement{border-left:4px solid var(--gold);padding:12px 15px;background:#fffaf0;border-radius:0 12px 12px 0;margin:10px 0}
+@media(max-width:850px){.auth-grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:4px;padding:8px}.navbtn{white-space:nowrap;width:auto;margin:0}.split{grid-template-columns:1fr}.tree{max-height:none}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wrap{padding:15px 12px}.hero{padding:25px 20px}.card{padding:17px}.topbar{padding:12px}.brand{font-size:18px}.status{display:none}.pagehead{align-items:flex-start;flex-direction:column}.stats{gap:8px}.stat{padding:13px}}
 </style>
 </head>
 <body>
-
-<div id="loginScreen" class="login">
-<div style="text-align:center"><div class="qlogo" style="margin:0 auto;width:64px;height:64px;font-size:42px"><span>Q</span></div><h1>Quizora AI</h1></div>
-<div class="tabs2"><button type="button" id="tabAdmin" class="on" onclick="setTab(0)">Admin</button><button type="button" id="tabStudent" onclick="setTab(1)">Student</button></div>
-<div id="adminLoginBox">
-<label style="margin-top:14px;display:block">Admin Username</label><input id="adminUser" placeholder="Admin Username" autocomplete="off">
-<label style="margin-top:10px;display:block">Password</label><input id="adminPass" type="password" placeholder="Password" autocomplete="new-password">
-<p class="mut" id="adminHint">Hidden</p>
-<button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doAdmin()">Enter</button>
-<button type="button" class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="resetLogin()">Reset Login if stuck</button>
-</div>
-<div id="studentLoginBox" style="display:none">
-<div class="tabs2"><button type="button" id="stuLoginTab" class="on" onclick="setStuMode(0)">Login</button><button type="button" id="stuCreateTab" onclick="setStuMode(1)">Create My Account</button></div>
-<div id="stuLoginForm"><label style="margin-top:14px;display:block">Student Username</label><input id="studentUser" placeholder="Your Username" autocomplete="off"><label style="margin-top:10px;display:block">Password</label><input id="studentPass" type="password" placeholder="Your Password" autocomplete="new-password"><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentLogin()">Login</button></div>
-<div id="stuCreateForm" style="display:none"><label style="margin-top:14px;display:block">Choose Your Username</label><input id="newStuUser" placeholder="e.g. Chiamaka123" autocomplete="off"><label style="margin-top:10px;display:block">Create Your Password</label><input id="newStuPass" type="password" placeholder="Create a password" autocomplete="new-password"><label style="margin-top:10px;display:block">Confirm Password</label><input id="newStuPass2" type="password" placeholder="Type it again" autocomplete="new-password"><label style="margin-top:10px;display:block">Your Class</label><select id="newStuClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentCreate()">Create My Account and Enter</button></div>
-</div>
-<div class="status info" id="loginStatus">Hidden</div>
-</div>
-
+<header class="topbar">
+ <div class="brand"><span class="brandmark">Q</span> Quizora <span style="color:#f8d36b">AI</span></div>
+ <div class="top-actions"><span id="netStatus" class="status">Checking connection…</span><button id="logoutBtn" class="btn small gold hidden" onclick="logout()">Sign out</button></div>
+</header>
+<main id="root" class="wrap">
+ <section id="welcome">
+  <div class="hero">
+   <h1>Learn without limits.<br>Even offline.</h1>
+   <p>Your organised learning space for JSS, SS, WAEC and JAMB. Download your learning materials once and continue studying when you're offline.</p>
+   <div class="pills"><span class="pill">JSS1–SS3</span><span class="pill">WAEC</span><span class="pill">JAMB</span><span class="pill">Offline learning</span></div>
+  </div>
+  <div class="auth-grid">
+   <div class="card">
+    <h2>Welcome to Quizora</h2><p class="muted">Sign in or create your student account.</p>
+    <div class="tabs"><button class="tab active" id="studentTab" onclick="setAuth('student')">Student</button><button class="tab" id="adminTab" onclick="setAuth('admin')">Administrator</button></div>
+    <div id="studentAuth">
+     <div class="tabs"><button class="tab active" id="loginTab" onclick="setStudentMode('login')">Sign in</button><button class="tab" id="registerTab" onclick="setStudentMode('register')">Create account</button></div>
+     <div id="studentLoginForm">
+      <div class="field"><label>Your name / username</label><input id="loginName" autocomplete="username" placeholder="Enter your name"></div>
+      <div class="field"><label>Password</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="Enter password"></div>
+      <button class="btn" style="width:100%" onclick="studentLogin()">Sign in</button>
+     </div>
+     <div id="studentRegisterForm" class="hidden">
+      <div class="field"><label>Your name</label><input id="regName" placeholder="Enter your full name"></div>
+      <div class="field"><label>Create password</label><input id="regPass" type="password" placeholder="At least 6 characters"></div>
+      <div class="field"><label>Confirm password</label><input id="regPass2" type="password" placeholder="Repeat password"></div>
+      <div class="field"><label>Select your class</label><select id="regClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select></div>
+      <button class="btn" style="width:100%" onclick="studentRegister()">Create student account</button>
+     </div>
+    </div>
+    <div id="adminAuth" class="hidden">
+     <div id="adminLoginForm">
+      <div class="field"><label>Administrator username</label><input id="adminName" autocomplete="username" placeholder="Admin username"></div>
+      <div class="field"><label>Password</label><input id="adminPass" type="password" autocomplete="current-password" placeholder="Admin password"></div>
+      <button class="btn" style="width:100%" onclick="adminLogin()">Administrator sign in</button>
+     </div>
+     <div id="adminSetupForm" class="hidden">
+      <div class="note">First-time setup. Enter the ADMIN_SETUP_KEY you configured in Vercel Environment Variables. This creates the first administrator account.</div>
+      <div class="field"><label>Setup key</label><input id="setupKey" type="password"></div>
+      <div class="field"><label>Choose admin username</label><input id="setupName"></div>
+      <div class="field"><label>Choose admin password</label><input id="setupPass" type="password"></div>
+      <button class="btn" style="width:100%" onclick="adminSetup()">Create administrator</button>
+     </div>
+     <p class="muted" style="font-size:12px">Administrator access is separate from student accounts.</p>
+    </div>
+   </div>
+   <div class="card">
+    <h2>Study on your terms</h2>
+    <p class="muted">Quizora keeps your learning materials organised and available on your device.</p>
+    <div class="note" style="margin:14px 0"><b>How offline learning works</b><br>Connect once, sign in and download your available lessons. Install Quizora on your phone. Your saved lessons and diagrams remain available offline on that device.</div>
+    <h3 style="margin-top:20px">Built for focused learning</h3>
+    <p class="muted">Clear class and subject organisation, readable notes, diagrams and a distraction-free learning experience.</p>
+   </div>
+  </div>
+ </section>
+ <section id="workspace" class="hidden">
+  <div class="app">
+   <aside class="sidebar" id="sidebar"></aside>
+   <section class="main" id="main"></section>
+  </div>
+ </section>
+</main>
+<div id="modalRoot"></div><div id="toast" class="toast hidden"></div>
 <script>
-function el(id){ return document.getElementById(id); }
-function showToast(m){ var t=el("toast2"); if(!t){ t=document.createElement("div"); t.id="toast2"; t.style.cssText="position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#13132b;color:#fff;padding:12px 16px;border-radius:999px;z-index:99;max-width:92%;text-align:center"; document.body.appendChild(t); } t.textContent=m; t.style.display="block"; setTimeout(function(){ t.style.display="none"; },2500); }
-function showStatus(m){ showToast(m); }
-function setTab(n){ var isAdmin = (n===0); el("tabAdmin").className = isAdmin ? "on" : ""; el("tabStudent").className = isAdmin ? "" : "on"; el("adminLoginBox").style.display = isAdmin ? "block" : "none"; el("studentLoginBox").style.display = isAdmin ? "none" : "block"; }
-function setStuMode(n){ var isLogin = (n===0); el("stuLoginTab").className = isLogin ? "on" : ""; el("stuCreateTab").className = isLogin ? "" : "on"; el("stuLoginForm").style.display = isLogin ? "block" : "none"; el("stuCreateForm").style.display = isLogin ? "none" : "block"; }
-function getAdmin(){ try{ var v=localStorage.getItem("quizora_admin_data"); return v ? JSON.parse(v) : null; }catch(e){ return null; } }
-function getStudents(){ try{ var v=localStorage.getItem("quizora_students"); return v ? JSON.parse(v) : []; }catch(e){ return []; } }
-function saveSession(){ try{ localStorage.setItem("quizora_session", JSON.stringify({role:window.__role, student:window.__currentStudent})); }catch(e){} }
-window.__role=""; window.__currentStudent=null; window.__preview=false;
-window.enterAppSafe=function(){
-  window.__preview=false;
-  var sw=el("switchBtn"); var qsw=el("quickSwitchBtn");
-  if(window.__role==="admin"){ if(sw) sw.style.display="block"; if(qsw) qsw.style.display="block"; } else { if(sw) sw.style.display="none"; if(qsw) qsw.style.display="none"; }
-  el("previewBanner").style.display="none";
-  el("loginScreen").style.display="none";
-  el("app").style.display="block";
-  el("navAdmin").className="bottom "+(window.__role==="admin" ? "show" : "");
-  if(window.__role!=="admin"){ el("navAdmin").classList.remove("show"); el("navStudent").style.display="flex"; } else { el("navStudent").style.display="none"; }
-  el("topSub").textContent = window.__role==="admin" ? "Admin Dashboard - You" : ("Student Dashboard - "+(window.__currentStudent ? window.__currentStudent.name : "Student"));
-  if(window.showPage) window.showPage(window.__role==="admin" ? 0 : 5);
-  if(window.renderApp) window.renderApp();
-  saveSession();
-};
-function doAdmin(){
-  var u=(el("adminUser").value||"").trim(); var p=(el("adminPass").value||"").trim();
-  if(!u){ showStatus("Enter Admin Username"); return; }
-  if(!p){ showStatus("Enter Password"); return; }
-  var saved=getAdmin();
-  if(!saved){ try{ localStorage.setItem("quizora_admin_data", JSON.stringify({user:u, pass:p})); }catch(e){} window.__role="admin"; window.__currentStudent=null; setTimeout(function(){ window.enterAppSafe(); },300); return; }
-  if(u.toLowerCase()!==saved.user.toLowerCase()){ showStatus("Wrong Admin Username. Saved is "+saved.user); return; }
-  if(p!==saved.pass){ showStatus("Wrong Password"); return; }
-  window.__role="admin"; window.__currentStudent=null; setTimeout(function(){ window.enterAppSafe(); },300);
-}
-function doStudentCreate(){
-  var u=(el("newStuUser").value||"").trim(); var p=(el("newStuPass").value||"").trim(); var p2=(el("newStuPass2").value||"").trim(); var cls=el("newStuClass").value;
-  if(!u){ showStatus("Choose a Username"); return; }
-  if(!p){ showStatus("Create a Password"); return; }
-  if(p!==p2){ showStatus("Passwords do not match"); return; }
-  var list=getStudents();
-  for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase()){ showStatus("Username exists - choose another"); return; } }
-  var dev=""; try{ dev=localStorage.getItem("quizora_device_id")||("DEV-"+Math.random().toString(36).slice(2,10).toUpperCase()); localStorage.setItem("quizora_device_id",dev); }catch(e){}
-  var ns={name:u, cls:cls, pin:p, status:"Active", subs:[], deviceId:dev}; list.unshift(ns); try{ localStorage.setItem("quizora_students", JSON.stringify(list)); }catch(e){}
-  window.__role="student"; window.__currentStudent=ns; setTimeout(function(){ window.enterAppSafe(); },300);
-}
-function doStudentLogin(){
-  var u=(el("studentUser").value||"").trim(); var p=(el("studentPass").value||"").trim();
-  if(!u){ showStatus("Enter Your Username"); return; }
-  if(!p){ showStatus("Enter Your Password"); return; }
-  var list=getStudents(); var found=null; for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase() && list[i].pin===p){ found=list[i]; break; } }
-  if(!found){ showStatus("Wrong Username or Password. If new, tap Create My Account."); return; }
-  if(found.status==="Blocked"){ showStatus("Blocked. Contact Admin."); return; }
-  var dev=""; try{ dev=localStorage.getItem("quizora_device_id")||""; }catch(e){}
-  if(!found.deviceId){ found.deviceId=dev; try{ localStorage.setItem("quizora_students", JSON.stringify(list)); }catch(e){} }
-  else if(found.deviceId!==dev){ showStatus("Locked to another device. Ask Admin to Reset Device."); return; }
-  window.__role="student"; window.__currentStudent=found; setTimeout(function(){ window.enterAppSafe(); },300);
-}
-function resetLogin(){ if(!confirm("Reset Login? Clears Admin and Students on THIS phone only. Content stays.")) return; try{ localStorage.removeItem("quizora_admin_data"); localStorage.removeItem("quizora_students"); localStorage.removeItem("quizora_session"); }catch(e){} el("adminUser").value=""; el("adminPass").value=""; showStatus("Login reset. Create Admin again."); }
-(function(){
-  try{
-    var s=JSON.parse(localStorage.getItem("quizora_session")||"null");
-    if(s && s.role){
-      window.__role=s.role; window.__currentStudent=s.student||null;
-      setTimeout(function(){ window.enterAppSafe(); }, 300);
-    }
-  }catch(e){}
-})();
+const $=id=>document.getElementById(id);
+let authType='student',studentMode='login',me=null,cache=null,page='dashboard',activeClass=null,activeSubject=null,activeTopic=null,activeContent=null;
+const FREE_CLASSES=['JSS1','JSS2','SS1','SS2'];
+const DEVICE_KEY='quizora_device_id',CACHE_KEY='quizora_offline_cache',PROFILE_KEY='quizora_offline_profile';
+function deviceId(){let x=localStorage.getItem(DEVICE_KEY);if(!x){x=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random());localStorage.setItem(DEVICE_KEY,x)}return x}
+function toast(s){$('toast').textContent=s;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),3000)}
+function online(){return navigator.onLine}
+function net(){ $('netStatus').textContent=online()?'● Online':'● Offline mode';$('netStatus').style.color=online()?'#e8fff2':'#ffe4a8'}
+window.addEventListener('online',net);window.addEventListener('offline',net);net();
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+async function api(action,data={}){if(!online())throw new Error('You are offline. Connect to the internet to make this change.');let r=await fetch('/api',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({action,...data})});let j=await r.json().catch(()=>({error:'Server returned an invalid response'}));if(!r.ok||j.error)throw new Error(j.error||'Request failed');return j}
+function setAuth(t){authType=t;$('studentTab').classList.toggle('active',t==='student');$('adminTab').classList.toggle('active',t==='admin');$('studentAuth').classList.toggle('hidden',t!=='student');$('adminAuth').classList.toggle('hidden',t!=='admin');if(t==='admin')checkAdminSetup()}
+function setStudentMode(m){studentMode=m;$('loginTab').classList.toggle('active',m==='login');$('registerTab').classList.toggle('active',m==='register');$('studentLoginForm').classList.toggle('hidden',m!=='login');$('studentRegisterForm').classList.toggle('hidden',m!=='register')}
+async function checkAdminSetup(){try{let x=await api('status');$('adminSetupForm').classList.toggle('hidden',x.adminExists);$('adminLoginForm').classList.toggle('hidden',!x.adminExists)}catch(e){$('adminSetupForm').classList.add('hidden');$('adminLoginForm').classList.remove('hidden')}}
+function showApp(){ $('welcome').classList.add('hidden');$('workspace').classList.remove('hidden');$('logoutBtn').classList.remove('hidden');render()}
+function showWelcome(){ $('welcome').classList.remove('hidden');$('workspace').classList.add('hidden');$('logoutBtn').classList.add('hidden')}
+async function studentRegister(){let name=$('regName').value.trim(),p=$('regPass').value,p2=$('regPass2').value,cl=$('regClass').value;if(!name||p.length<6||p!==p2)return toast('Enter your name and matching passwords of at least 6 characters.');try{let r=await api('register',{name,password:p,className:cl,deviceId:deviceId()});me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));await refreshData();toast('Account created. Your lessons are being saved for offline use.');showApp()}catch(e){toast(e.message)}}
+async function studentLogin(){let name=$('loginName').value.trim(),password=$('loginPass').value;if(!name||!password)return toast('Enter your name and password.');try{let r=await api('login',{name,password,role:'student',deviceId:deviceId()});me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));await refreshData();showApp()}catch(e){toast(e.message)}}
+async function adminLogin(){try{let r=await api('login',{name:$('adminName').value.trim(),password:$('adminPass').value,role:'admin',deviceId:deviceId()});me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));await refreshData();showApp()}catch(e){toast(e.message)}}
+async function adminSetup(){try{let r=await api('adminSetup',{setupKey:$('setupKey').value,name:$('setupName').value.trim(),password:$('setupPass').value});toast('Administrator created. Sign in now.');$('adminSetupForm').classList.add('hidden');$('adminLoginForm').classList.remove('hidden');$('adminName').value=r.name}catch(e){toast(e.message)}}
+async function logout(){if(online()){try{await api('logout')}catch(e){}}me=null;localStorage.removeItem(PROFILE_KEY);showWelcome()}
+function openLocalDB(){return new Promise((resolve,reject)=>{let r=indexedDB.open('QuizoraOffline',1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains('kv'))r.result.createObjectStore('kv')};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+async function localPut(key,value){let d=await openLocalDB();return new Promise((resolve,reject)=>{let t=d.transaction('kv','readwrite');t.objectStore('kv').put(value,key);t.oncomplete=()=>resolve();t.onerror=()=>reject(t.error)})}
+async function localGet(key){let d=await openLocalDB();return new Promise((resolve,reject)=>{let t=d.transaction('kv','readonly'),r=t.objectStore('kv').get(key);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+async function refreshData(){try{let r=await api('bootstrap');cache=r;await localPut('cache',r);me=r.user;localStorage.setItem(PROFILE_KEY,JSON.stringify(me));}catch(e){let saved=await localGet('cache').catch(()=>null);if(saved){cache=saved;me=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');if(!me)throw e}else throw e}}
+async function resumeOffline(){try{let p=localStorage.getItem(PROFILE_KEY),c=await localGet('cache');if(p&&c){me=JSON.parse(p);cache=c;showApp();if(online())refreshData().then(render).catch(()=>{})}}catch(e){}}
+resumeOffline();
+function navItems(){return me.role==='admin'?[['dashboard','▦','Dashboard'],['manage','▤','Classes & Content'],['students','♙','Students'],['announcements','◉','Announcements'],['settings','⚙','Settings']]:[['dashboard','⌂','Home'],['classes','▤','My Classes'],['announcements','◉','Announcements'],['profile','♙','My Profile']]}
+function render(){if(!me||!cache)return;let items=navItems();if(!items.some(x=>x[0]===page))page='dashboard';$('sidebar').innerHTML=`<div style="padding:9px 10px 14px;font-weight:850">${esc(me.name)}<div class="muted" style="font-size:11px">${me.role==='admin'?'Administrator':'Student account'}</div></div>`+items.map(x=>`<button class="navbtn ${page===x[0]?'active':''}" onclick="go('${x[0]}')"><span>${x[1]}</span>${x[2]}</button>`).join('')+`<div style="padding:10px"><button class="btn ghost small" style="width:100%" onclick="syncNow()">⇩ Save lessons offline</button></div>`;if(me.role==='admin')renderAdmin();else renderStudent()}
+function go(p){page=p;render()}
+function renderAdmin(){let total=(cache.students||[]).length,classes=cache.tree||[];if(page==='dashboard'){$('main').innerHTML=`<div class="pagehead"><div><h1>Administrator dashboard</h1><div class="muted">Manage your learning platform.</div></div><span class="badge">ADMIN</span></div><div class="stats"><div class="stat"><strong>${total}</strong><span>STUDENTS</span></div><div class="stat"><strong>${classes.length}</strong><span>CLASSES</span></div><div class="stat"><strong>${classes.reduce((a,c)=>a+c.subjects.length,0)}</strong><span>SUBJECTS</span></div><div class="stat"><strong>${classes.reduce((a,c)=>a+c.subjects.reduce((b,s)=>b+s.topics.length,0),0)}</strong><span>TOPICS</span></div></div><div class="card"><h2>Welcome to Quizora AI</h2><p class="muted">Use Classes & Content to build your learning library. Select a class and subject with their checkboxes; new topics will automatically be placed under the selected subject.</p><button class="btn" onclick="go('manage')">Manage learning content</button></div>`}
+else if(page==='manage')renderManager();
+else if(page==='students')renderStudents();
+else if(page==='announcements')renderAnnouncements(true);
+else if(page==='settings')$('main').innerHTML=`<div class="pagehead"><h1>Settings</h1></div><div class="card"><h2>Offline and security</h2><p class="muted">Student learning materials are cached on each device. Administrator changes require an internet connection and are synchronised with the shared database.</p><button class="btn secondary" onclick="syncNow()">Synchronise content</button><button class="btn ghost" style="margin-left:7px" onclick="logout()">Sign out</button></div>`}
+function renderManager(){let tree=cache.tree||[];if(!activeClass&&tree[0])activeClass=tree[0].id;let c=tree.find(x=>x.id===activeClass);if(c&&!activeSubject&&c.subjects[0])activeSubject=c.subjects[0].id;let s=c?.subjects.find(x=>x.id===activeSubject);if(s&&!activeTopic&&s.topics[0])activeTopic=s.topics[0].id;let t=s?.topics.find(x=>x.id===activeTopic);$('main').innerHTML=`<div class="pagehead"><div><h1>Classes & Content</h1><div class="muted">Organise classes, subjects, topics and learning materials.</div></div><button class="btn small" onclick="addClass()">＋ Add class</button></div><div class="split"><div class="card tree"><h3>Learning structure</h3><p class="muted" style="font-size:12px">Tick a class and subject to set the destination for new topics.</p>${tree.map(cl=>`<div class="tree-row ${cl.id===activeClass?'selected':''}"><input type="checkbox" ${cl.id===activeClass?'checked':''} onchange="selectClass('${cl.id}',this.checked)"><span class="name" onclick="selectClass('${cl.id}',true)">${esc(cl.name)}</span><button class="btn ghost small" onclick="renameItem('class','${cl.id}','${attr(cl.name)}')">Edit</button><button class="btn danger small" onclick="deleteItem('class','${cl.id}')">×</button></div>${cl.id===activeClass?`<div class="indent">${cl.subjects.map(sb=>`<div class="tree-row ${sb.id===activeSubject?'selected':''}"><input type="checkbox" ${sb.id===activeSubject?'checked':''} onchange="selectSubject('${cl.id}','${sb.id}',this.checked)"><span class="name" onclick="selectSubject('${cl.id}','${sb.id}',true)">${esc(sb.name)}</span><button class="btn ghost small" onclick="renameItem('subject','${sb.id}','${attr(sb.name)}')">Edit</button><button class="btn danger small" onclick="deleteItem('subject','${sb.id}')">×</button></div>`).join('')}<button class="btn secondary small" onclick="addSubject('${cl.id}')">＋ Add subject</button></div>`:''}`).join('')}</div><div><div class="card"><div class="pagehead"><div><h3>${esc(c?.name||'Select a class')} ${s?' / '+esc(s.name):''}</h3><div class="muted" style="font-size:12px">Selected destination for new topics</div></div><button class="btn small" onclick="addTopic()">＋ Add topic</button></div>${s?`<div class="field"><label>Choose subject</label><select onchange="selectSubject('${c.id}',this.value,true)">${c.subjects.map(x=>`<option value="${x.id}" ${x.id===activeSubject?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div><h3>Topics</h3>${s.topics.map(tp=>`<button class="topic-btn ${tp.id===activeTopic?'active':''}" onclick="selectTopic('${tp.id}')">${esc(tp.name)} <span class="muted">›</span></button>`).join('')||'<p class="muted">No topics yet. Add your first topic.</p>'}<div class="btnrow"><button class="btn ghost small" onclick="renameItem('subject','${s.id}','${attr(s.name)}')">Rename subject</button><button class="btn danger small" onclick="deleteItem('subject','${s.id}')">Delete subject</button></div>`:'<div class="empty">Select a class, then tick or choose a subject.</div>'}</div>${t?renderTopicEditor(t):'<div class="card empty">Select a topic to add or edit learning content. You can create topics without adding notes.</div>'}</div></div>`}
+function renderTopicEditor(t){let blocks=t.content||[];return `<div class="card" style="margin-top:15px"><div class="pagehead"><div><h3>${esc(t.name)}</h3><div class="muted" style="font-size:12px">Topic content editor — edit while reading.</div></div><div class="btnrow"><button class="btn ghost small" onclick="renameItem('topic','${t.id}','${attr(t.name)}')">Rename</button><button class="btn danger small" onclick="deleteItem('topic','${t.id}')">Delete</button></div></div><div class="btnrow"><button class="btn small" onclick="addPhrase()">＋ Add phrase</button><button class="btn secondary small" onclick="addNotes()">＋ Add notes</button><label class="btn ghost small">＋ Add diagram<input type="file" accept="image/*" hidden onchange="uploadDiagram(this.files[0])"></label></div>${blocks.length?blocks.map(b=>`<article class="content-card"><span class="badge">${b.kind==='phrase'?'PHRASE':'NOTES'}</span><p>${esc(b.body)}</p><div class="content-tools"><button class="btn ghost small" onclick="copyText('${b.id}')">Copy</button><button class="btn secondary small" onclick="editContent('${b.id}')">Edit</button><button class="btn ghost small" onclick="activeContent='${b.id}';toast('Next uploaded diagram will be attached here.')">Attach diagram here</button><button class="btn danger small" onclick="removeContent('${b.id}')">Remove</button></div>${(t.diagrams||[]).filter(d=>d.content_id===b.id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}"><button class="btn danger small" onclick="removeDiagram('${d.id}')">Remove diagram</button>`).join('')}</article>`).join(''):'<div class="empty">This topic has no notes yet. Add a phrase or create a full note.</div>'}${(t.diagrams||[]).filter(d=>!d.content_id).map(d=>`<div class="content-card"><img class="diagram" src="${d.data_url}" alt="${attr(d.name)}"><button class="btn danger small" onclick="removeDiagram('${d.id}')">Remove diagram</button></div>`).join('')}</div>`}
+function renderStudents(){let list=cache.students||[];$('main').innerHTML=`<div class="pagehead"><div><h1>Students</h1><div class="muted">Manage access and subscriptions.</div></div><button class="btn small" onclick="refreshData().then(render)">Refresh</button></div><div class="card">${list.length?list.map(u=>`<div class="student-class"><div><b>${esc(u.name)}</b><div class="muted" style="font-size:12px">${u.blocked?'Blocked':'Active'} · ${esc(u.class_name||'No class')}</div></div><div class="btnrow"><button class="btn ${u.blocked?'secondary':'ghost'} small" onclick="studentAction('${u.id}','block',${!u.blocked})">${u.blocked?'Unblock':'Block'}</button><button class="btn small" onclick="studentAction('${u.id}','subscription')">Subscription</button><button class="btn ghost small" onclick="resetStudentDevice('${u.id}')">Reset device</button></div></div>`).join(''):'<div class="empty">No students have registered yet.</div>'}</div>`}
+function renderAnnouncements(admin){let a=cache.announcements||[];$('main').innerHTML=`<div class="pagehead"><div><h1>Announcements</h1><div class="muted">Updates for Quizora students.</div></div>${admin?'<button class="btn small" onclick="addAnnouncement()">＋ New announcement</button>':''}</div><div class="card">${a.length?a.map(x=>`<div class="announcement"><b>${esc(x.title)}</b><p>${esc(x.body)}</p>${admin?`<button class="btn danger small" onclick="deleteAnnouncement('${x.id}')">Delete</button>`:''}</div>`).join(''):'<div class="empty">No announcements yet.</div>'}</div>`}
+function renderStudent(){if(page==='dashboard'||page==='classes'){let tree=cache.tree||[];$('main').innerHTML=`<div class="pagehead"><div><h1>${page==='dashboard'?'Welcome, '+esc(me.name):'My Classes'}</h1><div class="muted">Choose a class to continue learning.</div></div><span class="badge free">Offline-ready</span></div><div class="note">Tap “Save lessons offline” while connected to download your available learning materials.</div>${tree.map(c=>{let locked=!(FREE_CLASSES.includes(c.name))&&!c.unlocked;return `<div class="student-class"><div><h3>${esc(c.name)}</h3><div class="muted" style="font-size:12px">${c.subjects.length} subjects</div></div>${locked?'<div class="btnrow"><span class="badge lock">🔒 Subscription</span><a class="btn small gold" style="text-decoration:none" href="https://wa.me/2348147699555?text=Hello%2C%20I%20want%20to%20subscribe%20to%20Quizora" target="_blank" rel="noopener">Subscribe</a></div>':`<button class="btn small" onclick="openStudentClass('${c.id}')">Open class</button>`}</div>`}).join('')}`;return}
+if(page==='announcements')renderAnnouncements(false);else if(page==='profile')$('main').innerHTML=`<div class="pagehead"><h1>My Profile</h1></div><div class="card"><h2>${esc(me.name)}</h2><p class="muted">Student account · ${esc(me.class_name||'')}</p><p class="muted">Your offline lessons are stored on this device.</p></div>`;else if(page==='reading')renderStudentReading()}
+function openStudentClass(id){activeClass=id;page='subjects';renderStudentSubjects()}
+function renderStudentSubjects(){let c=(cache.tree||[]).find(x=>x.id===activeClass);if(!c)return;let locked=!(FREE_CLASSES.includes(c.name))&&!c.unlocked;if(locked){$('main').innerHTML=`<div class="locked">🔒 ${esc(c.name)} is locked. An active subscription is required.</div>`;return}$('main').innerHTML=`<div class="pagehead"><div><h1>${esc(c.name)}</h1><div class="muted">Select a subject.</div></div><button class="btn ghost small" onclick="go('classes')">Back to classes</button></div>`+c.subjects.map(s=>`<div class="student-class"><h3>${esc(s.name)}</h3><button class="btn small" onclick="openStudentSubject('${s.id}')">View topics</button></div>`).join('')}
+function openStudentSubject(id){activeSubject=id;let c=(cache.tree||[]).find(x=>x.id===activeClass),s=c.subjects.find(x=>x.id===id);$('main').innerHTML=`<div class="pagehead"><div><h1>${esc(s.name)}</h1><div class="muted">${esc(c.name)} · Topics</div></div><button class="btn ghost small" onclick="renderStudentSubjects()">Back</button></div>`+s.topics.map(t=>`<button class="topic-btn" onclick="activeTopic='${t.id}';page='reading';renderStudentReading()">${esc(t.name)} ›</button>`).join('')}
+function renderStudentReading(){let t=findTopic(activeTopic);if(!t){$('main').innerHTML='<div class="empty">Topic not found.</div>';return}let blocks=(t.content||[]).map(b=>`<article class="content-card"><p>${esc(b.body)}</p>${(t.diagrams||[]).filter(d=>d.content_id===b.id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}">`).join('')}</article>`).join('');let loose=(t.diagrams||[]).filter(d=>!d.content_id).map(d=>`<img class="diagram" src="${d.data_url}" alt="${attr(d.name)}">`).join('');$('main').innerHTML=`<div class="pagehead"><div><h1>${esc(t.name)}</h1><div class="muted">Learning notes</div></div><button class="btn ghost small" onclick="openStudentSubject(activeSubject)">Back to topics</button></div>${blocks}${loose}${blocks||loose?'':'<div class="empty">Notes for this topic have not been added yet.</div>'}`}
+function findTopic(id){for(let c of cache.tree||[])for(let s of c.subjects)for(let t of s.topics)if(t.id===id)return t;return null}
+function selectClass(id,checked){activeClass=checked?id:null;activeSubject=null;activeTopic=null;renderManager()}
+function selectSubject(cid,id,checked){activeClass=cid;activeSubject=checked?id:null;activeTopic=null;renderManager()}
+function selectTopic(id){activeTopic=id;renderManager()}
+function ask(title,placeholder,callback,initial=''){modal(`<h2>${title}</h2><div class="field"><input id="modalValue" value="${attr(initial)}" placeholder="${attr(placeholder)}"></div><div class="btnrow"><button class="btn" onclick="window.modalDone($('modalValue').value)">Save</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);window.modalDone=v=>{closeModal();callback(v)}}
+function modal(html){$('modalRoot').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`}
+function closeModal(){$('modalRoot').innerHTML=''}
+async function addClass(){ask('Add class','e.g. SS1',async v=>{if(v.trim())await mutate('saveClass',{name:v.trim()})})}
+async function addSubject(cid){ask('Add subject','e.g. Mathematics',async v=>{if(v.trim())await mutate('saveSubject',{classId:cid,name:v.trim()})})}
+async function addTopic(){if(!activeClass||!activeSubject)return toast('Tick a class and a subject first.');ask('Add topic','Topic title',async v=>{if(v.trim())await mutate('saveTopic',{classId:activeClass,subjectId:activeSubject,name:v.trim()})})}
+async function renameItem(type,id,old){ask('Rename '+type,'Enter a new name',async v=>{if(v.trim())await mutate('renameItem',{type,id,name:v.trim()})},old)}
+async function deleteItem(type,id){if(!confirm('Delete this '+type+' and its nested content?'))return;await mutate('deleteItem',{type,id})}
+async function mutate(action,data){try{await api(action,data);await refreshData();render();toast('Saved successfully.')}catch(e){toast(e.message)}}
+function addPhrase(){let t=findTopic(activeTopic);if(!t)return;modal(`<h2>Add phrase</h2><p class="muted">Add a sentence or a few lines. Quizora will suggest a logical position in the most relevant existing note.</p><div class="field"><label>Phrase or lines</label><textarea id="phraseText" placeholder="Write the addition here…"></textarea></div><div class="note" id="smartPreview">The suggested insertion will appear here as you type. Review it before saving.</div><div class="btnrow" style="margin-top:12px"><button class="btn" onclick="savePhrase()">Smart fix & save</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);$('phraseText').addEventListener('input',previewPhrase)}
+function previewPhrase(){let v=$('phraseText')?.value.trim();let t=findTopic(activeTopic);if(!v||!t){$('smartPreview').textContent='The suggested insertion will appear here as you type.';return}let notes=(t.content||[]).filter(x=>x.kind==='note');let aw=new Set(words(v)),target=null,best=-1;for(let n of notes){let nw=new Set(words(n.body)),score=[...aw].filter(w=>nw.has(w)).length;if(score>best){best=score;target=n}}$('smartPreview').textContent=target&&best>0?'Suggested placement in “'+target.body.slice(0,70)+'…”:\n\n'+smartInsert(target.body,v):'No closely related note was found. The phrase will be saved as a separate content item.'}
+function sentenceParts(text){return (text.match(/[^.!?]+[.!?]?/g)||[]).map(x=>x.trim()).filter(Boolean)}
+function words(s){return (s.toLowerCase().match(/[a-z]{3,}/g)||[]).filter(x=>!['the','and','that','this','with','from','when','which','into','their','there','then','than','also','will','have','has','are','was','were','for','not','you','your'].includes(x))}
+function smartInsert(existing,addition){let parts=sentenceParts(existing),aw=new Set(words(addition));if(!parts.length)return addition;let best=parts.length,score=-1;parts.forEach((p,i)=>{let pw=words(p),overlap=pw.filter(w=>aw.has(w)).length;let connector=/^(therefore|thus|hence|however|for example|for instance|in addition|also|consequently|this means|as a result)\b/i.test(addition);let s=overlap+(connector&&i>0?1:0);if(s>score){score=s;best=i+1}});let before=parts.slice(0,best),after=parts.slice(best);return [...before,addition.trim(),...after].join(' ').replace(/\s+/g,' ').trim()}
+async function savePhrase(){let v=$('phraseText').value.trim();if(!v)return toast('Write the phrase first.');let t=findTopic(activeTopic);let notes=(t.content||[]).filter(x=>x.kind==='note');let target=null,best=-1;let aw=new Set(words(v));for(let n of notes){let nw=new Set(words(n.body));let score=[...aw].filter(w=>nw.has(w)).length;if(score>best){best=score;target=n}}try{if(target&&best>0){let updated=smartInsert(target.body,v);await api('updateContent',{id:target.id,body:updated})}else{await api('saveContent',{topicId:activeTopic,id:crypto.randomUUID(),kind:'phrase',body:v,position:999999})}await refreshData();closeModal();render();toast(target&&best>0?'Phrase inserted into the most relevant note. Please review its flow.':'Phrase saved. Add more context or move it if needed.')}catch(e){toast(e.message)}}
+function addNotes(){modal(`<h2>Add notes</h2><p class="muted">Create a separate note under this topic. This can be a full lesson or a new section.</p><div class="field"><label>Note title (optional)</label><input id="noteTitle" placeholder="e.g. Meaning of force"></div><div class="field"><label>Notes</label><textarea id="noteBody" style="min-height:190px" placeholder="Write your lesson notes…"></textarea></div><div class="btnrow"><button class="btn" onclick="saveNotes()">Save notes</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`)}
+async function saveNotes(){let body=$('noteBody').value.trim(),title=$('noteTitle').value.trim();if(!body)return toast('Write your notes first.');await mutate('saveContent',{topicId:activeTopic,id:crypto.randomUUID(),kind:'note',body:title?title+'\\n\\n'+body:body,position:999999});closeModal()}
+function editContent(id){let t=findTopic(activeTopic),b=t.content.find(x=>x.id===id);modal(`<h2>Edit content</h2><div class="field"><textarea id="editBody" style="min-height:220px">${esc(b.body)}</textarea></div><div class="btnrow"><button class="btn" onclick="saveEdit('${id}')">Save changes</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`)}
+async function saveEdit(id){let body=$('editBody').value.trim();if(!body)return toast('Content cannot be empty.');await mutate('updateContent',{id,body});closeModal()}
+async function removeContent(id){if(confirm('Remove this content?'))await mutate('deleteContent',{id})}
+async function copyText(id){let t=findTopic(activeTopic),b=t.content.find(x=>x.id===id);try{await navigator.clipboard.writeText(b.body);toast('Copied.')}catch(e){toast('Copy is not available in this browser. Select and copy the text instead.')}}
+async function uploadDiagram(file){if(!file)return;if(file.size>2*1024*1024)return toast('Please use an image smaller than 2 MB.');let reader=new FileReader();reader.onload=async()=>{let t=findTopic(activeTopic),target=activeContent||null;try{await api('saveDiagram',{id:crypto.randomUUID(),topicId:activeTopic,contentId:target,name:file.name,mime:file.type,dataUrl:reader.result});await refreshData();render();toast('Diagram uploaded.')}catch(e){toast(e.message)}};reader.readAsDataURL(file)}
+async function removeDiagram(id){if(confirm('Remove this diagram?'))await mutate('deleteDiagram',{id})}
+async function addAnnouncement(){modal(`<h2>New announcement</h2><div class="field"><label>Title</label><input id="annTitle"></div><div class="field"><label>Message</label><textarea id="annBody"></textarea></div><div class="btnrow"><button class="btn" onclick="saveAnnouncement()">Publish</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>`)}
+async function saveAnnouncement(){let title=$('annTitle').value.trim(),body=$('annBody').value.trim();if(!title||!body)return toast('Enter a title and message.');await mutate('saveAnnouncement',{title,body});closeModal()}
+async function deleteAnnouncement(id){if(confirm('Delete announcement?'))await mutate('deleteAnnouncement',{id})}
+async function studentAction(id,action,value){if(action==='block'){await mutate('setStudentBlocked',{id,blocked:value});return}let cl=prompt('Enter class to unlock (JSS3, SS3, WAEC or JAMB):');if(!cl)return;let days=prompt('Subscription duration in days (e.g. 365):','365');if(!days)return;await mutate('setSubscription',{userId:id,className:cl.toUpperCase(),days:Number(days)})}
+async function resetStudentDevice(id){if(confirm('Allow this student to register a new device on their next sign-in?'))await mutate('resetDevice',{id})}
+async function syncNow(){if(!online())return toast('Connect to the internet to download or synchronise lessons.');try{await refreshData();render();toast('Your available lessons have been saved on this device for offline study.')}catch(e){toast(e.message)}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function attr(s){return esc(s).replace(/`/g,'&#96;')}
 </script>
-
-<div id="app" style="display:none">
-<div class="top"><div style="display:flex;align-items:center;gap:10px"><div class="qlogo"><span>Q</span></div><div><b style="font-size:22px">Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" class="pill switch" id="switchBtn" style="display:none" onclick="toggleView()">View as Student</button><button type="button" class="pill white" onclick="showPage(4)">Announcement</button><button type="button" class="pill gold" onclick="logout()">Logout</button></div></div>
-<div class="preview-banner" id="previewBanner">Previewing as Student - Admin only. Tap Back to Admin.</div>
-<div class="wrap">
-<div id="aDash" class="page show">
-<div class="cards"><div class="card"><p class="mut">Revenue</p><h3 id="revText">₦0</h3></div><div class="card"><p class="mut">Students</p><h3 id="stuCount">0</h3></div><div class="card"><p class="mut">Locked</p><h3>4</h3><small class="mut">JSS3 - SS3 - WAEC - JAMB</small></div><div class="card"><p class="mut">Free</p><h3>4</h3><small class="mut">JSS1 - JSS2 - SS1 - SS2</small></div></div>
-<div class="card"><h2>Quick Actions</h2><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" class="btn btn-primary" id="quickSwitchBtn" style="display:none" onclick="toggleView()">View as Student</button><button type="button" class="btn btn-ghost" onclick="showPage(1)">View Students</button><button type="button" class="btn btn-ghost" onclick="showPage(2)">Open Classes</button><button type="button" class="btn btn-ghost" onclick="showPage(3)">Content Studio</button></div></div>
-<div class="card"><h2>Students - Tap ... to Unlock / Reset Device</h2><div class="list" id="studentsList"></div></div>
-<div class="card"><h2>Classes - Tick Box - Tap box to select</h2><p class="mut">1. Tick a Class box. 2. Tap Class name to open it. 3. Tick a Subject box. All new Topics go under ticked Subject.</p><div class="tickbar none" id="tickBarA">Ticked: None - Tick a Class box, then a Subject box</div><div class="list" id="classListA"></div></div>
-<div class="card"><h2>Payment - Admin Only</h2><div class="paybox"><b>Opay: 8147699555</b> - WhatsApp: 08147699555<br><small>Locked: ₦2,000 per section / month</small></div></div>
-</div>
-<div id="aStudents" class="page"><div class="card"><h2>Students</h2><div class="list" id="studentsList2"></div></div></div>
-<div id="classes" class="page"><div class="card"><h2>Classes - Tick Box</h2><p class="mut">Tick Class box, then tick Subject box. Untick to change.</p><div class="tickbar none" id="tickBar">Ticked: None - Tick a Class box, then a Subject box</div><div class="list" id="classList"></div><div id="adminClassTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newClassName" placeholder="New Class"><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addClass()">+ Add New Class</button><div style="margin-top:12px"><b>Add Subject to TICKED Class:</b><input id="newSubForTicked" placeholder="New Subject for ticked Class"><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addSubjectToTicked()">+ Add Subject to Ticked Class</button></div><div style="margin-top:12px"><b>Add Topic to TICKED Subject:</b><input id="newTopicForTicked" placeholder="New Topic for ticked Subject"><textarea id="newNoteForTicked" rows="2" placeholder="Note optional - leave empty to add topic only"></textarea><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addTopicToTicked()">+ Add Topic to Ticked Subject - Note Optional</button></div></div></div></div>
-<div id="studio" class="page"><div class="card"><h2>Content Studio - Uses TICKED Class + Subject</h2><p class="mut">No Class dropdown anymore - to avoid duplicates. Tick Class + Subject boxes in Classes page first.</p><div class="tickbar none" id="tickBarStudio">Ticked: None - Go to Classes, tick a Class box, then a Subject box</div><label>Topic Title for TICKED Subject</label><input id="stTopic" placeholder="e.g. Fractions"><label>Note - Optional</label><textarea id="stNote" rows="5" placeholder="Write lesson... or leave empty"></textarea><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="addContentTicked()">+ Add This Topic to Ticked Subject - Note Optional</button><div style="margin-top:16px;border-top:1px solid #eee;padding-top:12px"><h3>Manage Classes</h3><input id="studioNewClass" placeholder="New Class"><button type="button" class="btn btn-ghost" style="margin-top:8px" onclick="addClassFromStudio()">+ Add Class</button><div class="list" id="studioClassList"></div></div><div style="margin-top:16px"><h3>All Topics - Add Phrase / Add Notes / Edit / Delete</h3><div class="list" id="studioList"></div></div></div></div>
-<div id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">Send</button><div class="list" id="annList"></div></div></div>
-<div id="settings" class="page"><div class="card"><h2>Settings - Admin Only</h2><label>Admin Username</label><input id="settingsAdminUser"><label>Change MY Admin Password</label><input id="newAdminOtp" type="password" placeholder="New Password"><input id="newAdminOtp2" type="password" placeholder="Confirm"><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="changeAdminOtp()">Save My New Password</button><div class="paybox"><b>Lock Rule:</b> FREE = JSS1, JSS2, SS1, SS2<br>LOCKED = JSS3, SS3, WAEC, JAMB - ₦2,000 / section / month</div></div></div>
-<div id="sDash" class="page"><div class="cards"><div class="card"><p class="mut">My Username</p><h3 id="myOtpText">-</h3></div><div class="card"><p class="mut">My Subscriptions</p><h3 id="mySubsText" style="font-size:14px">Free Classes Only</h3></div></div><div class="card"><h2>My Classes - Dropdown</h2><p class="mut">Tap Class name to open, tap Subject name to see Topics. Students have no tick boxes.</p><div class="list" id="classListS"></div></div><div class="card"><h2>Announcements</h2><div class="list" id="sAnnList"></div></div><div class="card"><h2>Subscribe</h2><div class="paybox"><b>Pay ₦2,000 per locked section to Opay: 8147699555</b></div><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
-<div id="sClasses" class="page"><div class="card"><h2>My Classes - Dropdown</h2><div class="list" id="classListS2"></div></div></div>
-<div id="sProfile" class="page"><div class="card"><h2>My Profile</h2><p id="sProfileText"></p><div style="background:#f4f0ff;padding:14px;border-radius:12px;margin:12px 0;font-weight:800;text-align:center" id="sProfileOtp"></div><p class="mut" id="sProfileSubs"></p><button type="button" class="btn btn-primary" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
-</div>
-</div>
-<div class="bottom" id="navAdmin"><button type="button" class="on" onclick="navTo(0,this)">Dashboard</button><button type="button" onclick="navTo(1,this)">Students</button><button type="button" onclick="navTo(2,this)">Classes</button><button type="button" onclick="navTo(3,this)">Studio</button><button type="button" onclick="navTo(6,this)">Settings</button></div>
-<div class="bottom" id="navStudent" style="display:none"><button type="button" class="on" onclick="navTo(5,this)">Home</button><button type="button" onclick="navTo(7,this)">Classes</button><button type="button" onclick="navTo(4,this)">Announce</button><button type="button" onclick="navTo(8,this)">Profile</button></div>
-<div class="toast" id="toast"></div>
-
-<script>
-var WA_NUM="2348147699555";
-var OPAY_NUM="8147699555";
-var FREE_LIST=["JSS1","JSS2","SS1","SS2"];
-var LOCKED_LIST=["JSS3","SS3","WAEC","JAMB"];
-var PRICE_NUM=2000;
-var PAGE_IDS=["aDash","aStudents","classes","studio","announce","sDash","settings","sClasses","sProfile"];
-var anns=[];
-try{ anns=JSON.parse(localStorage.getItem("quizora_anns")||"[]"); }catch(e){ anns=[]; }
-if(!anns.length) anns=["Welcome to Quizora AI - Free: JSS1, JSS2, SS1, SS2. Locked: JSS3, SS3, WAEC, JAMB - N2,000 per section per month."];
-var classesData=null;
-try{ classesData=JSON.parse(localStorage.getItem("quizora_content")||"null"); }catch(e){ classesData=null; }
-if(classesData && !Array.isArray(classesData)){
-  var newArr=[];
-  for(var k in classesData){
-    var subs=[];
-    for(var s in classesData[k]){
-      var tops=[]; var arr=classesData[k][s];
-      for(var i=0;i<arr.length;i++){ tops.push(arr[i]); }
-      subs.push({name:s, topics:tops});
-    }
-    newArr.push({name:k, subjects:subs});
-  }
-  classesData=newArr;
-}
-function dedupeClasses(){
-  if(!classesData) return;
-  var mergedClasses=[];
-  for(var ci=0;ci<classesData.length;ci++){
-    var cls=classesData[ci]; if(!cls || !cls.name) continue;
-    var found=-1; for(var m=0;m<mergedClasses.length;m++){ if(mergedClasses[m].name.toLowerCase()===cls.name.toLowerCase()) found=m; }
-    if(found<0){ mergedClasses.push({name:cls.name, subjects:cls.subjects||[]}); }
-    else { for(var s2=0;s2<(cls.subjects||[]).length;s2++) mergedClasses[found].subjects.push(cls.subjects[s2]); }
-  }
-  for(var k=0;k<mergedClasses.length;k++){
-    var mergedSubs=[];
-    for(var si=0;si<mergedClasses[k].subjects.length;si++){
-      var sub=mergedClasses[k].subjects[si]; if(!sub || !sub.name) continue;
-      var f2=-1; for(var n=0;n<mergedSubs.length;n++){ if(mergedSubs[n].name.toLowerCase()===sub.name.toLowerCase()) f2=n; }
-      if(f2<0){ mergedSubs.push({name:sub.name, topics:sub.topics||[]}); }
-      else { for(var t2=0;t2<(sub.topics||[]).length;t2++){ var tp=sub.topics[t2]; var exists=false; for(var e=0;e<mergedSubs[f2].topics.length;e++){ if(mergedSubs[f2].topics[e].title.toLowerCase()===tp.title.toLowerCase()) exists=true; } if(!exists) mergedSubs[f2].topics.push(tp); } }
-    }
-    mergedClasses[k].subjects=mergedSubs;
-  }
-  classesData=mergedClasses;
-}
-dedupeClasses();
-if(!classesData || !classesData.length){
-  classesData=[
-    {name:"JSS1", subjects:[{name:"Mathematics", topics:[{title:"Fractions", note:"A fraction is a part of a whole. Example: 1/2 means 1 out of 2 equal parts. To add fractions with the same denominator, add the numerators and keep the denominator. In conclusion, fractions help us share things equally.", images:[]}]}]},
-    {name:"JSS2", subjects:[{name:"Mathematics", topics:[{title:"Algebra Basics", note:"Algebra uses letters to stand for numbers. Example: x + 3 = 7, so x = 4.", images:[]}]}]},
-    {name:"JSS3", subjects:[{name:"Mathematics", topics:[{title:"BECE Prep - Indices", note:"Indices show repeated multiplication. Example: 2 x 2 x 2 = 8.", images:[]}]}]},
-    {name:"SS1", subjects:[{name:"Mathematics", topics:[{title:"Quadratic Equations", note:"A quadratic equation has x squared. Example: x squared + 3x + 2 = 0", images:[]}]}]},
-    {name:"SS2", subjects:[{name:"English", topics:[{title:"Comprehension", note:"Read the passage carefully, then answer the questions in your own words.", images:[]}]}]},
-    {name:"SS3", subjects:[{name:"Mathematics", topics:[{title:"WAEC Prep - Revision", note:"Revise all topics. Practise past questions daily.", images:[]}]}]},
-    {name:"WAEC", subjects:[{name:"Mathematics", topics:[{title:"WAEC - Past Questions", note:"WAEC Mathematics: Practise past questions. Show all workings. Example: Solve 2x + 5 = 15.", images:[]}]}, {name:"English", topics:[{title:"WAEC - Oral English", note:"Oral English: Stress, intonation and vowel sounds.", images:[]}]}]},
-    {name:"JAMB", subjects:[{name:"Mathematics", topics:[{title:"JAMB - CBT Practice", note:"JAMB CBT: 40 questions, time management is key.", images:[]}]}, {name:"English", topics:[{title:"JAMB - Use of English", note:"Use of English: Comprehension, lexis, oral English.", images:[]}]}]}
-  ];
-}
-var curCI=-1, curSI=-1, curTI=-1, isEditing=false, openCI=-1, openSI=-1, pendingDiagram="", pendingDiagramNotes="", selCI=-1, selSI=-1;
-function toast2(m){ var t=document.getElementById("toast"); if(!t) return; t.textContent=m; t.style.display="block"; setTimeout(function(){ t.style.display="none"; },3400); }
-function saveApp(){ try{ localStorage.setItem("quizora_anns", JSON.stringify(anns)); localStorage.setItem("quizora_content", JSON.stringify(classesData)); }catch(e){} }
-function getStudentsApp(){ try{ var v=localStorage.getItem("quizora_students"); return v ? JSON.parse(v) : []; }catch(e){ return []; } }
-function saveStudentsApp(list){ try{ localStorage.setItem("quizora_students", JSON.stringify(list)); }catch(e){} }
-function roleNow(){ return window.__role||""; }
-function curStu(){ return window.__currentStudent||null; }
-function requireAdmin(){ if(roleNow()!=="admin"){ toast2("Students cannot access Admin."); return false; } if(window.__preview){ toast2("Previewing as Student. Tap Back to Admin."); return false; } return true; }
-window.logout=function(){ window.__preview=false; window.__role=""; window.__currentStudent=null; try{ localStorage.removeItem("quizora_session"); }catch(e){} document.getElementById("app").style.display="none"; document.getElementById("loginScreen").style.display="block"; document.getElementById("navAdmin").classList.remove("show"); document.getElementById("navStudent").style.display="none"; document.getElementById("previewBanner").style.display="none"; document.getElementById("switchBtn").style.display="none"; document.getElementById("adminPass").value=""; document.getElementById("studentPass").value=""; };
-window.showPage=function(pi){
-  var id=PAGE_IDS[pi];
-  var adminPages=[0,1,3,6];
-  var isAdminPage=false; for(var i=0;i<adminPages.length;i++){ if(adminPages[i]===pi) isAdminPage=true; }
-  if(isAdminPage && roleNow()!=="admin"){ toast2("Admin only"); return; }
-  if(isAdminPage && window.__preview){ toast2("Tap Back to Admin first"); return; }
-  var pages=document.querySelectorAll(".page"); for(var j=0;j<pages.length;j++) pages[j].classList.remove("show");
-  var e=document.getElementById(id); if(e) e.classList.add("show"); window.scrollTo(0,0); if(pi===2||pi===5||pi===7) renderClasses();
-};
-window.navTo=function(pi,btn){ var b=document.querySelectorAll(".bottom button"); for(var i=0;i<b.length;i++) b[i].classList.remove("on"); if(btn) btn.classList.add("on"); window.showPage(pi); };
-window.toggleView=function(){
-  if(roleNow()!=="admin"){ toast2("Students cannot switch to Admin."); return; }
-  if(!window.__preview){ window.__preview=true; document.getElementById("switchBtn").textContent="Back to Admin"; document.getElementById("previewBanner").style.display="block"; document.getElementById("topSub").textContent="Student View - Preview (You are still Admin)"; document.getElementById("navAdmin").classList.remove("show"); document.getElementById("navStudent").style.display="flex"; window.showPage(5); window.renderApp(); toast2("Previewing as Student"); }
-  else { window.__preview=false; document.getElementById("switchBtn").textContent="View as Student"; document.getElementById("previewBanner").style.display="none"; document.getElementById("topSub").textContent="Admin Dashboard - You"; document.getElementById("navAdmin").classList.add("show"); document.getElementById("navStudent").style.display="none"; window.showPage(0); window.renderApp(); toast2("Back to Admin"); }
-};
-window.changeAdminOtp=function(){ if(!requireAdmin()) return; var a=(document.getElementById("newAdminOtp").value||"").trim(); var b=(document.getElementById("newAdminOtp2").value||"").trim(); if(!a) return toast2("Type new password"); if(a!==b) return toast2("Passwords do not match"); try{ var cur=JSON.parse(localStorage.getItem("quizora_admin_data")||"{}"); cur.pass=a; localStorage.setItem("quizora_admin_data", JSON.stringify(cur)); }catch(e){} toast2("Admin password changed"); document.getElementById("newAdminOtp").value=""; document.getElementById("newAdminOtp2").value=""; };
-function isLockedName(n){ return LOCKED_LIST.indexOf(n)>=0; }
-function canOpenName(n){ if(roleNow()==="admin" && !window.__preview) return true; if(FREE_LIST.indexOf(n)>=0) return true; if(window.__preview) return false; var s=curStu(); if(s && s.subs && s.subs.indexOf(n)>=0) return true; return false; }
-function splitS(t){ var parts=(t||"").split("."); var out=[]; for(var i=0;i<parts.length;i++){ var p=parts[i].trim(); if(p) out.push(p+"."); } return out; }
-function cleanNote(t){ var parts=(t||"").split(" "); var out=[]; for(var i=0;i<parts.length;i++){ if(parts[i]!=="") out.push(parts[i]); } var x=out.join(" "); x=x.trim(); if(x) x=x.charAt(0).toUpperCase()+x.slice(1); return x; }
-function cleanBlock(t){ var lines=(t||"").split(" "); var out=[]; for(var i=0;i<lines.length;i++){ if(lines[i]!=="") out.push(lines[i]); } var x=out.join(" "); return x.trim(); }
-function esc(s){ var d=document.createElement("div"); d.textContent=s||""; return d.innerHTML; }
-function isStopWord(w){ var stops=["the","and","for","with","that","this","from","into","your","you","are","was","were","will","can","have","has","had","not","but","then","than","when","where","which","while","also","very","just","like","over","under","about","after","before","between"]; for(var i=0;i<stops.length;i++){ if(stops[i]===w) return true; } return false; }
-function getKeywords(text){ var low=(text||"").toLowerCase(); var parts=low.split(" "); var out=[]; for(var i=0;i<parts.length;i++){ var w=""; for(var j=0;j<parts[i].length;j++){ var ch=parts[i].charAt(j); if((ch>="a" && ch<="z") || (ch>="0" && ch<="9")) w+=ch; } if(w.length>3 && !isStopWord(w)){ var exists=false; for(var k=0;k<out.length;k++){ if(out[k]===w) exists=true; } if(!exists) out.push(w); } } return out; }
-function scoreOverlap(sent, keys){ var low=sent.toLowerCase(); var score=0; for(var i=0;i<keys.length;i++){ if(low.indexOf(keys[i])>=0) score++; } return score; }
-function smartInsert(oldText, newPhrase, force){
-  var base=(oldText||"").trim(); var add=cleanNote(newPhrase); if(!add) return {text:base, where:"Nothing added", after:-1, follow:""}; if(!base) return {text:add, where:"Note was empty - placed at start", after:-1, follow:""};
-  if([".","!","?"].indexOf(add.slice(-1))<0) add+=".";
-  var lower=add.toLowerCase(); var sents=splitS(base); var total=sents.length;
-  if(force==="start") return {text:add+" "+base, where:"Placed at BEGINNING - you chose Start", after:-1, follow:sents.length ? sents[0] : ""};
-  if(force==="end") return {text:base+" "+add, where:"Placed at END - you chose End", after:total-1, follow:""};
-  if(lower.indexOf("first")===0 || lower.indexOf("to begin")===0 || lower.indexOf("firstly")===0) return {text:add+" "+base, where:"Detected First - placed at BEGINNING", after:-1, follow:sents.length ? sents[0] : ""};
-  if(lower.indexOf("in conclusion")===0 || lower.indexOf("finally")===0 || lower.indexOf("in summary")===0) return {text:base+" "+add, where:"Detected In conclusion - placed at END", after:total-1, follow:""};
-  if(lower.indexOf("for example")===0 || lower.indexOf("example")===0){
-    var idx=-1; for(var i=0;i<sents.length;i++){ if(sents[i].toLowerCase().indexOf("example")>=0){ idx=i; break; } }
-    if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(" "), where:"Detected For example - placed AFTER example sentence", after:idx, follow:sents[idx]}; }
-    sents.splice(1,0,add); return {text:sents.join(" "), where:"Detected For example - placed AFTER definition", after:0, follow:sents[0]};
-  }
-  var keys=getKeywords(add); var bestIdx=-1; var bestScore=0;
-  for(var s=0;s<sents.length;s++){ var sc=scoreOverlap(sents[s], keys); if(sc>bestScore){ bestScore=sc; bestIdx=s; } }
-  if(bestScore>=1){
-    var follow=sents[bestIdx];
-    sents.splice(bestIdx+1,0,add);
-    return {text:sents.join(" "), where:"Smart match - placed after the most related sentence", after:bestIdx, follow:follow};
-  }
-  if(lower.indexOf("also")===0 || lower.indexOf("in addition")===0 || lower.indexOf("furthermore")===0 || lower.indexOf("moreover")===0 || lower.indexOf("however")===0 || lower.indexOf("therefore")===0 || lower.indexOf("so")===0){
-    var mid2=Math.floor(total/2); sents.splice(mid2,0,add); return {text:sents.join(" "), where:"Connector detected - placed in middle where it flows", after:mid2-1, follow:sents[mid2-1]};
-  }
-  var mid=Math.floor(total/2); sents.splice(mid,0,add); return {text:sents.join(" "), where:"Placed in MIDDLE where it flows, NOT forced to end", after:mid-1, follow:sents[mid-1]};
-}
-function smartInsertNotes(oldText, notesBlock, force){
-  var base=(oldText||"").trim(); var block=cleanBlock(notesBlock); if(!block) return {text:base, where:"Nothing added", after:-1, follow:""}; if(!base) return {text:block, where:"Note was empty - notes placed at start", after:-1, follow:""};
-  var sents=splitS(base); var blockSents=splitS(block); var firstSent=blockSents.length ? blockSents[0] : block;
-  if(force==="start") return {text:block+" "+base, where:"Notes placed at BEGINNING - you chose Start", after:-1, follow:sents.length ? sents[0] : ""};
-  if(force==="end") return {text:base+" "+block, where:"Notes placed at END - you chose End", after:sents.length-1, follow:""};
-  var lowFirst=firstSent.toLowerCase();
-  if(lowFirst.indexOf("first")===0 || lowFirst.indexOf("to begin")===0) return {text:block+" "+base, where:"Notes detected First - placed at BEGINNING", after:-1, follow:sents.length ? sents[0] : ""};
-  if(lowFirst.indexOf("in conclusion")===0 || lowFirst.indexOf("finally")===0 || lowFirst.indexOf("in summary")===0) return {text:base+" "+block, where:"Notes detected In conclusion - placed at END", after:sents.length-1, follow:""};
-  var keys=getKeywords(block); var bestIdx=-1; var bestScore=0;
-  for(var s=0;s<sents.length;s++){ var sc=scoreOverlap(sents[s], keys); if(sc>bestScore){ bestScore=sc; bestIdx=s; } }
-  if(bestScore>=1){ var follow=sents[bestIdx]; sents.splice(bestIdx+1,0,block); return {text:sents.join(" "), where:"Notes smart match - placed after most related sentence", after:bestIdx, follow:follow}; }
-  var mid=Math.floor(sents.length/2); sents.splice(mid,0,block); return {text:sents.join(" "), where:"Notes placed in MIDDLE where they flow, NOT forced to end", after:mid-1, follow:sents[mid-1]};
-}
-function tickText(){ if(selCI<0) return "Ticked: None - Tick a Class box, then a Subject box"; if(selSI<0) return "Ticked: "+classesData[selCI].name+" - Now tick a Subject box under it"; return "Ticked: "+classesData[selCI].name+" > "+classesData[selCI].subjects[selSI].name+" - All new Topics / Phrases / Notes go here. Untick to change."; }
-function updateTickBars(){ var t=tickText(); var ids=["tickBar","tickBarA","tickBarStudio"]; for(var i=0;i<ids.length;i++){ var e=document.getElementById(ids[i]); if(e){ e.textContent=t; e.className = selCI<0 ? "tickbar none" : "tickbar"; } } }
-window.tickClass=function(ci, ev){ if(ev) ev.stopPropagation(); if(!requireAdmin()) return; if(selCI===ci){ selCI=-1; selSI=-1; openCI=-1; } else { selCI=ci; selSI=-1; openCI=ci; } updateTickBars(); renderClasses(); };
-window.tickSubject=function(ci, si, ev){ if(ev) ev.stopPropagation(); if(!requireAdmin()) return; if(selCI===ci && selSI===si){ selSI=-1; } else { selCI=ci; selSI=si; openCI=ci; openSI=si; } updateTickBars(); renderClasses(); };
-window.toggleClass=function(ci){ openCI=openCI===ci?-1:ci; openSI=-1; renderClasses(); };
-window.toggleSubject=function(ci, si){ openCI=ci; if(openSI===si) openSI=-1; else openSI=si; renderClasses(); };
-window.subscribeTo=function(ci){ var n=classesData[ci].name; window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent("Hi, I want to subscribe to "+n+" - N2,000/month. My Username is "+(curStu()?curStu().name:"")+". I paid to Opay "+OPAY_NUM+".")); };
-function classRow(ci, prefix, showTick){
-  var cls=classesData[ci]; var locked=isLockedName(cls.name); var can=canOpenName(cls.name);
-  var badge=locked ? (can && !(roleNow()==="admin" && !window.__preview) ? "<span class=lock-badge style=background:#0bb56a>Subscribed</span>" : "<span class=lock-badge>LOCKED - N2,000/mo</span>") : "<span class=free-badge>FREE</span>";
-  var tickHtml="";
-  if(showTick){ var checked=selCI===ci ? "checked" : ""; tickHtml="<input type=checkbox "+checked+" onclick=tickClass("+ci+",event)>"; }
-  var subHtml="";
-  if(openCI===ci){
-    if(!can){ subHtml="<div style=padding:12px;background:#fff3cd;border-radius:10px;margin-top:8px><b>"+esc(cls.name)+" is Locked</b><br><small>Pay N2,000 for "+esc(cls.name)+" only to Opay "+OPAY_NUM+", then WhatsApp 08147699555.</small><br><button type=button class=btn btn-primary style=margin-top:8px onclick=subscribeTo("+ci+")>Subscribe to "+esc(cls.name)+" - N2,000</button></div>"; }
-    else {
-      if(cls.subjects.length){ for(var k=0;k<cls.subjects.length;k++) subHtml+=subjectRow(ci, k, prefix, showTick); } else { subHtml="<p class=mut style=padding:10px>No subjects yet - Tick this Class box, then add Subject below.</p>"; }
-      if(roleNow()==="admin" && !window.__preview && showTick) subHtml+="<div style=margin-top:10px"><input id="+prefix+"-newSub-"+ci+" placeholder=New Subject for TICKED Class><button type=button class=btn btn-primary style=margin-top:6px onclick=addSubjectInline("+ci+",\""+prefix+"\")>+ Add Subject to Ticked Class</button> <button type=button class=btn btn-ghost onclick=renameClassPrompt("+ci+")>Rename Class</button> <button type=button class=btn btn-red onclick=deleteClassPrompt("+ci+")>Delete Class</button></div>";
-    }
-  }
-  var subNames=""; for(var s=0;s<cls.subjects.length;s++){ if(s>0) subNames+=" - "; subNames+=cls.subjects[s].name; }
-  return "<div class=drop><div class=drop-head onclick=toggleClass("+ci+")>"+tickHtml+"<div style=flex:1><b>"+esc(cls.name)+"</b><br><small class=mut>"+(subNames||"No subjects yet")+"</small></div><div>"+badge+" <span>"+(openCI===ci ? "Up" : "Down")+"</span></div></div><div class=drop-body "+(openCI===ci ? "open" : "")+">"+subHtml+"</div></div>";
-}
-function subjectRow(ci, si, prefix, showTick){
-  var subj=classesData[ci].subjects[si]; var isOpen=openCI===ci && openSI===si; var topicsHtml="";
-  var tickHtml="";
-  if(showTick){ var checked=(selCI===ci && selSI===si) ? "checked" : ""; tickHtml="<input type=checkbox "+checked+" onclick=tickSubject("+ci+","+si+",event)>"; }
-  if(isOpen){
-    if(subj.topics.length){ for(var i=0;i<subj.topics.length;i++){ topicsHtml+="<div class=topic-item onclick=openTopic("+ci+","+si+","+i+")><div><b>"+esc(subj.topics[i].title)+"</b><br><small class=mut>"+((subj.topics[i].images||[]).length ? ("Image "+(subj.topics[i].images||[]).length+" - ") : "")+((subj.topics[i].note||"") ? "Tap to read" : "No note yet - Tap to add note")+"</small></div><span>Read</span></div>"; } } else { topicsHtml="<p class=mut>No topics yet - Tick this Subject box, then add Topic.</p>"; }
-    if(roleNow()==="admin" && !window.__preview && showTick) topicsHtml+="<div style=margin-top:10px><input id="+prefix+"-newTopic-"+ci+"-"+si+" placeholder=New Topic for TICKED Subject><textarea id="+prefix+"-newNote-"+ci+"-"+si+" rows=2 placeholder=Note optional></textarea><button type=button class=btn btn-primary style=margin-top:6px onclick=addTopicInline("+ci+","+si+",\""+prefix+"\")>+ Add Topic to Ticked Subject</button> <button type=button class=btn btn-ghost onclick=renameSubjectInline("+ci+","+si+")>Rename Subject</button> <button type=button class=btn btn-red onclick=deleteSubjectInline("+ci+","+si+")>Delete Subject</button></div>";
-  }
-  return "<div class=drop-sub><div class=drop-sub-head onclick=toggleSubject("+ci+","+si+")>"+tickHtml+"<div style=flex:1><b>"+esc(subj.name)+"</b><br><small class=mut>"+subj.topics.length+" topic(s) - Tap name to open</small></div><span>"+(isOpen ? "Up" : "Down")+"</span></div><div class=drop-sub-body "+(isOpen ? "open" : "")+">"+topicsHtml+"</div></div>";
-}
-function renderClasses(){
-  var isRealAdmin=roleNow()==="admin" && !window.__preview; var t=document.getElementById("adminClassTools"); if(t) t.style.display=isRealAdmin ? "block" : "none";
-  updateTickBars();
-  var isAdminView=isRealAdmin;
-  var lists=[["classList","CL"],["classListA","DA"],["classListS","SD"],["classListS2","SC"]];
-  for(var li=0;li<lists.length;li++){ var eid=lists[li][0]; var prefix=lists[li][1]; var e=document.getElementById(eid); if(!e) continue; var html=""; for(var k=0;k<classesData.length;k++) html+=classRow(k, prefix, isAdminView); e.innerHTML=html; }
-}
-window.addSubjectInline=function(ci, prefix){ if(!requireAdmin()) return; if(selCI!==ci){ selCI=ci; selSI=-1; updateTickBars(); } var e=document.getElementById(prefix+"-newSub-"+ci); var n=(e.value||"").trim(); if(!n) return toast2("Type Subject - it will go under ticked Class "+classesData[ci].name); var subs=classesData[ci].subjects; for(var i=0;i<subs.length;i++){ if(subs[i].name.toLowerCase()===n.toLowerCase()){ selSI=i; updateTickBars(); renderClasses(); return toast2("Subject already exists - ticked it instead, no duplicate"); } } subs.push({name:n, topics:[]}); selSI=subs.length-1; saveApp(); window.renderApp(); toast2("Subject added under "+classesData[ci].name+" and ticked"); };
-window.renameSubjectInline=function(ci,si){ if(!requireAdmin()) return; var n=prompt("Rename Subject", classesData[ci].subjects[si].name); if(!n) return; classesData[ci].subjects[si].name=n; saveApp(); window.renderApp(); };
-window.deleteSubjectInline=function(ci,si){ if(!requireAdmin()) return; if(!confirm("Delete Subject?")) return; classesData[ci].subjects.splice(si,1); openSI=-1; if(selCI===ci && selSI===si) selSI=-1; saveApp(); window.renderApp(); };
-window.addTopicInline=function(ci,si,prefix){ if(!requireAdmin()) return; if(selCI!==ci || selSI!==si){ selCI=ci; selSI=si; updateTickBars(); } var tEl=document.getElementById(prefix+"-newTopic-"+ci+"-"+si); var nEl=document.getElementById(prefix+"-newNote-"+ci+"-"+si); var title=(tEl.value||"").trim(); var note=(nEl.value||"").trim(); if(!title) return toast2("Type Topic Title - Note is optional"); var tops=classesData[ci].subjects[si].topics; for(var i=0;i<tops.length;i++){ if(tops[i].title.toLowerCase()===title.toLowerCase()) return toast2("Topic already exists under "+classesData[ci].subjects[si].name); } tops.push({title:title, note:cleanNote(note), images:[]}); saveApp(); window.renderApp(); toast2("Topic added under "+classesData[ci].name+" > "+classesData[ci].subjects[si].name); };
-window.addSubjectToTicked=function(){ if(!requireAdmin()) return; if(selCI<0) return toast2("Tick a Class box first"); var n=(document.getElementById("newSubForTicked").value||"").trim(); if(!n) return toast2("Type Subject"); var subs=classesData[selCI].subjects; for(var i=0;i<subs.length;i++){ if(subs[i].name.toLowerCase()===n.toLowerCase()){ selSI=i; updateTickBars(); renderClasses(); document.getElementById("newSubForTicked").value=""; return toast2("Already exists - ticked it, no duplicate"); } } subs.push({name:n, topics:[]}); selSI=subs.length-1; document.getElementById("newSubForTicked").value=""; saveApp(); window.renderApp(); toast2("Subject added to ticked Class"); };
-window.addTopicToTicked=function(){ if(!requireAdmin()) return; if(selCI<0) return toast2("Tick a Class box first"); if(selSI<0) return toast2("Tick a Subject box first"); var title=(document.getElementById("newTopicForTicked").value||"").trim(); var note=(document.getElementById("newNoteForTicked").value||"").trim(); if(!title) return toast2("Type Topic - Note optional"); var tops=classesData[selCI].subjects[selSI].topics; for(var i=0;i<tops.length;i++){ if(tops[i].title.toLowerCase()===title.toLowerCase()) return toast2("Topic already exists"); } tops.push({title:title, note:cleanNote(note), images:[]}); document.getElementById("newTopicForTicked").value=""; document.getElementById("newNoteForTicked").value=""; saveApp(); window.renderApp(); toast2("Topic added to ticked Subject"); };
-window.renderApp=function(){
-  var list=getStudentsApp(); var total=0; for(var i=0;i<list.length;i++) total+=(list[i].subs ? list[i].subs.length : 0);
-  var sc=document.getElementById("stuCount"); if(sc) sc.textContent=list.length;
-  var rv=document.getElementById("revText"); if(rv) rv.textContent="₦"+(total*PRICE_NUM).toLocaleString();
-  var rows=""; if(list.length){ for(var j=0;j<list.length;j++){ var s=list[j]; rows+="<div style=border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center><div><b>"+esc(s.name)+"</b><br><small class=mut>"+esc(s.cls)+" - Subs: "+esc((s.subs||[]).join(", ")||"Free only")+" - "+esc(s.status)+"</small></div><button type=button class=btn btn-ghost onclick=studentMenu("+j+")>...</button></div>"; } } else { rows="<p class=mut>No students yet.</p>"; }
-  var a=document.getElementById("studentsList"); if(a) a.innerHTML=rows; var b=document.getElementById("studentsList2"); if(b) b.innerHTML=rows;
-  var annHtml=""; for(var k=0;k<anns.length;k++) annHtml+="<div>Announcement: "+esc(anns[k])+"</div>";
-  var al=document.getElementById("annList"); if(al) al.innerHTML=annHtml; var sl=document.getElementById("sAnnList"); if(sl) sl.innerHTML=annHtml;
-  var scl=document.getElementById("studioClassList"); if(scl){ var h2=""; for(var cc=0;cc<classesData.length;cc++){ h2+="<div style=border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between><div><b>"+esc(classesData[cc].name)+"</b> "+(isLockedName(classesData[cc].name) ? "<span style=background:#e9a800;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px>LOCKED</span>" : "<span style=background:#0bb56a;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px>FREE</span>")+"</div><div><button type=button class=btn btn-ghost onclick=renameClassPrompt("+cc+")>Rename</button> <button type=button class=btn btn-red onclick=deleteClassPrompt("+cc+")>Delete</button></div></div>"; } scl.innerHTML=h2; }
-  var sList=""; for(var cls2=0;cls2<classesData.length;cls2++){ for(var subj2=0;subj2<classesData[cls2].subjects.length;subj2++){ for(var ti=0;ti<classesData[cls2].subjects[subj2].topics.length;ti++){ var tt=classesData[cls2].subjects[subj2].topics[ti]; sList+="<div style=border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between><div><b>"+esc(classesData[cls2].name)+" - "+esc(classesData[cls2].subjects[subj2].name)+" - "+esc(tt.title)+"</b><br><small class=mut>"+((tt.note||"") ? "Has note" : "No note yet")+"</small></div><div><button type=button class=btn btn-primary onclick=addPhraseToTopic("+cls2+","+subj2+","+ti+")>+ Add Phrase</button> <button type=button class=btn btn-primary style=background:#0bb56a onclick=addNotesToTopic("+cls2+","+subj2+","+ti+")>+ Add Notes</button> <button type=button class=btn btn-ghost onclick=editTopicDirect("+cls2+","+subj2+","+ti+")>Edit</button> <button type=button class=btn btn-red onclick=delTopic("+cls2+","+subj2+","+ti+")>Delete</button></div></div>"; } } }
-  var sl2=document.getElementById("studioList"); if(sl2) sl2.innerHTML=sList||"<p class=mut>No content yet.</p>";
-  var cs=curStu(); if(cs){ var mo=document.getElementById("myOtpText"); if(mo) mo.textContent=cs.name; var ms=document.getElementById("mySubsText"); if(ms) ms.textContent=(cs.subs&&cs.subs.length) ? cs.subs.join(", ") : "Free Classes Only"; var sp=document.getElementById("sProfileText"); if(sp) sp.innerHTML="<b>"+esc(cs.name)+"</b><br><small class=mut>"+esc(cs.cls)+"</small>"; var so=document.getElementById("sProfileOtp"); if(so) so.textContent="Username: "+cs.name+" - Class: "+cs.cls; var ss=document.getElementById("sProfileSubs"); if(ss) ss.textContent="Subscribed Locked: "+((cs.subs||[]).join(", ")||"None - Free only"); }
-  if(window.__preview){ var mo2=document.getElementById("myOtpText"); if(mo2) mo2.textContent="Preview Student"; var ms2=document.getElementById("mySubsText"); if(ms2) ms2.textContent="Free Classes Only (Preview)"; }
-  renderClasses();
-};
-window.addClass=function(){ if(!requireAdmin()) return; var n=(document.getElementById("newClassName").value||"").trim(); if(!n) return toast2("Type Class"); for(var i=0;i<classesData.length;i++){ if(classesData[i].name.toLowerCase()===n.toLowerCase()){ selCI=i; updateTickBars(); renderClasses(); return toast2("Class already exists - ticked it"); } } classesData.push({name:n, subjects:[]}); selCI=classesData.length-1; selSI=-1; saveApp(); window.renderApp(); document.getElementById("newClassName").value=""; toast2("Class added and ticked"); };
-window.addClassFromStudio=function(){ if(!requireAdmin()) return; var n=(document.getElementById("studioNewClass").value||"").trim(); if(!n) return toast2("Type Class"); for(var i=0;i<classesData.length;i++){ if(classesData[i].name.toLowerCase()===n.toLowerCase()){ selCI=i; updateTickBars(); renderClasses(); return toast2("Class already exists - ticked it"); } } classesData.push({name:n, subjects:[]}); selCI=classesData.length-1; selSI=-1; document.getElementById("studioNewClass").value=""; saveApp(); window.renderApp(); toast2("Class added and ticked"); };
-window.renameClassPrompt=function(ci){ if(!requireAdmin()) return; var n=prompt("Rename Class", classesData[ci].name); if(!n) return; classesData[ci].name=n; saveApp(); window.renderApp(); toast2("Class renamed"); };
-window.deleteClassPrompt=function(ci){ if(!requireAdmin()) return; if(!confirm("Delete Class?")) return; classesData.splice(ci,1); if(selCI===ci){ selCI=-1; selSI=-1; } saveApp(); window.renderApp(); toast2("Class deleted"); };
-window.addContentTicked=function(){ if(!requireAdmin()) return; if(selCI<0) return toast2("Tick a Class box first in Classes page"); if(selSI<0) return toast2("Tick a Subject box first in Classes page"); var topic=(document.getElementById("stTopic").value||"").trim(); var note=(document.getElementById("stNote").value||"").trim(); if(!topic) return toast2("Type Topic - Note optional"); var tops=classesData[selCI].subjects[selSI].topics; for(var i=0;i<tops.length;i++){ if(tops[i].title.toLowerCase()===topic.toLowerCase()) return toast2("Topic already exists under ticked Subject"); } tops.push({title:topic, note:cleanNote(note), images:[]}); document.getElementById("stTopic").value=""; document.getElementById("stNote").value=""; saveApp(); window.renderApp(); toast2("Topic added to ticked "+classesData[selCI].name+" > "+classesData[selCI].subjects[selSI].name); };
-window.editTopicDirect=function(ci,si,ti){ if(!requireAdmin()) return; openCI=ci; openSI=si; selCI=ci; selSI=si; updateTickBars(); window.showPage(2); renderClasses(); window.openTopic(ci,si,ti); };
-window.addPhraseToTopic=function(ci,si,ti){ if(!requireAdmin()) return; openCI=ci; openSI=si; selCI=ci; selSI=si; updateTickBars(); window.showPage(2); renderClasses(); window.openTopic(ci,si,ti); setTimeout(function(){ var b=document.getElementById("addPhraseBoxGlobal"); if(b) b.style.display="block"; var n=document.getElementById("addNotesBoxGlobal"); if(n) n.style.display="none"; }, 300); };
-window.addNotesToTopic=function(ci,si,ti){ if(!requireAdmin()) return; openCI=ci; openSI=si; selCI=ci; selSI=si; updateTickBars(); window.showPage(2); renderClasses(); window.openTopic(ci,si,ti); setTimeout(function(){ var b=document.getElementById("addNotesBoxGlobal"); if(b) b.style.display="block"; var p=document.getElementById("addPhraseBoxGlobal"); if(p) p.style.display="none"; }, 300); };
-window.delTopic=function(ci,si,ti){ if(!requireAdmin()) return; if(!confirm("Delete this topic?")) return; classesData[ci].subjects[si].topics.splice(ti,1); saveApp(); window.renderApp(); };
-window.closeReading=function(){ var e=document.getElementById("readBoxGlobal"); if(e) e.remove(); };
-function diagramHtml(im){ var delBtn=(roleNow()==="admin" && !window.__preview) ? "<br><button type=button class=btn btn-red style=padding:6px 10px;font-size:12px onclick=deleteDiagram("+im.idx+")>Delete Diagram</button>" : ""; return "<div class=diagram><img src="+im.src+"><small>Image: "+esc(im.caption||"Diagram")+"</small>"+delBtn+"</div>"; }
-function renderReadingContent(topic){ var sents=splitS(topic.note||""); var imgs=topic.images||[]; var html=""; if(!sents.length) html+="<div class=mut>No note yet - Tap + Add Phrase or + Add Notes below to add.</div>"; for(var i=0;i<imgs.length;i++){ if(imgs[i].after===-1) html+=diagramHtml({src:imgs[i].src, caption:imgs[i].caption, idx:i}); } for(var j=0;j<sents.length;j++){ html+="<div>"+esc(sents[j])+"</div>"; for(var k=0;k<imgs.length;k++){ if(imgs[k].after===j) html+=diagramHtml({src:imgs[k].src, caption:imgs[k].caption, idx:k}); } } for(var m=0;m<imgs.length;m++){ if(imgs[m].after>=sents.length) html+=diagramHtml({src:imgs[m].src, caption:imgs[m].caption, idx:m}); } return html; }
-window.openTopic=function(ci,si,ti){
-  var cls=classesData[ci];
-  if(!canOpenName(cls.name)){ toast2(cls.name+" is Locked - Subscribe N2,000"); window.subscribeTo(ci); return; }
-  curCI=ci; curSI=si; curTI=ti; isEditing=false; pendingDiagram=""; pendingDiagramNotes=""; selCI=ci; selSI=si; updateTickBars();
-  var existing=document.getElementById("readBoxGlobal"); if(!existing){ existing=document.createElement("div"); existing.id="readBoxGlobal"; existing.className="card"; document.querySelector(".wrap").appendChild(existing); }
-  var t=cls.subjects[si].topics[ti]; if(!t.images) t.images=[];
-  existing.innerHTML="<p style=cursor:pointer;color:#5a00e6;font-weight:800 onclick=closeReading()>Close Reading</p><h2 style=margin-top:8px>"+esc(cls.name)+" - "+esc(cls.subjects[si].name)+" - "+esc(t.title)+"</h2><div class=read id=readTextGlobal>"+renderReadingContent(t)+"</div><div style=background:#f4f0ff;border-radius:10px;padding:10px;margin-top:10px;font-size:13px>Smart Placement ON: Add Phrase and Add Notes are TWO different things. Both find where they make sense - NOT just to end.</div><div class=placed id=placedInfoGlobal></div><div class=editbar id=readActionsGlobal></div><div id=addPhraseBoxGlobal class=addbox phrase><label><b>1 - ADD PHRASE - Short phrase / one line - Auto Smart Fix</b></label><textarea id=addPhraseInputGlobal rows=2 placeholder=Type ONE phrase or ONE line></textarea><label><b>Upload Diagram for this Phrase (optional)</b></label><input type=file id=diagramInputGlobal accept=image/* onchange=previewDiagram(event)><div id=diagramPreviewGlobal></div><label>Diagram Caption</label><input id=diagramCaptionGlobal placeholder=Diagram for this phrase><label>Placement</label><select id=forcePlaceGlobal><option value=auto>Auto - Smart Place Phrase</option><option value=start>At Beginning</option><option value=end>At End</option><option value=after-example>After Example</option></select><button type=button class=btn btn-primary style=margin-top:8px onclick=addPhraseAndDiagram()>+ Add Phrase Smartly and Save</button></div><div id=addNotesBoxGlobal class=addbox notes><label><b>2 - ADD NOTES - Longer notes / many lines - Auto Smart Fix - DIFFERENT from Phrase</b></label><textarea id=addNotesInputGlobal rows=5 placeholder=Type your full notes here - many lines allowed></textarea><label><b>Upload Diagram for these Notes (optional)</b></label><input type=file id=diagramInputNotesGlobal accept=image/* onchange=previewDiagramNotes(event)><div id=diagramPreviewNotesGlobal></div><label>Diagram Caption</label><input id=diagramCaptionNotesGlobal placeholder=Diagram for these notes><label>Placement</label><select id=forcePlaceNotesGlobal><option value=auto>Auto - Smart Place Notes</option><option value=start>At Beginning</option><option value=end>At End</option><option value=after-example>After Example</option></select><button type=button class=btn btn-primary style=margin-top:8px;background:#0bb56a onclick=addNotesAndDiagram()>+ Add Notes Smartly and Save</button></div>";
-  renderReadActions(); existing.scrollIntoView({behavior:"smooth"});
-};
-function renderReadActions(){ var isRealAdmin=(roleNow()==="admin" && !window.__preview); var html="<button type=button class=btn btn-ghost onclick=copyReading()>Copy Text</button>"; if(isRealAdmin){ html+="<button type=button class=btn btn-ghost onclick=pasteReading()>Paste</button><button type=button class=btn btn-primary onclick=toggleEdit()>"+(isEditing ? "Save Edit" : "Edit While Reading")+"</button><button type=button class=btn btn-primary onclick=toggleAddPhrase()>+ Add Phrase</button><button type=button class=btn btn-primary style=background:#0bb56a onclick=toggleAddNotes()>+ Add Notes</button><button type=button class=btn btn-ghost onclick=renameTopic()>Rename Topic</button><button type=button class=btn btn-red onclick=deleteTopic()>Delete Topic</button>"; } else { html+="<p class=mut>Student can read and copy only.</p>"; } var e=document.getElementById("readActionsGlobal"); if(e) e.innerHTML=html; }
-window.toggleEdit=function(){ if(!requireAdmin()) return; var elm=document.getElementById("readTextGlobal"); if(!elm) return; if(!isEditing){ isEditing=true; elm.contentEditable=true; elm.classList.add("editing"); elm.focus(); toast2("Editing ON - edit text, then tap Save Edit"); } else { var parts=[]; elm.childNodes.forEach(function(n){ if(n.nodeType===3) parts.push(n.textContent); else if(n.tagName==="DIV" && !n.classList.contains("diagram")) parts.push(n.innerText); }); var nt=cleanNote(parts.join(" ")); if(nt==="No note yet - Tap + Add Phrase or + Add Notes below to add.") nt=""; classesData[curCI].subjects[curSI].topics[curTI].note=nt; isEditing=false; elm.contentEditable=false; elm.classList.remove("editing"); saveApp(); window.renderApp(); window.openTopic(curCI,curSI,curTI); toast2("Saved"); } renderReadActions(); };
-window.copyReading=function(){ var t=classesData[curCI].subjects[curSI].topics[curTI]; navigator.clipboard.writeText(t.note); toast2("Text copied"); };
-window.pasteReading=function(){ if(!requireAdmin()) return; navigator.clipboard.readText().then(function(t){ if(!t) return toast2("Clipboard empty"); var topic=classesData[curCI].subjects[curSI].topics[curTI]; var res=smartInsert(topic.note,t,"auto"); topic.note=res.text; saveApp(); window.renderApp(); window.openTopic(curCI,curSI,curTI); var p=document.getElementById("placedInfoGlobal"); if(p){ p.style.display="block"; p.innerHTML="Placed: "+res.where+"<br>After: "+esc(res.follow||""); } toast2("Pasted smartly"); }).catch(function(){ toast2("Allow clipboard"); }); };
-window.toggleAddPhrase=function(){ if(!requireAdmin()) return; var b=document.getElementById("addPhraseBoxGlobal"); var n=document.getElementById("addNotesBoxGlobal"); if(n) n.style.display="none"; b.style.display=b.style.display==="none" ? "block" : "none"; };
-window.toggleAddNotes=function(){ if(!requireAdmin()) return; var b=document.getElementById("addNotesBoxGlobal"); var p=document.getElementById("addPhraseBoxGlobal"); if(p) p.style.display="none"; b.style.display=b.style.display==="none" ? "block" : "none"; };
-window.previewDiagram=function(e){ var file=e.target.files[0]; if(!file) return; var r=new FileReader(); r.onload=function(){ pendingDiagram=r.result; document.getElementById("diagramPreviewGlobal").innerHTML="<img src="+pendingDiagram+" style=max-width:100%;max-height:140px;border-radius:10px;margin-top:8px>"; }; r.readAsDataURL(file); };
-window.previewDiagramNotes=function(e){ var file=e.target.files[0]; if(!file) return; var r=new FileReader(); r.onload=function(){ pendingDiagramNotes=r.result; document.getElementById("diagramPreviewNotesGlobal").innerHTML="<img src="+pendingDiagramNotes+" style=max-width:100%;max-height:140px;border-radius:10px;margin-top:8px>"; }; r.readAsDataURL(file); };
-window.addPhraseAndDiagram=function(){
-  if(!requireAdmin()) return;
-  var phrase=(document.getElementById("addPhraseInputGlobal").value||"").trim();
-  var caption=(document.getElementById("diagramCaptionGlobal").value||"").trim() || phrase || "Diagram";
-  var force=document.getElementById("forcePlaceGlobal").value;
-  var topic=classesData[curCI].subjects[curSI].topics[curTI]; var msgs=[];
-  if(phrase){ var res=smartInsert(topic.note, phrase, force); topic.note=res.text; msgs.push("PHRASE: "+res.where); if(res.follow) msgs.push("After: "+res.follow); if(pendingDiagram){ var sents=splitS(topic.note); var pIdx=-1; for(var i=0;i<sents.length;i++){ if(sents[i].toLowerCase().indexOf(phrase.toLowerCase().slice(0,20))>=0){ pIdx=i; break; } } var after=pIdx>=0 ? pIdx : res.after; topic.images.push({src:pendingDiagram, caption:caption, after:after}); msgs.push("Diagram for PHRASE: placed RIGHT AFTER your phrase"); } }
-  else if(pendingDiagram){ var keys=getKeywords(caption); var sents2=splitS(topic.note); var best=-1; var bestSc=0; for(var j=0;j<sents2.length;j++){ var sc=scoreOverlap(sents2[j], keys); if(sc>bestSc){ bestSc=sc; best=j; } } var after2=best>=0 ? best : Math.floor(sents2.length/2); topic.images.push({src:pendingDiagram, caption:caption, after:after2}); msgs.push("Diagram for PHRASE: placed after most related sentence"); }
-  else { return toast2("Type a phrase OR upload a diagram"); }
-  pendingDiagram=""; document.getElementById("addPhraseInputGlobal").value=""; document.getElementById("diagramCaptionGlobal").value=""; document.getElementById("diagramInputGlobal").value=""; document.getElementById("diagramPreviewGlobal").innerHTML=""; document.getElementById("addPhraseBoxGlobal").style.display="none";
-  saveApp(); window.renderApp(); window.openTopic(curCI,curSI,curTI);
-  var pEl=document.getElementById("placedInfoGlobal"); if(pEl){ pEl.style.display="block"; pEl.innerHTML="Placed PHRASE:<br>"+msgs.join("<br>"); }
-  toast2("Phrase added smartly");
-};
-window.addNotesAndDiagram=function(){
-  if(!requireAdmin()) return;
-  var notes=(document.getElementById("addNotesInputGlobal").value||"").trim();
-  var caption=(document.getElementById("diagramCaptionNotesGlobal").value||"").trim() || notes.slice(0,40) || "Diagram";
-  var force=document.getElementById("forcePlaceNotesGlobal").value;
-  var topic=classesData[curCI].subjects[curSI].topics[curTI]; var msgs=[];
-  if(notes){ var res=smartInsertNotes(topic.note, notes, force); topic.note=res.text; msgs.push("NOTES: "+res.where); if(res.follow) msgs.push("After: "+res.follow); if(pendingDiagramNotes){ var sents=splitS(topic.note); var pIdx=-1; var firstWord=notes.slice(0,20).toLowerCase(); for(var i=0;i<sents.length;i++){ if(sents[i].toLowerCase().indexOf(firstWord)>=0){ pIdx=i; break; } } var after=pIdx>=0 ? pIdx : res.after; if(after<0) after=sents.length-1; topic.images.push({src:pendingDiagramNotes, caption:caption, after:after}); msgs.push("Diagram for NOTES: placed RIGHT AFTER your notes block"); } }
-  else if(pendingDiagramNotes){ var keys=getKeywords(caption); var sents2=splitS(topic.note); var best=-1; var bestSc=0; for(var j=0;j<sents2.length;j++){ var sc=scoreOverlap(sents2[j], keys); if(sc>bestSc){ bestSc=sc; best=j; } } var after2=best>=0 ? best : Math.floor(sents2.length/2); topic.images.push({src:pendingDiagramNotes, caption:caption, after:after2}); msgs.push("Diagram for NOTES: placed after most related sentence"); }
-  else { return toast2("Type notes OR upload a diagram"); }
-  pendingDiagramNotes=""; document.getElementById("addNotesInputGlobal").value=""; document.getElementById("diagramCaptionNotesGlobal").value=""; document.getElementById("diagramInputNotesGlobal").value=""; document.getElementById("diagramPreviewNotesGlobal").innerHTML=""; document.getElementById("addNotesBoxGlobal").style.display="none";
-  saveApp(); window.renderApp(); window.openTopic(curCI,curSI,curTI);
-  var pEl=document.getElementById("placedInfoGlobal"); if(pEl){ pEl.style.display="block"; pEl.innerHTML="Placed NOTES:<br>"+msgs.join("<br>"); }
-  toast2("Notes added smartly");
-};
-window.deleteDiagram=function(idx){ if(!requireAdmin()) return; if(!confirm("Delete this diagram?")) return; var topic=classesData[curCI].subjects[curSI].topics[curTI]; topic.images.splice(idx,1); saveApp(); window.renderApp(); window.openTopic(curCI,curSI,curTI); toast2("Diagram deleted"); };
-window.renameTopic=function(){ if(!requireAdmin()) return; var t=classesData[curCI].subjects[curSI].topics[curTI]; var n=prompt("Rename Topic",t.title); if(n){ t.title=n; saveApp(); window.renderApp(); window.openTopic(curCI,curSI,curTI); } };
-window.deleteTopic=function(){ if(!requireAdmin()) return; if(!confirm("Delete this topic?")) return; classesData[curCI].subjects[curSI].topics.splice(curTI,1); saveApp(); window.renderApp(); var e=document.getElementById("readBoxGlobal"); if(e) e.remove(); toast2("Topic deleted"); };
-window.postAnn=function(){ if(roleNow()!=="admin"){ toast2("Students cannot send announcements"); return; } var v=(document.getElementById("annText").value||"").trim(); if(!v) return toast2("Type announcement"); anns.unshift(v); document.getElementById("annText").value=""; saveApp(); window.renderApp(); toast2("Sent"); };
-window.studentMenu=function(i){ if(!requireAdmin()) return; var list=getStudentsApp(); var s=list[i]; var a=prompt("Student: "+s.name+" Subs: "+(s.subs||[]).join(", ")+". Type: unlock WAEC / unlock JSS3 / unlock SS3 / unlock JAMB / lock WAEC / reset device / block / unblock / whatsapp / delete","unlock WAEC"); if(!a) return; a=a.toLowerCase(); if(a.indexOf("unlock")>=0){ var target=null; if(a.indexOf("waec")>=0) target="WAEC"; else if(a.indexOf("jamb")>=0) target="JAMB"; else if(a.indexOf("jss3")>=0) target="JSS3"; else if(a.indexOf("ss3")>=0) target="SS3"; if(target){ if(!s.subs) s.subs=[]; if(s.subs.indexOf(target)<0) s.subs.push(target); toast2("Unlocked "+target); } } else if(a.indexOf("lock")>=0){ var t2=null; if(a.indexOf("waec")>=0) t2="WAEC"; else if(a.indexOf("jamb")>=0) t2="JAMB"; else if(a.indexOf("jss3")>=0) t2="JSS3"; else if(a.indexOf("ss3")>=0) t2="SS3"; if(t2){ s.subs=(s.subs||[]).filter(function(x){ return x!==t2; }); toast2("Locked "+t2); } } else if(a.indexOf("reset")>=0){ s.deviceId=""; toast2("Device reset"); } else if(a.indexOf("block")>=0){ s.status="Blocked"; toast2("Blocked"); } else if(a.indexOf("unblock")>=0){ s.status="Active"; toast2("Unblocked"); } else if(a.indexOf("whatsapp")>=0){ window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent("Hi "+s.name+", renew: Pay N2,000 per locked section to Opay "+OPAY_NUM)); } else if(a.indexOf("delete")>=0){ if(confirm("Delete "+s.name+"?")) list.splice(i,1); } saveStudentsApp(list); window.renderApp(); };
-window.renewPin=function(){ window.open("https://wa.me/"+WA_NUM+"?text="+encodeURIComponent("Hi, I want to subscribe - N2,000/month. My Username is "+(curStu()?curStu().name:"")+". I paid to Opay "+OPAY_NUM+".")); };
-</script>
-</body>
-</html>
+</body></html>
