@@ -44,7 +44,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div id="adminLoginBox">
 <label style="margin-top:14px;display:block">Admin Username</label><input id="adminUser" placeholder="Admin Username" autocomplete="off">
 <label style="margin-top:10px;display:block">Password</label><input id="adminPass" type="password" placeholder="Password" autocomplete="new-password">
-<p class="mut" id="adminHint" style="margin-top:8px">Hidden</p>
+<p class="mut" id="adminHint">Hidden</p>
 <button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doAdmin()">Enter</button>
 <button type="button" class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="resetLogin()">Reset Login if stuck</button>
 </div>
@@ -64,6 +64,8 @@ function setTab(t){ el('tabAdmin').className=t==='admin'?'on':''; el('tabStudent
 function setStuMode(m){ el('stuLoginTab').className=m==='login'?'on':''; el('stuCreateTab').className=m==='create'?'on':''; el('stuLoginForm').style.display=m==='login'?'block':'none'; el('stuCreateForm').style.display=m==='create'?'block':'none'; }
 function getAdmin(){ try{ var v=localStorage.getItem('quizora_admin_data'); return v?JSON.parse(v):null; }catch(e){ return null; } }
 function getStudents(){ try{ var v=localStorage.getItem('quizora_students'); return v?JSON.parse(v):[]; }catch(e){ return []; } }
+function saveSession(){ try{ localStorage.setItem('quizora_session', JSON.stringify({role:window.__role, student:window.__currentStudent})); }catch(e){} }
+function clearSession(){ try{ localStorage.removeItem('quizora_session'); }catch(e){} }
 window.__role=''; window.__currentStudent=null; window.__preview=false;
 window.enterAppSafe=function(){
   window.__preview=false;
@@ -77,41 +79,52 @@ window.enterAppSafe=function(){
   el('topSub').textContent = window.__role==='admin' ? 'Admin Dashboard - You' : ('Student Dashboard - '+(window.__currentStudent?window.__currentStudent.name:'Student'));
   if(window.showPage) window.showPage(window.__role==='admin'?'aDash':'sDash');
   if(window.renderApp) window.renderApp();
+  saveSession();
 };
 function doAdmin(){
   var u=(el('adminUser').value||'').trim(); var p=(el('adminPass').value||'').trim();
-  if(!u){ showStatus('Enter Admin Username','err'); return; }
-  if(!p){ showStatus('Enter Password','err'); return; }
+  if(!u){ showStatus('Enter Admin Username'); return; }
+  if(!p){ showStatus('Enter Password'); return; }
   var saved=getAdmin();
   if(!saved){ try{ localStorage.setItem('quizora_admin_data', JSON.stringify({user:u, pass:p})); }catch(e){} window.__role='admin'; window.__currentStudent=null; setTimeout(function(){ window.enterAppSafe(); },300); return; }
-  if(u.toLowerCase()!==saved.user.toLowerCase()){ showStatus('Wrong Admin Username. Saved is '+saved.user,'err'); return; }
-  if(p!==saved.pass){ showStatus('Wrong Password','err'); return; }
+  if(u.toLowerCase()!==saved.user.toLowerCase()){ showStatus('Wrong Admin Username. Saved is '+saved.user); return; }
+  if(p!==saved.pass){ showStatus('Wrong Password'); return; }
   window.__role='admin'; window.__currentStudent=null; setTimeout(function(){ window.enterAppSafe(); },300);
 }
 function doStudentCreate(){
   var u=(el('newStuUser').value||'').trim(); var p=(el('newStuPass').value||'').trim(); var p2=(el('newStuPass2').value||'').trim(); var cls=el('newStuClass').value;
-  if(!u){ showStatus('Choose a Username','err'); return; }
-  if(!p){ showStatus('Create a Password','err'); return; }
-  if(p!==p2){ showStatus('Passwords do not match','err'); return; }
+  if(!u){ showStatus('Choose a Username'); return; }
+  if(!p){ showStatus('Create a Password'); return; }
+  if(p!==p2){ showStatus('Passwords do not match'); return; }
   var list=getStudents();
-  for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase()){ showStatus('Username exists - choose another','err'); return; } }
+  for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase()){ showStatus('Username exists - choose another'); return; } }
   var dev=''; try{ dev=localStorage.getItem('quizora_device_id')||('DEV-'+Math.random().toString(36).slice(2,10).toUpperCase()); localStorage.setItem('quizora_device_id',dev); }catch(e){}
   var ns={name:u, cls:cls, pin:p, status:'Active', subs:[], deviceId:dev}; list.unshift(ns); try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){}
   window.__role='student'; window.__currentStudent=ns; setTimeout(function(){ window.enterAppSafe(); },300);
 }
 function doStudentLogin(){
   var u=(el('studentUser').value||'').trim(); var p=(el('studentPass').value||'').trim();
-  if(!u){ showStatus('Enter Your Username','err'); return; }
-  if(!p){ showStatus('Enter Your Password','err'); return; }
+  if(!u){ showStatus('Enter Your Username'); return; }
+  if(!p){ showStatus('Enter Your Password'); return; }
   var list=getStudents(); var found=null; for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase() && list[i].pin===p){ found=list[i]; break; } }
-  if(!found){ showStatus('Wrong Username or Password. If new, tap Create My Account.','err'); return; }
-  if(found.status==='Blocked'){ showStatus('Blocked. Contact Admin.','err'); return; }
+  if(!found){ showStatus('Wrong Username or Password. If new, tap Create My Account.'); return; }
+  if(found.status==='Blocked'){ showStatus('Blocked. Contact Admin.'); return; }
   var dev=''; try{ dev=localStorage.getItem('quizora_device_id')||''; }catch(e){}
   if(!found.deviceId){ found.deviceId=dev; try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){} }
-  else if(found.deviceId!==dev){ showStatus('Locked to another device. Ask Admin to Reset Device.','err'); return; }
+  else if(found.deviceId!==dev){ showStatus('Locked to another device. Ask Admin to Reset Device.'); return; }
   window.__role='student'; window.__currentStudent=found; setTimeout(function(){ window.enterAppSafe(); },300);
 }
-function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS phone only. Content stays.')) return; try{ localStorage.removeItem('quizora_admin_data'); localStorage.removeItem('quizora_students'); }catch(e){} el('adminUser').value=''; el('adminPass').value=''; showStatus('Login reset. Create Admin again.','ok'); }
+function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS phone only. Content stays.')) return; try{ localStorage.removeItem('quizora_admin_data'); localStorage.removeItem('quizora_students'); localStorage.removeItem('quizora_session'); }catch(e){} el('adminUser').value=''; el('adminPass').value=''; showStatus('Login reset. Create Admin again.'); }
+// AUTO RESTORE SESSION ON RELOAD - THIS WAS THE MISSING PART
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('quizora_session')||'null');
+    if(s && s.role){
+      window.__role=s.role; window.__currentStudent=s.student||null;
+      setTimeout(function(){ window.enterAppSafe(); }, 300);
+    }
+  }catch(e){}
+})();
 </script>
 
 <div id="app" style="display:none">
@@ -184,7 +197,7 @@ function saveStudentsApp(list){ try{ localStorage.setItem('quizora_students', JS
 function roleNow(){ return window.__role||''; }
 function curStu(){ return window.__currentStudent||null; }
 function requireAdmin(){ if(roleNow()!=='admin'){ toast2('Students cannot access Admin.'); return false; } if(window.__preview){ toast2('Previewing as Student. Tap Back to Admin.'); return false; } return true; }
-window.logout=function(){ window.__preview=false; window.__role=''; window.__currentStudent=null; document.getElementById('app').style.display='none'; document.getElementById('loginScreen').style.display='block'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='none'; document.getElementById('previewBanner').style.display='none'; document.getElementById('switchBtn').style.display='none'; document.getElementById('adminPass').value=''; document.getElementById('studentPass').value=''; };
+window.logout=function(){ window.__preview=false; window.__role=''; window.__currentStudent=null; try{ localStorage.removeItem('quizora_session'); }catch(e){} document.getElementById('app').style.display='none'; document.getElementById('loginScreen').style.display='block'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='none'; document.getElementById('previewBanner').style.display='none'; document.getElementById('switchBtn').style.display='none'; document.getElementById('adminPass').value=''; document.getElementById('studentPass').value=''; };
 window.showPage=function(id){
   var adminPages=['aDash','aStudents','studio','settings'];
   if(adminPages.indexOf(id)>=0 && roleNow()!=='admin'){ toast2('Admin only'); return; }
@@ -192,7 +205,7 @@ window.showPage=function(id){
   var pages=document.querySelectorAll('.page'); for(var i=0;i<pages.length;i++) pages[i].classList.remove('show');
   var e=document.getElementById(id); if(e) e.classList.add('show'); window.scrollTo(0,0); if(id==='classes'||id==='sDash'||id==='sClasses') renderClasses();
 };
-window.navTo=function(id,btn){ if(roleNow()!=='admin' && ['aDash','aStudents','studio','settings'].indexOf(id)>=0){ toast2('Admin only'); return; } var b=document.querySelectorAll('.bottom button'); for(var i=0;i<b.length;i++) b[i].classList.remove('on'); if(btn) btn.classList.add('on'); window.showPage(id); };
+window.navTo=function(id,btn){ var b=document.querySelectorAll('.bottom button'); for(var i=0;i<b.length;i++) b[i].classList.remove('on'); if(btn) btn.classList.add('on'); window.showPage(id); };
 window.toggleView=function(){
   if(roleNow()!=='admin'){ toast2('Students cannot switch to Admin.'); return; }
   if(!window.__preview){ window.__preview=true; document.getElementById('switchBtn').textContent='Back to Admin'; document.getElementById('previewBanner').style.display='block'; document.getElementById('topSub').textContent='Student View - Preview (You are still Admin)'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='flex'; window.showPage('sDash'); window.renderApp(); toast2('Previewing as Student'); }
