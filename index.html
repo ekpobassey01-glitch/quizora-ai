@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
 body{background:#d9d6ff;color:#13132b}
-button{cursor:pointer;border:0;font-family:inherit}
+button{cursor:pointer;border:0}
 .top{margin:12px;background:linear-gradient(90deg,#7b00ff,#5a00e6 45%,#0066ff);border-radius:14px;padding:12px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .qlogo{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500);display:grid;place-items:center;font-size:28px;font-weight:900;color:#5a00e6;border:2px solid #fff}
 .pill{background:rgba(255,255,255,.22);padding:9px 12px;border-radius:999px;font-weight:700;color:#fff}.pill.white{background:#fff;color:#5a00e6}.pill.gold{background:#ffd166;color:#3a2400}.pill.switch{background:#FFD700;color:#3a2400}
@@ -24,7 +24,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 .tabs2{display:flex;background:#f1f1f5;border-radius:999px;padding:4px;margin-top:16px}.tabs2 button{flex:1;padding:12px;border-radius:999px;font-weight:800;background:none}.tabs2 button.on{background:#5a00e6;color:#fff}
 .paybox{background:#fff3cd;border:1px dashed #e9a800;border-radius:12px;padding:12px;margin-top:12px}
 .status{margin-top:12px;padding:12px;border-radius:10px;font-weight:700;font-size:14px;display:none;text-align:center}.status.ok{background:#e6ffed;color:#0a7a3a;display:block}.status.err{background:#ffe1e1;color:#b00;display:block}.status.info{background:#f4f0ff;color:#5a00e6;display:block}
-.read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;min-height:80px;padding:10px;border-radius:10px}.read.editing{border:2px solid #7b00ff;background:#fbf7ff}
+.read{white-space:pre-wrap;line-height:1.75;margin-top:12px;font-size:16px;padding:10px;border-radius:10px}.read.editing{border:2px solid #7b00ff;background:#fbf7ff}
 .editbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.placed{background:#e6ffed;border:1px solid #0bb56a;border-radius:10px;padding:10px;margin-top:10px;font-size:13px;display:none}
 .drop{border:1px solid #eee;border-radius:12px;overflow:hidden}.drop-head{padding:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:#fff}.drop-body{display:none;padding:0 12px 12px;background:#fcfcff}.drop-body.open{display:block}
 .drop-sub{border:1px solid #eee;border-radius:10px;margin-top:8px;background:#fff}.drop-sub-head{padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.drop-sub-body{display:none;padding:0 10px 10px}.drop-sub-body.open{display:block}
@@ -37,24 +37,73 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen" class="login">
 <div style="text-align:center"><div class="qlogo" style="margin:0 auto;width:64px;height:64px;font-size:42px"><span>Q</span></div><h1>Quizora AI</h1></div>
 <div class="tabs2"><button type="button" id="tabAdmin" class="on" onclick="setTab('admin')">Admin</button><button type="button" id="tabStudent" onclick="setTab('student')">Student</button></div>
 <div id="adminLoginBox">
-<label style="margin-top:14px;display:block">Admin Username</label><input id="adminUser" placeholder="Admin Username">
-<label style="margin-top:10px;display:block">Password</label><input id="adminPass" type="password" placeholder="Password">
+<label style="margin-top:14px;display:block">Admin Username</label><input id="adminUser" placeholder="Admin Username" autocomplete="off">
+<label style="margin-top:10px;display:block">Password</label><input id="adminPass" type="password" placeholder="Password" autocomplete="new-password">
 <p class="mut" id="adminHint" style="margin-top:8px">First time? Type a password you want — it will become your password.</p>
 <button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doAdmin()">Enter →</button>
 <button type="button" class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="resetLogin()">⚠️ Reset Login if stuck</button>
 </div>
 <div id="studentLoginBox" style="display:none">
 <div class="tabs2"><button type="button" id="stuLoginTab" class="on" onclick="setStuMode('login')">Login</button><button type="button" id="stuCreateTab" onclick="setStuMode('create')">Create My Account</button></div>
-<div id="stuLoginForm"><label style="margin-top:14px;display:block">Student Username</label><input id="studentUser" placeholder="Your Username"><label style="margin-top:10px;display:block">Password</label><input id="studentPass" type="password" placeholder="Your Password"><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentLogin()">Login →</button></div>
-<div id="stuCreateForm" style="display:none"><label style="margin-top:14px;display:block">Choose Your Username</label><input id="newStuUser" placeholder="e.g. Chiamaka123"><label style="margin-top:10px;display:block">Create Your Password</label><input id="newStuPass" type="password" placeholder="Create a password"><label style="margin-top:10px;display:block">Confirm Password</label><input id="newStuPass2" type="password" placeholder="Type it again"><label style="margin-top:10px;display:block">Your Class</label><select id="newStuClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentCreate()">Create My Account & Enter →</button><p class="mut" style="text-align:center;margin-top:8px">You create it. Admin does NOT give you password.</p></div>
+<div id="stuLoginForm"><label style="margin-top:14px;display:block">Student Username</label><input id="studentUser" placeholder="Your Username" autocomplete="off"><label style="margin-top:10px;display:block">Password</label><input id="studentPass" type="password" placeholder="Your Password" autocomplete="new-password"><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentLogin()">Login →</button></div>
+<div id="stuCreateForm" style="display:none"><label style="margin-top:14px;display:block">Choose Your Username</label><input id="newStuUser" placeholder="e.g. Chiamaka123" autocomplete="off"><label style="margin-top:10px;display:block">Create Your Password</label><input id="newStuPass" type="password" placeholder="Create a password" autocomplete="new-password"><label style="margin-top:10px;display:block">Confirm Password</label><input id="newStuPass2" type="password" placeholder="Type it again" autocomplete="new-password"><label style="margin-top:10px;display:block">Your Class</label><select id="newStuClass"><option>JSS1</option><option>JSS2</option><option>JSS3</option><option>SS1</option><option>SS2</option><option>SS3</option><option>WAEC</option><option>JAMB</option></select><button type="button" class="btn btn-primary" style="width:100%;margin-top:14px;padding:14px" onclick="doStudentCreate()">Create My Account & Enter →</button></div>
 </div>
 <div class="status info" id="loginStatus">Ready. Choose Admin or Student, then Enter.</div>
+<div class="status err" id="jsErrorBox" style="display:none"></div>
 </div>
 
+<!-- SCRIPT 1 - LOGIN ONLY - THIS IS THE TEST CODE THAT WORKED, IT CANNOT BE KILLED BY APP CODE BELOW -->
+<script>
+window.onerror = function(msg){ var b=document.getElementById('jsErrorBox'); if(b){ b.style.display='block'; b.textContent='JS ERROR: '+msg+' — Login still works, app part has error.'; } };
+function el(id){ return document.getElementById(id); }
+function showStatus(m, type){ var e=el('loginStatus'); if(!e) return; e.textContent=m; e.className='status '+type; }
+function setTab(t){ el('tabAdmin').className=t==='admin'?'on':''; el('tabStudent').className=t==='student'?'on':''; el('adminLoginBox').style.display=t==='admin'?'block':'none'; el('studentLoginBox').style.display=t==='student'?'block':'none'; showStatus(t==='admin'?'Admin selected':'Student selected — Login or Create My Account','info'); }
+function setStuMode(m){ el('stuLoginTab').className=m==='login'?'on':''; el('stuCreateTab').className=m==='create'?'on':''; el('stuLoginForm').style.display=m==='login'?'block':'none'; el('stuCreateForm').style.display=m==='create'?'block':'none'; }
+function getAdmin(){ try{ var v=localStorage.getItem('quizora_admin_data'); return v?JSON.parse(v):null; }catch(e){ return null; } }
+function getStudents(){ try{ var v=localStorage.getItem('quizora_students'); return v?JSON.parse(v):[]; }catch(e){ return []; } }
+function doAdmin(){
+  var u=(el('adminUser').value||'').trim(); var p=(el('adminPass').value||'').trim();
+  if(!u){ showStatus('❌ Enter Admin Username','err'); return; }
+  if(!p){ showStatus('❌ Enter Password','err'); return; }
+  var saved=getAdmin();
+  if(!saved){ try{ localStorage.setItem('quizora_admin_data', JSON.stringify({user:u, pass:p})); }catch(e){} window.__role='admin'; window.__currentStudent=null; showStatus('✅ Admin created for '+u+' - Entering...','ok'); setTimeout(function(){ window.enterAppSafe(); },400); return; }
+  if(u.toLowerCase()!==saved.user.toLowerCase()){ showStatus('❌ Wrong Admin Username. Saved is "'+saved.user+'". Or tap Reset Login.','err'); return; }
+  if(p!==saved.pass){ showStatus('❌ Wrong Password for '+u+'. Or tap Reset Login.','err'); return; }
+  window.__role='admin'; window.__currentStudent=null; showStatus('✅ Welcome back '+u,'ok'); setTimeout(function(){ window.enterAppSafe(); },400);
+}
+function doStudentCreate(){
+  var u=(el('newStuUser').value||'').trim(); var p=(el('newStuPass').value||'').trim(); var p2=(el('newStuPass2').value||'').trim(); var cls=el('newStuClass').value;
+  if(!u){ showStatus('❌ Choose a Username','err'); return; }
+  if(!p){ showStatus('❌ Create a Password','err'); return; }
+  if(p!==p2){ showStatus('❌ Passwords do not match','err'); return; }
+  var list=getStudents();
+  for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase()){ showStatus('❌ Username exists — choose another','err'); return; } }
+  var dev=''; try{ dev=localStorage.getItem('quizora_device_id')||('DEV-'+Math.random().toString(36).slice(2,10).toUpperCase()); localStorage.setItem('quizora_device_id',dev); }catch(e){}
+  var ns={name:u, cls:cls, pin:p, status:'Active', subs:[], deviceId:dev}; list.unshift(ns); try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){}
+  window.__role='student'; window.__currentStudent=ns; showStatus('✅ Account created! Welcome '+u,'ok'); setTimeout(function(){ window.enterAppSafe(); },400);
+}
+function doStudentLogin(){
+  var u=(el('studentUser').value||'').trim(); var p=(el('studentPass').value||'').trim();
+  if(!u){ showStatus('❌ Enter Your Username','err'); return; }
+  if(!p){ showStatus('❌ Enter Your Password','err'); return; }
+  var list=getStudents(); var found=null; for(var i=0;i<list.length;i++){ if(list[i].name.toLowerCase()===u.toLowerCase() && list[i].pin===p){ found=list[i]; break; } }
+  if(!found){ showStatus('❌ Wrong Username or Password. If new, tap Create My Account.','err'); return; }
+  if(found.status==='Blocked'){ showStatus('❌ Blocked. Contact Admin.','err'); return; }
+  var dev=''; try{ dev=localStorage.getItem('quizora_device_id')||''; }catch(e){}
+  if(!found.deviceId){ found.deviceId=dev; try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){} }
+  else if(found.deviceId!==dev){ showStatus('❌ Locked to another device. Ask Admin to Reset Device.','err'); return; }
+  window.__role='student'; window.__currentStudent=found; showStatus('✅ Welcome '+u,'ok'); setTimeout(function(){ window.enterAppSafe(); },400);
+}
+function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS phone only. Content stays.')) return; try{ localStorage.removeItem('quizora_admin_data'); localStorage.removeItem('quizora_students'); }catch(e){} el('adminUser').value=''; el('adminPass').value=''; showStatus('✅ Login reset. Create Admin again.','ok'); var h=el('adminHint'); if(h) h.textContent='First time? Type a password you want — it will become your password.'; }
+(function(){ var s=getAdmin(); if(s){ showStatus('Welcome back. Admin saved as "'+s.user+'". Enter its password, or tap Reset Login if you forgot it.','info'); var h=el('adminHint'); if(h) h.textContent='Welcome back. Enter password for "'+s.user+'".'; } else { showStatus('Ready. First time Admin: type Username + new Password + Enter.','info'); } })();
+</script>
+
+<!-- APP -->
 <div id="app" style="display:none">
 <div class="top"><div style="display:flex;align-items:center;gap:10px"><div class="qlogo"><span>Q</span></div><div><b style="font-size:22px">Quizora AI</b><br><small id="topSub">Admin Dashboard</small></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" class="pill switch" id="switchBtn" style="display:none" onclick="toggleView()">👁️ View as Student</button><button type="button" class="pill white" onclick="showPage('announce')">📢 Announcement</button><button type="button" class="pill gold" onclick="logout()">Logout</button></div></div>
 <div class="preview-banner" id="previewBanner">👁️ Previewing as Student — Admin only. Tap Back to Admin.</div>
@@ -66,7 +115,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div class="card"><h2>Classes — Dropdown</h2><p class="mut">Tap Class ▼ → Subject ▼ → Topic → Read</p><div class="list" id="classListA"></div></div>
 <div class="card"><h2>Payment — Admin Only</h2><div class="paybox"><b>Opay: 8147699555</b> • WhatsApp: 08147699555<br><small>Locked: ₦2,000 per section / month</small></div></div>
 </div>
-<div id="aStudents" class="page"><div class="card"><h2>Students</h2><p class="mut">Students created their own password. You cannot see it.</p><div class="list" id="studentsList2"></div></div></div>
+<div id="aStudents" class="page"><div class="card"><h2>Students</h2><div class="list" id="studentsList2"></div></div></div>
 <div id="classes" class="page"><div class="card"><h2>Classes — Dropdown</h2><div class="list" id="classList"></div><div id="adminClassTools" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><input id="newClassName" placeholder="New Class"><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addClass()">+ Add New Class</button></div></div></div>
 <div id="studio" class="page"><div class="card"><h2>Content Studio — Add / Edit / Delete</h2><label>Class</label><select id="stClass"></select><label>Subject</label><input id="stSubject" placeholder="e.g. Mathematics"><label>Topic Title</label><input id="stTopic" placeholder="e.g. Fractions"><label>Note</label><textarea id="stNote" rows="5" placeholder="Write lesson..."></textarea><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="addContent()">+ Add This Topic</button><div style="margin-top:16px;border-top:1px solid #eee;padding-top:12px"><h3>Manage Classes</h3><input id="studioNewClass" placeholder="New Class"><button type="button" class="btn btn-ghost" style="margin-top:8px" onclick="addClassFromStudio()">+ Add Class</button><div class="list" id="studioClassList"></div></div><div style="margin-top:16px"><h3>All Topics</h3><div class="list" id="studioList"></div></div></div></div>
 <div id="announce" class="page"><div class="card"><h2>Announcement</h2><textarea id="annText" rows="3" placeholder="Type announcement..."></textarea><button type="button" class="btn btn-primary" style="margin-top:10px" onclick="postAnn()">📢 Send</button><div class="list" id="annList"></div></div></div>
@@ -76,236 +125,178 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div id="sProfile" class="page"><div class="card"><h2>My Profile</h2><p id="sProfileText"></p><div style="background:#f4f0ff;padding:14px;border-radius:12px;margin:12px 0;font-weight:800;text-align:center" id="sProfileOtp"></div><p class="mut" id="sProfileSubs"></p><button type="button" class="btn btn-primary" onclick="renewPin()">Subscribe via WhatsApp</button></div></div>
 </div>
 </div>
-
 <div class="bottom" id="navAdmin"><button type="button" class="on" onclick="navTo('aDash',this)">🏠<br>Dashboard</button><button type="button" onclick="navTo('aStudents',this)">👥<br>Students</button><button type="button" onclick="navTo('classes',this)">📚<br>Classes</button><button type="button" onclick="navTo('studio',this)">🎨<br>Studio</button><button type="button" onclick="navTo('settings',this)">⚙️<br>Settings</button></div>
 <div class="bottom" id="navStudent" style="display:none"><button type="button" class="on" onclick="navTo('sDash',this)">🏠<br>Home</button><button type="button" onclick="navTo('sClasses',this)">📚<br>Classes</button><button type="button" onclick="navTo('announce',this)">📢<br>Announce</button><button type="button" onclick="navTo('sProfile',this)">👤<br>Profile</button></div>
 <div class="toast" id="toast"></div>
 
+<!-- SCRIPT 2 - APP ONLY - WRAPPED IN TRY/CATCH, CANNOT KILL LOGIN -->
 <script>
-function el(id){ return document.getElementById(id); }
-function getLS(k, fb){ try{ var v=localStorage.getItem(k); return v ? JSON.parse(v) : fb; }catch(e){ return fb; } }
-function setLS(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-function getStr(k, fb){ try{ return localStorage.getItem(k) || fb; }catch(e){ return fb; } }
-function setStr(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-function showStatus(m, type){ var e=el('loginStatus'); if(!e) return; e.textContent=m; e.className='status '+type; }
-function toast(m){ var t=el('toast'); if(!t) return; t.textContent=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; }, 3400); }
+try{
 var WA='2348147699555', OPAY='8147699555';
 var FREE_CLASSES=['JSS1','JSS2','SS1','SS2'];
 var LOCKED_CLASSES=['JSS3','SS3','WAEC','JAMB'];
 var PRICE=2000;
-var role=''; var currentStudent=null; var isPreview=false;
-var adminData=getLS('quizora_admin_data', null);
-var students=getLS('quizora_students', []);
-var anns=getLS('quizora_anns', ["Welcome to Quizora AI — Free: JSS1, JSS2, SS1, SS2. Locked: JSS3, SS3, WAEC, JAMB — N2,000 per section per month."]);
-var content=getLS('quizora_content', null) || {
- JSS1:{'Mathematics':[{title:'Fractions', note:'A fraction is a part of a whole.\n\nExample: 1/2 means 1 out of 2 equal parts.\n\nTo add fractions with the same denominator, add the numerators and keep the denominator.\n\nIn conclusion, fractions help us share things equally.', images:[]}]},
- JSS2:{'Mathematics':[{title:'Algebra Basics', note:'Algebra uses letters to stand for numbers.\n\nExample: x + 3 = 7, so x = 4.', images:[]}]},
- JSS3:{'Mathematics':[{title:'BECE Prep — Indices', note:'Indices show repeated multiplication.\n\nExample: 2 x 2 x 2 = 2^3 = 8.', images:[]}]},
- SS1:{'Mathematics':[{title:'Quadratic Equations', note:'A quadratic equation has x squared.\n\nExample: x^2 + 3x + 2 = 0', images:[]}]},
- SS2:{'English':[{title:'Comprehension', note:'Read the passage carefully, then answer the questions in your own words.', images:[]}]},
- SS3:{'Mathematics':[{title:'WAEC Prep — Revision', note:'Revise all topics. Practise past questions daily.', images:[]}]},
- WAEC:{'Mathematics':[{title:'WAEC — Past Questions', note:'WAEC Mathematics: Practise past questions. Show all workings.\n\nExample: Solve 2x + 5 = 15.', images:[]}], 'English':[{title:'WAEC — Oral English', note:'Oral English: Stress, intonation and vowel sounds.', images:[]}]},
- JAMB:{'Mathematics':[{title:'JAMB — CBT Practice', note:'JAMB CBT: 40 questions, time management is key.', images:[]}], 'English':[{title:'JAMB — Use of English', note:'Use of English: Comprehension, lexis, oral English.', images:[]}]}
-};
-for(var c in content){ for(var s in content[c]){ for(var i=0;i<content[c][s].length;i++){ if(!content[c][s][i].images) content[c][s][i].images=[]; } } }
+var isPreview=false;
+var anns=[]; try{ anns=JSON.parse(localStorage.getItem('quizora_anns')||'[]'); }catch(e){ anns=[]; }
+if(!anns.length) anns=["Welcome to Quizora AI — Free: JSS1, JSS2, SS1, SS2. Locked: JSS3, SS3, WAEC, JAMB — N2,000 per section per month."];
+var content=null; try{ content=JSON.parse(localStorage.getItem('quizora_content')||'null'); }catch(e){ content=null; }
+if(!content){
+  content={
+    JSS1:{Mathematics:[{title:'Fractions', note:'A fraction is a part of a whole. Example: 1/2 means 1 out of 2 equal parts. To add fractions with the same denominator, add the numerators and keep the denominator. In conclusion, fractions help us share things equally.', images:[]}]},
+    JSS2:{Mathematics:[{title:'Algebra Basics', note:'Algebra uses letters to stand for numbers. Example: x + 3 = 7, so x = 4.', images:[]}]},
+    JSS3:{Mathematics:[{title:'BECE Prep - Indices', note:'Indices show repeated multiplication. Example: 2 x 2 x 2 = 8.', images:[]}]},
+    SS1:{Mathematics:[{title:'Quadratic Equations', note:'A quadratic equation has x squared. Example: x squared + 3x + 2 = 0', images:[]}]},
+    SS2:{English:[{title:'Comprehension', note:'Read the passage carefully, then answer the questions in your own words.', images:[]}]},
+    SS3:{Mathematics:[{title:'WAEC Prep - Revision', note:'Revise all topics. Practise past questions daily.', images:[]}]},
+    WAEC:{Mathematics:[{title:'WAEC - Past Questions', note:'WAEC Mathematics: Practise past questions. Show all workings. Example: Solve 2x + 5 = 15.', images:[]}], English:[{title:'WAEC - Oral English', note:'Oral English: Stress, intonation and vowel sounds.', images:[]}]},
+    JAMB:{Mathematics:[{title:'JAMB - CBT Practice', note:'JAMB CBT: 40 questions, time management is key.', images:[]}], English:[{title:'JAMB - Use of English', note:'Use of English: Comprehension, lexis, oral English.', images:[]}]}
+  };
+}
 var curClass='', curSubject='', curTopicIdx=-1, isEditing=false, openClassName='', openSubjectName='', pendingDiagram='';
-var myDeviceId=getStr('quizora_device_id','') || ('DEV-'+Math.random().toString(36).slice(2,10).toUpperCase());
-setStr('quizora_device_id', myDeviceId);
-function save(){ setLS('quizora_students', students); setLS('quizora_anns', anns); setLS('quizora_content', content); }
-function setTab(t){ el('tabAdmin').className=t==='admin'?'on':''; el('tabStudent').className=t==='student'?'on':''; el('adminLoginBox').style.display=t==='admin'?'block':'none'; el('studentLoginBox').style.display=t==='student'?'block':'none'; showStatus(t==='admin'?'Admin selected':'Student selected — Login or Create My Account', 'info'); updateHint(); }
-function setStuMode(m){ el('stuLoginTab').className=m==='login'?'on':''; el('stuCreateTab').className=m==='create'?'on':''; el('stuLoginForm').style.display=m==='login'?'block':'none'; el('stuCreateForm').style.display=m==='create'?'block':'none'; }
-function updateHint(){ var h=el('adminHint'); if(!adminData){ if(h) h.textContent='First time? Type a password you want — it will become your password.'; } else { if(h) h.textContent='Welcome back. Enter password for "'+adminData.user+'".'; var u=el('settingsAdminUser'); if(u) u.value=adminData.user; } }
-function doAdmin(){
-  var u=(el('adminUser').value||'').trim(); var p=(el('adminPass').value||'').trim();
-  if(!u){ showStatus('❌ Enter Admin Username','err'); return; }
-  if(!p){ showStatus('❌ Enter Password','err'); return; }
-  if(!adminData){ adminData={user:u, pass:p}; setLS('quizora_admin_data', adminData); role='admin'; showStatus('✅ Admin created for '+u+' - Entering...','ok'); setTimeout(enterApp,400); updateHint(); return; }
-  if(u.toLowerCase()!==adminData.user.toLowerCase()){ showStatus('❌ Wrong Admin Username. Saved is "'+adminData.user+'". Or tap Reset Login.','err'); return; }
-  if(p!==adminData.pass){ showStatus('❌ Wrong Password for '+u+'. Or tap Reset Login.','err'); return; }
-  role='admin'; showStatus('✅ Welcome back '+u,'ok'); setTimeout(enterApp,400);
-}
-function doStudentCreate(){
-  var u=(el('newStuUser').value||'').trim(); var p=(el('newStuPass').value||'').trim(); var p2=(el('newStuPass2').value||'').trim(); var cls=el('newStuClass').value;
-  if(!u){ showStatus('❌ Choose a Username','err'); return; }
-  if(!p){ showStatus('❌ Create a Password','err'); return; }
-  if(p!==p2){ showStatus('❌ Passwords do not match','err'); return; }
-  for(var i=0;i<students.length;i++){ if(students[i].name.toLowerCase()===u.toLowerCase()){ showStatus('❌ Username exists — choose another','err'); return; } }
-  var ns={name:u, cls:cls, pin:p, status:'Active', subs:[], deviceId:myDeviceId}; students.unshift(ns); save(); currentStudent=ns; role='student'; showStatus('✅ Account created! Welcome '+u,'ok'); setTimeout(enterApp,400);
-}
-function doStudentLogin(){
-  var u=(el('studentUser').value||'').trim(); var p=(el('studentPass').value||'').trim();
-  if(!u){ showStatus('❌ Enter Your Username','err'); return; }
-  if(!p){ showStatus('❌ Enter Your Password','err'); return; }
-  var found=null; for(var i=0;i<students.length;i++){ if(students[i].name.toLowerCase()===u.toLowerCase() && students[i].pin===p){ found=students[i]; break; } }
-  if(!found){ showStatus('❌ Wrong Username or Password. If new, tap Create My Account.','err'); return; }
-  if(found.status==='Blocked'){ showStatus('❌ Blocked. Contact Admin.','err'); return; }
-  if(!found.deviceId){ found.deviceId=myDeviceId; save(); } else if(found.deviceId!==myDeviceId){ showStatus('❌ Locked to another device. Ask Admin to Reset Device.','err'); return; }
-  currentStudent=found; role='student'; showStatus('✅ Welcome '+u,'ok'); setTimeout(enterApp,400);
-}
-function resetLogin(){ if(!confirm('Reset Login? Clears Admin + Students on THIS phone only. Content stays. Continue?')) return; try{ localStorage.removeItem('quizora_admin_data'); localStorage.removeItem('quizora_students'); }catch(e){} adminData=null; students=[]; save(); el('adminUser').value=''; el('adminPass').value=''; showStatus('✅ Login reset. Create Admin again.','ok'); updateHint(); }
-function logout(){ isPreview=false; role=''; currentStudent=null; el('app').style.display='none'; el('loginScreen').style.display='block'; el('navAdmin').classList.remove('show'); el('navStudent').style.display='none'; el('previewBanner').style.display='none'; el('switchBtn').style.display='none'; el('adminPass').value=''; el('studentPass').value=''; showStatus('Logged out. Login again.','info'); }
-function requireAdmin(){ if(role!=='admin'){ toast('❌ Students cannot access Admin.'); return false; } if(isPreview){ toast('Previewing as Student. Tap Back to Admin.'); return false; } return true; }
-function showPage(id){
-  var adminPages=['aDash','aStudents','studio','settings'];
-  if(adminPages.indexOf(id)>=0 && role!=='admin'){ toast('❌ Admin only'); return; }
-  if(adminPages.indexOf(id)>=0 && isPreview){ toast('Tap Back to Admin first'); return; }
-  var pages=document.querySelectorAll('.page'); for(var i=0;i<pages.length;i++) pages[i].classList.remove('show');
-  var e=el(id); if(e) e.classList.add('show'); window.scrollTo(0,0); if(id==='classes'||id==='sDash'||id==='sClasses') renderClasses();
-}
-function navTo(id,btn){ if(role!=='admin' && ['aDash','aStudents','studio','settings'].indexOf(id)>=0){ toast('❌ Admin only'); return; } var b=document.querySelectorAll('.bottom button'); for(var i=0;i<b.length;i++) b[i].classList.remove('on'); if(btn) btn.classList.add('on'); showPage(id); }
-function toggleView(){
-  if(role!=='admin'){ showStatus('❌ Students cannot switch to Admin.','err'); return; }
-  if(!isPreview){ isPreview=true; el('switchBtn').textContent='⬅️ Back to Admin'; el('previewBanner').style.display='block'; el('topSub').textContent='Student View — Preview (You are still Admin)'; el('navAdmin').classList.remove('show'); el('navStudent').style.display='flex'; showPage('sDash'); render(); toast('👁️ Previewing as Student'); }
-  else { isPreview=false; el('switchBtn').textContent='👁️ View as Student'; el('previewBanner').style.display='none'; el('topSub').textContent='Admin Dashboard — You'; el('navAdmin').classList.add('show'); el('navStudent').style.display='none'; showPage('aDash'); render(); toast('⬅️ Back to Admin'); }
-}
-function enterApp(){
+function toast2(m){ var t=document.getElementById('toast'); if(!t) return; t.textContent=m; t.style.display='block'; setTimeout(function(){ t.style.display='none'; },3400); }
+function saveApp(){ try{ localStorage.setItem('quizora_anns', JSON.stringify(anns)); localStorage.setItem('quizora_content', JSON.stringify(content)); }catch(e){} }
+function getStudentsApp(){ try{ var v=localStorage.getItem('quizora_students'); return v?JSON.parse(v):[]; }catch(e){ return []; } }
+function saveStudentsApp(list){ try{ localStorage.setItem('quizora_students', JSON.stringify(list)); }catch(e){} }
+function roleNow(){ return window.__role||''; }
+function curStu(){ return window.__currentStudent||null; }
+function requireAdmin(){ if(roleNow()!=='admin'){ toast2('Students cannot access Admin.'); return false; } if(isPreview){ toast2('Previewing as Student. Tap Back to Admin.'); return false; } return true; }
+window.enterAppSafe=function(){
   isPreview=false;
-  var sw=el('switchBtn'); var qsw=el('quickSwitchBtn');
-  if(role==='admin'){ sw.style.display='block'; sw.textContent='👁️ View as Student'; if(qsw) qsw.style.display='block'; } else { sw.style.display='none'; if(qsw) qsw.style.display='none'; }
-  el('previewBanner').style.display='none'; el('loginScreen').style.display='none'; el('app').style.display='block';
-  el('navAdmin').classList.toggle('show', role==='admin');
-  if(role!=='admin'){ el('navAdmin').classList.remove('show'); el('navStudent').style.display='flex'; } else { el('navStudent').style.display='none'; }
-  el('topSub').textContent = role==='admin' ? 'Admin Dashboard — You' : ('Student Dashboard — '+(currentStudent?currentStudent.name:'Student'));
-  showPage(role==='admin'?'aDash':'sDash'); render();
-}
-function changeAdminOtp(){ if(!requireAdmin()) return; var a=(el('newAdminOtp').value||'').trim(); var b=(el('newAdminOtp2').value||'').trim(); if(!a) return toast('Type new password'); if(a!==b) return toast('Passwords do not match'); if(!adminData) adminData={user:'Admin',pass:a}; else adminData.pass=a; setLS('quizora_admin_data', adminData); toast('✅ Admin password changed'); el('newAdminOtp').value=''; el('newAdminOtp2').value=''; updateHint(); }
+  var sw=document.getElementById('switchBtn'); var qsw=document.getElementById('quickSwitchBtn');
+  if(roleNow()==='admin'){ if(sw) sw.style.display='block'; if(sw) sw.textContent='View as Student'; if(qsw) qsw.style.display='block'; } else { if(sw) sw.style.display='none'; if(qsw) qsw.style.display='none'; }
+  document.getElementById('previewBanner').style.display='none';
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('navAdmin').classList.toggle('show', roleNow()==='admin');
+  if(roleNow()!=='admin'){ document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='flex'; } else { document.getElementById('navStudent').style.display='none'; }
+  document.getElementById('topSub').textContent = roleNow()==='admin' ? 'Admin Dashboard - You' : ('Student Dashboard - '+(curStu()?curStu().name:'Student'));
+  showPage(roleNow()==='admin'?'aDash':'sDash'); renderApp();
+};
+window.logout=function(){ isPreview=false; window.__role=''; window.__currentStudent=null; document.getElementById('app').style.display='none'; document.getElementById('loginScreen').style.display='block'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='none'; document.getElementById('previewBanner').style.display='none'; var sw=document.getElementById('switchBtn'); if(sw) sw.style.display='none'; document.getElementById('adminPass').value=''; document.getElementById('studentPass').value=''; var st=document.getElementById('loginStatus'); if(st){ st.textContent='Logged out. Login again.'; st.className='status info'; } };
+window.showPage=function(id){
+  var adminPages=['aDash','aStudents','studio','settings'];
+  if(adminPages.indexOf(id)>=0 && roleNow()!=='admin'){ toast2('Admin only'); return; }
+  if(adminPages.indexOf(id)>=0 && isPreview){ toast2('Tap Back to Admin first'); return; }
+  var pages=document.querySelectorAll('.page'); for(var i=0;i<pages.length;i++) pages[i].classList.remove('show');
+  var e=document.getElementById(id); if(e) e.classList.add('show'); window.scrollTo(0,0); if(id==='classes'||id==='sDash'||id==='sClasses') renderClasses();
+};
+window.navTo=function(id,btn){ if(roleNow()!=='admin' && ['aDash','aStudents','studio','settings'].indexOf(id)>=0){ toast2('Admin only'); return; } var b=document.querySelectorAll('.bottom button'); for(var i=0;i<b.length;i++) b[i].classList.remove('on'); if(btn) btn.classList.add('on'); window.showPage(id); };
+window.toggleView=function(){
+  if(roleNow()!=='admin'){ toast2('Students cannot switch to Admin.'); return; }
+  if(!isPreview){ isPreview=true; document.getElementById('switchBtn').textContent='Back to Admin'; document.getElementById('previewBanner').style.display='block'; document.getElementById('topSub').textContent='Student View - Preview (You are still Admin)'; document.getElementById('navAdmin').classList.remove('show'); document.getElementById('navStudent').style.display='flex'; window.showPage('sDash'); renderApp(); toast2('Previewing as Student'); }
+  else { isPreview=false; document.getElementById('switchBtn').textContent='View as Student'; document.getElementById('previewBanner').style.display='none'; document.getElementById('topSub').textContent='Admin Dashboard - You'; document.getElementById('navAdmin').classList.add('show'); document.getElementById('navStudent').style.display='none'; window.showPage('aDash'); renderApp(); toast2('Back to Admin'); }
+};
+window.changeAdminOtp=function(){ if(!requireAdmin()) return; var a=(document.getElementById('newAdminOtp').value||'').trim(); var b=(document.getElementById('newAdminOtp2').value||'').trim(); if(!a) return toast2('Type new password'); if(a!==b) return toast2('Passwords do not match'); try{ var cur=JSON.parse(localStorage.getItem('quizora_admin_data')||'{}'); cur.pass=a; localStorage.setItem('quizora_admin_data', JSON.stringify(cur)); }catch(e){} toast2('Admin password changed'); document.getElementById('newAdminOtp').value=''; document.getElementById('newAdminOtp2').value=''; };
 function isLocked(cls){ return LOCKED_CLASSES.indexOf(cls)>=0; }
-function canOpen(cls){ if(role==='admin' && !isPreview) return true; if(FREE_CLASSES.indexOf(cls)>=0) return true; if(isPreview) return false; if(currentStudent && currentStudent.subs && currentStudent.subs.indexOf(cls)>=0) return true; return false; }
-function splitS(t){ var parts=(t||'').split(/\n+/).map(function(p){return p.trim();}).filter(Boolean); var out=[]; parts.forEach(function(p){ var s=p.match(/[^.!?]+[.!?]+/g)||[p]; s.forEach(function(x){ out.push(x.trim()); }); }); return out; }
-function words(s){ return s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(function(w){ return w.length>3 && ['this','that','with','from','which','when','there','their','about','into','your','have','will','also'].indexOf(w)<0; }); }
-function cleanNote(t){ var x=(t||'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').replace(/\s+([,.!?])/g,'$1').replace(/([.!?])\s+([a-z])/g,function(m,p,c){return p+' '+c.toUpperCase();}); x=x.trim(); if(x) x=x.charAt(0).toUpperCase()+x.slice(1); return x; }
+function canOpen(cls){ if(roleNow()==='admin' && !isPreview) return true; if(FREE_CLASSES.indexOf(cls)>=0) return true; if(isPreview) return false; var s=curStu(); if(s && s.subs && s.subs.indexOf(cls)>=0) return true; return false; }
+function splitS(t){ var parts=(t||'').split(/\n+/); var out=[]; for(var i=0;i<parts.length;i++){ var p=parts[i].trim(); if(!p) continue; var s=p.match(/[^.!?]+[.!?]+/g)||[p]; for(var j=0;j<s.length;j++) out.push(s[j].trim()); } return out; }
+function cleanNote(t){ var x=(t||'').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n'); x=x.trim(); if(x) x=x.charAt(0).toUpperCase()+x.slice(1); return x; }
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function smartInsert(oldText, newPhrase, force){
-  var base=(oldText||'').trim(); var add=cleanNote(newPhrase); if(!add) return {text:base, where:'Nothing added', after:-1}; if(!base) return {text:add, where:'Note was empty — placed at start', after:-1}; if(['.','!','?'].indexOf(add.slice(-1))<0) add+='.'; var lower=add.toLowerCase(); var sents=splitS(base); var total=sents.length;
+  var base=(oldText||'').trim(); var add=cleanNote(newPhrase); if(!add) return {text:base, where:'Nothing added', after:-1}; if(!base) return {text:add, where:'Note was empty - placed at start', after:-1}; if(['.','!','?'].indexOf(add.slice(-1))<0) add+='.'; var lower=add.toLowerCase(); var sents=splitS(base); var total=sents.length;
   if(force==='start') return {text:add+' '+base, where:'Placed at BEGINNING', after:-1};
   if(force==='end') return {text:base+' '+add, where:'Placed at END', after:total-1};
-  if(/^(first|firstly|to begin|to start|before anything|introduction)/.test(lower)) return {text:add+' '+base, where:'Detected "First" — placed at BEGINNING', after:-1};
-  if(/^(in conclusion|finally|in summary|to conclude|overall)/.test(lower)) return {text:base+' '+add, where:'Detected "In conclusion" — placed at END', after:total-1};
-  if(/^(for example|for instance|example|e\.g\.|such as)/.test(lower)){ var idx=-1; for(var i=0;i<sents.length;i++){ if(/example/i.test(sents[i])){ idx=i; break; } } if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '), where:'Detected "For example" — placed AFTER example', after:idx}; } sents.splice(1,0,add); return {text:sents.join(' '), where:'Detected "For example" — placed AFTER definition', after:0}; }
-  if(force==='after-example'){ var idx2=-1; for(var j=0;j<sents.length;j++){ if(/example/i.test(sents[j])){ idx2=j; break; } } if(idx2>=0){ sents.splice(idx2+1,0,add); return {text:sents.join(' '), where:'Placed AFTER Example', after:idx2}; } sents.splice(1,0,add); return {text:sents.join(' '), where:'No example — placed after definition', after:0}; }
-  if(/^(however|but|on the other hand|in contrast|although|despite)/.test(lower)){ var at=Math.min(2,total); sents.splice(at,0,add); return {text:sents.join(' '), where:'Detected contrast — placed AFTER main point', after:at-1}; }
-  var addWords={}; words(add).forEach(function(w){ addWords[w]=1; }); var bestIdx=-1, bestScore=0; sents.forEach(function(s,i){ var sw={}; words(s).forEach(function(w){ sw[w]=1; }); var score=0; for(var w in addWords){ if(sw[w]) score++; } if(score>bestScore){ bestScore=score; bestIdx=i; } });
-  if(bestScore>=1){ sents.splice(bestIdx+1,0,add); return {text:sents.join(' '), where:'Found related sentence — placed RIGHT AFTER it', after:bestIdx}; }
-  var conclIdx=-1; for(var k=0;k<sents.length;k++){ if(/in conclusion|finally|summary/i.test(sents[k])){ conclIdx=k; break; } }
-  if(conclIdx>0){ sents.splice(conclIdx,0,add); return {text:sents.join(' '), where:'Placed BEFORE conclusion', after:conclIdx-1}; }
+  if(lower.indexOf('first')===0 || lower.indexOf('to begin')===0) return {text:add+' '+base, where:'Detected First - placed at BEGINNING', after:-1};
+  if(lower.indexOf('in conclusion')===0 || lower.indexOf('finally')===0) return {text:base+' '+add, where:'Detected In conclusion - placed at END', after:total-1};
+  if(lower.indexOf('for example')===0 || lower.indexOf('example')===0){ var idx=-1; for(var i=0;i<sents.length;i++){ if(sents[i].toLowerCase().indexOf('example')>=0){ idx=i; break; } } if(idx>=0){ sents.splice(idx+1,0,add); return {text:sents.join(' '), where:'Detected For example - placed AFTER example', after:idx}; } sents.splice(1,0,add); return {text:sents.join(' '), where:'Detected For example - placed AFTER definition', after:0}; }
   var mid=Math.floor(total/2); sents.splice(mid,0,add); return {text:sents.join(' '), where:'Placed in MIDDLE where it flows, NOT forced to end', after:mid-1};
 }
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+window.toggleClass=function(cls){ openClassName=openClassName===cls?'':cls; openSubjectName=''; renderClasses(); };
+window.toggleSubject=function(cls, subj){ openClassName=cls; openSubjectName=openSubjectName===subj?'':subj; renderClasses(); };
+window.subscribeTo=function(cls){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe to '+cls+' - N2,000/month. My Username is '+(curStu()?curStu().name:'')+'. I paid to Opay '+OPAY+'.')); };
 function classRow(cls){
-  try{
   var locked=isLocked(cls); var can=canOpen(cls);
-  var badge=locked ? (can && !(role==='admin' && !isPreview) ? '<span class="lock-badge" style="background:#0bb56a">✅ Subscribed</span>' : '<span class="lock-badge">🔒 LOCKED • ₦2,000/mo</span>') : '<span class="free-badge">🟢 FREE</span>';
-  var arrow=openClassName===cls?'▲':'▼'; var subjects=content[cls]||{}; var subHtml='';
+  var badge=locked ? (can && !(roleNow()==='admin' && !isPreview) ? '<span class="lock-badge" style="background:#0bb56a">Subscribed</span>' : '<span class="lock-badge">LOCKED - N2,000/mo</span>') : '<span class="free-badge">FREE</span>';
+  var arrow=openClassName===cls?'Up':'Down'; var subjects=content[cls]||{}; var subHtml='';
   if(openClassName===cls){
-    if(!can){ subHtml='<div style="padding:12px;background:#fff3cd;border-radius:10px;margin-top:8px"><b>🔒 '+cls+' is Locked</b><br><small>Pay ₦2,000 for '+cls+' only to Opay '+OPAY+', then WhatsApp 08147699555.</small><br><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="event.stopPropagation();subscribeTo(\''+cls+'\')">Subscribe to '+cls+' — ₦2,000</button></div>'; }
-    else { subHtml=Object.keys(subjects).length ? Object.keys(subjects).map(function(sj){ return subjectRow(cls,sj); }).join('') : '<p class="mut" style="padding:10px">No subjects yet.</p>'; if(role==='admin' && !isPreview) subHtml+='<div style="margin-top:10px"><input id="newSub-'+cls+'" placeholder="New Subject in '+cls+'"><button type="button" class="btn btn-primary" style="margin-top:6px" onclick="event.stopPropagation();addSubjectInline(\''+cls+'\')">+ Add Subject</button> <button type="button" class="btn btn-ghost" onclick="event.stopPropagation();renameClassPrompt(\''+cls+'\')">Rename Class</button> <button type="button" class="btn btn-red" onclick="event.stopPropagation();deleteClassPrompt(\''+cls+'\')">Delete Class</button></div>'; }
+    if(!can){ subHtml='<div style="padding:12px;background:#fff3cd;border-radius:10px;margin-top:8px"><b>'+cls+' is Locked</b><br><small>Pay N2,000 for '+cls+' only to Opay '+OPAY+', then WhatsApp 08147699555.</small><br><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="subscribeTo(\''+cls+'\')">Subscribe to '+cls+' - N2,000</button></div>'; }
+    else {
+      var keys=Object.keys(subjects); if(keys.length){ for(var k=0;k<keys.length;k++) subHtml+=subjectRow(cls, keys[k]); } else { subHtml='<p class="mut" style="padding:10px">No subjects yet.</p>'; }
+      if(roleNow()==='admin' && !isPreview) subHtml+='<div style="margin-top:10px"><input id="newSub-'+cls+'" placeholder="New Subject in '+cls+'"><button type="button" class="btn btn-primary" style="margin-top:6px" onclick="addSubjectInline(\''+cls+'\')">+ Add Subject</button> <button type="button" class="btn btn-ghost" onclick="renameClassPrompt(\''+cls+'\')">Rename Class</button> <button type="button" class="btn btn-red" onclick="deleteClassPrompt(\''+cls+'\')">Delete Class</button></div>';
+    }
   }
-  return '<div class="drop"><div class="drop-head" onclick="toggleClass(\''+cls+'\')"><div><b>'+cls+'</b><br><small class="mut">'+(Object.keys(subjects).join(' • ')||'No subjects yet')+'</small></div><div style="display:flex;gap:6px;align-items:center">'+badge+'<span>'+arrow+'</span></div></div><div class="drop-body '+(openClassName===cls?'open':'')+'">'+subHtml+'</div></div>';
-  }catch(e){ return '<div class="card">Error loading '+cls+'</div>'; }
+  return '<div class="drop"><div class="drop-head" onclick="toggleClass(\''+cls+'\')"><div><b>'+cls+'</b><br><small class="mut">'+(Object.keys(subjects).join(' - ')||'No subjects yet')+'</small></div><div>'+badge+' <span>'+arrow+'</span></div></div><div class="drop-body '+(openClassName===cls?'open':'')+'">'+subHtml+'</div></div>';
 }
 function subjectRow(cls, subj){
-  var topics=(content[cls]||{})[subj]||[]; var isOpen=openClassName===cls && openSubjectName===subj; var arrow=isOpen?'▲':'▼'; var topicsHtml='';
+  var topics=(content[cls]||{})[subj]||[]; var isOpen=openClassName===cls && openSubjectName===subj; var topicsHtml='';
   if(isOpen){
-    topicsHtml=topics.length ? topics.map(function(t,i){ return '<div class="topic-item" onclick="event.stopPropagation();openTopic(\''+cls+'\',\''+subj+'\','+i+')"><div><b>'+esc(t.title)+'</b><br><small class="mut">'+((t.images||[]).length?('🖼️ '+(t.images||[]).length+' diagram(s) • ':'')+'Tap to read')+'</small></div><span>📖 Read →</span></div>'; }).join('') : '<p class="mut">No topics yet.</p>';
-    if(role==='admin' && !isPreview) topicsHtml+='<div style="margin-top:10px"><input id="newTopic-'+cls+'-'+subj+'" placeholder="New Topic"><textarea id="newNote-'+cls+'-'+subj+'" rows="2" placeholder="Write note..."></textarea><button type="button" class="btn btn-primary" style="margin-top:6px" onclick="event.stopPropagation();addTopicInline(\''+cls+'\',\''+subj+'\')">+ Add Topic</button> <button type="button" class="btn btn-ghost" onclick="event.stopPropagation();renameSubjectInline(\''+cls+'\',\''+subj+'\')">Rename Subject</button> <button type="button" class="btn btn-red" onclick="event.stopPropagation();deleteSubjectInline(\''+cls+'\',\''+subj+'\')">Delete Subject</button></div>';
+    if(topics.length){ for(var i=0;i<topics.length;i++){ topicsHtml+='<div class="topic-item" onclick="openTopic(\''+cls+'\',\''+subj+'\','+i+')"><div><b>'+esc(topics[i].title)+'</b><br><small class="mut">'+((topics[i].images||[]).length?('Image '+(topics[i].images||[]).length+' - ':'')+'Tap to read')+'</small></div><span>Read</span></div>'; } } else { topicsHtml='<p class="mut">No topics yet.</p>'; }
+    if(roleNow()==='admin' && !isPreview) topicsHtml+='<div style="margin-top:10px"><input id="newTopic-'+cls+'-'+subj+'" placeholder="New Topic"><textarea id="newNote-'+cls+'-'+subj+'" rows="2" placeholder="Write note..."></textarea><button type="button" class="btn btn-primary" style="margin-top:6px" onclick="addTopicInline(\''+cls+'\',\''+subj+'\')">+ Add Topic</button> <button type="button" class="btn btn-ghost" onclick="renameSubjectInline(\''+cls+'\',\''+subj+'\')">Rename Subject</button> <button type="button" class="btn btn-red" onclick="deleteSubjectInline(\''+cls+'\',\''+subj+'\')">Delete Subject</button></div>';
   }
-  return '<div class="drop-sub"><div class="drop-sub-head" onclick="event.stopPropagation();toggleSubject(\''+cls+'\',\''+subj+'\')"><div><b>'+esc(subj)+'</b><br><small class="mut">'+topics.length+' topic(s)</small></div><span>'+arrow+'</span></div><div class="drop-sub-body '+(isOpen?'open':'')+'">'+topicsHtml+'</div></div>';
+  return '<div class="drop-sub"><div class="drop-sub-head" onclick="toggleSubject(\''+cls+'\',\''+subj+'\')"><div><b>'+esc(subj)+'</b><br><small class="mut">'+topics.length+' topic(s)</small></div><span>'+(isOpen?'Up':'Down')+'</span></div><div class="drop-sub-body '+(isOpen?'open':'')+'">'+topicsHtml+'</div></div>';
 }
-function toggleClass(cls){ openClassName=openClassName===cls?'':cls; openSubjectName=''; renderClasses(); }
-function toggleSubject(cls, subj){ openClassName=cls; openSubjectName=openSubjectName===subj?'':subj; renderClasses(); }
-function subscribeTo(cls){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe to '+cls+' — ₦2,000/month. My Username is '+(currentStudent?currentStudent.name:'')+'. I paid to Opay '+OPAY+'.')); }
 function renderClasses(){
-  try{
-  var isRealAdmin=role==='admin' && !isPreview; var t=el('adminClassTools'); if(t) t.style.display=isRealAdmin?'block':'none';
-  var order=['JSS1','JSS2','JSS3','SS1','SS2','SS3','WAEC','JAMB']; var all=Object.keys(content); var sorted=[]; order.forEach(function(c){ if(all.indexOf(c)>=0) sorted.push(c); }); all.forEach(function(c){ if(order.indexOf(c)<0) sorted.push(c); });
-  var html=sorted.map(function(c){ return classRow(c); }).join('');
-  ['classList','classListA','classListS','classListS2'].forEach(function(id){ var e=el(id); if(e) e.innerHTML=html; });
-  }catch(e){ toast('Classes error: '+e.message); }
+  var isRealAdmin=roleNow()==='admin' && !isPreview; var t=document.getElementById('adminClassTools'); if(t) t.style.display=isRealAdmin?'block':'none';
+  var order=['JSS1','JSS2','JSS3','SS1','SS2','SS3','WAEC','JAMB']; var all=Object.keys(content); var sorted=[]; for(var i=0;i<order.length;i++){ if(all.indexOf(order[i])>=0) sorted.push(order[i]); } for(var j=0;j<all.length;j++){ if(order.indexOf(all[j])<0) sorted.push(all[j]); }
+  var html=''; for(var k=0;k<sorted.length;k++) html+=classRow(sorted[k]);
+  var ids=['classList','classListA','classListS','classListS2']; for(var m=0;m<ids.length;m++){ var e=document.getElementById(ids[m]); if(e) e.innerHTML=html; }
 }
-function addSubjectInline(cls){ if(!requireAdmin()) return; var e=el('newSub-'+cls); var n=(e.value||'').trim(); if(!n) return toast('Type Subject'); if(!content[cls]) content[cls]={}; if(content[cls][n]) return toast('Exists'); content[cls][n]=[]; save(); render(); toast('✅ Subject added'); }
-function renameSubjectInline(cls,subj){ if(!requireAdmin()) return; var n=prompt('Rename Subject',subj); if(!n||n===subj) return; content[cls][n]=content[cls][subj]; delete content[cls][subj]; openSubjectName=n; save(); render(); }
-function deleteSubjectInline(cls,subj){ if(!requireAdmin()) return; if(!confirm('Delete Subject '+subj+'?')) return; delete content[cls][subj]; openSubjectName=''; save(); render(); }
-function addTopicInline(cls,subj){ if(!requireAdmin()) return; var tEl=el('newTopic-'+cls+'-'+subj); var nEl=el('newNote-'+cls+'-'+subj); var title=(tEl.value||'').trim(); var note=(nEl.value||'').trim(); if(!title||!note) return toast('Fill Topic + Note'); if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title:title, note:cleanNote(note), images:[]}); save(); render(); toast('✅ Topic added'); }
-function render(){
-  try{
-  var total=0; students.forEach(function(s){ total+=(s.subs?s.subs.length:0); });
-  if(el('stuCount')) el('stuCount').textContent=students.length;
-  if(el('revText')) el('revText').textContent='₦'+(total*PRICE).toLocaleString();
-  var rows=students.length ? students.map(function(s,i){ return '<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center"><div><b>'+esc(s.name)+'</b><br><small class="mut">'+s.cls+' • Subs: '+((s.subs||[]).join(', ')||'Free only')+' • '+s.status+'</small></div><button type="button" class="btn btn-ghost" onclick="studentMenu('+i+')">•••</button></div>'; }).join('') : '<p class="mut">No students yet.</p>';
-  if(el('studentsList')) el('studentsList').innerHTML=rows; if(el('studentsList2')) el('studentsList2').innerHTML=rows;
-  if(el('annList')) el('annList').innerHTML=anns.map(function(a){ return '<div>📢 '+esc(a)+'</div>'; }).join('');
-  if(el('sAnnList')) el('sAnnList').innerHTML=anns.map(function(a){ return '<div>📢 '+esc(a)+'</div>'; }).join('');
-  if(el('stClass')) el('stClass').innerHTML=Object.keys(content).map(function(c){ return '<option>'+c+'</option>'; }).join('');
-  if(el('studioClassList')) el('studioClassList').innerHTML=Object.keys(content).map(function(c){ return '<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between"><div><b>'+c+'</b> '+(isLocked(c)?'<span style="background:#e9a800;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px">LOCKED</span>':'<span style="background:#0bb56a;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px">FREE</span>')+'<br><small class="mut">'+(Object.keys(content[c]).join(', ')||'No subjects')+'</small></div><div><button type="button" class="btn btn-ghost" onclick="renameClassPrompt(\''+c+'\')">Rename</button> <button type="button" class="btn btn-red" onclick="deleteClassPrompt(\''+c+'\')">Delete</button></div></div>'; }).join('');
-  var sList=''; for(var cls in content){ for(var subj in content[cls]){ content[cls][subj].forEach(function(t,ti){ sList+='<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between"><div><b>'+cls+' • '+esc(subj)+' • '+esc(t.title)+'</b></div><div><button type="button" class="btn btn-ghost" onclick="editTopicDirect(\''+cls+'\',\''+subj+'\','+ti+')">Edit</button> <button type="button" class="btn btn-red" onclick="delTopic(\''+cls+'\',\''+subj+'\','+ti+')">Delete</button></div></div>'; }); } }
-  if(el('studioList')) el('studioList').innerHTML=sList||'<p class="mut">No content yet.</p>';
-  if(currentStudent){ if(el('myOtpText')) el('myOtpText').textContent=currentStudent.name; if(el('mySubsText')) el('mySubsText').textContent=(currentStudent.subs&&currentStudent.subs.length)?currentStudent.subs.join(', '):'Free Classes Only'; if(el('sProfileText')) el('sProfileText').innerHTML='<b>'+esc(currentStudent.name)+'</b><br><small class="mut">'+currentStudent.cls+'</small>'; if(el('sProfileOtp')) el('sProfileOtp').textContent='Username: '+currentStudent.name+' • Class: '+currentStudent.cls; if(el('sProfileSubs')) el('sProfileSubs').textContent='Subscribed Locked: '+((currentStudent.subs||[]).join(', ')||'None — Free only'); }
-  if(isPreview){ if(el('myOtpText')) el('myOtpText').textContent='Preview Student'; if(el('mySubsText')) el('mySubsText').textContent='Free Classes Only (Preview)'; }
+window.addSubjectInline=function(cls){ if(!requireAdmin()) return; var e=document.getElementById('newSub-'+cls); var n=(e.value||'').trim(); if(!n) return toast2('Type Subject'); if(!content[cls]) content[cls]={}; if(content[cls][n]) return toast2('Exists'); content[cls][n]=[]; saveApp(); renderApp(); toast2('Subject added'); };
+window.renameSubjectInline=function(cls,subj){ if(!requireAdmin()) return; var n=prompt('Rename Subject',subj); if(!n||n===subj) return; content[cls][n]=content[cls][subj]; delete content[cls][subj]; openSubjectName=n; saveApp(); renderApp(); };
+window.deleteSubjectInline=function(cls,subj){ if(!requireAdmin()) return; if(!confirm('Delete Subject '+subj+'?')) return; delete content[cls][subj]; openSubjectName=''; saveApp(); renderApp(); };
+window.addTopicInline=function(cls,subj){ if(!requireAdmin()) return; var tEl=document.getElementById('newTopic-'+cls+'-'+subj); var nEl=document.getElementById('newNote-'+cls+'-'+subj); var title=(tEl.value||'').trim(); var note=(nEl.value||'').trim(); if(!title||!note) return toast2('Fill Topic + Note'); if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title:title, note:cleanNote(note), images:[]}); saveApp(); renderApp(); toast2('Topic added'); };
+function renderApp(){
+  var list=getStudentsApp(); var total=0; for(var i=0;i<list.length;i++) total+=(list[i].subs?list[i].subs.length:0);
+  var sc=document.getElementById('stuCount'); if(sc) sc.textContent=list.length;
+  var rv=document.getElementById('revText'); if(rv) rv.textContent='N'+(total*PRICE).toLocaleString();
+  var rows=''; if(list.length){ for(var j=0;j<list.length;j++){ var s=list[j]; rows+='<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center"><div><b>'+esc(s.name)+'</b><br><small class="mut">'+s.cls+' - Subs: '+((s.subs||[]).join(', ')||'Free only')+' - '+s.status+'</small></div><button type="button" class="btn btn-ghost" onclick="studentMenu('+j+')">...</button></div>'; } } else { rows='<p class="mut">No students yet.</p>'; }
+  var a=document.getElementById('studentsList'); if(a) a.innerHTML=rows; var b=document.getElementById('studentsList2'); if(b) b.innerHTML=rows;
+  var annHtml=''; for(var k=0;k<anns.length;k++) annHtml+='<div>Announcement: '+esc(anns[k])+'</div>';
+  var al=document.getElementById('annList'); if(al) al.innerHTML=annHtml; var sl=document.getElementById('sAnnList'); if(sl) sl.innerHTML=annHtml;
+  var st=document.getElementById('stClass'); if(st){ var opts=''; for(var c in content) opts+='<option>'+c+'</option>'; st.innerHTML=opts; }
+  var scl=document.getElementById('studioClassList'); if(scl){ var h2=''; for(var cc in content){ h2+='<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between"><div><b>'+cc+'</b> '+(isLocked(cc)?'<span style="background:#e9a800;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px">LOCKED</span>':'<span style="background:#0bb56a;color:#fff;padding:2px 6px;border-radius:999px;font-size:11px">FREE</span>')+'<br><small class="mut">'+(Object.keys(content[cc]).join(', ')||'No subjects')+'</small></div><div><button type="button" class="btn btn-ghost" onclick="renameClassPrompt(\''+cc+'\')">Rename</button> <button type="button" class="btn btn-red" onclick="deleteClassPrompt(\''+cc+'\')">Delete</button></div></div>'; } scl.innerHTML=h2; }
+  var sList=''; for(var cls2 in content){ for(var subj2 in content[cls2]){ for(var ti=0;ti<content[cls2][subj2].length;ti++){ var tt=content[cls2][subj2][ti]; sList+='<div style="border:1px solid #eee;border-radius:10px;padding:12px;display:flex;justify-content:space-between"><div><b>'+cls2+' - '+esc(subj2)+' - '+esc(tt.title)+'</b></div><div><button type="button" class="btn btn-ghost" onclick="editTopicDirect(\''+cls2+'\',\''+subj2+'\','+ti+')">Edit</button> <button type="button" class="btn btn-red" onclick="delTopic(\''+cls2+'\',\''+subj2+'\','+ti+')">Delete</button></div></div>'; } } }
+  var sl2=document.getElementById('studioList'); if(sl2) sl2.innerHTML=sList||'<p class="mut">No content yet.</p>';
+  var cs=curStu(); if(cs){ var mo=document.getElementById('myOtpText'); if(mo) mo.textContent=cs.name; var ms=document.getElementById('mySubsText'); if(ms) ms.textContent=(cs.subs&&cs.subs.length)?cs.subs.join(', '):'Free Classes Only'; var sp=document.getElementById('sProfileText'); if(sp) sp.innerHTML='<b>'+esc(cs.name)+'</b><br><small class="mut">'+cs.cls+'</small>'; var so=document.getElementById('sProfileOtp'); if(so) so.textContent='Username: '+cs.name+' - Class: '+cs.cls; var ss=document.getElementById('sProfileSubs'); if(ss) ss.textContent='Subscribed Locked: '+((cs.subs||[]).join(', ')||'None - Free only'); }
+  if(isPreview){ var mo2=document.getElementById('myOtpText'); if(mo2) mo2.textContent='Preview Student'; var ms2=document.getElementById('mySubsText'); if(ms2) ms2.textContent='Free Classes Only (Preview)'; }
   renderClasses();
-  }catch(e){ toast('Render error: '+e.message); }
 }
-function addClass(){ if(!requireAdmin()) return; var n=(el('newClassName').value||'').trim(); if(!n) return toast('Type Class'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); el('newClassName').value=''; toast('✅ Class added'); }
-function addClassFromStudio(){ if(!requireAdmin()) return; var n=(el('studioNewClass').value||'').trim(); if(!n) return toast('Type Class'); if(content[n]) return toast('Exists'); content[n]={}; save(); render(); el('studioNewClass').value=''; toast('✅ Class added'); }
-function renameClassPrompt(oldName){ if(!requireAdmin()) return; var n=prompt('Rename Class',oldName); if(!n||n===oldName) return; content[n]=content[oldName]; delete content[oldName]; save(); render(); toast('Class renamed'); }
-function deleteClassPrompt(c){ if(!requireAdmin()) return; if(!confirm('Delete Class '+c+'?')) return; delete content[c]; save(); render(); toast('Class deleted'); }
-function addContent(){ if(!requireAdmin()) return; var cls=el('stClass').value; var subj=(el('stSubject').value||'').trim(); var topic=(el('stTopic').value||'').trim(); var note=(el('stNote').value||'').trim(); if(!subj||!topic||!note) return toast('Fill Subject, Topic, Note'); if(!content[cls]) content[cls]={}; if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title:topic, note:cleanNote(note), images:[]}); save(); render(); el('stSubject').value=''; el('stTopic').value=''; el('stNote').value=''; toast('✅ Topic added'); }
-function editTopicDirect(cls,subj,i){ if(!requireAdmin()) return; openClassName=cls; openSubjectName=subj; showPage('classes'); renderClasses(); openTopic(cls,subj,i); }
-function delTopic(cls,subj,i){ if(!requireAdmin()) return; if(!confirm('Delete this topic?')) return; content[cls][subj].splice(i,1); if(!content[cls][subj].length) delete content[cls][subj]; save(); render(); }
-function renderReadingContent(topic){
-  var sents=splitS(topic.note||''); var imgs=topic.images||[]; var html='';
-  imgs.forEach(function(im){ if(im.after===-1) html+=diagramHtml(im); });
-  sents.forEach(function(s,idx){ html+='<div>'+esc(s)+'</div>'; imgs.forEach(function(im){ if(im.after===idx) html+=diagramHtml(im); }); });
-  imgs.forEach(function(im){ if(im.after>=sents.length) html+=diagramHtml(im); });
-  return html;
-}
-function diagramHtml(im){ var delBtn=(role==='admin' && !isPreview) ? '<br><button type="button" class="btn btn-red" style="padding:6px 10px;font-size:12px" onclick="deleteDiagram(\''+im.id+'\')">Delete Diagram</button>' : ''; return '<div class="diagram"><img src="'+im.src+'"><small>🖼️ '+esc(im.caption||'Diagram')+'</small>'+delBtn+'</div>'; }
-function openTopic(cls,subj,i){
-  if(!canOpen(cls)){ toast('🔒 '+cls+' is Locked — Subscribe ₦2,000'); subscribeTo(cls); return; }
+window.addClass=function(){ if(!requireAdmin()) return; var n=(document.getElementById('newClassName').value||'').trim(); if(!n) return toast2('Type Class'); if(content[n]) return toast2('Exists'); content[n]={}; saveApp(); renderApp(); document.getElementById('newClassName').value=''; toast2('Class added'); };
+window.addClassFromStudio=function(){ if(!requireAdmin()) return; var n=(document.getElementById('studioNewClass').value||'').trim(); if(!n) return toast2('Type Class'); if(content[n]) return toast2('Exists'); content[n]={}; saveApp(); renderApp(); document.getElementById('studioNewClass').value=''; toast2('Class added'); };
+window.renameClassPrompt=function(oldName){ if(!requireAdmin()) return; var n=prompt('Rename Class',oldName); if(!n||n===oldName) return; content[n]=content[oldName]; delete content[oldName]; saveApp(); renderApp(); toast2('Class renamed'); };
+window.deleteClassPrompt=function(c){ if(!requireAdmin()) return; if(!confirm('Delete Class '+c+'?')) return; delete content[c]; saveApp(); renderApp(); toast2('Class deleted'); };
+window.addContent=function(){ if(!requireAdmin()) return; var cls=document.getElementById('stClass').value; var subj=(document.getElementById('stSubject').value||'').trim(); var topic=(document.getElementById('stTopic').value||'').trim(); var note=(document.getElementById('stNote').value||'').trim(); if(!subj||!topic||!note) return toast2('Fill Subject, Topic, Note'); if(!content[cls]) content[cls]={}; if(!content[cls][subj]) content[cls][subj]=[]; content[cls][subj].push({title:topic, note:cleanNote(note), images:[]}); saveApp(); renderApp(); document.getElementById('stSubject').value=''; document.getElementById('stTopic').value=''; document.getElementById('stNote').value=''; toast2('Topic added'); };
+window.editTopicDirect=function(cls,subj,i){ if(!requireAdmin()) return; openClassName=cls; openSubjectName=subj; window.showPage('classes'); renderClasses(); window.openTopic(cls,subj,i); };
+window.delTopic=function(cls,subj,i){ if(!requireAdmin()) return; if(!confirm('Delete this topic?')) return; content[cls][subj].splice(i,1); if(!content[cls][subj].length) delete content[cls][subj]; saveApp(); renderApp(); };
+function diagramHtml(im){ var delBtn=(roleNow()==='admin' && !isPreview) ? '<br><button type="button" class="btn btn-red" style="padding:6px 10px;font-size:12px" onclick="deleteDiagram(\''+im.id+'\')">Delete Diagram</button>' : ''; return '<div class="diagram"><img src="'+im.src+'"><small>Image: '+esc(im.caption||'Diagram')+'</small>'+delBtn+'</div>'; }
+function renderReadingContent(topic){ var sents=splitS(topic.note||''); var imgs=topic.images||[]; var html=''; for(var i=0;i<imgs.length;i++){ if(imgs[i].after===-1) html+=diagramHtml(imgs[i]); } for(var j=0;j<sents.length;j++){ html+='<div>'+esc(sents[j])+'</div>'; for(var k=0;k<imgs.length;k++){ if(imgs[k].after===j) html+=diagramHtml(imgs[k]); } } for(var m=0;m<imgs.length;m++){ if(imgs[m].after>=sents.length) html+=diagramHtml(imgs[m]); } return html; }
+window.openTopic=function(cls,subj,i){
+  if(!canOpen(cls)){ toast2(cls+' is Locked - Subscribe N2,000'); window.subscribeTo(cls); return; }
   curClass=cls; curSubject=subj; curTopicIdx=i; isEditing=false; pendingDiagram='';
-  var existing=el('readBoxGlobal'); if(!existing){ existing=document.createElement('div'); existing.id='readBoxGlobal'; existing.className='card'; document.querySelector('.wrap').appendChild(existing); }
+  var existing=document.getElementById('readBoxGlobal'); if(!existing){ existing=document.createElement('div'); existing.id='readBoxGlobal'; existing.className='card'; document.querySelector('.wrap').appendChild(existing); }
   var t=content[cls][subj][i]; if(!t.images) t.images=[];
-  existing.innerHTML='<p style="cursor:pointer;color:#5a00e6;font-weight:800" onclick="document.getElementById(\'readBoxGlobal\').remove()">← Close Reading</p><h2 style="margin-top:8px">'+cls+' • '+esc(subj)+' • '+esc(t.title)+'</h2><div class="read" id="readTextGlobal">'+renderReadingContent(t)+'</div><div style="background:#f4f0ff;border-radius:10px;padding:10px;margin-top:10px;font-size:13px">🧠 <b>Smart Placement ON:</b> Phrase + Diagram find where they make sense — NOT just to end.</div><div class="placed" id="placedInfoGlobal"></div><div class="editbar" id="readActionsGlobal"></div><div id="addPhraseBoxGlobal" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><label><b>Add a phrase / lines — Auto-Place</b></label><textarea id="addPhraseInputGlobal" rows="3" placeholder="Type phrase e.g. For example, 1/2 of 10 is 5"></textarea><label><b>📷 Upload Diagram (optional — will also auto-place)</b></label><input type="file" id="diagramInputGlobal" accept="image/*" onchange="previewDiagram(event)"><div id="diagramPreviewGlobal"></div><label>Diagram Caption — helps place it</label><input id="diagramCaptionGlobal" placeholder="e.g. Diagram of a fraction"><label>Placement</label><select id="forcePlaceGlobal"><option value="auto">🤖 Auto</option><option value="start">⬆️ At Beginning</option><option value="end">⬇️ At End</option><option value="after-example">📌 After Example</option></select><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addPhraseAndDiagram()">+ Add Smartly & Save (Phrase + Diagram)</button></div>';
+  existing.innerHTML='<p style="cursor:pointer;color:#5a00e6;font-weight:800" onclick="document.getElementById(\'readBoxGlobal\').remove()">Close Reading</p><h2 style="margin-top:8px">'+cls+' - '+esc(subj)+' - '+esc(t.title)+'</h2><div class="read" id="readTextGlobal">'+renderReadingContent(t)+'</div><div style="background:#f4f0ff;border-radius:10px;padding:10px;margin-top:10px;font-size:13px">Smart Placement ON: Phrase + Diagram find where they make sense - NOT just to end.</div><div class="placed" id="placedInfoGlobal"></div><div class="editbar" id="readActionsGlobal"></div><div id="addPhraseBoxGlobal" style="display:none;margin-top:12px;border-top:1px solid #eee;padding-top:12px"><label><b>Add a phrase / lines - Auto-Place</b></label><textarea id="addPhraseInputGlobal" rows="3" placeholder="Type phrase"></textarea><label><b>Upload Diagram (optional)</b></label><input type="file" id="diagramInputGlobal" accept="image/*" onchange="previewDiagram(event)"><div id="diagramPreviewGlobal"></div><label>Diagram Caption</label><input id="diagramCaptionGlobal" placeholder="e.g. Diagram of a fraction"><label>Placement</label><select id="forcePlaceGlobal"><option value="auto">Auto</option><option value="start">At Beginning</option><option value="end">At End</option><option value="after-example">After Example</option></select><button type="button" class="btn btn-primary" style="margin-top:8px" onclick="addPhraseAndDiagram()">+ Add Smartly & Save</button></div>';
   renderReadActions(); existing.scrollIntoView({behavior:'smooth'});
-}
-function renderReadActions(){
-  var isRealAdmin=(role==='admin' && !isPreview);
-  var html='<button type="button" class="btn btn-ghost" onclick="copyReading()">📋 Copy Text</button>';
-  if(isRealAdmin){ html+='<button type="button" class="btn btn-ghost" onclick="pasteReading()">📥 Paste</button><button type="button" class="btn btn-primary" onclick="toggleEdit()">'+(isEditing?'💾 Save Edit':'✏️ Edit While Reading')+'</button><button type="button" class="btn btn-ghost" onclick="toggleAddPhrase()">+ Add Phrase / Diagram — Auto-Place</button><button type="button" class="btn btn-ghost" onclick="renameTopic()">Rename Topic</button><button type="button" class="btn btn-red" onclick="deleteTopic()">Delete Topic</button>'; }
-  else { html+='<p class="mut">Student can read & copy only.</p>'; }
-  var e=el('readActionsGlobal'); if(e) e.innerHTML=html;
-}
-function toggleEdit(){
-  if(!requireAdmin()) return; var elm=el('readTextGlobal'); if(!elm) return;
-  if(!isEditing){ isEditing=true; elm.contentEditable=true; elm.classList.add('editing'); elm.focus(); toast('✏️ Editing ON — type, paste, delete, then Save'); }
-  else { var parts=[]; elm.childNodes.forEach(function(n){ if(n.nodeType===3) parts.push(n.textContent); else if(n.tagName==='DIV' && !n.classList.contains('diagram')) parts.push(n.innerText); }); var nt=cleanNote(parts.join(' ')); content[curClass][curSubject][curTopicIdx].note=nt; isEditing=false; elm.contentEditable=false; elm.classList.remove('editing'); save(); render(); openTopic(curClass,curSubject,curTopicIdx); toast('✅ Saved'); }
-  renderReadActions();
-}
-function copyReading(){ var t=content[curClass][curSubject][curTopicIdx]; navigator.clipboard.writeText(t.note); toast('📋 Text copied'); }
-function pasteReading(){ if(!requireAdmin()) return; navigator.clipboard.readText().then(function(t){ if(!t) return toast('Clipboard empty'); var topic=content[curClass][curSubject][curTopicIdx]; var res=smartInsert(topic.note,t,'auto'); topic.note=res.text; save(); render(); openTopic(curClass,curSubject,curTopicIdx); var p=el('placedInfoGlobal'); if(p){ p.style.display='block'; p.innerHTML='✅ <b>Placed:</b> '+res.where; } toast('📥 Pasted smartly'); }).catch(function(){ toast('Allow clipboard'); }); }
-function toggleAddPhrase(){ if(!requireAdmin()) return; var b=el('addPhraseBoxGlobal'); b.style.display=b.style.display==='none'?'block':'none'; }
-function previewDiagram(e){ var file=e.target.files[0]; if(!file) return; var r=new FileReader(); r.onload=function(){ pendingDiagram=r.result; el('diagramPreviewGlobal').innerHTML='<img src="'+pendingDiagram+'" style="max-width:100%;max-height:140px;border-radius:10px;margin-top:8px">'; }; r.readAsDataURL(file); }
-function addPhraseAndDiagram(){
+};
+function renderReadActions(){ var isRealAdmin=(roleNow()==='admin' && !isPreview); var html='<button type="button" class="btn btn-ghost" onclick="copyReading()">Copy Text</button>'; if(isRealAdmin){ html+='<button type="button" class="btn btn-ghost" onclick="pasteReading()">Paste</button><button type="button" class="btn btn-primary" onclick="toggleEdit()">'+(isEditing?'Save Edit':'Edit While Reading')+'</button><button type="button" class="btn btn-ghost" onclick="toggleAddPhrase()">+ Add Phrase / Diagram</button><button type="button" class="btn btn-ghost" onclick="renameTopic()">Rename Topic</button><button type="button" class="btn btn-red" onclick="deleteTopic()">Delete Topic</button>'; } else { html+='<p class="mut">Student can read & copy only.</p>'; } var e=document.getElementById('readActionsGlobal'); if(e) e.innerHTML=html; }
+window.toggleEdit=function(){ if(!requireAdmin()) return; var elm=document.getElementById('readTextGlobal'); if(!elm) return; if(!isEditing){ isEditing=true; elm.contentEditable=true; elm.classList.add('editing'); elm.focus(); toast2('Editing ON'); } else { var parts=[]; elm.childNodes.forEach(function(n){ if(n.nodeType===3) parts.push(n.textContent); else if(n.tagName==='DIV' && !n.classList.contains('diagram')) parts.push(n.innerText); }); var nt=cleanNote(parts.join(' ')); content[curClass][curSubject][curTopicIdx].note=nt; isEditing=false; elm.contentEditable=false; elm.classList.remove('editing'); saveApp(); renderApp(); window.openTopic(curClass,curSubject,curTopicIdx); toast2('Saved'); } renderReadActions(); };
+window.copyReading=function(){ var t=content[curClass][curSubject][curTopicIdx]; navigator.clipboard.writeText(t.note); toast2('Text copied'); };
+window.pasteReading=function(){ if(!requireAdmin()) return; navigator.clipboard.readText().then(function(t){ if(!t) return toast2('Clipboard empty'); var topic=content[curClass][curSubject][curTopicIdx]; var res=smartInsert(topic.note,t,'auto'); topic.note=res.text; saveApp(); renderApp(); window.openTopic(curClass,curSubject,curTopicIdx); var p=document.getElementById('placedInfoGlobal'); if(p){ p.style.display='block'; p.innerHTML='Placed: '+res.where; } toast2('Pasted smartly'); }).catch(function(){ toast2('Allow clipboard'); }); };
+window.toggleAddPhrase=function(){ if(!requireAdmin()) return; var b=document.getElementById('addPhraseBoxGlobal'); b.style.display=b.style.display==='none'?'block':'none'; };
+window.previewDiagram=function(e){ var file=e.target.files[0]; if(!file) return; var r=new FileReader(); r.onload=function(){ pendingDiagram=r.result; document.getElementById('diagramPreviewGlobal').innerHTML='<img src="'+pendingDiagram+'" style="max-width:100%;max-height:140px;border-radius:10px;margin-top:8px">'; }; r.readAsDataURL(file); };
+window.addPhraseAndDiagram=function(){
   if(!requireAdmin()) return;
-  var phrase=(el('addPhraseInputGlobal').value||'').trim();
-  var caption=(el('diagramCaptionGlobal').value||'').trim() || phrase || 'Diagram';
-  var force=el('forcePlaceGlobal').value;
+  var phrase=(document.getElementById('addPhraseInputGlobal').value||'').trim();
+  var caption=(document.getElementById('diagramCaptionGlobal').value||'').trim() || phrase || 'Diagram';
+  var force=document.getElementById('forcePlaceGlobal').value;
   var topic=content[curClass][curSubject][curTopicIdx]; var msgs=[];
   if(phrase){ var res=smartInsert(topic.note, phrase, force); topic.note=res.text; msgs.push('Phrase: '+res.where); if(pendingDiagram){ var sents=splitS(topic.note); var pIdx=-1; for(var i=0;i<sents.length;i++){ if(sents[i].toLowerCase().indexOf(phrase.toLowerCase().slice(0,20))>=0){ pIdx=i; break; } } var after=pIdx>=0?pIdx:res.after; topic.images.push({id:'img-'+Date.now(), src:pendingDiagram, caption:caption, after:after}); msgs.push('Diagram: placed RIGHT AFTER your new phrase'); } }
   else if(pendingDiagram){ var res2=smartInsert(topic.note, caption, force); topic.images.push({id:'img-'+Date.now(), src:pendingDiagram, caption:caption, after:res2.after}); msgs.push('Diagram: '+res2.where); }
-  else { return toast('Type a phrase OR upload a diagram'); }
-  pendingDiagram=''; el('addPhraseInputGlobal').value=''; el('diagramCaptionGlobal').value=''; el('diagramInputGlobal').value=''; el('diagramPreviewGlobal').innerHTML=''; el('addPhraseBoxGlobal').style.display='none';
-  save(); render(); openTopic(curClass,curSubject,curTopicIdx);
-  var pEl=el('placedInfoGlobal'); if(pEl){ pEl.style.display='block'; pEl.innerHTML='✅ <b>Placed:</b><br>'+msgs.join('<br>'); }
-  toast('✅ Added smartly');
+  else { return toast2('Type a phrase OR upload a diagram'); }
+  pendingDiagram=''; document.getElementById('addPhraseInputGlobal').value=''; document.getElementById('diagramCaptionGlobal').value=''; document.getElementById('diagramInputGlobal').value=''; document.getElementById('diagramPreviewGlobal').innerHTML=''; document.getElementById('addPhraseBoxGlobal').style.display='none';
+  saveApp(); renderApp(); window.openTopic(curClass,curSubject,curTopicIdx);
+  var pEl=document.getElementById('placedInfoGlobal'); if(pEl){ pEl.style.display='block'; pEl.innerHTML='Placed:<br>'+msgs.join('<br>'); }
+  toast2('Added smartly');
+};
+window.deleteDiagram=function(id){ if(!requireAdmin()) return; if(!confirm('Delete this diagram?')) return; var topic=content[curClass][curSubject][curTopicIdx]; topic.images=(topic.images||[]).filter(function(im){ return im.id!==id; }); saveApp(); renderApp(); window.openTopic(curClass,curSubject,curTopicIdx); toast2('Diagram deleted'); };
+window.renameTopic=function(){ if(!requireAdmin()) return; var t=content[curClass][curSubject][curTopicIdx]; var n=prompt('Rename Topic',t.title); if(n){ t.title=n; saveApp(); renderApp(); window.openTopic(curClass,curSubject,curTopicIdx); } };
+window.deleteTopic=function(){ if(!requireAdmin()) return; if(!confirm('Delete this topic?')) return; content[curClass][curSubject].splice(curTopicIdx,1); if(!content[curClass][curSubject].length) delete content[curClass][curSubject]; saveApp(); renderApp(); var e=document.getElementById('readBoxGlobal'); if(e) e.remove(); toast2('Topic deleted'); };
+window.postAnn=function(){ if(roleNow()!=='admin'){ toast2('Students cannot send announcements'); return; } var v=(document.getElementById('annText').value||'').trim(); if(!v) return toast2('Type announcement'); anns.unshift(v); document.getElementById('annText').value=''; saveApp(); renderApp(); toast2('Sent'); };
+window.studentMenu=function(i){ if(!requireAdmin()) return; var list=getStudentsApp(); var s=list[i]; var a=prompt('Student: '+s.name+'\nSubs: '+(s.subs||[]).join(', ')+'\n\nType: unlock WAEC / unlock JSS3 / unlock SS3 / unlock JAMB / lock WAEC / reset device / block / unblock / whatsapp / delete','unlock WAEC'); if(!a) return; a=a.toLowerCase(); if(a.indexOf('unlock')>=0){ var target=null; if(a.indexOf('waec')>=0) target='WAEC'; else if(a.indexOf('jamb')>=0) target='JAMB'; else if(a.indexOf('jss3')>=0) target='JSS3'; else if(a.indexOf('ss3')>=0) target='SS3'; if(target){ if(!s.subs) s.subs=[]; if(s.subs.indexOf(target)<0) s.subs.push(target); toast2('Unlocked '+target); } } else if(a.indexOf('lock')>=0){ var t2=null; if(a.indexOf('waec')>=0) t2='WAEC'; else if(a.indexOf('jamb')>=0) t2='JAMB'; else if(a.indexOf('jss3')>=0) t2='JSS3'; else if(a.indexOf('ss3')>=0) t2='SS3'; if(t2){ s.subs=(s.subs||[]).filter(function(x){ return x!==t2; }); toast2('Locked '+t2); } } else if(a.indexOf('reset')>=0){ s.deviceId=''; toast2('Device reset'); } else if(a.indexOf('block')>=0){ s.status='Blocked'; toast2('Blocked'); } else if(a.indexOf('unblock')>=0){ s.status='Active'; toast2('Unblocked'); } else if(a.indexOf('whatsapp')>=0){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi '+s.name+', renew: Pay N2,000 per locked section to Opay '+OPAY)); } else if(a.indexOf('delete')>=0){ if(confirm('Delete '+s.name+'?')) list.splice(i,1); } saveStudentsApp(list); renderApp(); };
+window.renewPin=function(){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe - N2,000/month. My Username is '+(curStu()?curStu().name:'')+'. I paid to Opay '+OPAY+'.')); };
+}catch(err){
+  var b=document.getElementById('jsErrorBox'); if(b){ b.style.display='block'; b.textContent='APP ERROR (login still works): '+err.message; }
 }
-function deleteDiagram(id){ if(!requireAdmin()) return; if(!confirm('Delete this diagram?')) return; var topic=content[curClass][curSubject][curTopicIdx]; topic.images=(topic.images||[]).filter(function(im){ return im.id!==id; }); save(); render(); openTopic(curClass,curSubject,curTopicIdx); toast('Diagram deleted'); }
-function renameTopic(){ if(!requireAdmin()) return; var t=content[curClass][curSubject][curTopicIdx]; var n=prompt('Rename Topic',t.title); if(n){ t.title=n; save(); render(); openTopic(curClass,curSubject,curTopicIdx); } }
-function deleteTopic(){ if(!requireAdmin()) return; if(!confirm('Delete this topic?')) return; content[curClass][curSubject].splice(curTopicIdx,1); if(!content[curClass][curSubject].length) delete content[curClass][curSubject]; save(); render(); var e=el('readBoxGlobal'); if(e) e.remove(); toast('Topic deleted'); }
-function postAnn(){ if(role!=='admin'){ toast('Students cannot send announcements'); return; } var v=(el('annText').value||'').trim(); if(!v) return toast('Type announcement'); anns.unshift(v); el('annText').value=''; save(); render(); toast('Sent'); }
-function studentMenu(i){ if(!requireAdmin()) return; var s=students[i]; var a=prompt('Student: '+s.name+'\nSubs: '+(s.subs||[]).join(', ')+'\n\nType: unlock WAEC / unlock JSS3 / unlock SS3 / unlock JAMB / lock WAEC / reset device / block / unblock / whatsapp / delete','unlock WAEC'); if(!a) return; a=a.toLowerCase(); if(a.indexOf('unlock')>=0){ var target=null; if(a.indexOf('waec')>=0) target='WAEC'; else if(a.indexOf('jamb')>=0) target='JAMB'; else if(a.indexOf('jss3')>=0) target='JSS3'; else if(a.indexOf('ss3')>=0) target='SS3'; if(target){ if(!s.subs) s.subs=[]; if(s.subs.indexOf(target)<0) s.subs.push(target); toast('✅ Unlocked '+target); } } else if(a.indexOf('lock')>=0){ var t2=null; if(a.indexOf('waec')>=0) t2='WAEC'; else if(a.indexOf('jamb')>=0) t2='JAMB'; else if(a.indexOf('jss3')>=0) t2='JSS3'; else if(a.indexOf('ss3')>=0) t2='SS3'; if(t2){ s.subs=(s.subs||[]).filter(function(x){ return x!==t2; }); toast('Locked '+t2); } } else if(a.indexOf('reset')>=0){ s.deviceId=''; toast('✅ Device reset'); } else if(a.indexOf('block')>=0){ s.status='Blocked'; toast('Blocked'); } else if(a.indexOf('unblock')>=0){ s.status='Active'; toast('Unblocked'); } else if(a.indexOf('whatsapp')>=0){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi '+s.name+', renew: Pay ₦2,000 per locked section to Opay '+OPAY)); } else if(a.indexOf('delete')>=0){ if(confirm('Delete '+s.name+'?')) students.splice(i,1); } save(); render(); }
-function renewPin(){ window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi, I want to subscribe — ₦2,000/month. My Username is '+(currentStudent?currentStudent.name:'')+'. I paid to Opay '+OPAY+'.')); }
-updateHint();
-if(adminData){ showStatus('Welcome back. Admin saved as "'+adminData.user+'". Enter its password, or tap Reset Login if you forgot it.','info'); }
-else { showStatus('Ready. First time Admin: type Username + new Password + Enter.','info'); }
 </script>
 </body>
 </html>
