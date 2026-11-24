@@ -1,49 +1,36 @@
-# Quizora AI — Vercel project
+# Quizora AI — Vercel Project
 
-This project contains the Quizora front end, Vercel API function, offline app shell, and a database that is initialised automatically.
+Quizora AI is an offline-capable learning platform for **JSS1–SS3**, **WAEC**, and **JAMB**, built with a single-page front end, a Vercel serverless API backed by Neon Postgres, and a service worker + local storage cache for offline study.
 
-## Important files
-- `index.html` — the main application (HTML, CSS and browser JavaScript in one file).
-- `api/index.js` — secure server-side API for accounts, administrator actions, content and subscriptions.
-- `sw.js` — caches the application shell so it can reopen offline.
-- `manifest.webmanifest` — allows installation as a phone app.
-- `package.json` — server dependencies.
+## Important Files
+
+* `index.html` — Main application UI, role/view switching, topic/content authoring, `.docx` and photo uploads, subscription/PIN modal, admin financial view, and offline state handling.
+* `api/index.js` — Serverless API routes and automatic Neon Postgres schema initialization (`q_users`, `q_classes`, `q_subjects`, `q_topics`, `q_content`, `q_diagrams`, `q_subscriptions`, `q_pins`, and `q_announcements`).
+* `sw.js` — Service worker that caches the application shell and assets for offline loading.
+* `manifest.webmanifest` — Web app manifest for installing Quizora AI on mobile and desktop devices.
+* `package.json` — Node.js dependencies (`@neondatabase/serverless` and `bcryptjs`).
+* `README.md` — Project setup, architecture, and deployment guide.
+
+## Key Features
+
+* **Admin ↔ Student View Switching**: Administrators can switch to Student view to test or browse the student experience and switch right back to Administrator view.
+* **Paid Sections & Non-Transferable PINs**: **JSS3**, **SS3**, **WAEC**, and **JAMB** are gated at **₦2,000 per locked section per month**. Students pay into **OPay `8147699555` (Ekpo Bassey)**, send payment proof to **WhatsApp `08147699555`**, and redeem a non-transferable PIN generated from the Admin **Financial** section.
+* **Flexible Content Authoring**: Add **topics only** (to fill later) or **topics with notes**, with **Edit**, **Delete**, **Type**, **Upload Photos**, and **Upload File (`.docx` / `.txt` / `.md`)** controls.
+* **Sticky Topic Tick & Smart Placement**: Selecting a class and ticking a topic keeps the checkbox ticked until unticked, automatically placing typed lines, phrases, subtopics, and uploaded photos into matching sections/paragraphs on save.
+* **Profile Photos & Global Admin Avatar**: Both students and administrators can upload profile photos, and the administrator's photo is displayed in the top-right header of every dashboard.
+* **Offline Access After Initial Setup**: Once a user creates an account/signs in and syncs lessons, cached lessons, profile data, and unlocked subscriptions remain accessible offline on that device without mobile data.
 
 ## Deploy from GitHub to Vercel
 
-1. Upload the contents of this folder to the root of a new GitHub repository. Keep the `api` folder and its `index.js` file.
-2. In Vercel, import that GitHub repository. The project can use the default settings; no build command is required.
-3. In the Vercel project, open **Storage / Marketplace** and install **Neon Postgres**. Choose the option to create a new database. Vercel will add `DATABASE_URL` to the project.
-4. In Vercel **Settings → Environment Variables**, add:
-   - `ADMIN_SETUP_KEY` — a long private setup key you choose.
-   - `SESSION_SECRET` — a different long random secret (at least 32 random characters).
-   Apply both to Production (and Preview if you intend to use Preview).
-5. Redeploy after adding the database and environment variables.
-6. Open your live site, select **Administrator**, and complete the first-time setup using `ADMIN_SETUP_KEY`. Choose a strong administrator password. Keep the setup key private.
+1. Push the repository files (`index.html`, `api/index.js`, `sw.js`, `manifest.webmanifest`, `package.json`, and `README.md`) to your GitHub repository (`ekpobassey01-glitch/quizora-ai`).
+2. Import the repository into **Vercel** (no build command is required).
+3. In Vercel **Storage / Marketplace**, connect **Neon Postgres** so `DATABASE_URL` is added to your environment.
+4. In **Vercel Settings → Environment Variables**, configure:
+   * `ADMIN_SETUP_KEY` — Private setup key for creating the initial administrator account.
+   * `SESSION_SECRET` — Strong random secret (at least 32 characters) for signing session cookies.
+5. **Redeploy** the project on Vercel (with **Use existing Build Cache** unchecked when pushing major updates).
+6. Open your live site, select **Administrator**, and complete first-time setup using `ADMIN_SETUP_KEY`.
 
-Neon is a Postgres integration available through Vercel Marketplace. Vercel Functions run the API code. The database tables are created automatically on the first API request.
+## Security Reminder
 
-## First use
-
-- Create the administrator account.
-- Sign in as administrator and add subjects and topics.
-- Tick a class and a subject to set the destination for new topics.
-- Add a phrase or add a separate note. Add diagrams from the topic editor.
-- Students create accounts and sign in from the student tab.
-- Use **Save lessons offline** while connected to download the current learning library to the student's browser cache.
-
-## Offline behaviour and limitations
-
-- The app shell is cached by the service worker.
-- After a student signs in and downloads content, the cached learning library is kept in browser storage and the app can reopen offline on that same browser/device.
-- Student offline access is a local convenience, not an offline server login. Account creation, sign-in, subscription verification, new content and administrator changes require internet.
-- If a student clears browser storage, uses private browsing, or changes device/browser, the local downloaded content is lost and must be downloaded again.
-- New content and subscription changes reach devices when they next connect and synchronise.
-- Premium access is checked by the server when the student downloads the library. The current code shows JSS1, JSS2, SS1 and SS2 as free; JSS3, SS3, WAEC and JAMB require an active subscription.
-- The administrator currently grants subscriptions manually from the Students screen. Payment verification is not integrated.
-- The smart phrase placement is a local heuristic, not a language-understanding guarantee. Review the suggested placement and edit the text if necessary.
-- Diagram uploads are limited to 2 MB each in this starter build. For a large library of high-resolution images, use object storage rather than storing image data in Postgres.
-- Device binding is a basic device identifier and can be reset only by implementing a dedicated admin action; browser storage reset can change the identifier. It is not a substitute for high-assurance device security.
-
-## Important
-Do not publish `ADMIN_SETUP_KEY`, `SESSION_SECRET`, database connection strings, or passwords in GitHub. They belong only in Vercel Environment Variables.
+Never commit `ADMIN_SETUP_KEY`, `SESSION_SECRET`, database connection strings (`DATABASE_URL` / `POSTGRES_URL`), or passwords into GitHub. Store them only in Vercel Environment Variables.
